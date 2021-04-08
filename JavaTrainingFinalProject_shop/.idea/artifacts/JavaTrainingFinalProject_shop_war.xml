@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="JavaTrainingFinalProject_shop:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>JavaTrainingFinalProject_shop</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="JavaTrainingFinalProject_shop-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="JavaTrainingFinalProject_shop:war exploded" />
+    </root>
+  </artifact>
+</component>

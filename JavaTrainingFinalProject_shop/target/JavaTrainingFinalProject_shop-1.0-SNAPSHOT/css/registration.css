@@ -1,0 +1,50 @@
+body {
+    background-color: dodgerblue;
+    background-size: cover;
+}
+
+.form_reg_block{
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+}
+.form_reg_block_content{
+    padding-top: 5%;
+}
+.form_reg_block_head_text{
+    display: block;
+    text-align: center;
+    font-size: 250%;
+    color: white;
+}
+.form_reg_block label{
+    display: block;
+    text-align: center;
+    padding: 10px;
+    font-size: 150%;
+    color: white;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.form_reg_block input{
+    display: block;
+    margin: 0 auto;
+    padding-left: 10px;
+    width: 80%;
+    height: 45px;
+    border-radius: 10px;
+    outline: none;
+}
+.form_reg_block .form_reg_button{
+    font-size: 150%;
+    display: block;
+    height: 50px;
+    width: 200px;
+    border: none;
+    cursor: pointer;
+}
+
+.form_reg_block_content .recomend_label {
+    font-size: medium;
+    margin-bottom: 0;
+}
