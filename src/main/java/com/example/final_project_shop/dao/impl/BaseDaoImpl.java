@@ -24,9 +24,8 @@ public class BaseDaoImpl implements BaseDao {
                                                     "user_DOB,user_phone_number,user_email,user_role FROM users " +
                                                     "WHERE user_nickname LIKE ?";
     private static final String SQL_FIND_PASSWORD_BY_NICKNAME = "SELECT user_password FROM users WHERE user_nickname = ?";
-    private static final String SQL_ADD_USER = "INSERT INTO users (user_name, user_surname, user_nickname, user_password," +
-                                                "user_DOB, user_phone_number, user_email, user_role) VALUES " +
-                                                "(?,?,?,?,?,?,?,client)";
+    private static final String SQL_ADD_USER = "INSERT INTO users (user_name,user_surname,user_nickname,user_password," +
+                                                "user_DOB, user_phone_number, user_email) VALUES (?,?,?,?,?,?,?)";
 
 
     private BaseDaoImpl(){}
@@ -84,7 +83,7 @@ public class BaseDaoImpl implements BaseDao {
 
     @Override
     public void addNewUser(String name, String surname, String nickname, String password,
-                           String dob, String phone,String email) throws DaoException{
+                           String dob, String phone, String email) throws DaoException{
         try(Connection connection = CustomConnectionPool.getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(SQL_ADD_USER);
             statement.setString(1, name);
@@ -94,8 +93,9 @@ public class BaseDaoImpl implements BaseDao {
             statement.setString(5, dob);
             statement.setString(6, phone);
             statement.setString(7, email);
+            statement.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while finding users", e);
+            throw new DaoException("Error while adding user", e);
         }
     }
 
