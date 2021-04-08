@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean registerUser(String name, String surname, String nickname, String password,
-                                  String dob, String email, String phone) throws ServiceException {
+                                  String dob, String phone, String email) throws ServiceException {
         boolean flag = false;
         if (UserValidator.isLoginCorrect(nickname) && UserValidator.isPasswordCorrect(password) &&
                 UserValidator.isEmailCorrect(email) && UserValidator.isPhoneCorrect(phone)) {

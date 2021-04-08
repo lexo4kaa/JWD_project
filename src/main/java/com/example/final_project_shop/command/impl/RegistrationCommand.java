@@ -30,12 +30,13 @@ public class RegistrationCommand implements ActionCommand {
         String email = request.getParameter(PARAM_NAME_EMAIL);
         String password = request.getParameter(PARAM_NAME_PASSWORD);
         String password2 = request.getParameter(PARAM_NAME_PASSWORD2);
-        if (password == password2 && userService.registerUser(name, surname, nickname, password, dob, phone, email)) {
-            //request.setAttribute("user", login);
+        if (password.equals(password2) && userService.registerUser(name, surname, nickname, password, dob, phone, email)) {
+            page = ConfigurationManager.getProperty("path.page.login");
         } else {
-            request.setAttribute("errorLoginPassMessage", MessageManager.getProperty("message.loginerror"));
+            System.out.println(userService.registerUser(name, surname, nickname, password, dob, phone, email));
+            request.setAttribute("errorRegistrationMessage", MessageManager.getProperty("message.registrationerror"));
+            page = ConfigurationManager.getProperty("path.page.registration");
         }
-        page = ConfigurationManager.getProperty("path.page.login");
         return page;
     }
 }
