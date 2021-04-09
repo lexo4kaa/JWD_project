@@ -12,7 +12,7 @@ public class ConnectionCreator {
     private static Logger logger = LogManager.getLogger();
 
     private ConnectionCreator(){}
-    //fixme Class.forName in constructor or static-block
+    // fixme
     public static Connection createConnection() throws SQLException {
         Connection connection;
         try {

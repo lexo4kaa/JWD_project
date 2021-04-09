@@ -24,6 +24,6 @@
 <hr/>
 
 <br/>
-<a href="controller?command=logout">Logout</a>
+<a href="controller?command=logout">Logout</a> <!-- todo сделать функцией -->
 </body>
 </html>
