@@ -14,6 +14,7 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -34,13 +35,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findUsersByNickname(String nickname) throws ServiceException {
-        List<User> users;
-        try {
-            // todo add validator (video 26.03 23:00)
-            users = baseDao.findUsersByNickname(nickname);
-        } catch (DaoException e) {
-            logger.info("baseDao.findUsersByNickname(" + nickname + ") is failed in UserServiceImpl", e);
-            throw new ServiceException(e);
+        List<User> users = new ArrayList<>();
+        if (UserValidator.isLoginCorrect(nickname)) {
+            try {
+                users = baseDao.findUsersByNickname(nickname);
+            } catch (DaoException e) {
+                logger.info("baseDao.findUsersByNickname(" + nickname + ") is failed in UserServiceImpl", e);
+                throw new ServiceException(e);
+            }
         }
         return users;
     }

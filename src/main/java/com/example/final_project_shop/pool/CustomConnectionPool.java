@@ -40,14 +40,14 @@ public class CustomConnectionPool {
         }
 
         if(freeConnections.size() == 0) {
-            throw new RuntimeException("database access error");
+            logger.fatal("connection poll don't created, pool size is 0");
+            throw new RuntimeException("connection poll don't created, pool size is 0");
         }
     }
 
     public Connection getConnection() throws ConnectionPoolException {
         Connection connection;
         try {
-            // todo watch video 02.04 (30.00)
             connection = freeConnections.take();
             givenAwayConnections.offer(connection);
         } catch (InterruptedException e) {
