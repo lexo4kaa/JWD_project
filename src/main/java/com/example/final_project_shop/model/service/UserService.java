@@ -1,4 +1,4 @@
-package com.example.final_project_shop.service;
+package com.example.final_project_shop.model.service;
 
 import com.example.final_project_shop.entity.User;
 

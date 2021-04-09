@@ -1,6 +1,6 @@
 package com.example.final_project_shop.command;
 
-import com.example.final_project_shop.service.ServiceException;
+import com.example.final_project_shop.model.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 

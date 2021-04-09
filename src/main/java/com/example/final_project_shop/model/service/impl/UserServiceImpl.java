@@ -1,11 +1,11 @@
-package com.example.final_project_shop.service.impl;
+package com.example.final_project_shop.model.service.impl;
 
-import com.example.final_project_shop.dao.BaseDao;
-import com.example.final_project_shop.dao.DaoException;
-import com.example.final_project_shop.dao.impl.BaseDaoImpl;
+import com.example.final_project_shop.model.dao.BaseDao;
+import com.example.final_project_shop.model.dao.DaoException;
+import com.example.final_project_shop.model.dao.impl.BaseDaoImpl;
 import com.example.final_project_shop.entity.User;
-import com.example.final_project_shop.service.ServiceException;
-import com.example.final_project_shop.service.UserService;
+import com.example.final_project_shop.model.service.ServiceException;
+import com.example.final_project_shop.model.service.UserService;
 import com.example.final_project_shop.validator.UserValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -1,11 +1,11 @@
-package com.example.final_project_shop.dao.impl;
+package com.example.final_project_shop.model.dao.impl;
 
-import com.example.final_project_shop.dao.BaseDao;
-import com.example.final_project_shop.dao.UsersColumn;
-import com.example.final_project_shop.dao.DaoException;
+import com.example.final_project_shop.model.dao.BaseDao;
+import com.example.final_project_shop.model.dao.UsersColumn;
+import com.example.final_project_shop.model.dao.DaoException;
 import com.example.final_project_shop.entity.User;
-import com.example.final_project_shop.pool.ConnectionPoolException;
-import com.example.final_project_shop.pool.CustomConnectionPool;
+import com.example.final_project_shop.model.connection.ConnectionPoolException;
+import com.example.final_project_shop.model.connection.CustomConnectionPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
