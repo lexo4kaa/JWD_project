@@ -1,4 +1,4 @@
-package com.example.final_project_shop.pool;
+package com.example.final_project_shop.model.connection;
 
 public class ConnectionPoolException extends Exception {
     public ConnectionPoolException() {

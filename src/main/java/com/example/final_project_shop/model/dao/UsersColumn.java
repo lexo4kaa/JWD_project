@@ -1,4 +1,4 @@
-package com.example.final_project_shop.dao;
+package com.example.final_project_shop.model.dao;
 
 public final class UsersColumn {
     public static final String USER_ID = "user_id";

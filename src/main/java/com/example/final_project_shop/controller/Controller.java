@@ -3,7 +3,7 @@ import com.example.final_project_shop.command.ActionCommand;
 import com.example.final_project_shop.command.ActionFactory;
 import com.example.final_project_shop.resource.ConfigurationManager;
 import com.example.final_project_shop.resource.MessageManager;
-import com.example.final_project_shop.service.ServiceException;
+import com.example.final_project_shop.model.service.ServiceException;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;

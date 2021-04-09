@@ -1,6 +1,5 @@
-package com.example.final_project_shop.pool;
+package com.example.final_project_shop.model.connection;
 
-import com.example.final_project_shop.db.ConnectionCreator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,7 +30,7 @@ public class CustomConnectionPool {
         givenAwayConnections = new ArrayDeque<>();
         try {
             for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
-                Connection connection = ConnectionCreator.createConnection();
+                Connection connection = ConnectionCreator.getConnection();
                 ProxyConnection proxyConnection = new ProxyConnection(connection);
                 freeConnections.add(proxyConnection);
             }

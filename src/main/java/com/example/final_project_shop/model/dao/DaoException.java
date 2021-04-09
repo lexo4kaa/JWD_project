@@ -1,4 +1,4 @@
-package com.example.final_project_shop.dao;
+package com.example.final_project_shop.model.dao;
 
 public class DaoException extends Exception {
     public DaoException() {
