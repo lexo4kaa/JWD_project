@@ -6,7 +6,7 @@
 </head>
 <body>
 <form name="loginForm" method="POST" action="controller">
-    <input type="hidden" name="command" value="login" />
+    <input type="hidden" name="command" value="login"/>
 
     <div class="form_auth_block">
         <div class="form_auth_block_content">
@@ -22,10 +22,15 @@
             <br/>
             <input class="form_auth_button" type="submit" value="Log in"/>
             <br/>
-            <a href="pages/registration.jsp">I haven't an account</a>
-
         </div>
     </div>
+
+</form>
+
+<form name="toRegistration" method="POST" action="controller">
+    <input type="hidden" name="command" value="to_registration_page"/>
+
+    <input class="other_button" type="submit" value="I haven't an account"/>
 
 </form>
 
