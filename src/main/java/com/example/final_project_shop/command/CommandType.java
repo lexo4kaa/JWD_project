@@ -27,6 +27,16 @@ public enum CommandType {
         {
             this.command = new FindUsersByNicknameCommand();
         }
+    },
+    TO_LOGIN_PAGE {
+        {
+            this.command = new ToLoginPageCommand();
+        }
+    },
+    TO_REGISTRATION_PAGE {
+        {
+            this.command = new ToRegistrationPageCommand();
+        }
     };
     ActionCommand command;
     public ActionCommand getCurrentCommand() {
