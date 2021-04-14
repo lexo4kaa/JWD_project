@@ -48,6 +48,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String findUserRole(String login) throws ServiceException {
+        String role;
+        try {
+            role = baseDao.findUserRole(login);
+        } catch (DaoException e) {
+            logger.info("baseDao.findUserRole(" + login + ") is failed in UserServiceImpl", e);
+            throw new ServiceException(e);
+        }
+        return role;
+    }
+
+    @Override
     public boolean authorizeUser(String login, String password) throws ServiceException {
         String findPassword = "";
         String encPassword = encryptPassword(password);

@@ -1,4 +1,4 @@
-package com.example.final_project_shop.command;
+package com.example.final_project_shop.controller.command;
 
 import com.example.final_project_shop.model.service.ServiceException;
 

@@ -1,6 +1,6 @@
 package com.example.final_project_shop.controller;
-import com.example.final_project_shop.command.ActionCommand;
-import com.example.final_project_shop.command.ActionFactory;
+import com.example.final_project_shop.controller.command.ActionCommand;
+import com.example.final_project_shop.controller.command.ActionFactory;
 import com.example.final_project_shop.resource.ConfigurationManager;
 import com.example.final_project_shop.resource.MessageManager;
 import com.example.final_project_shop.model.service.ServiceException;

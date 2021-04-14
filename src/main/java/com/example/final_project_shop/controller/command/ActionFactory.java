@@ -1,5 +1,5 @@
-package com.example.final_project_shop.command;
-import com.example.final_project_shop.command.impl.EmptyCommand;
+package com.example.final_project_shop.controller.command;
+import com.example.final_project_shop.controller.command.impl.EmptyCommand;
 import com.example.final_project_shop.resource.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
