@@ -23,6 +23,7 @@ public class BaseDaoImpl implements BaseDao {
     private static final String SQL_FIND_BY_NICKNAME = "SELECT user_id,user_name,user_surname,user_nickname,user_password," +
                                                     "user_DOB,user_phone_number,user_email,user_role FROM users " +
                                                     "WHERE user_nickname LIKE ?";
+    private static final String SQL_FIND_ROLE_BY_NICKNAME = "SELECT user_role FROM users WHERE user_nickname = ?";
     private static final String SQL_FIND_PASSWORD_BY_NICKNAME = "SELECT user_password FROM users WHERE user_nickname = ?";
     private static final String SQL_ADD_USER = "INSERT INTO users (user_name,user_surname,user_nickname,user_password," +
                                                 "user_DOB, user_phone_number, user_email) VALUES (?,?,?,?,?,?,?)";
@@ -63,6 +64,22 @@ public class BaseDaoImpl implements BaseDao {
             throw new DaoException("Error while finding users", e);
         }
         return users;
+    }
+
+    @Override
+    public String findUserRole(String nickname) throws DaoException {
+        String role = "";
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ROLE_BY_NICKNAME);
+            statement.setString(1, nickname);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()){
+                role = resultSet.getString(UsersColumn.USER_ROLE);
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while finding users", e);
+        }
+        return role;
     }
 
     @Override

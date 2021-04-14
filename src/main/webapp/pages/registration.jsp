@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/registration.css"/>
 </head>
 <body>
-<form name="registrationForm" method="POST" action="../controller">
+<form name="registrationForm" method="POST" action="controller">
     <input type="hidden" name="command" value="registration" />
 
     <div class="form_reg_block">
