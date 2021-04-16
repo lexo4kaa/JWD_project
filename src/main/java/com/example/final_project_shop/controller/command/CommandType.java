@@ -23,6 +23,11 @@ public enum CommandType {
             this.command = new FindAllUsersCommand();
         }
     },
+    FIND_ALL_PRODUCTS {
+        {
+            this.command = new FindAllProductsCommand();
+        }
+    },
     FIND_USERS_BY_NICKNAME {
         {
             this.command = new FindUsersByNicknameCommand();
