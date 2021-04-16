@@ -1,6 +1,8 @@
 package com.example.final_project_shop.model.dao.impl;
 
+import com.example.final_project_shop.entity.Product;
 import com.example.final_project_shop.model.dao.BaseDao;
+import com.example.final_project_shop.model.dao.ProductColumn;
 import com.example.final_project_shop.model.dao.UsersColumn;
 import com.example.final_project_shop.model.dao.DaoException;
 import com.example.final_project_shop.entity.User;
@@ -18,8 +20,10 @@ import java.util.List;
 public class BaseDaoImpl implements BaseDao {
     private static final char PERCENT = '%';
     private static final BaseDaoImpl instance = new BaseDaoImpl();
-    private static final String SQL_FIND_ALL = "SELECT user_id,user_name,user_surname,user_nickname,user_password," +
-                                            "user_DOB,user_phone_number,user_email,user_role FROM users";
+    private static final String SQL_FIND_ALL_USERS = "SELECT user_id,user_name,user_surname,user_nickname,user_password," +
+                                                     "user_DOB,user_phone_number,user_email,user_role FROM users";
+    private static final String SQL_FIND_ALL_PRODUCTS = "SELECT product_id,product_type, product_team, product_year, product_specification," +
+                                                        "product_quantity, product_price, product_path FROM products";
     private static final String SQL_FIND_BY_NICKNAME = "SELECT user_id,user_name,user_surname,user_nickname,user_password," +
                                                     "user_DOB,user_phone_number,user_email,user_role FROM users " +
                                                     "WHERE user_nickname LIKE ?";
@@ -39,7 +43,7 @@ public class BaseDaoImpl implements BaseDao {
     public List<User> findAllUsers() throws DaoException {
         List<User> users = new ArrayList<>();
         try(Connection connection = CustomConnectionPool.getInstance().getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL);
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_USERS);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 users.add(createUserFromResultSet(resultSet));
@@ -48,6 +52,21 @@ public class BaseDaoImpl implements BaseDao {
             throw new DaoException("Error while finding users", e);
         }
         return users;
+    }
+
+    @Override
+    public List<Product> findAllProducts() throws DaoException {
+        List<Product> products = new ArrayList<>();
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_PRODUCTS);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                products.add(createProductsFromResultSet(resultSet));
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while finding products", e);
+        }
+        return products;
     }
 
     @Override
@@ -137,5 +156,26 @@ public class BaseDaoImpl implements BaseDao {
         user.setEmail(email);
         user.setRole(role);
         return user;
+    }
+
+    private Product createProductsFromResultSet(ResultSet resultSet) throws SQLException {
+        Product product = new Product();
+        int productId = resultSet.getInt(ProductColumn.PRODUCT_ID);
+        String type = resultSet.getString(ProductColumn.PRODUCT_TYPE);
+        String team = resultSet.getString(ProductColumn.PRODUCT_TEAM);
+        int year = resultSet.getInt(ProductColumn.PRODUCT_YEAR);
+        String specification = resultSet.getString(ProductColumn.PRODUCT_SPECIFICATION);
+        int quantity = resultSet.getInt(ProductColumn.PRODUCT_QUANTITY);
+        double price = resultSet.getDouble(ProductColumn.PRODUCT_PRICE);
+        String path = resultSet.getString(ProductColumn.PRODUCT_PATH);
+        product.setProductId(productId);
+        product.setType(type);
+        product.setTeam(team);
+        product.setYear(year);
+        product.setSpecification(specification);
+        product.setQuantity(quantity);
+        product.setPrice(price);
+        product.setPath(path);
+        return product;
     }
 }
