@@ -6,26 +6,23 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/products.css"/>
 </head>
 <body>
-<ul class="products">
+<ul class="products" >
     <c:forEach var="elem" items="${lst}" varStatus="status">
     <li class="product-wrapper">
         <a href="" class="product">
             <div class="product-photo">
                 <tr>
-                    <td><c:out value="${ elem.type }" /></td>
-                    <td><c:out value="${ elem.team }" /></td>
-                    <td><c:out value="${ elem.year }" /></td>
-                    <td><c:out value="${ elem.price }$" /></td>
-                    <td><img src="${pageContext.request.contextPath}${elem.path}" alt="альтернативный текст"></td>
+                    <td><img src="${pageContext.request.contextPath}${elem.path}" alt="Oops"></td>
                 </tr>
             </div>
         </a>
+        <td class="product-text"><c:out value="${ elem.team }" /></td>
+        <td class="product-text"><c:out value="${ elem.type }" /></td>
+        <td class="product-text"><c:out value="${ elem.year }" /></td><br>
+        <td class="product-text"><c:out value="${ elem.price }$" /></td>
     </li>
     </c:forEach>
 </ul>
-
-<br/>
-<a href="controller?command=logout">Logout</a>
 
 </body>
 </html>

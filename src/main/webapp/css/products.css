@@ -1,20 +1,15 @@
 .product-wrapper {
     display: block;
-    width: 100%;
+    text-align: center;
     float: left;
-    transition: width .2s;
 }
 
 .product {
     display: block;
-    border: 1px solid #b5e9a7;
+    border: 1px solid lightgreen;
     border-radius: 3px;
-    position: relative;
-    background: #fff;
-    margin: 0 20px 20px 0;
-    text-decoration: none;
-    color: #474747;
-    z-index: 0;
+    background: white;
+    margin: 20px 20px;
     height: 300px;
 }
 
@@ -30,8 +25,8 @@
     bottom: 0;
     left: 0;
     right: 0;
-    max-width: 95%;
-    max-height: 95%;
+    max-width: 90%;
+    max-height: 90%;
     margin: auto;
     transition: transform .4s ease-out;
 }
