@@ -13,7 +13,7 @@
 
     <div class="form_auth_block">
         <div class="form_auth_block_content">
-            <p class="form_auth_block_head_text"><fmt:message key="label.login_title"/></p>
+            <p class="form_auth_block_head_text"><fmt:message key="label.login_block_title"/></p>
             <label><fmt:message key="label.login_input"/></label>
             <input type="text" name="login" value="">
             <label><fmt:message key="label.password_input"/></label>
@@ -23,7 +23,7 @@
             ${wrongAction}
             ${nullPage}
             <br/>
-            <input class="form_auth_button" type="submit" value="<fmt:message key="label.login_title"/>"/>
+            <input class="form_auth_button" type="submit" value="<fmt:message key="label.login_button"/>"/>
             <br/>
         </div>
     </div>
