@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/products.css"/>
 </head>
 <body>
+<jsp:include page="header.jsp"/>
 <ul class="products" >
     <c:forEach var="elem" items="${lst}" varStatus="status">
     <li class="product-wrapper">

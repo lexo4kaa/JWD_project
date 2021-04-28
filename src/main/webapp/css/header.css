@@ -1,4 +1,13 @@
+.header {
+    padding: 15px 10px;
+}
+
 form {
-    margin: 0;
-    padding: 0;
+    float: left;
+    padding: 0 10px;
+}
+
+form input {
+    color: blue;
+    font-size: large;
 }
