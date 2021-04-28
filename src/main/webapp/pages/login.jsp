@@ -32,7 +32,6 @@
 
 <form name="toRegistration" method="POST" action="controller">
     <input type="hidden" name="command" value="to_registration_page"/>
-
     <input class="other_button" type="submit" value="<fmt:message key="label.no_account"/>"/>
 </form>
 <br/>

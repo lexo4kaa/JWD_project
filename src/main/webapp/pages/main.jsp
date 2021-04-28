@@ -4,8 +4,9 @@
 <head>
     <title>Main</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css"/>
-    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 </head>
+
+<jsp:include page="header.jsp"/>
 
 <h3>Welcome, dear ${user}!</h3>
 <img src="https://media.giphy.com/media/Cmr1OMJ2FN0B2/giphy.gif" alt="Oops" width="150" height="150">

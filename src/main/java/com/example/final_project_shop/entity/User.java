@@ -1,10 +1,9 @@
 package com.example.final_project_shop.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class User implements Serializable, Cloneable {
+public class User {
     private int userId;
     private String name;
     private String surname;
