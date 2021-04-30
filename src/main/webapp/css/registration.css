@@ -35,11 +35,11 @@ body {
     border-radius: 10px;
     outline: none;
 }
-.form_reg_block .form_reg_button{
+.form_reg_block .form_reg_block_content .form_reg_button{
     font-size: 150%;
     display: block;
     height: 50px;
-    width: 200px;
+    width: 50%;
     border: none;
     cursor: pointer;
 }
