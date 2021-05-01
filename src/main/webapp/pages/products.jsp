@@ -10,17 +10,27 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<p>Select a team:</p>
 
-<form name="findProductsByTeam" method="POST" action="controller">
+<form class="radio" name="findProductsByTeam" method="POST" action="controller">
+    <h3>Select a team:</h3>
     <p><input type="radio" name="team" value="All" checked>All</p>
+    <p><input type="radio" name="team" value="Atletico Madrid">Atletico Madrid</p>
     <p><input type="radio" name="team" value="Barcelona">Barcelona</p>
     <p><input type="radio" name="team" value="Chelsea">Chelsea</p>
+    <p><input type="radio" name="team" value="Inter Milan">Inter Milan</p>
+    <p><input type="radio" name="team" value="Juventus">Juventus</p>
     <p><input type="radio" name="team" value="Liverpool">Liverpool</p>
+    <p><input type="radio" name="team" value="Manchester City">Manchester City</p>
+    <p><input type="radio" name="team" value="Manchester United">Manchester United</p>
+    <p><input type="radio" name="team" value="Milan">Milan</p>
+    <p><input type="radio" name="team" value="PSG">PSG</p>
+    <p><input type="radio" name="team" value="Real Madrid">Real Madrid</p>
 
     <input type="hidden" name="command" value="find_products_by_team" />
     <input type="submit" value="Find" name="submit"/>
 </form>
+
+
 
 <ul class="products" >
     <c:forEach var="elem" items="${lst}" varStatus="status">

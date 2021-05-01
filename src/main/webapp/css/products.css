@@ -1,3 +1,7 @@
+.products {
+    margin-left: 100px;
+}
+
 .product-wrapper {
     display: block;
     text-align: center;
@@ -9,7 +13,7 @@
     border: 1px solid lightgreen;
     border-radius: 3px;
     background: white;
-    margin: 20px 20px;
+    margin: 20px;
     height: 300px;
 }
 
@@ -25,13 +29,17 @@
     bottom: 0;
     left: 0;
     right: 0;
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 95%;
+    max-height: 95%;
     margin: auto;
 }
 
 .product-photo img:hover {
     transform: scale(1.2);
+}
+
+.radio {
+    position: fixed;
 }
 
 @media only screen and (min-width: 450px) {
