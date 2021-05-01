@@ -9,6 +9,7 @@ import java.util.List;
 public interface BaseDao {
     List<User> findAllUsers() throws DaoException;
     List<Product> findAllProducts() throws DaoException;
+    List<Product> findProductsByTeam(String team) throws DaoException;
     List<User> findUsersByNickname(String nickname) throws DaoException;
     String findUserRole(String nickname) throws DaoException;
     String findPasswordByNickname(String nickname) throws DaoException;

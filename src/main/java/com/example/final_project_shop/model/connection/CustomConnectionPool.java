@@ -19,7 +19,7 @@ public class CustomConnectionPool {
     private static final CustomConnectionPool instance = new CustomConnectionPool();
 
     private BlockingQueue<Connection> freeConnections;
-    private Queue<Connection> givenAwayConnections;
+    private BlockingQueue<Connection> givenAwayConnections;
 
     public static CustomConnectionPool getInstance() {
         return instance;
@@ -27,7 +27,7 @@ public class CustomConnectionPool {
 
     private CustomConnectionPool() {
         freeConnections = new LinkedBlockingQueue<>(DEFAULT_POOL_SIZE);
-        givenAwayConnections = new ArrayDeque<>();
+        givenAwayConnections = new LinkedBlockingQueue<>();
         try {
             for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
                 Connection connection = ConnectionCreator.getConnection();

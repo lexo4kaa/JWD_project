@@ -26,4 +26,16 @@ public class ProductServiceImpl implements ProductService {
         }
         return products;
     }
+
+    @Override
+    public List<Product> findProductsByTeam(String team) throws ServiceException {
+        List<Product> products;
+        try {
+            products = baseDao.findProductsByTeam(team);
+        } catch (DaoException e) {
+            logger.info("baseDao.findProductsByTeam() is failed in ProductServiceImpl", e);
+            throw new ServiceException(e);
+        }
+        return products;
+    }
 }

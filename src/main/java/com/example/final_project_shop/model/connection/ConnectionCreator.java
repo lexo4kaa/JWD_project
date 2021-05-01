@@ -11,7 +11,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class ConnectionCreator {
+public class ConnectionCreator { //todo delete public
     private static final Logger logger = LogManager.getLogger();
     private static final Properties properties = new Properties();
     private static final String FILE_NAME = "properties/database.properties";
