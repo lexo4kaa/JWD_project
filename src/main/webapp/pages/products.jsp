@@ -11,26 +11,35 @@
 <body>
 <jsp:include page="header.jsp"/>
 
+<form class="radio" name="findProductsByTeam" method="POST" action="controller">
+    <h3>Select a team:</h3>
+    <p><input type="radio" name="team" value="All" checked>All</p>
+    <p><input type="radio" name="team" value="Atletico Madrid">Atletico Madrid</p>
+    <p><input type="radio" name="team" value="Barcelona">Barcelona</p>
+    <p><input type="radio" name="team" value="Chelsea">Chelsea</p>
+    <p><input type="radio" name="team" value="Inter Milan">Inter Milan</p>
+    <p><input type="radio" name="team" value="Juventus">Juventus</p>
+    <p><input type="radio" name="team" value="Liverpool">Liverpool</p>
+    <p><input type="radio" name="team" value="Manchester City">Manchester City</p>
+    <p><input type="radio" name="team" value="Manchester United">Manchester United</p>
+    <p><input type="radio" name="team" value="Milan">Milan</p>
+    <p><input type="radio" name="team" value="PSG">PSG</p>
+    <p><input type="radio" name="team" value="Real Madrid">Real Madrid</p>
 
-<div class="team">
-    <h3>Team</h3>
-    <div id="teamDropdown">
-        <input type="radio" class="btn" value="all">All<br>
-        <input type="radio" class="btn" value="Barcelona">Barcelona<br>
-        <input type="radio" class="btn" value="Chelsea">Chelsea<br>
-        <input type="radio" class="btn" value="Liverpool">Liverpool<br>
-        <input type="radio" class="btn" value="PSG">PSG<br>
-    </div>
-</div>
+    <input type="hidden" name="command" value="find_products_by_team" />
+    <input type="submit" value="Find" name="submit"/>
+</form>
+
+
 
 <ul class="products" >
     <c:forEach var="elem" items="${lst}" varStatus="status">
     <li class="product-wrapper">
-        <a href="" class="product">
+        <div class="product">
             <div class="product-photo">
                 <img src="${pageContext.request.contextPath}${elem.path}" alt="Oops">
             </div>
-        </a>
+        </div>
         <div class="product-text"><c:out value="${ elem.team }" />
                                   <c:out value="${ elem.type }" />
                                   <c:out value="${ elem.year }" /></div>

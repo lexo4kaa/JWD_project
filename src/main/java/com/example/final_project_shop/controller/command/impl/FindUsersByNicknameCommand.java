@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class FindUsersByNicknameCommand implements ActionCommand {
+    private static final String PARAM_NAME_NICKNAME = "nickname";
     private static final UserServiceImpl userService = new UserServiceImpl();
     private static Logger logger = LogManager.getLogger();
 
@@ -19,7 +20,7 @@ public class FindUsersByNicknameCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         String page;
         List<User> users;
-        String nickname = request.getParameter("nickname");
+        String nickname = request.getParameter(PARAM_NAME_NICKNAME);
         try {
             users = userService.findUsersByNickname(nickname);
             request.setAttribute("lst", users);

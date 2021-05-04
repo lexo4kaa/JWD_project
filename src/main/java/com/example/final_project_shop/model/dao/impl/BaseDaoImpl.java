@@ -22,11 +22,15 @@ public class BaseDaoImpl implements BaseDao {
     private static final BaseDaoImpl instance = new BaseDaoImpl();
     private static final String SQL_FIND_ALL_USERS = "SELECT user_id,user_name,user_surname,user_nickname,user_password," +
                                                      "user_DOB,user_phone_number,user_email,user_role FROM users";
-    private static final String SQL_FIND_ALL_PRODUCTS = "SELECT product_id,product_type, product_team, product_year, product_specification," +
-                                                        "product_quantity, product_price, product_path FROM products";
-    private static final String SQL_FIND_BY_NICKNAME = "SELECT user_id,user_name,user_surname,user_nickname,user_password," +
-                                                    "user_DOB,user_phone_number,user_email,user_role FROM users " +
-                                                    "WHERE user_nickname LIKE ?";
+    private static final String SQL_FIND_ALL_PRODUCTS = "SELECT product_id,product_type, product_team, product_year, " +
+                                                        "product_specification, product_quantity, product_price, " +
+                                                        "product_path FROM products";
+    private static final String SQL_FIND_PRODUCTS_BY_TEAM = "SELECT product_id,product_type, product_team, product_year," +
+                                                            "product_specification,product_quantity, product_price, " +
+                                                            "product_path FROM products WHERE product_team = ?";
+    private static final String SQL_FIND_USER_BY_NICKNAME = "SELECT user_id,user_name,user_surname,user_nickname," +
+                                                            "user_password,user_DOB,user_phone_number,user_email," +
+                                                            "user_role FROM users WHERE user_nickname LIKE ?";
     private static final String SQL_FIND_ROLE_BY_NICKNAME = "SELECT user_role FROM users WHERE user_nickname = ?";
     private static final String SQL_FIND_PASSWORD_BY_NICKNAME = "SELECT user_password FROM users WHERE user_nickname = ?";
     private static final String SQL_ADD_USER = "INSERT INTO users (user_name,user_surname,user_nickname,user_password," +
@@ -42,8 +46,8 @@ public class BaseDaoImpl implements BaseDao {
     @Override
     public List<User> findAllUsers() throws DaoException {
         List<User> users = new ArrayList<>();
-        try(Connection connection = CustomConnectionPool.getInstance().getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_USERS);
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_USERS)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 users.add(createUserFromResultSet(resultSet));
@@ -57,8 +61,24 @@ public class BaseDaoImpl implements BaseDao {
     @Override
     public List<Product> findAllProducts() throws DaoException {
         List<Product> products = new ArrayList<>();
-        try(Connection connection = CustomConnectionPool.getInstance().getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_PRODUCTS);
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_PRODUCTS)) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                products.add(createProductsFromResultSet(resultSet));
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while finding products", e);
+        }
+        return products;
+    }
+
+    @Override
+    public List<Product> findProductsByTeam(String team) throws DaoException {
+        List<Product> products = new ArrayList<>();
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_PRODUCTS_BY_TEAM)) {
+            statement.setString(1, team);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 products.add(createProductsFromResultSet(resultSet));
@@ -72,8 +92,8 @@ public class BaseDaoImpl implements BaseDao {
     @Override
     public List<User> findUsersByNickname(String nickname) throws DaoException {
         List<User> users = new ArrayList<>();
-        try(Connection connection = CustomConnectionPool.getInstance().getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(SQL_FIND_BY_NICKNAME);
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_USER_BY_NICKNAME)) {
             statement.setString(1, nickname + PERCENT);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
@@ -88,8 +108,8 @@ public class BaseDaoImpl implements BaseDao {
     @Override
     public String findUserRole(String nickname) throws DaoException {
         String role = "";
-        try(Connection connection = CustomConnectionPool.getInstance().getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ROLE_BY_NICKNAME);
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ROLE_BY_NICKNAME)) {
             statement.setString(1, nickname);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()){
@@ -104,8 +124,8 @@ public class BaseDaoImpl implements BaseDao {
     @Override
     public String findPasswordByNickname(String nickname) throws DaoException {
         String password = "";
-        try(Connection connection = CustomConnectionPool.getInstance().getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(SQL_FIND_PASSWORD_BY_NICKNAME);
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_PASSWORD_BY_NICKNAME)) {
             statement.setString(1, nickname);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()){
@@ -120,8 +140,8 @@ public class BaseDaoImpl implements BaseDao {
     @Override
     public void addNewUser(String name, String surname, String nickname, String password,
                            String dob, String phone, String email) throws DaoException{
-        try(Connection connection = CustomConnectionPool.getInstance().getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(SQL_ADD_USER);
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_ADD_USER)) {
             statement.setString(1, name);
             statement.setString(2, surname);
             statement.setString(3, nickname);

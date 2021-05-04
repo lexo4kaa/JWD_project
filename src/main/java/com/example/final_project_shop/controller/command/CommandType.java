@@ -28,6 +28,11 @@ public enum CommandType {
             this.command = new FindAllProductsCommand();
         }
     },
+    FIND_PRODUCTS_BY_TEAM {
+        {
+            this.command = new FindProductsByTeamCommand();
+        }
+    },
     FIND_USERS_BY_NICKNAME {
         {
             this.command = new FindUsersByNicknameCommand();
