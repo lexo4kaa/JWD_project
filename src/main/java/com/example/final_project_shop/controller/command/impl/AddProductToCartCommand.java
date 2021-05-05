@@ -24,16 +24,11 @@ public class AddProductToCartCommand implements ActionCommand {
         Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
         String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
         int productId = Integer.parseInt(stringProductId);
-        try {
-            productService.addProductToCart(cart, productId);
-            cart.entrySet().forEach(entry -> {
-                System.out.println(entry.getKey() + " " + entry.getValue()); //fixme
-            });
-            page = ConfigurationManager.getProperty("path.page.products");
-        } catch (ServiceException e) {
-            logger.info("Problems with function 'addProductToCart', redirected to error page");
-            page = ConfigurationManager.getProperty("path.page.error");
-        }
+        productService.addProductToCart(cart, productId);
+        cart.entrySet().forEach(entry -> {
+            System.out.println(entry.getKey() + " " + entry.getValue()); //fixme
+        });
+        page = ConfigurationManager.getProperty("path.page.products");
         return page;
     }
 }

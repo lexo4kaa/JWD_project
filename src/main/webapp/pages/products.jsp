@@ -52,7 +52,7 @@
             <input type="submit" value="+"/>
         </form>
         <form style="float: left" name="deleteProduct" method="POST" action="controller">
-            <input type="hidden" name="command" value="delete_product_from_cart"/> <!-- todo add func -->
+            <input type="hidden" name="command" value="delete_product_from_cart"/>
             <input type="hidden" name="product_id" value="${ elem.productId }">
             <input type="submit" value="-"/>
         </form>

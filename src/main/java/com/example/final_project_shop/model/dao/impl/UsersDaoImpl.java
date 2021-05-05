@@ -94,6 +94,7 @@ public class UsersDaoImpl implements UserDao {
         }
         return password;
     }
+
     @Override
     public void addNewUser(String name, String surname, String nickname, String password,
                            String dob, String phone, String email) throws DaoException{
@@ -134,5 +135,4 @@ public class UsersDaoImpl implements UserDao {
         user.setRole(role);
         return user;
     }
-
 }

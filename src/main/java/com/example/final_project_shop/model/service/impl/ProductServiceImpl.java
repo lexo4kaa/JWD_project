@@ -41,12 +41,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void addProductToCart(Map<Integer, Integer> cast, int productId) throws ServiceException {
-        try {
-            productDao.addProductToCart(cast, productId);
-        } catch (DaoException e) {
-            logger.info("productDao.findProductsByTeam() is failed in ProductServiceImpl", e);
-            throw new ServiceException(e);
+    public void addProductToCart(Map<Integer, Integer> cast, int productId) {
+        if(cast.containsKey(productId)) {
+            cast.put(productId, cast.get(productId) + 1);
+        } else {
+            cast.put(productId, 1);
         }
     }
 }

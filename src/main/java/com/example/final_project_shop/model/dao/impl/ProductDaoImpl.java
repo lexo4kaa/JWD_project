@@ -63,18 +63,6 @@ public class ProductDaoImpl implements ProductDao {
         return products;
     }
 
-
-
-    @Override
-    public void addProductToCart(Map<Integer, Integer> cast, int productId) throws DaoException {
-        if(cast.containsKey(productId)) {
-            System.out.println(productId);
-            cast.put(productId, cast.get(productId) + 1);
-        } else {
-            cast.put(productId, 1);
-        }
-    }
-
     private Product createProductsFromResultSet(ResultSet resultSet) throws SQLException {
         Product product = new Product();
         int productId = resultSet.getInt(ProductColumn.PRODUCT_ID);
