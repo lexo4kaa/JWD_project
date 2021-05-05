@@ -30,8 +30,6 @@
     <input type="submit" value="Find" name="submit"/>
 </form>
 
-
-
 <ul class="products" >
     <c:forEach var="elem" items="${lst}" varStatus="status">
     <li class="product-wrapper">
@@ -40,14 +38,24 @@
                 <img src="${pageContext.request.contextPath}${elem.path}" alt="Oops">
             </div>
         </div>
-        <div class="product-text"><c:out value="${ elem.team }" />
-                                  <c:out value="${ elem.type }" />
-                                  <c:out value="${ elem.year }" /></div>
-        <form style="margin: 0 auto; width: 93%" name="buyProduct" method="POST" action="controller">
-            <input type="hidden" name="command" value="add_product_to_cart"/> <!-- todo add function -->
-            <input type="submit" value="<fmt:message key="label.buy"/>"/>
+        <div>
+            <c:out value="${ elem.team }" />
+            <c:out value="${ elem.type }" />
+            <c:out value="${ elem.year }" />
+        </div>
+        <div style="color: red">
+            <c:out value="${ elem.price }$" />
+        </div>
+        <form style="float: left; margin-left: 42.5%" name="addProduct" method="POST" action="controller">
+            <input type="hidden" name="command" value="add_product_to_cart"/>
+            <input type="hidden" name="product_id" value="${ elem.productId }">
+            <input type="submit" value="+"/>
         </form>
-        <div class="product-text"><c:out value="${ elem.price }$" />
+        <form style="float: left" name="deleteProduct" method="POST" action="controller">
+            <input type="hidden" name="command" value="delete_product_from_cart"/> <!-- todo add func -->
+            <input type="hidden" name="product_id" value="${ elem.productId }">
+            <input type="submit" value="-"/>
+        </form>
     </li>
     </c:forEach>
 </ul>
