@@ -31,9 +31,7 @@ public class LoginCommand implements ActionCommand {
             session.setAttribute("user", login);
             session.setAttribute("cart", new HashMap<Integer, Integer>()); // productId & quantity
             if (userService.findUserRole(login).equals(PARAM_NAME_ROLE_CLIENT)) {
-                List<Product> products;
-                products = productService.findAllProducts();
-                request.setAttribute("lst", products);
+                request.setAttribute("lst", productService.findAllProducts());
                 page = ConfigurationManager.getProperty("path.page.products");
             } else {
                 page = ConfigurationManager.getProperty("path.page.admin_main");

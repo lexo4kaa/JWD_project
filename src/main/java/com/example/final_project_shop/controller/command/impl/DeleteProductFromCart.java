@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
-public class AddProductToCartCommand implements ActionCommand {
+public class DeleteProductFromCart implements ActionCommand {
     private static final String PARAM_NAME_PRODUCT_ID = "product_id";
     private static final ProductService productService = new ProductServiceImpl();
 
@@ -21,7 +21,7 @@ public class AddProductToCartCommand implements ActionCommand {
         Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
         String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
         int productId = Integer.parseInt(stringProductId);
-        productService.addProductToCart(cart, productId);
+        productService.deleteProductFromCart(cart, productId);
         cart.entrySet().forEach(entry -> {
             System.out.println(entry.getKey() + " " + entry.getValue()); //fixme
         });

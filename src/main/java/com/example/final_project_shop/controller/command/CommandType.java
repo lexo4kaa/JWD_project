@@ -43,6 +43,11 @@ public enum CommandType {
             this.command = new AddProductToCartCommand();
         }
     },
+    DELETE_PRODUCT_FROM_CART {
+        {
+            this.command = new DeleteProductFromCart();
+        }
+    },
     TO_LOGIN_PAGE {
         {
             this.command = new ToLoginPageCommand();

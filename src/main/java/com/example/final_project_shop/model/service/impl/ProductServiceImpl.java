@@ -48,4 +48,16 @@ public class ProductServiceImpl implements ProductService {
             cast.put(productId, 1);
         }
     }
+
+    @Override
+    public void deleteProductFromCart(Map<Integer, Integer> cast, int productId) {
+        if(cast.containsKey(productId)) {
+            if(cast.get(productId) > 1) {
+                cast.put(productId, cast.get(productId) - 1);
+            }
+            else {
+                cast.remove(productId);
+            }
+        }
+    }
 }
