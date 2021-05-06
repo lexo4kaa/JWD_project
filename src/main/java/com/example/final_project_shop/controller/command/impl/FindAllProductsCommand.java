@@ -21,8 +21,7 @@ public class FindAllProductsCommand implements ActionCommand {
         List<Product> products;
         try {
             products = productService.findAllProducts();
-            request.setAttribute("lst", products);
-            request.setAttribute("lst_length", products.size());
+            request.setAttribute("products", products);
             page = ConfigurationManager.getProperty("path.page.products");
         } catch (ServiceException e) {
             logger.info("Problems with function 'FindAllProducts', redirected to error page");

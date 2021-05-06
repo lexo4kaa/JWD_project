@@ -13,18 +13,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ProductDaoImpl implements ProductDao {
     private static final ProductDao instance = new ProductDaoImpl();
     private static final String SQL_FIND_ALL_PRODUCTS = "SELECT product_id,product_type, product_team, product_year, " +
-            "product_specification, product_quantity, product_price, " +
-            "product_path FROM products";
+                                                        "product_specification, product_quantity, product_price, " +
+                                                        "product_path FROM products";
     private static final String SQL_FIND_PRODUCTS_BY_TEAM = "SELECT product_id,product_type, product_team, product_year," +
-            "product_specification,product_quantity, product_price, " +
-            "product_path FROM products WHERE product_team = ?";
-    private static final String SQL_ADD_PRODUCT_TO_CART = "INSERT INTO users (user_name,user_surname,user_nickname,user_password," +
-            "user_DOB, user_phone_number, user_email) VALUES (?,?,?,?,?,?,?)";
+                                                            "product_specification,product_quantity, product_price, " +
+                                                            "product_path FROM products WHERE product_team = ?";
+    private static final String SQL_FIND_PRODUCTS_BY_IDS =  "SELECT product_id,product_type, product_team, product_year," +
+                                                            "product_specification,product_quantity, product_price, " +
+                                                            "product_path FROM products WHERE product_id = ?";
 
     private ProductDaoImpl(){}
 
@@ -61,6 +61,22 @@ public class ProductDaoImpl implements ProductDao {
             throw new DaoException("Error while finding products", e);
         }
         return products;
+    }
+
+    @Override
+    public Product findProductById(int productId) throws DaoException { // todo
+        Product product = new Product();
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_PRODUCTS_BY_IDS)) {
+            statement.setInt(1, productId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()){
+                product = createProductsFromResultSet(resultSet);
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while finding products", e);
+        }
+        return product;
     }
 
     private Product createProductsFromResultSet(ResultSet resultSet) throws SQLException {

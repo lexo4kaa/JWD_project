@@ -9,8 +9,10 @@ import com.example.final_project_shop.model.service.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ProductServiceImpl implements ProductService {
     private final ProductDao productDao = ProductDaoImpl.getInstance();
@@ -34,7 +36,22 @@ public class ProductServiceImpl implements ProductService {
         try {
             products = productDao.findProductsByTeam(team);
         } catch (DaoException e) {
-            logger.info("productDao.findProductsByTeam() is failed in ProductServiceImpl", e);
+            logger.info("productDao.findProductsByTeam(" + team + ") is failed in ProductServiceImpl", e);
+            throw new ServiceException(e);
+        }
+        return products;
+    }
+
+    @Override
+    public List<Product> findProductsByIds(Set<Integer> productIds) throws ServiceException {
+        List<Product> products = new ArrayList<>();
+        try {
+            for (int productId: productIds) {
+                Product product = productDao.findProductById(productId);
+                products.add(product);
+            }
+        } catch (DaoException e) {
+            logger.info("productDao.findProductsInCart(" + productIds + ") is failed in ProductServiceImpl", e);
             throw new ServiceException(e);
         }
         return products;

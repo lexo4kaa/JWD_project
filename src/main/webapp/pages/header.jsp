@@ -13,6 +13,10 @@
         <input type="hidden" name="command" value="find_all_products"/>
         <input class="other_button" type="submit" value="<fmt:message key="label.products"/>"/>
     </form>
+    <form style="float: left" name="findProducts" method="POST" action="controller">
+        <input type="hidden" name="command" value="find_products_by_ids"/>
+        <input type="submit" value="<fmt:message key="label.cart"/>"/>
+    </form>
     <form name="logout" method="POST" action="controller">
         <input type="hidden" name="command" value="logout"/>
         <input class="other_button" type="submit" value="<fmt:message key="label.logout_button"/>"/>

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
-public class DeleteProductFromCart implements ActionCommand {
+public class DeleteProductFromCartCommand implements ActionCommand {
     private static final String PARAM_NAME_PRODUCT_ID = "product_id";
     private static final ProductService productService = new ProductServiceImpl();
 
@@ -25,7 +25,7 @@ public class DeleteProductFromCart implements ActionCommand {
         cart.entrySet().forEach(entry -> {
             System.out.println(entry.getKey() + " " + entry.getValue()); //fixme
         });
-        request.setAttribute("lst", productService.findAllProducts());
+        request.setAttribute("products", productService.findAllProducts());
         page = ConfigurationManager.getProperty("path.page.products");
         return page;
     }

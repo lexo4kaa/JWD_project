@@ -33,6 +33,11 @@ public enum CommandType {
             this.command = new FindProductsByTeamCommand();
         }
     },
+    FIND_PRODUCTS_BY_IDS {
+        {
+            this.command = new FindProductsByIdsCommand();
+        }
+    },
     FIND_USERS_BY_NICKNAME {
         {
             this.command = new FindUsersByNicknameCommand();
@@ -45,7 +50,7 @@ public enum CommandType {
     },
     DELETE_PRODUCT_FROM_CART {
         {
-            this.command = new DeleteProductFromCart();
+            this.command = new DeleteProductFromCartCommand();
         }
     },
     TO_LOGIN_PAGE {

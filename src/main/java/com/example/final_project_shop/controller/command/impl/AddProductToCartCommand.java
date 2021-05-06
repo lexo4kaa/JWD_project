@@ -25,7 +25,7 @@ public class AddProductToCartCommand implements ActionCommand {
         cart.entrySet().forEach(entry -> {
             System.out.println(entry.getKey() + " " + entry.getValue()); //fixme
         });
-        request.setAttribute("lst", productService.findAllProducts());
+        request.setAttribute("products", productService.findAllProducts());
         page = ConfigurationManager.getProperty("path.page.products");
         return page;
     }

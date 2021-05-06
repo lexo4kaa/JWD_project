@@ -1,3 +1,5 @@
+<%@ page import="com.example.final_project_shop.entity.Product" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -31,32 +33,49 @@
 </form>
 
 <ul class="products" >
-    <c:forEach var="elem" items="${lst}" varStatus="status">
+    <c:forEach var="prod" items="${products}" varStatus="status">
     <li class="product-wrapper">
         <div class="product">
             <div class="product-photo">
-                <img src="${pageContext.request.contextPath}${elem.path}" alt="Oops">
+                <img src="${pageContext.request.contextPath}${prod.path}" alt="Oops">
             </div>
         </div>
         <div>
-            <c:out value="${ elem.team }" />
-            <c:out value="${ elem.type }" />
-            <c:out value="${ elem.year }" />
+            <c:out value="${ prod.team }" />
+            <c:out value="${ prod.type }" />
+            <c:out value="${ prod.year }" />
         </div>
         <div style="color: red">
-            <c:out value="${ elem.price }$" />
+            <c:out value="${ prod.price }$" />
         </div>
         <form style="float: left; margin-left: 42.5%" name="addProduct" method="POST" action="controller">
             <input type="hidden" name="command" value="add_product_to_cart"/>
-            <input type="hidden" name="product_id" value="${ elem.productId }">
+            <input type="hidden" name="product_id" value="${ prod.productId }">
             <input type="submit" value="+"/>
         </form>
         <form style="float: left" name="deleteProduct" method="POST" action="controller">
             <input type="hidden" name="command" value="delete_product_from_cart"/>
-            <input type="hidden" name="product_id" value="${ elem.productId }">
+            <input type="hidden" name="product_id" value="${ prod.productId }">
             <input type="submit" value="-"/>
         </form>
     </li>
+    </c:forEach>
+</ul>
+
+<ul class="cart" >
+    <c:forEach var="elem" items="${cartProducts}" varStatus="status">
+        <li class="product-wrapper">
+            <div class="product">
+                <div class="product-photo">
+                    <img src="${pageContext.request.contextPath}${elem.path}" alt="Oops">
+                </div>
+            </div>
+            <div>
+                <c:out value="${ elem.team }" />
+                <c:out value="${ elem.type }" />
+                <c:out value="${ elem.year }" />
+            </div>
+        </li>
     </c:forEach>
 </ul>
 
