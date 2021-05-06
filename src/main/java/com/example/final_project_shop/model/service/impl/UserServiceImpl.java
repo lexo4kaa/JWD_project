@@ -1,9 +1,9 @@
 package com.example.final_project_shop.model.service.impl;
 
-import com.example.final_project_shop.model.dao.BaseDao;
 import com.example.final_project_shop.model.dao.DaoException;
-import com.example.final_project_shop.model.dao.impl.BaseDaoImpl;
 import com.example.final_project_shop.entity.User;
+import com.example.final_project_shop.model.dao.UserDao;
+import com.example.final_project_shop.model.dao.impl.UsersDaoImpl;
 import com.example.final_project_shop.model.service.ServiceException;
 import com.example.final_project_shop.model.service.UserService;
 import com.example.final_project_shop.validator.UserValidator;
@@ -18,16 +18,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
-    private final BaseDao baseDao = BaseDaoImpl.getInstance();
+    private final UserDao userDao = UsersDaoImpl.getInstance();
     private static Logger logger = LogManager.getLogger();
 
     @Override
     public List<User> findAllUsers() throws ServiceException {
         List<User> users;
         try {
-            users = baseDao.findAllUsers();
+            users = userDao.findAllUsers();
         } catch (DaoException e) {
-            logger.info("baseDao.findAllUsers() is failed in UserServiceImpl", e);
+            logger.info("userDao.findAllUsers() is failed in UserServiceImpl", e);
             throw new ServiceException(e);
         }
         return users;
@@ -38,9 +38,9 @@ public class UserServiceImpl implements UserService {
         List<User> users = new ArrayList<>();
         if (UserValidator.isLoginCorrect(nickname)) {
             try {
-                users = baseDao.findUsersByNickname(nickname);
+                users = userDao.findUsersByNickname(nickname);
             } catch (DaoException e) {
-                logger.info("baseDao.findUsersByNickname(" + nickname + ") is failed in UserServiceImpl", e);
+                logger.info("userDao.findUsersByNickname(" + nickname + ") is failed in UserServiceImpl", e);
                 throw new ServiceException(e);
             }
         }
@@ -51,9 +51,9 @@ public class UserServiceImpl implements UserService {
     public String findUserRole(String login) throws ServiceException {
         String role;
         try {
-            role = baseDao.findUserRole(login);
+            role = userDao.findUserRole(login);
         } catch (DaoException e) {
-            logger.info("baseDao.findUserRole(" + login + ") is failed in UserServiceImpl", e);
+            logger.info("userDao.findUserRole(" + login + ") is failed in UserServiceImpl", e);
             throw new ServiceException(e);
         }
         return role;
@@ -65,9 +65,9 @@ public class UserServiceImpl implements UserService {
         String encPassword = encryptPassword(password);
         if (UserValidator.isLoginCorrect(login) && UserValidator.isPasswordCorrect(password)) {
             try {
-                findPassword = baseDao.findPasswordByNickname(login);
+                findPassword = userDao.findPasswordByNickname(login);
             } catch (DaoException e) {
-                logger.info("baseDao.findPasswordByNickname(" + login + ") is failed in UserServiceImpl", e);
+                logger.info("userDao.findPasswordByNickname(" + login + ") is failed in UserServiceImpl", e);
                 throw new ServiceException(e);
             }
         }
@@ -96,10 +96,10 @@ public class UserServiceImpl implements UserService {
         if (UserValidator.isLoginCorrect(nickname) && UserValidator.isPasswordCorrect(password) &&
                 UserValidator.isEmailCorrect(email) && UserValidator.isPhoneCorrect(phone)) {
             try {
-                baseDao.addNewUser(name, surname, nickname, password, dob, phone, email);
+                userDao.addNewUser(name, surname, nickname, password, dob, phone, email);
                 flag = true;
             } catch (DaoException e) {
-                logger.info("baseDao.registerUser is failed in UserServiceImpl", e);
+                logger.info("userDao.registerUser is failed in UserServiceImpl", e);
                 throw new ServiceException(e);
             }
         }

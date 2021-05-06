@@ -32,7 +32,7 @@
             <label><fmt:message key="label.password"/></label>
             <label class="recomend_label" for="password_label"><fmt:message key="label.password_prompt"/></label>
             <input type="password" name="password" id="password_label" value="" required pattern="^[A-Za-z0-9_-]{6,18}$">
-            <label><fmt:message key="label.password_repead"/></label>
+            <label><fmt:message key="label.password_repeat"/></label>
             <input type="password" name="password2" value="" required pattern="^[A-Za-z0-9_-]{6,18}$">
             <br/>
             ${errorLoginPassMessage}

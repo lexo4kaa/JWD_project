@@ -14,7 +14,7 @@
     border-radius: 3px;
     background: white;
     margin: 20px;
-    height: 300px;
+    height: 270px;
 }
 
 .product-photo {
@@ -29,13 +29,13 @@
     bottom: 0;
     left: 0;
     right: 0;
-    max-width: 95%;
-    max-height: 95%;
+    max-width: 90%;
+    max-height: 90%;
     margin: auto;
 }
 
 .product-photo img:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 .radio {

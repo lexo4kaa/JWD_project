@@ -27,7 +27,7 @@ public class CustomConnectionPool {
 
     private CustomConnectionPool() {
         freeConnections = new LinkedBlockingQueue<>(DEFAULT_POOL_SIZE);
-        givenAwayConnections = new LinkedBlockingQueue<>();
+        givenAwayConnections = new LinkedBlockingQueue<>(); //fixme
         try {
             for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
                 Connection connection = ConnectionCreator.getConnection();
