@@ -105,4 +105,14 @@ public class UserServiceImpl implements UserService {
         }
         return flag;
     }
+
+    @Override
+    public void deleteUser(int userId) throws ServiceException {
+        try {
+            userDao.deleteUser(userId);
+        } catch (DaoException e) {
+            logger.info("userDao.deleteUser(" + userId + ") is failed in UserServiceImpl", e);
+            throw new ServiceException(e);
+        }
+    }
 }

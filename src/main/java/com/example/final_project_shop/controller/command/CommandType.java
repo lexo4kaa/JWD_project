@@ -18,6 +18,11 @@ public enum CommandType {
             this.command = new RegistrationCommand();
         }
     },
+    DELETE_USER {
+        {
+            this.command = new DeleteUserCommand();
+        }
+    },
     FIND_ALL_USERS {
         {
             this.command = new FindAllUsersCommand();
