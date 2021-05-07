@@ -19,14 +19,15 @@ public class UsersDaoImpl implements UserDao {
     private static final UserDao instance = new UsersDaoImpl();
     private static final char PERCENT = '%';
     private static final String SQL_FIND_ALL_USERS = "SELECT user_id,user_name,user_surname,user_nickname,user_password," +
-            "user_DOB,user_phone_number,user_email,user_role FROM users";
+                                                     "user_DOB,user_phone_number,user_email,user_role FROM users";
     private static final String SQL_FIND_USER_BY_NICKNAME = "SELECT user_id,user_name,user_surname,user_nickname," +
-            "user_password,user_DOB,user_phone_number,user_email," +
-            "user_role FROM users WHERE user_nickname LIKE ?";
+                                                            "user_password,user_DOB,user_phone_number,user_email," +
+                                                            "user_role FROM users WHERE user_nickname LIKE ?";
     private static final String SQL_FIND_ROLE_BY_NICKNAME = "SELECT user_role FROM users WHERE user_nickname = ?";
     private static final String SQL_FIND_PASSWORD_BY_NICKNAME = "SELECT user_password FROM users WHERE user_nickname = ?";
     private static final String SQL_ADD_USER = "INSERT INTO users (user_name,user_surname,user_nickname,user_password," +
-            "user_DOB, user_phone_number, user_email) VALUES (?,?,?,?,?,?,?)";
+                                                "user_DOB, user_phone_number, user_email) VALUES (?,?,?,?,?,?,?)";
+    private static final String SQL_DELETE_USER = "DELETE FROM users WHERE user_id = ?";
 
     public static UserDao getInstance(){
         return instance;
@@ -110,6 +111,17 @@ public class UsersDaoImpl implements UserDao {
             statement.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while adding user", e);
+        }
+    }
+
+    @Override
+    public void deleteUser(int userId) throws DaoException {
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_DELETE_USER)) {
+            statement.setInt(1, userId);
+            statement.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while deleting user", e);
         }
     }
 

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setLocale value="en_US" scope="session"/>
 <fmt:setBundle basename="pagecontent"/>
 <html>
@@ -13,7 +14,7 @@
         <input type="hidden" name="command" value="find_all_products"/>
         <input class="other_button" type="submit" value="<fmt:message key="label.products"/>"/>
     </form>
-    <form style="float: left" name="findProducts" method="POST" action="controller">
+    <form name="findProducts" method="POST" action="controller">
         <input type="hidden" name="command" value="find_products_by_ids"/>
         <input type="submit" value="<fmt:message key="label.cart"/>"/>
     </form>

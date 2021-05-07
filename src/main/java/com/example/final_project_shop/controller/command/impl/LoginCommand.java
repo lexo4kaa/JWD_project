@@ -26,11 +26,14 @@ public class LoginCommand implements ActionCommand {
         String page;
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String password = request.getParameter(PARAM_NAME_PASSWORD);
+        String role;
         if (userService.authorizeUser(login, password)) {
             HttpSession session = request.getSession();
-            session.setAttribute("user", login);
             session.setAttribute("cart", new HashMap<Integer, Integer>()); // productId & quantity
-            if (userService.findUserRole(login).equals(PARAM_NAME_ROLE_CLIENT)) {
+            session.setAttribute("user", login);
+            role = userService.findUserRole(login);
+            session.setAttribute("user_role", role);
+            if (role.equals(PARAM_NAME_ROLE_CLIENT)) {
                 request.setAttribute("products", productService.findAllProducts());
                 page = ConfigurationManager.getProperty("path.page.products");
             } else {

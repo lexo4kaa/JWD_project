@@ -11,4 +11,5 @@ public interface UserService {
     boolean authorizeUser(String login, String password) throws ServiceException;
     boolean registerUser(String name, String surname, String nickname, String password,
                                 String dob, String phone, String email) throws ServiceException;
+    void deleteUser(int userId) throws ServiceException;
 }
