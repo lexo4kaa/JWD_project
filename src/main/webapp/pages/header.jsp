@@ -18,6 +18,12 @@
         <input type="hidden" name="command" value="find_products_by_ids"/>
         <input type="submit" value="<fmt:message key="label.cart"/>"/>
     </form>
+    <form name="switchLocale" method="POST" action="controller">
+        <p><input type="radio" name="locale" value="ru_RU"><fmt:message key="label.ru_RU"/></p>
+        <p><input type="radio" name="locale" value="en_US"><fmt:message key="label.en_US"/></p>
+        <input type="hidden" name="command" value="switch_locale" />
+        <input type="submit" value="<fmt:message key="label.switch"/>" name="submit"/>
+    </form>
     <form style="float: right" name="logout" method="POST" action="controller">
         <input type="hidden" name="command" value="logout"/>
         <input class="other_button" type="submit" value="<fmt:message key="label.logout_button"/>"/>

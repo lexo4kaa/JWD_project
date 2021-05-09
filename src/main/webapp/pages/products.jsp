@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="en_US" scope="session"/>
+<fmt:setLocale value="${currentLocale}" scope="session"/>
 <fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
@@ -27,7 +27,7 @@
     <p><input type="radio" name="team" value="Real Madrid">Real Madrid</p>
 
     <input type="hidden" name="command" value="find_products_by_team" />
-    <input type="submit" value="Find" name="submit"/>
+    <input type="submit" value="<fmt:message key="label.find"/>" name="submit"/>
 </form>
 
 <ul class="products" >
