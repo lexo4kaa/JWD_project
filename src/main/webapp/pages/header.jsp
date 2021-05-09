@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<fmt:setLocale value="en_US" scope="session"/>
+<fmt:setLocale value="${currentLocale}"/>
 <fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
@@ -18,10 +18,11 @@
         <input type="hidden" name="command" value="find_products_by_ids"/>
         <input type="submit" value="<fmt:message key="label.cart"/>"/>
     </form>
-    <form name="logout" method="POST" action="controller">
+    <form style="float: right" name="logout" method="POST" action="controller">
         <input type="hidden" name="command" value="logout"/>
         <input class="other_button" type="submit" value="<fmt:message key="label.logout_button"/>"/>
     </form>
+    <div style="padding: 0 15px; float: right; color: blue; font-size: large">${user_role}<br>${user}</div>
     <br/>
 </div>
 </body>

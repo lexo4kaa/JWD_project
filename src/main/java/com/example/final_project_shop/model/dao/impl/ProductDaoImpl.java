@@ -36,8 +36,8 @@ public class ProductDaoImpl implements ProductDao {
     public List<Product> findAllProducts() throws DaoException {
         List<Product> products = new ArrayList<>();
         try(Connection connection = CustomConnectionPool.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_PRODUCTS)) {
-            ResultSet resultSet = statement.executeQuery();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_PRODUCTS);
+            ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()){
                 products.add(createProductsFromResultSet(resultSet));
             }
@@ -64,7 +64,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public Product findProductById(int productId) throws DaoException { // todo
+    public Product findProductById(int productId) throws DaoException {
         Product product = new Product();
         try(Connection connection = CustomConnectionPool.getInstance().getConnection();
             PreparedStatement statement = connection.prepareStatement(SQL_FIND_PRODUCTS_BY_IDS)) {

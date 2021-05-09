@@ -1,6 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html><head><title>Tables</title></head>
+<fmt:setLocale value="${currentLocale}"/>
+<fmt:setBundle basename="pagecontent"/>
+<html>
+<head>
+    <title>Tables</title>
+</head>
 <body>
 <jsp:include page="header.jsp"/><br>
 
