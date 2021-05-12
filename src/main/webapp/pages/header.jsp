@@ -19,10 +19,13 @@
         <input type="submit" value="<fmt:message key="label.cart"/>"/>
     </form>
     <form name="switchLocale" method="POST" action="controller">
-        <p><input type="radio" name="locale" value="ru_RU"><fmt:message key="label.ru_RU"/></p>
-        <p><input type="radio" name="locale" value="en_US"><fmt:message key="label.en_US"/></p>
-        <input type="hidden" name="command" value="switch_locale" />
+        <input type="hidden" name="command" value="switch_locale"/>
         <input type="submit" value="<fmt:message key="label.switch"/>" name="submit"/>
+        <p><select name="locale">
+            <option selected disabled>Выберите язык</option>
+            <option value="ru_RU"><fmt:message key="label.ru_RU"/></option>
+            <option value="en_US"><fmt:message key="label.en_US"/></option>
+        </select></p>
     </form>
     <form style="float: right" name="logout" method="POST" action="controller">
         <input type="hidden" name="command" value="logout"/>
