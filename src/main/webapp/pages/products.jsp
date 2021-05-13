@@ -13,18 +13,18 @@
 
 <form class="radio" name="findProductsByTeam" method="POST" action="controller">
     <h3>Select a team:</h3>
-    <p><input type="radio" name="team" value="All" checked>All</p>
-    <p><input type="radio" name="team" value="Atletico Madrid">Atletico Madrid</p>
-    <p><input type="radio" name="team" value="Barcelona">Barcelona</p>
-    <p><input type="radio" name="team" value="Chelsea">Chelsea</p>
-    <p><input type="radio" name="team" value="Inter Milan">Inter Milan</p>
-    <p><input type="radio" name="team" value="Juventus">Juventus</p>
-    <p><input type="radio" name="team" value="Liverpool">Liverpool</p>
-    <p><input type="radio" name="team" value="Manchester City">Manchester City</p>
-    <p><input type="radio" name="team" value="Manchester United">Manchester United</p>
-    <p><input type="radio" name="team" value="Milan">Milan</p>
-    <p><input type="radio" name="team" value="PSG">PSG</p>
-    <p><input type="radio" name="team" value="Real Madrid">Real Madrid</p>
+    <p><input type="radio" name="team" value="All" checked><fmt:message key="label.all"/></p>
+    <p><input type="radio" name="team" value="Atletico Madrid"><fmt:message key="label.atletico"/></p>
+    <p><input type="radio" name="team" value="Barcelona"><fmt:message key="label.barcelona"/></p>
+    <p><input type="radio" name="team" value="Chelsea"><fmt:message key="label.chelsea"/></p>
+    <p><input type="radio" name="team" value="Inter Milan"><fmt:message key="label.inter"/></p>
+    <p><input type="radio" name="team" value="Juventus"><fmt:message key="label.juventus"/></p>
+    <p><input type="radio" name="team" value="Liverpool"><fmt:message key="label.Liverpool"/></p>
+    <p><input type="radio" name="team" value="Manchester City"><fmt:message key="label.manCity"/></p>
+    <p><input type="radio" name="team" value="Manchester United"><fmt:message key="label.manU"/></p>
+    <p><input type="radio" name="team" value="Milan"><fmt:message key="label.milan"/></p>
+    <p><input type="radio" name="team" value="PSG"><fmt:message key="label.PSG"/></p>
+    <p><input type="radio" name="team" value="Real Madrid"><fmt:message key="label.realMadrid"/></p>
 
     <input type="hidden" name="command" value="find_products_by_team" />
     <input type="submit" value="<fmt:message key="label.find"/>" name="submit"/>
