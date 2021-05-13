@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="tags" uri="customtags" %>
 <fmt:setLocale value="${currentLocale}" scope="session"/>
 <fmt:setBundle basename="pagecontent"/>
 <html>
@@ -77,5 +78,8 @@
     </c:forEach>
 </ul>
 
+<br style="clear:both">
+<hr>
+<tags:copyright/>
 </body>
 </html>

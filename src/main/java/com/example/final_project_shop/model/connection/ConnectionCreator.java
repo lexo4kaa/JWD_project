@@ -11,7 +11,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class ConnectionCreator { //todo delete public
+class ConnectionCreator {
     private static final Logger logger = LogManager.getLogger();
     private static final Properties properties = new Properties();
     private static final String FILE_NAME = "properties/database.properties";
@@ -48,8 +48,7 @@ public class ConnectionCreator { //todo delete public
         }
     }
 
-    public static Connection getConnection() throws SQLException {
+    static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
     }
-
 }
