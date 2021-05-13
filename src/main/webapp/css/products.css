@@ -1,5 +1,5 @@
-.products {
-    margin-left: 100px;
+.products, .cart {
+    margin-left: 111px;
 }
 
 .product-wrapper {
@@ -42,19 +42,19 @@
     position: fixed;
 }
 
-@media only screen and (min-width: 450px) {
+@media only screen and (min-width: 370px) {
     .product-wrapper {
         width: 50%;
     }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 750px) {
     .product-wrapper {
         width: 33.333%;
     }
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1100px) {
     .product-wrapper {
         width: 25%;
     }

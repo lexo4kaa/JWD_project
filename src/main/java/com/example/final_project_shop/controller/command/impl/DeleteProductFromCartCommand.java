@@ -16,17 +16,12 @@ public class DeleteProductFromCartCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws ServiceException {
-        String page;
         HttpSession session = request.getSession();
         Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
         String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
         int productId = Integer.parseInt(stringProductId);
         productService.deleteProductFromCart(cart, productId);
-        cart.entrySet().forEach(entry -> {
-            System.out.println(entry.getKey() + " " + entry.getValue()); //fixme
-        });
-        request.setAttribute("products", productService.findAllProducts());
-        page = ConfigurationManager.getProperty("path.page.products");
+        String page = ConfigurationManager.getProperty("path.page.products");
         return page;
     }
 }

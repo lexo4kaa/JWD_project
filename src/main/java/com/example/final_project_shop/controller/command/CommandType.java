@@ -67,6 +67,11 @@ public enum CommandType {
         {
             this.command = new ToRegistrationPageCommand();
         }
+    },
+    SWITCH_LOCALE {
+        {
+            this.command = new SwitchLocaleCommand();
+        }
     };
     ActionCommand command;
     public ActionCommand getCurrentCommand() {

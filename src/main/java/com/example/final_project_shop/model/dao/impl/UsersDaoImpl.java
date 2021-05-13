@@ -37,8 +37,8 @@ public class UsersDaoImpl implements UserDao {
     public List<User> findAllUsers() throws DaoException {
         List<User> users = new ArrayList<>();
         try(Connection connection = CustomConnectionPool.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_USERS)) {
-            ResultSet resultSet = statement.executeQuery();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_USERS);
+            ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()){
                 users.add(createUserFromResultSet(resultSet));
             }
@@ -54,7 +54,7 @@ public class UsersDaoImpl implements UserDao {
         try(Connection connection = CustomConnectionPool.getInstance().getConnection();
             PreparedStatement statement = connection.prepareStatement(SQL_FIND_USER_BY_NICKNAME)) {
             statement.setString(1, nickname + PERCENT);
-            ResultSet resultSet = statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery(); // fixme ?in try?
             while (resultSet.next()){
                 users.add(createUserFromResultSet(resultSet));
             }

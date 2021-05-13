@@ -7,9 +7,7 @@ import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayDeque;
 import java.util.Enumeration;
-import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -27,7 +25,7 @@ public class CustomConnectionPool {
 
     private CustomConnectionPool() {
         freeConnections = new LinkedBlockingQueue<>(DEFAULT_POOL_SIZE);
-        givenAwayConnections = new LinkedBlockingQueue<>(); //fixme
+        givenAwayConnections = new LinkedBlockingQueue<>(DEFAULT_POOL_SIZE);//fixme methods as Blocking
         try {
             for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
                 Connection connection = ConnectionCreator.getConnection();

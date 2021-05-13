@@ -1,27 +1,28 @@
 package com.example.final_project_shop.controller.command.impl;
 
 import com.example.final_project_shop.controller.command.ActionCommand;
-import com.example.final_project_shop.model.service.ProductService;
+import com.example.final_project_shop.entity.Product;
 import com.example.final_project_shop.model.service.ServiceException;
 import com.example.final_project_shop.model.service.impl.ProductServiceImpl;
-import com.example.final_project_shop.resource.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
-public class AddProductToCartCommand implements ActionCommand {
-    private static final String PARAM_NAME_PRODUCT_ID = "product_id";
-    private static final ProductService productService = new ProductServiceImpl();
+public class SwitchLocaleCommand implements ActionCommand {
+    private static final String PARAM_NAME_LOCALE = "locale";
+    private static final ProductServiceImpl productService = new ProductServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) throws ServiceException {
         HttpSession session = request.getSession();
         Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
-        String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
-        int productId = Integer.parseInt(stringProductId);
-        productService.addProductToCart(cart, productId);
-        String page = ConfigurationManager.getProperty("path.page.products");
+        List<Product> products = productService.findProductsByIds(cart.keySet());
+        request.setAttribute("cartProducts", products); // todo may be different
+        String locale = request.getParameter(PARAM_NAME_LOCALE);
+        session.setAttribute("currentLocale", locale);
+        String page = (String)session.getAttribute("currentPage");
         return page;
     }
 }
