@@ -9,7 +9,7 @@
     <uri>customtags</uri>
     <tag>
         <name>copyright</name>
-        <tag-class>com.example.final_project_shop.tag.CopyrightTag</tag-class>
+        <tag-class>com.example.shop.tag.CopyrightTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 </taglib>
