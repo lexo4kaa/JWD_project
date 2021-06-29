@@ -18,15 +18,28 @@
         <input type="hidden" name="command" value="find_products_by_ids"/>
         <input type="submit" value="<fmt:message key="label.cart"/>"/>
     </form>
-    <form style="float: right" name="logout" method="POST" action="controller">
-        <input type="hidden" name="command" value="logout"/>
-        <input class="other_button" type="submit" value="<fmt:message key="label.logout_button"/>"/>
-    </form>
-    <form style="float: right" name="to_login_page" method="POST" action="controller">
-        <input type="hidden" name="command" value="to_login_page"/>
-        <input class="other_button" type="submit" value="<fmt:message key="label.login_button"/>"/>
-    </form>
-    <div style="padding: 0 15px; float: right; color: blue; font-size: large">${user_role}<br>${user}</div>
+    <c:if test="${user_role != 'guest'}">
+        <form style="float: right" name="logout" method="POST" action="controller">
+            <input type="hidden" name="command" value="logout"/>
+            <input class="other_button" type="submit" value="<fmt:message key="label.logout_button"/>"/>
+        </form>
+        <c:if test="${user_role == 'client'}">
+            <div style="padding: 0 15px; float: right; color: blue; font-size: large">
+                <fmt:message key="label.user"/><br>${user}</div>
+        </c:if>
+        <c:if test="${user_role == 'administrator'}">
+            <div style="padding: 0 15px; float: right; color: blue; font-size: large">
+                <fmt:message key="label.admin"/><br>${user}</div>
+        </c:if>
+    </c:if>
+    <c:if test="${user_role == 'guest'}">
+        <form style="float: right" name="to_login_page" method="POST" action="controller">
+            <input type="hidden" name="command" value="to_login_page"/>
+            <input class="other_button" type="submit" value="<fmt:message key="label.login_button"/>"/>
+        </form>
+        <div style="padding: 0 15px; float: right; color: darkred; font-size: large">
+            <fmt:message key="label.guest"/></div>
+    </c:if>
     <form style="float: right" name="switchLocale" method="POST" action="controller">
         <input type="hidden" name="command" value="switch_locale"/>
         <button type="submit" name="locale" value="ru_RU" style="margin: 0">

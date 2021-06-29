@@ -21,7 +21,7 @@ public class FirstInitCommand implements ActionCommand {
             session.setAttribute("currentLocale", "en_US");
             session.setAttribute("products", productService.findAllProducts());
             session.setAttribute("cart", new HashMap<Integer, Integer>());
-            session.setAttribute("role", "unknown");
+            session.setAttribute("user_role", "guest");
             page = ConfigurationManager.getProperty("path.page.products");
         } catch (ServiceException e) {
             request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction") + "\n" + e);
