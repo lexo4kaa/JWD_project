@@ -8,7 +8,6 @@ import com.example.shop.model.service.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.Optional;
 
 public class LoginCommand implements ActionCommand {
@@ -23,15 +22,12 @@ public class LoginCommand implements ActionCommand {
         String page;
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String password = request.getParameter(PARAM_NAME_PASSWORD);
-        Optional<String> role;
         try {
             if (userService.authorizeUser(login, password)) {
                 HttpSession session = request.getSession();
-                session.setAttribute("cart", new HashMap<Integer, Integer>());
                 session.setAttribute("user", login);
-                role = userService.findUserRole(login);
-                session.setAttribute("user_role", role.get());
-                session.setAttribute("products", productService.findAllProducts());
+                String role = userService.findUserRole(login).get();
+                session.setAttribute("user_role", role);
                 if (role.equals(PARAM_NAME_ROLE_CLIENT)) {
                     request.setAttribute("products", productService.findAllProducts());
                     page = ConfigurationManager.getProperty("path.page.products");
@@ -45,7 +41,7 @@ public class LoginCommand implements ActionCommand {
         }
         catch(ServiceException e) {
             request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction") + "\n" + e);
-            page = ConfigurationManager.getProperty("path.page.login");
+            page = ConfigurationManager.getProperty("path.page.index");
         }
         return page;
     }

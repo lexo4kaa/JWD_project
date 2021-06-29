@@ -78,8 +78,5 @@
     </c:forEach>
 </ul>
 
-<br style="clear:both">
-<hr>
-<tags:copyright/>
 </body>
 </html>

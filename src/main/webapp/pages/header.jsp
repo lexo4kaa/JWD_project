@@ -22,6 +22,10 @@
         <input type="hidden" name="command" value="logout"/>
         <input class="other_button" type="submit" value="<fmt:message key="label.logout_button"/>"/>
     </form>
+    <form style="float: right" name="to_login_page" method="POST" action="controller">
+        <input type="hidden" name="command" value="to_login_page"/>
+        <input class="other_button" type="submit" value="<fmt:message key="label.login_button"/>"/>
+    </form>
     <div style="padding: 0 15px; float: right; color: blue; font-size: large">${user_role}<br>${user}</div>
     <form style="float: right" name="switchLocale" method="POST" action="controller">
         <input type="hidden" name="command" value="switch_locale"/>

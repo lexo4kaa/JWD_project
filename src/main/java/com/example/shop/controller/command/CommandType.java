@@ -68,6 +68,16 @@ public enum CommandType {
             this.command = new ToRegistrationPageCommand();
         }
     },
+    TO_PRODUCTS_PAGE {
+        {
+            this.command = new ToProductsPageCommand();
+        }
+    },
+    FIRST_INIT {
+        {
+            this.command = new FirstInitCommand();
+        }
+    },
     SWITCH_LOCALE {
         {
             this.command = new SwitchLocaleCommand();

@@ -39,7 +39,7 @@ public class RegistrationCommand implements ActionCommand {
             }
         } catch(ServiceException e) {
             request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction") + "\n" + e);
-            page = ConfigurationManager.getProperty("path.page.login");
+            page = ConfigurationManager.getProperty("path.page.index");
         }
         return page;
     }
