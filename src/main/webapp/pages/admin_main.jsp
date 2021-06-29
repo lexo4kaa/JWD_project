@@ -6,7 +6,7 @@
 <fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
-    <title>Admin Main</title>
+    <title><fmt:message key="label.admin_main"/></title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css"/>
 </head>
 <jsp:include page="header.jsp"/>

@@ -12,6 +12,8 @@ public class PasswordEncryptor {
     private static Logger logger = LogManager.getLogger();
     private static final String ENCRYPTOR_ALGORITHM = "SHA-1";
 
+    public PasswordEncryptor() {}
+
     public String encryptPassword(String password) {
         String encryptedPassword;
         try {

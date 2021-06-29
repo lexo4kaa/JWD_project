@@ -27,7 +27,7 @@
             <input type="date" name="dob" value="" required>
             <label><fmt:message key="label.email"/></label>
             <input type="email" name="email" value="" required
-                   pattern="^[\w]{3,30}@(gmail|yandex|mail)\.(com|ru|by)$" title="***(3-30)@(gmail|yandex|mail)\.(com|ru|by)">
+                   pattern="^[\w]{3,30}@gmail.com$" title="Length between 3 and 30 and then '@gmail.com'">
             <label><fmt:message key="label.phone"/></label>
             <input type="text" name="phone" value="" required
                    pattern="375(17|25|29|33|44)([1-9]{1})([0-9]{6})$" title="375(17|25|29|33|44)*******">

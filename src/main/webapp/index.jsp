@@ -5,7 +5,7 @@
 </head>
 <body>
 <jsp:forward page="/controller">
-    <jsp:param name="command" value="to_login_page"/>
+    <jsp:param name="command" value="first_init"/>
 </jsp:forward>
 </body>
 </html>
