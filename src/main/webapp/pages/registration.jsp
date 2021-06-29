@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/registration.css"/>
 </head>
 <body>
+<jsp:include page="header.jsp"/>
+
 <form name="registrationForm" method="POST" action="controller">
     <input type="hidden" name="command" value="registration" />
 
@@ -55,8 +57,10 @@
             document.getElementById("password2").onchange = validatePassword;
         }
         function validatePassword(){
-            var pass2=document.getElementById("password2").value;
             var pass1=document.getElementById("password").value;
+            var pass2=document.getElementById("password2").value;
+            alert(pass1);
+            alert(pass2);
             if(pass1!=pass2)
                 document.getElementById("password2").setCustomValidity(<fmt:message key="label.passwords_don't_match"/>);
             else
