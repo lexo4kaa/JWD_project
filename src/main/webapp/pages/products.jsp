@@ -6,7 +6,7 @@
 <fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
-    <title>Products</title>
+    <title><fmt:message key="label.products"/></title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/products.css"/>
 </head>
 <body>

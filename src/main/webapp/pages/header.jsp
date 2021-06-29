@@ -5,16 +5,21 @@
 <fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
-    <title>Online football store</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css"/>
 </head>
 <body>
 <div class="header">
-    <form name="toProducts" method="POST" action="controller">
+    <c:if test="${user_role == 'administrator'}">
+        <form name="adminMainPage" method="POST" action="controller">
+            <input type="hidden" name="command" value="to_admin_main_page"/>
+            <input type="submit" value="<fmt:message key="label.admin_main"/>"/>
+        </form>
+    </c:if>
+    <form name="productsPage" method="POST" action="controller">
         <input type="hidden" name="command" value="find_all_products"/>
         <input class="other_button" type="submit" value="<fmt:message key="label.products"/>"/>
     </form>
-    <form name="findProducts" method="POST" action="controller">
+    <form name="cartPage" method="POST" action="controller">
         <input type="hidden" name="command" value="find_products_by_ids"/>
         <input type="submit" value="<fmt:message key="label.cart"/>"/>
     </form>
@@ -25,11 +30,13 @@
         </form>
         <c:if test="${user_role == 'client'}">
             <div style="padding: 0 15px; float: right; color: blue; font-size: large">
-                <fmt:message key="label.user"/><br>${user}</div>
+                <fmt:message key="label.user"/><br>${user}
+            </div>
         </c:if>
         <c:if test="${user_role == 'administrator'}">
-            <div style="padding: 0 15px; float: right; color: blue; font-size: large">
-                <fmt:message key="label.admin"/><br>${user}</div>
+            <div style="padding: 0 15px; float: right; color: saddlebrown; font-size: large">
+                <fmt:message key="label.admin"/><br>${user}
+            </div>
         </c:if>
     </c:if>
     <c:if test="${user_role == 'guest'}">

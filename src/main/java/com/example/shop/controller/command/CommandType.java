@@ -73,6 +73,11 @@ public enum CommandType {
             this.command = new ToProductsPageCommand();
         }
     },
+    TO_ADMIN_MAIN_PAGE {
+        {
+            this.command = new ToAdminMainPageCommand();
+        }
+    },
     FIRST_INIT {
         {
             this.command = new FirstInitCommand();
