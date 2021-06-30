@@ -40,7 +40,7 @@ public class LoginCommand implements ActionCommand {
             }
         }
         catch(ServiceException e) {
-            request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction") + "\n" + e);
+            request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction"));
             page = ConfigurationManager.getProperty("path.page.index");
         }
         return page;

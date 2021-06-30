@@ -26,10 +26,10 @@
             <input type="text" name="nickname" id="nickname_label" value="" required
                    pattern="^[\w]{3,18}$" title="Letters, numbers or symbol '_' (length between 3 and 18)">
             <label><fmt:message key="label.dob"/></label>
-            <input type="date" name="dob" value="" required>
+            <input type="date" name="dob" value="" min="1900-01-01" max="2003-09-01" required>
             <label><fmt:message key="label.email"/></label>
             <input type="email" name="email" value="" required
-                   pattern="^[\w]{3,30}@gmail.com$" title="Length between 3 and 30 and then '@gmail.com'">
+                   pattern="^[\w]{3,30}@gmail.com$" title="Letters length between 3 and 30 and then '@gmail.com'">
             <label><fmt:message key="label.phone"/></label>
             <input type="text" name="phone" value="" required
                    pattern="375(17|25|29|33|44)([1-9]{1})([0-9]{6})$" title="375(17|25|29|33|44)*******">
@@ -39,35 +39,21 @@
                    pattern="^[\w]{6,18}$" title="Letters, numbers or symbol '_' (length between 6 and 18)">
             <label><fmt:message key="label.password_repeat"/></label>
             <input type="password" name="password2" id="password2" value="" required pattern="^[\w]{6,18}$">
-            <br/>
+            <br>
             ${errorLoginPassMessage}
-            <br/>
             ${wrongAction}
-            <br/>
             ${nullPage}
-            <br/>
+            ${registrationError}
+            <br>
             <input class="form_reg_button" type="submit" value="<fmt:message key="label.registration_button"/>"/>
-            <br/>
+            <br>
         </div>
     </div>
-
-    <script type="text/javascript">
-        window.onload = function () {
-            document.getElementById("password").onchange = validatePassword;
-            document.getElementById("password2").onchange = validatePassword;
-        }
-        function validatePassword(){
-            var pass1=document.getElementById("password").value;
-            var pass2=document.getElementById("password2").value;
-            alert(pass1);
-            alert(pass2);
-            if(pass1!=pass2)
-                document.getElementById("password2").setCustomValidity(<fmt:message key="label.passwords_don't_match"/>);
-            else
-                document.getElementById("password2").setCustomValidity('');
-        }
-    </script>
-
 </form>
+
+<script type="text/javascript">
+
+</script>
+
 </body>
 </html>

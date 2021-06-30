@@ -24,7 +24,7 @@ public class FirstInitCommand implements ActionCommand {
             session.setAttribute("user_role", "guest");
             page = ConfigurationManager.getProperty("path.page.products");
         } catch (ServiceException e) {
-            request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction") + "\n" + e);
+            request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction"));
             page = ConfigurationManager.getProperty("path.page.index");
         }
         return page;

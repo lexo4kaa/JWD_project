@@ -34,11 +34,11 @@ public class RegistrationCommand implements ActionCommand {
             if (password.equals(password2) && userService.registerUser(name, surname, nickname, password, dob, phone, email)) {
                 page = ConfigurationManager.getProperty("path.page.login");
             } else {
-                request.setAttribute("errorRegistrationMessage", MessageManager.getProperty("message.registrationerror"));
+                request.setAttribute("registrationError", MessageManager.getProperty("message.registrationerror"));
                 page = ConfigurationManager.getProperty("path.page.registration");
             }
         } catch(ServiceException e) {
-            request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction") + "\n" + e);
+            request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction"));
             page = ConfigurationManager.getProperty("path.page.index");
         }
         return page;
