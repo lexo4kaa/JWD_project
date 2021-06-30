@@ -28,7 +28,7 @@ public class SwitchLocaleCommand implements ActionCommand {
             session.setAttribute("currentLocale", locale);
             page = (String) session.getAttribute("currentPage");
         } catch(ServiceException e) {
-            request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction") + "\n" + e);
+            request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction"));
             page = ConfigurationManager.getProperty("path.page.index");
         }
         return page;

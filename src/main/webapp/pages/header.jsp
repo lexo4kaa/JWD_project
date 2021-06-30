@@ -17,7 +17,7 @@
     </c:if>
     <form name="productsPage" method="POST" action="controller">
         <input type="hidden" name="command" value="find_all_products"/>
-        <input class="other_button" type="submit" value="<fmt:message key="label.products"/>"/>
+        <input type="submit" value="<fmt:message key="label.products"/>"/>
     </form>
     <form name="cartPage" method="POST" action="controller">
         <input type="hidden" name="command" value="find_products_by_ids"/>
@@ -26,7 +26,7 @@
     <c:if test="${user_role != 'guest'}">
         <form style="float: right" name="logout" method="POST" action="controller">
             <input type="hidden" name="command" value="logout"/>
-            <input class="other_button" type="submit" value="<fmt:message key="label.logout_button"/>"/>
+            <input type="submit" value="<fmt:message key="label.logout_button"/>"/>
         </form>
         <c:if test="${user_role == 'client'}">
             <div style="padding: 0 15px; float: right; color: blue; font-size: large">
@@ -42,7 +42,7 @@
     <c:if test="${user_role == 'guest'}">
         <form style="float: right" name="to_login_page" method="POST" action="controller">
             <input type="hidden" name="command" value="to_login_page"/>
-            <input class="other_button" type="submit" value="<fmt:message key="label.login_button"/>"/>
+            <input type="submit" value="<fmt:message key="label.login_button"/>"/>
         </form>
         <div style="padding: 0 15px; float: right; color: darkred; font-size: large">
             <fmt:message key="label.guest"/></div>

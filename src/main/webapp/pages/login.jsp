@@ -9,32 +9,31 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css"/>
 </head>
 <body>
-<form name="loginForm" method="POST" action="controller">
-    <input type="hidden" name="command" value="login"/>
+<jsp:include page="header.jsp"/>
 
-    <div class="form_auth_block">
-        <div class="form_auth_block_content">
-            <p class="form_auth_block_head_text"><fmt:message key="label.login_block_title"/></p>
+<div class="form_auth_block">
+    <div class="form_auth_block_content">
+        <br>
+        <form name="loginForm" method="POST" action="controller">
+            <input type="hidden" name="command" value="login"/>
             <label><fmt:message key="label.login_input"/></label>
             <input type="text" name="login" value="">
             <label><fmt:message key="label.password_input"/></label>
             <input type="password" name="password" value="">
-            <br/>
+            <br>
             ${errorLoginPassMessage}
             ${wrongAction}
             ${nullPage}
-            <br/>
-            <input class="form_auth_button" type="submit" value="<fmt:message key="label.login_button"/>"/>
-            <br/>
-        </div>
+            <br>
+            <input class="form_login" type="submit" value="<fmt:message key="label.login_button"/>"/>
+            <br>
+        </form>
+        <form name="toRegistration" method="POST" action="controller">
+            <input type="hidden" name="command" value="to_registration_page"/>
+            <input class="form_no_account" type="submit" value="<fmt:message key="label.no_account"/>"/>
+        </form>
     </div>
+</div>
 
-</form>
-
-<form name="toRegistration" method="POST" action="controller">
-    <input type="hidden" name="command" value="to_registration_page"/>
-    <input class="other_button" type="submit" value="<fmt:message key="label.no_account"/>"/>
-</form>
-<br/>
 </body>
 </html>
