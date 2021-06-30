@@ -7,7 +7,8 @@ import java.util.Optional;
 
 public interface UserDao {
     List<User> findAllUsers() throws DaoException;
-    List<User> findUsersByNickname(String nickname) throws DaoException;
+    User findUserByNickname(String nickname) throws DaoException;
+    List<User> findUsersByPartOfNickname(String nickname) throws DaoException;
     Optional<String> findUserRole(String nickname) throws DaoException;
     String findPasswordByNickname(String nickname) throws DaoException;
     void addNewUser(String name, String surname, String nickname, String password,

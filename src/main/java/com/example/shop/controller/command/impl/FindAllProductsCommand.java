@@ -20,7 +20,7 @@ public class FindAllProductsCommand implements ActionCommand {
         String page;
         List<Product> products;
         try {
-            products = productService.findAllProducts();
+            products = productService.findAllProducts(); //todo test it (mb delete this)
             request.setAttribute("products", products);
             page = ConfigurationManager.getProperty("path.page.products");
         } catch (ServiceException e) {

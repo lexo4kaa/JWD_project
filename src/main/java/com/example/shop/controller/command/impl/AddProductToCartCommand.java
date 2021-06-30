@@ -20,6 +20,7 @@ public class AddProductToCartCommand implements ActionCommand {
         String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
         int productId = Integer.parseInt(stringProductId);
         productService.addProductToCart(cart, productId);
+        session.setAttribute("cart_size", cart.size());
         String page = ConfigurationManager.getProperty("path.page.products");
         return page;
     }

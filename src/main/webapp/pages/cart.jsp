@@ -29,6 +29,11 @@
     </c:forEach>
 </ul>
 
+<form name="addOrder" method="POST" action="controller">
+    <input type="hidden" name="command" value="add_order"/>
+    <input type="submit" value="<fmt:message key="label.add_order"/>"/>
+</form>
+
 <br style="clear:both">
 <hr>
 <tags:copyright/>

@@ -4,29 +4,29 @@ import com.example.shop.controller.command.ActionCommand;
 import com.example.shop.model.service.ServiceException;
 import com.example.shop.model.service.impl.ProductServiceImpl;
 import com.example.shop.resource.ConfigurationManager;
-import com.example.shop.resource.MessageManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
+import java.util.Map;
 
-public class FirstInitCommand implements ActionCommand {
+public class AddOrderCommand implements ActionCommand {
     private static final ProductServiceImpl productService = new ProductServiceImpl();
+    private static Logger logger = LogManager.getLogger();
 
     @Override
     public String execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
+        Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
+        String user = (String) session.getAttribute("user");
         try {
-            session.setAttribute("currentLocale", "en_US");
-            session.setAttribute("products", productService.findAllProducts());
-            session.setAttribute("cart", new HashMap<Integer, Integer>());
-            session.setAttribute("cart_size", 0);
-            session.setAttribute("user_role", "guest");
+            productService.addOrder(cart, user);
             page = ConfigurationManager.getProperty("path.page.products");
         } catch (ServiceException e) {
-            request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction"));
-            page = ConfigurationManager.getProperty("path.page.index");
+            logger.info("Problems with function 'addOrder', redirected to error page");
+            page = ConfigurationManager.getProperty("path.page.error");
         }
         return page;
     }

@@ -1,6 +1,7 @@
 package com.example.shop.model.dao.impl;
 
 import com.example.shop.entity.Product;
+import com.example.shop.model.dao.UserDao;
 import com.example.shop.model.pool.ConnectionPoolException;
 import com.example.shop.model.pool.CustomConnectionPool;
 import com.example.shop.model.dao.DaoException;
@@ -13,9 +14,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ProductDaoImpl implements ProductDao {
     private static final ProductDao instance = new ProductDaoImpl();
+    private final UserDao userDao = UserDaoImpl.getInstance();
+
     private static final String SQL_FIND_ALL_PRODUCTS = "SELECT product_id,product_type, product_team, product_year, " +
                                                         "product_specification, product_quantity, product_price, " +
                                                         "product_path FROM products";
@@ -25,6 +30,7 @@ public class ProductDaoImpl implements ProductDao {
     private static final String SQL_FIND_PRODUCTS_BY_IDS =  "SELECT product_id,product_type, product_team, product_year," +
                                                             "product_specification,product_quantity, product_price, " +
                                                             "product_path FROM products WHERE product_id = ?";
+    private static final String SQL_ADD_ORDER = "INSERT INTO orders (ref_client_id,cost) VALUES (?,?)";
 
     private ProductDaoImpl(){}
 
@@ -79,6 +85,27 @@ public class ProductDaoImpl implements ProductDao {
         return product;
     }
 
+    @Override
+    public void addOrder(Map<Integer, Integer> cart, String nickname) throws DaoException {
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_ADD_ORDER)) {
+            int userId = userDao.findUserByNickname(nickname).getUserId();
+            statement.setInt(1, userId);
+            int cost = 0;
+            int[] keys = cart.keySet().stream()
+                                        .mapToInt(Integer::intValue)
+                                        .toArray();
+            for(int i = 0; i < cart.size(); i++) {
+                int productId = keys[i];
+                cost += findPriceById(productId) * cart.get(productId);
+            }
+            statement.setDouble(2, cost);
+            statement.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while adding order", e);
+        }
+    }
+
     private Product createProductsFromResultSet(ResultSet resultSet) throws SQLException {
         Product product = new Product();
         int productId = resultSet.getInt(ProductColumn.PRODUCT_ID);
@@ -98,5 +125,20 @@ public class ProductDaoImpl implements ProductDao {
         product.setPrice(price);
         product.setPath(path);
         return product;
+    }
+
+    private double findPriceById(int productId) throws DaoException {
+        Product product = new Product();
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_PRODUCTS_BY_IDS)) {
+            statement.setInt(1, productId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()){
+                product = createProductsFromResultSet(resultSet);
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while adding order", e);
+        }
+        return product.getPrice();
     }
 }

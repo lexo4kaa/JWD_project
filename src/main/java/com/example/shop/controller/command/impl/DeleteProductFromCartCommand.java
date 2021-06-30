@@ -2,7 +2,6 @@ package com.example.shop.controller.command.impl;
 
 import com.example.shop.controller.command.ActionCommand;
 import com.example.shop.model.service.ProductService;
-import com.example.shop.model.service.ServiceException;
 import com.example.shop.model.service.impl.ProductServiceImpl;
 import com.example.shop.resource.ConfigurationManager;
 
@@ -21,6 +20,7 @@ public class DeleteProductFromCartCommand implements ActionCommand {
         String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
         int productId = Integer.parseInt(stringProductId);
         productService.deleteProductFromCart(cart, productId);
+        session.setAttribute("cart_size", cart.size());
         String page = ConfigurationManager.getProperty("path.page.products");
         return page;
     }
