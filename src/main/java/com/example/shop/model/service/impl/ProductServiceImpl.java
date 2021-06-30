@@ -80,13 +80,4 @@ public class ProductServiceImpl implements ProductService {
         return containsKey;
     }
 
-    @Override
-    public void addOrder(Map<Integer, Integer> cart, String nickname) throws ServiceException {
-        try {
-            productDao.addOrder(cart, nickname);
-        } catch (DaoException e) {
-            logger.info("productDao.addOrder(" + cart + "," + nickname + ") is failed in ProductServiceImpl", e);
-            throw new ServiceException(e);
-        }
-    }
 }
