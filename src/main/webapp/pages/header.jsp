@@ -21,7 +21,7 @@
     </form>
     <form name="cartPage" method="POST" action="controller">
         <input type="hidden" name="command" value="find_products_by_ids"/>
-        <input type="submit" value="<fmt:message key="label.cart"/>"/>
+        <input type="submit" value="<fmt:message key="label.cart"/>${cart_size}"/>
     </form>
     <c:if test="${user_role != 'guest'}">
         <form style="float: right" name="logout" method="POST" action="controller">

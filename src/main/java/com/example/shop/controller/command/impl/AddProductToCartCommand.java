@@ -17,10 +17,11 @@ public class AddProductToCartCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
+        int cart_size = (int) session.getAttribute("cart_size");
+        session.setAttribute("cart_size", cart_size + 1);
         String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
         int productId = Integer.parseInt(stringProductId);
         productService.addProductToCart(cart, productId);
-        session.setAttribute("cart_size", cart.size());
         String page = ConfigurationManager.getProperty("path.page.products");
         return page;
     }

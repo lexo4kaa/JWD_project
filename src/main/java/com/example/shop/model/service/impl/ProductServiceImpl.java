@@ -67,8 +67,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProductFromCart(Map<Integer, Integer> cart, int productId) {
-        if(cart.containsKey(productId)) {
+    public boolean deleteProductFromCart(Map<Integer, Integer> cart, int productId) {
+        boolean containsKey = cart.containsKey(productId);
+        if(containsKey) {
             if(cart.get(productId) > 1) {
                 cart.put(productId, cart.get(productId) - 1);
             }
@@ -76,6 +77,7 @@ public class ProductServiceImpl implements ProductService {
                 cart.remove(productId);
             }
         }
+        return containsKey;
     }
 
     @Override

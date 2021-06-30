@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.Map;
 
 public class AddOrderCommand implements ActionCommand {
@@ -23,7 +24,9 @@ public class AddOrderCommand implements ActionCommand {
         String user = (String) session.getAttribute("user");
         try {
             productService.addOrder(cart, user);
-            page = ConfigurationManager.getProperty("path.page.products");
+            session.setAttribute("cart", new HashMap<Integer, Integer>());
+            session.setAttribute("cart_size", 0);
+            page = ConfigurationManager.getProperty("path.page.cart");
         } catch (ServiceException e) {
             logger.info("Problems with function 'addOrder', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");

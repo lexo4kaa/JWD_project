@@ -12,5 +12,5 @@ public interface ProductService {
     List<Product> findProductsByIds(Set<Integer> productIds) throws ServiceException;
     void addOrder(Map<Integer, Integer> cart, String nickname) throws ServiceException;
     void addProductToCart(Map<Integer, Integer> cart, int productId);
-    void deleteProductFromCart(Map<Integer, Integer> cart, int productId);
+    boolean deleteProductFromCart(Map<Integer, Integer> cart, int productId);
 }
