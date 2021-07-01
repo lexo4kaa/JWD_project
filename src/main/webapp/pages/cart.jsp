@@ -7,12 +7,14 @@
 <html>
 <head>
     <title><fmt:message key="label.cart"/></title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/products.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cart.css"/>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
 
 <ul class="cart" >
+    <h1><fmt:message key="label.cart"/></h1>
+    <hr>
     <c:forEach var="elem" items="${cartProducts}" varStatus="status">
         <li class="product-wrapper">
             <div class="product">
@@ -20,19 +22,24 @@
                     <img src="${pageContext.request.contextPath}${elem.path}" alt="Oops">
                 </div>
             </div>
-            <div>
+            <div class="description">
                 <c:out value="${ elem.team }" />
                 <c:out value="${ elem.type }" />
                 <c:out value="${ elem.year }" />
             </div>
+            <div class="buttons">
+                <!-- todo -->
+            </div>
         </li>
+        <br style="clear:both">
+        <hr>
     </c:forEach>
-</ul>
 
-<form name="addOrder" method="POST" action="controller">
-    <input type="hidden" name="command" value="add_order"/>
-    <input type="submit" value="<fmt:message key="label.add_order"/>"/>
-</form>
+    <form style="float: right" name="addOrder" method="POST" action="controller">
+        <input type="hidden" name="command" value="add_order"/>
+        <input type="submit" value="<fmt:message key="label.add_order"/>"/>
+    </form>
+</ul>
 
 <br style="clear:both">
 <hr>

@@ -16,7 +16,7 @@
         </form>
     </c:if>
     <form name="productsPage" method="POST" action="controller">
-        <input type="hidden" name="command" value="find_all_products"/>
+        <input type="hidden" name="command" value="to_products_page"/>
         <input type="submit" value="<fmt:message key="label.products"/>"/>
     </form>
     <form name="cartPage" method="POST" action="controller">

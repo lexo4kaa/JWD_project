@@ -1,0 +1,36 @@
+.product-wrapper {
+    display: block;
+    text-align: left;
+}
+
+.product {
+    display: block;
+    background: white;
+    margin: 20px;
+    height: 60px;
+    width: 60px;
+    float: left;
+}
+
+.product-photo {
+    position: relative;
+    padding-bottom: 100%;
+    overflow: hidden;
+}
+
+.product-photo img {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+}
+
+.description {
+    font-size: 14pt;
+    width: 60%;
+    padding: 37px 45px 0;
+}
+
+.buttons {
+    width: 100px;
+    float: right;
+}

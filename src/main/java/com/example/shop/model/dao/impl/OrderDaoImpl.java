@@ -50,8 +50,8 @@ public class OrderDaoImpl implements OrderDao {
             statement.setInt(1, userId);
             int cost = 0;
             int[] keys = cart.keySet().stream()
-                    .mapToInt(Integer::intValue)
-                    .toArray();
+                            .mapToInt(Integer::intValue)
+                            .toArray();
             for(int i = 0; i < cart.size(); i++) {
                 int productId = keys[i];
                 cost += productDao.findPriceById(productId) * cart.get(productId);

@@ -23,11 +23,20 @@ public class AddOrderCommand implements ActionCommand {
         HttpSession session = request.getSession();
         Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
         String user = (String) session.getAttribute("user");
+        String user_role = (String) session.getAttribute("user_role");
         try {
-            orderService.addOrder(cart, user);
-            session.setAttribute("cart", new HashMap<Integer, Integer>());
-            session.setAttribute("cart_size", 0);
-            page = ConfigurationManager.getProperty("path.page.cart");
+            if(cart.size() != 0) {
+                if(user_role != "guest") {
+                    orderService.addOrder(cart, user);
+                    session.setAttribute("cart", new HashMap<Integer, Integer>());
+                    session.setAttribute("cart_size", 0);
+                    page = ConfigurationManager.getProperty("path.page.cart");
+                } else {
+                    page = ConfigurationManager.getProperty("path.page.login");
+                }
+            } else {
+                page = ConfigurationManager.getProperty("path.page.products");
+            }
         } catch (ServiceException e) {
             logger.info("Problems with function 'addOrder', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");

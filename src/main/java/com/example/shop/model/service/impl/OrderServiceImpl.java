@@ -20,8 +20,8 @@ public class OrderServiceImpl implements OrderService {
             orderDao.addOrder(cart, nickname);
 
             int[] keys = cart.keySet().stream()
-                    .mapToInt(Integer::intValue)
-                    .toArray();
+                            .mapToInt(Integer::intValue)
+                            .toArray();
             for(int i = 0; i < cart.size(); i++) {
                 int productId = keys[i];
                 orderDao.addOrderHasProduct(cart, productId);
