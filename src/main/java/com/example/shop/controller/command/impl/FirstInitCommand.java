@@ -23,6 +23,7 @@ public class FirstInitCommand implements ActionCommand {
             session.setAttribute("cart", new HashMap<Integer, Integer>());
             session.setAttribute("cart_size", 0);
             session.setAttribute("user_role", "guest");
+            session.setAttribute("currentPage", "path.page.products");
             page = ConfigurationManager.getProperty("path.page.products");
         } catch (ServiceException e) {
             request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction"));

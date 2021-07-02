@@ -21,8 +21,10 @@
     </form>
     <form name="cartPage" method="POST" action="controller">
         <input type="hidden" name="command" value="find_products_by_ids"/>
-        <input type="submit" value="<fmt:message key="label.cart"/>${cart_size}"/>
+        <input type="submit" value="<fmt:message key="label.cart"/>"/>
     </form>
+    <div style="border-radius: 10px; margin-left: -15px; margin-top: -10px; float: left;
+                color: white; background: blue; text-align: center; width: 20px; height: 20px">${cart_size}</div>
     <c:if test="${user_role != 'guest'}">
         <form style="float: right" name="logout" method="POST" action="controller">
             <input type="hidden" name="command" value="logout"/>

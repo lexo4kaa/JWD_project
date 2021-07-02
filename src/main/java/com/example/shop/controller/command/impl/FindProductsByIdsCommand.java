@@ -28,6 +28,7 @@ public class FindProductsByIdsCommand implements ActionCommand {
             products = productService.findProductsByIds(cart.keySet());
             request.setAttribute("cartProducts", products);
             request.setAttribute("cartValues", cart.values()); //todo use it on jsp
+            session.setAttribute("currentPage", "path.page.cart");
             page = ConfigurationManager.getProperty("path.page.cart");
         } catch (ServiceException e) {
             logger.info("Problems with function 'findProductsByIds', redirected to error page");

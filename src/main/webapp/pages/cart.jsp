@@ -27,6 +27,19 @@
                 <c:out value="${ elem.type }" />
                 <c:out value="${ elem.year }" />
             </div>
+            <div style="color: red">
+                <c:out value="${ elem.price }$" />
+            </div>
+            <form style="float: left; margin-left: 42.5%" name="addProduct" method="POST" action="controller">
+                <input type="hidden" name="command" value="add_product_to_cart"/>
+                <input type="hidden" name="product_id" value="${ elem.productId }">
+                <input type="submit" value="+"/>
+            </form>
+            <form style="float: left" name="deleteProduct" method="POST" action="controller">
+                <input type="hidden" name="command" value="delete_product_from_cart"/>
+                <input type="hidden" name="product_id" value="${ elem.productId }">
+                <input type="submit" value="-"/>
+            </form>
             <div class="buttons">
                 <!-- todo -->
             </div>
