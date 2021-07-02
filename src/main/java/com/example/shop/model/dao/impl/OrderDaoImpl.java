@@ -48,15 +48,7 @@ public class OrderDaoImpl implements OrderDao {
             PreparedStatement statement = connection.prepareStatement(SQL_ADD_ORDER)) {
             int userId = userDao.findUserByNickname(nickname).getUserId();
             statement.setInt(1, userId);
-            int cost = 0;
-            int[] keys = cart.keySet().stream()
-                            .mapToInt(Integer::intValue)
-                            .toArray();
-            for(int i = 0; i < cart.size(); i++) {
-                int productId = keys[i];
-                cost += productDao.findPriceById(productId) * cart.get(productId);
-            }
-            statement.setDouble(2, cost);
+            statement.setDouble(2, totalCost(cart));
             statement.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while adding order", e);
@@ -75,6 +67,18 @@ public class OrderDaoImpl implements OrderDao {
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while adding in order_has_product", e);
         }
+    }
+
+    private double totalCost(Map<Integer, Integer> cart) throws DaoException {
+        int cost = 0;
+        int[] keys = cart.keySet().stream()
+                .mapToInt(Integer::intValue)
+                .toArray();
+        for(int i = 0; i < cart.size(); i++) {
+            int productId = keys[i];
+            cost += productDao.findPriceById(productId) * cart.get(productId);
+        }
+        return cost;
     }
 
     private Order createOrdersFromResultSet(ResultSet resultSet) throws SQLException {

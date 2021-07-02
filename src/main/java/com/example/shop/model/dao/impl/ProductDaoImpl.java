@@ -17,15 +17,15 @@ import java.util.List;
 public class ProductDaoImpl implements ProductDao {
     private static final ProductDao instance = new ProductDaoImpl();
 
-    private static final String SQL_FIND_ALL_PRODUCTS = "SELECT product_id,product_type, product_team, product_year, " +
-                                                        "product_specification, product_quantity, product_price, " +
+    private static final String SQL_FIND_ALL_PRODUCTS = "SELECT product_id,product_type, product_team, product_year," +
+                                                        "product_specification, product_price, " +
                                                         "product_path FROM products";
     private static final String SQL_FIND_PRODUCTS_BY_TEAM = "SELECT product_id,product_type, product_team, product_year," +
-                                                            "product_specification,product_quantity, product_price, " +
-                                                            "product_path FROM products WHERE product_team = ?";
+                                                            "product_specification,product_price,product_path " +
+                                                            "FROM products WHERE product_team = ?";
     private static final String SQL_FIND_PRODUCTS_BY_IDS =  "SELECT product_id,product_type, product_team, product_year," +
-                                                            "product_specification,product_quantity, product_price, " +
-                                                            "product_path FROM products WHERE product_id = ?";
+                                                            "product_specification, product_price, product_path " +
+                                                            "FROM products WHERE product_id = ?";
 
     private ProductDaoImpl(){}
 
@@ -87,7 +87,6 @@ public class ProductDaoImpl implements ProductDao {
         String team = resultSet.getString(ProductColumn.PRODUCT_TEAM);
         int year = resultSet.getInt(ProductColumn.PRODUCT_YEAR);
         String specification = resultSet.getString(ProductColumn.PRODUCT_SPECIFICATION);
-        int quantity = resultSet.getInt(ProductColumn.PRODUCT_QUANTITY);
         double price = resultSet.getDouble(ProductColumn.PRODUCT_PRICE);
         String path = resultSet.getString(ProductColumn.PRODUCT_PATH);
         product.setProductId(productId);
@@ -95,7 +94,6 @@ public class ProductDaoImpl implements ProductDao {
         product.setTeam(team);
         product.setYear(year);
         product.setSpecification(specification);
-        product.setQuantity(quantity);
         product.setPrice(price);
         product.setPath(path);
         return product;

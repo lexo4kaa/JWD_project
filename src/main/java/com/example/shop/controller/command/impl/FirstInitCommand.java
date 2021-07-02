@@ -22,6 +22,7 @@ public class FirstInitCommand implements ActionCommand {
             session.setAttribute("products", productService.findAllProducts());
             session.setAttribute("cart", new HashMap<Integer, Integer>());
             session.setAttribute("cart_size", 0);
+            session.setAttribute("total_cost", 0.0);
             session.setAttribute("user_role", "guest");
             session.setAttribute("currentPage", "path.page.products");
             page = ConfigurationManager.getProperty("path.page.products");

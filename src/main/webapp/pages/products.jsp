@@ -61,22 +61,5 @@
     </c:forEach>
 </ul>
 
-<ul class="cart" >
-    <c:forEach var="elem" items="${cartProducts}" varStatus="status">
-        <li class="product-wrapper">
-            <div class="product">
-                <div class="product-photo">
-                    <img src="${pageContext.request.contextPath}${elem.path}" alt="Oops">
-                </div>
-            </div>
-            <div>
-                <c:out value="${ elem.team }" />
-                <c:out value="${ elem.type }" />
-                <c:out value="${ elem.year }" />
-            </div>
-        </li>
-    </c:forEach>
-</ul>
-
 </body>
 </html>

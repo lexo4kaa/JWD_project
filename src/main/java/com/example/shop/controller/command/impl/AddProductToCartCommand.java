@@ -1,6 +1,7 @@
 package com.example.shop.controller.command.impl;
 
 import com.example.shop.controller.command.ActionCommand;
+import com.example.shop.entity.Product;
 import com.example.shop.model.service.ProductService;
 import com.example.shop.model.service.ServiceException;
 import com.example.shop.model.service.impl.ProductServiceImpl;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class AddProductToCartCommand implements ActionCommand {
     private static final String PARAM_NAME_PRODUCT_ID = "product_id";
@@ -28,9 +30,12 @@ public class AddProductToCartCommand implements ActionCommand {
             String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
             int productId = Integer.parseInt(stringProductId);
             productService.addProductToCart(cart, productId);
+            session.setAttribute("cartProducts", productService.findProductsByIds(cart.keySet()));
+            Product product = productService.findProductsByIds(Set.of(productId)).get(0);
+            double cost = (double) session.getAttribute("total_cost");
+            session.setAttribute("total_cost", cost + product.getPrice());
             int cart_size = (int) session.getAttribute("cart_size");
             session.setAttribute("cart_size", cart_size + 1);
-            session.setAttribute("cartProducts", productService.findProductsByIds(cart.keySet()));
             page = (String) session.getAttribute("currentPage");
         } catch (ServiceException e) {
             logger.info("Problems in 'AddProductToCartCommand', redirected to error page");
