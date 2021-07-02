@@ -8,7 +8,6 @@ public class Product {
     private String team;
     private int year;
     private String specification;
-    private int quantity;
     private double price;
     private String path;
 
@@ -52,14 +51,6 @@ public class Product {
         this.specification = specification;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public double getPrice() {
         return price;
     }
@@ -81,10 +72,10 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return productId == product.productId && quantity == product.quantity &&
-                            Double.compare(product.price, price) == 0 && Objects.equals(type, product.type) &&
-                            Objects.equals(team, product.team) && year == product.year &&
-                            Objects.equals(specification, product.specification) && Objects.equals(path, product.path);
+        return productId == product.productId &&
+                Double.compare(product.price, price) == 0 && Objects.equals(type, product.type) &&
+                Objects.equals(team, product.team) && year == product.year &&
+                Objects.equals(specification, product.specification) && Objects.equals(path, product.path);
     }
 
     @Override
@@ -96,7 +87,6 @@ public class Product {
         result = prime * result + ((team == null) ? 0 : team.hashCode());
         result = prime * result + year;
         result = prime * result + ((specification == null) ? 0 : specification.hashCode());
-        result = prime * result + quantity;
         result = prime * result + (int)price;
         result = prime * result + ((path == null) ? 0 : path.hashCode());
         return result;
@@ -110,7 +100,6 @@ public class Product {
         sb.append(", team='").append(team).append('\'');
         sb.append(", year='").append(year).append('\'');
         sb.append(", specification='").append(specification).append('\'');
-        sb.append(", quantity=").append(quantity);
         sb.append(", price=").append(price);
         sb.append(", path='").append(path).append('\'');
         sb.append('}');

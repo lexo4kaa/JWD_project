@@ -22,7 +22,7 @@ public class FindUsersByNicknameCommand implements ActionCommand {
         List<User> users;
         String nickname = request.getParameter(PARAM_NAME_NICKNAME);
         try {
-            users = userService.findUsersByNickname(nickname);
+            users = userService.findUsersByPartOfNickname(nickname);
             request.setAttribute("lst", users);
             request.setAttribute("lst_length", users.size());
             page = ConfigurationManager.getProperty("path.page.tables");

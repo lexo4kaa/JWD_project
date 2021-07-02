@@ -32,11 +32,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUsersByNickname(String nickname) throws ServiceException {
+    public List<User> findUsersByPartOfNickname(String nickname) throws ServiceException {
         List<User> users = new ArrayList<>();
         if (UserValidator.isLoginCorrect(nickname)) {
             try {
-                users = userDao.findUsersByNickname(nickname);
+                users = userDao.findUsersByPartOfNickname(nickname);
             } catch (DaoException e) {
                 logger.info("userDao.findUsersByNickname(" + nickname + ") is failed in UserServiceImpl", e);
                 throw new ServiceException(e);

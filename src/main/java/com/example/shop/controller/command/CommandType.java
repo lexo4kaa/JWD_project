@@ -28,11 +28,6 @@ public enum CommandType {
             this.command = new FindAllUsersCommand();
         }
     },
-    FIND_ALL_PRODUCTS {
-        {
-            this.command = new FindAllProductsCommand();
-        }
-    },
     FIND_PRODUCTS_BY_TEAM {
         {
             this.command = new FindProductsByTeamCommand();
@@ -46,6 +41,11 @@ public enum CommandType {
     FIND_USERS_BY_NICKNAME {
         {
             this.command = new FindUsersByNicknameCommand();
+        }
+    },
+    ADD_ORDER {
+        {
+            this.command = new AddOrderCommand();
         }
     },
     ADD_PRODUCT_TO_CART {

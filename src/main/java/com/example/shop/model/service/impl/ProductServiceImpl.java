@@ -58,23 +58,26 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void addProductToCart(Map<Integer, Integer> cast, int productId) {
-        if(cast.containsKey(productId)) {
-            cast.put(productId, cast.get(productId) + 1);
+    public void addProductToCart(Map<Integer, Integer> cart, int productId) {
+        if(cart.containsKey(productId)) {
+            cart.put(productId, cart.get(productId) + 1);
         } else {
-            cast.put(productId, 1);
+            cart.put(productId, 1);
         }
     }
 
     @Override
-    public void deleteProductFromCart(Map<Integer, Integer> cast, int productId) {
-        if(cast.containsKey(productId)) {
-            if(cast.get(productId) > 1) {
-                cast.put(productId, cast.get(productId) - 1);
+    public boolean deleteProductFromCart(Map<Integer, Integer> cart, int productId) {
+        boolean containsKey = cart.containsKey(productId);
+        if(containsKey) {
+            if(cart.get(productId) > 1) {
+                cart.put(productId, cart.get(productId) - 1);
             }
             else {
-                cast.remove(productId);
+                cart.remove(productId);
             }
         }
+        return containsKey;
     }
+
 }

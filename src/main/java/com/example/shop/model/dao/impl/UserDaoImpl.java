@@ -23,6 +23,9 @@ public class UserDaoImpl implements UserDao {
                                                      "user_DOB,user_phone_number,user_email,user_role FROM users";
     private static final String SQL_FIND_USER_BY_NICKNAME = "SELECT user_id,user_name,user_surname,user_nickname," +
                                                             "user_password,user_DOB,user_phone_number,user_email," +
+                                                            "user_role FROM users WHERE user_nickname = ?";
+    private static final String SQL_FIND_USER_BY_PART_OF_NICKNAME = "SELECT user_id,user_name,user_surname,user_nickname," +
+                                                            "user_password,user_DOB,user_phone_number,user_email," +
                                                             "user_role FROM users WHERE user_nickname LIKE ?";
     private static final String SQL_FIND_ROLE_BY_NICKNAME = "SELECT user_role FROM users WHERE user_nickname = ?";
     private static final String SQL_FIND_PASSWORD_BY_NICKNAME = "SELECT user_password FROM users WHERE user_nickname = ?";
@@ -50,10 +53,26 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findUsersByNickname(String nickname) throws DaoException {
+    public User findUserByNickname(String nickname) throws DaoException {
         List<User> users = new ArrayList<>();
         try(Connection connection = CustomConnectionPool.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_FIND_USER_BY_NICKNAME)) {
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_USER_BY_PART_OF_NICKNAME)) {
+            statement.setString(1, nickname);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()){
+                users.add(createUserFromResultSet(resultSet));
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while finding users", e);
+        }
+        return users.get(0);
+    }
+
+    @Override
+    public List<User> findUsersByPartOfNickname(String nickname) throws DaoException {
+        List<User> users = new ArrayList<>();
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_USER_BY_PART_OF_NICKNAME)) {
             statement.setString(1, nickname + PERCENT);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){

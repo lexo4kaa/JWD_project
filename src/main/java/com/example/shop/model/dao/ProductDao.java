@@ -8,4 +8,5 @@ public interface ProductDao {
     List<Product> findAllProducts() throws DaoException;
     List<Product> findProductsByTeam(String team) throws DaoException;
     Product findProductById(int productId) throws DaoException;
+    double findPriceById(int productId) throws DaoException;
 }
