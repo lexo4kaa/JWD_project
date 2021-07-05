@@ -24,6 +24,12 @@
     <input type="hidden" name="command" value="find_all_users"/>
     <input type="submit" value="Find all users" name="submit"/>
 </form>
+
+<form name="registrationPage" method="POST" action="controller">
+    <input type="hidden" name="command" value="to_registration_page"/>
+    <input type="submit" value="<fmt:message key="label.register_admin"/>"/>
+</form>
+
 <br style="clear:both">
 <hr>
 <tags:copyright/>

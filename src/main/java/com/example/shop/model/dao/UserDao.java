@@ -12,6 +12,6 @@ public interface UserDao {
     Optional<String> findUserRole(String nickname) throws DaoException;
     String findPasswordByNickname(String nickname) throws DaoException;
     void addNewUser(String name, String surname, String nickname, String password,
-                    String dob, String phone, String email) throws DaoException;
+                    String dob, String phone, String email, String role) throws DaoException;
     void deleteUser(int userId) throws DaoException;
 }

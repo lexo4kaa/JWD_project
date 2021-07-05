@@ -75,12 +75,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean registerUser(String name, String surname, String nickname, String password,
-                                  String dob, String phone, String email) throws ServiceException {
+                                  String dob, String phone, String email, String role) throws ServiceException {
         boolean flag = false;
         if (UserValidator.isLoginCorrect(nickname) && UserValidator.isPasswordCorrect(password) &&
                 UserValidator.isEmailCorrect(email) && UserValidator.isPhoneCorrect(phone)) {
             try {
-                userDao.addNewUser(name, surname, nickname, password, dob, phone, email);
+                userDao.addNewUser(name, surname, nickname, password, dob, phone, email, role);
                 flag = true;
             } catch (DaoException e) {
                 logger.info("userDao.registerUser is failed in UserServiceImpl", e);

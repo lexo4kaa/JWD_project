@@ -31,6 +31,7 @@ public class AddOrderCommand implements ActionCommand {
                     session.setAttribute("cartProducts", null);
                     session.setAttribute("cart", new HashMap<Integer, Integer>());
                     session.setAttribute("cart_size", 0);
+                    session.setAttribute("total_cost", 0.0);
                     page = ConfigurationManager.getProperty("path.page.cart");
                 } else {
                     page = ConfigurationManager.getProperty("path.page.login");
