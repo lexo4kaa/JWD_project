@@ -13,7 +13,7 @@
 <jsp:include page="header.jsp"/>
 
 <form class="radio" name="findProductsByTeam" method="POST" action="controller">
-    <h3>Select a team:</h3>
+    <h3><fmt:message key="label.select_a_team"/></h3>
     <p><input type="radio" name="team" value="All" checked><fmt:message key="label.all"/></p>
     <p><input type="radio" name="team" value="Atletico Madrid"><fmt:message key="label.atletico"/></p>
     <p><input type="radio" name="team" value="Barcelona"><fmt:message key="label.barcelona"/></p>

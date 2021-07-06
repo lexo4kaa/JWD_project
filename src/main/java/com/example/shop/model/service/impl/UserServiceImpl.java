@@ -11,9 +11,7 @@ import com.example.shop.validator.UserValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class UserServiceImpl implements UserService {
     private static Logger logger = LogManager.getLogger();
@@ -29,6 +27,20 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
         return users;
+    }
+
+    @Override
+    public User findUserByNickname(String nickname) throws ServiceException {
+        User user = new User();
+        if (UserValidator.isLoginCorrect(nickname)) {
+            try {
+                user = userDao.findUserByNickname(nickname);
+            } catch (DaoException e) {
+                logger.info("userDao.findUserByNickname(" + nickname + ") is failed in UserServiceImpl", e);
+                throw new ServiceException(e);
+            }
+        }
+        return user;
     }
 
     @Override
@@ -75,12 +87,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean registerUser(String name, String surname, String nickname, String password,
-                                  String dob, String phone, String email) throws ServiceException {
+                                  String dob, String phone, String email, String role) throws ServiceException {
         boolean flag = false;
         if (UserValidator.isLoginCorrect(nickname) && UserValidator.isPasswordCorrect(password) &&
                 UserValidator.isEmailCorrect(email) && UserValidator.isPhoneCorrect(phone)) {
             try {
-                userDao.addNewUser(name, surname, nickname, password, dob, phone, email);
+                userDao.addNewUser(name, surname, nickname, password, dob, phone, email, role);
                 flag = true;
             } catch (DaoException e) {
                 logger.info("userDao.registerUser is failed in UserServiceImpl", e);
@@ -96,6 +108,28 @@ public class UserServiceImpl implements UserService {
             userDao.deleteUser(userId);
         } catch (DaoException e) {
             logger.info("userDao.deleteUser(" + userId + ") is failed in UserServiceImpl", e);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void addUserToBlacklist(int userId, String banReason) throws ServiceException {
+        try {
+            userDao.addUserToBlacklist(userId, banReason);
+            userDao.changeIsBannedPropertyOnTrue(userId);
+        } catch (DaoException e) {
+            logger.info("adding user to blacklist is failed in UserServiceImpl", e);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void deleteUserFromBlacklist(int userId) throws ServiceException {
+        try {
+            userDao.deleteUserFromBlacklist(userId);
+            userDao.changeIsBannedPropertyOnFalse(userId);
+        } catch (DaoException e) {
+            logger.info("deleting user to blacklist is failed in UserServiceImpl", e);
             throw new ServiceException(e);
         }
     }

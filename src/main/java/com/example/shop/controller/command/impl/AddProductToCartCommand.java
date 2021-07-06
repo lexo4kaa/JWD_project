@@ -6,13 +6,11 @@ import com.example.shop.model.service.ProductService;
 import com.example.shop.model.service.ServiceException;
 import com.example.shop.model.service.impl.ProductServiceImpl;
 import com.example.shop.resource.ConfigurationManager;
-import com.example.shop.resource.MessageManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 

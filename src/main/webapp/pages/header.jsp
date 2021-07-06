@@ -31,12 +31,12 @@
             <input type="submit" value="<fmt:message key="label.logout_button"/>"/>
         </form>
         <c:if test="${user_role == 'client'}">
-            <div style="padding: 0 15px; float: right; color: blue; font-size: large">
+            <div style="margin-top:-5px; padding: 0 15px; float: right; color: blue">
                 <fmt:message key="label.user"/><br>${user}
             </div>
         </c:if>
         <c:if test="${user_role == 'administrator'}">
-            <div style="padding: 0 15px; float: right; color: saddlebrown; font-size: large">
+            <div style="margin-top:-5px; padding: 0 15px; float: right; color: blueviolet">
                 <fmt:message key="label.admin"/><br>${user}
             </div>
         </c:if>
@@ -46,7 +46,7 @@
             <input type="hidden" name="command" value="to_login_page"/>
             <input type="submit" value="<fmt:message key="label.login_button"/>"/>
         </form>
-        <div style="padding: 0 15px; float: right; color: darkred; font-size: large">
+        <div style="margin-top:-5px; padding: 0 15px; float: right; color: darkred">
             <fmt:message key="label.guest"/></div>
     </c:if>
     <form style="float: right" name="switchLocale" method="POST" action="controller">

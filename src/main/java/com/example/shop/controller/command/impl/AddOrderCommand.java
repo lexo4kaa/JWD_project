@@ -3,7 +3,6 @@ package com.example.shop.controller.command.impl;
 import com.example.shop.controller.command.ActionCommand;
 import com.example.shop.model.service.ServiceException;
 import com.example.shop.model.service.impl.OrderServiceImpl;
-import com.example.shop.model.service.impl.ProductServiceImpl;
 import com.example.shop.resource.ConfigurationManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,6 +30,7 @@ public class AddOrderCommand implements ActionCommand {
                     session.setAttribute("cartProducts", null);
                     session.setAttribute("cart", new HashMap<Integer, Integer>());
                     session.setAttribute("cart_size", 0);
+                    session.setAttribute("total_cost", 0.0);
                     page = ConfigurationManager.getProperty("path.page.cart");
                 } else {
                     page = ConfigurationManager.getProperty("path.page.login");
