@@ -30,14 +30,18 @@
             <input type="hidden" name="command" value="logout"/>
             <input type="submit" value="<fmt:message key="label.logout_button"/>"/>
         </form>
+        <form style="float: right" name="account" method="POST" action="controller">
+            <input type="hidden" name="command" value="to_account_page"/>
+            <input type="submit" value="<fmt:message key="label.account"/>"/>
+        </form>
         <c:if test="${user_role == 'client'}">
             <div style="margin-top:-5px; padding: 0 15px; float: right; color: blue">
-                <fmt:message key="label.user"/><br>${user}
+                <fmt:message key="label.user"/><br>${nickname}
             </div>
         </c:if>
         <c:if test="${user_role == 'administrator'}">
             <div style="margin-top:-5px; padding: 0 15px; float: right; color: blueviolet">
-                <fmt:message key="label.admin"/><br>${user}
+                <fmt:message key="label.admin"/><br>${nickname}
             </div>
         </c:if>
     </c:if>

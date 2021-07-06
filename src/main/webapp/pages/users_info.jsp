@@ -10,8 +10,11 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/><br>
-<!-- todo message when users_size = 0 or no not banned users -->
-<table border="1">
+<c:if test="${ users_size == 0 }">
+    <h3><fmt:message key="label.no_results"/></h3>
+</c:if>
+<c:if test="${ users_size != 0 }">
+<table>
     <tr>
         <th>Id</th>
         <th><fmt:message key="label.name"/></th>
@@ -77,6 +80,7 @@
         </tr>
     </c:forEach>
 </table>
+</c:if>
 
 </body>
 </html>

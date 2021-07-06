@@ -31,7 +31,8 @@
             <input type="email" name="email" value="" required
                    pattern="^[\w]{3,30}@gmail.com$" title="Letters length between 3 and 30 and then '@gmail.com'">
             <label><fmt:message key="label.phone"/></label>
-            <input type="text" name="phone" value="" required
+            <label class="phone_label" for="phone"><fmt:message key="label.phone_prompt"/></label>
+            <input type="text" name="phone" id="phone" value="" required
                    pattern="375(17|25|29|33|44)([1-9]{1})([0-9]{6})$" title="375(17|25|29|33|44)*******">
             <label><fmt:message key="label.password"/></label>
             <label class="pass_label" for="password"><fmt:message key="label.password_prompt"/></label>
@@ -40,7 +41,6 @@
             <label><fmt:message key="label.password_repeat"/></label>
             <input type="password" name="password2" id="password2" value="" required pattern="^[\w]{6,18}$">
             <br>
-            ${errorLoginPassMessage}
             ${wrongAction}
             ${nullPage}
             ${registrationError}
@@ -50,10 +50,6 @@
         </div>
     </div>
 </form>
-
-<script type="text/javascript">
-
-</script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/validatePassword.js"></script>
 </body>
 </html>

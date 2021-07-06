@@ -11,8 +11,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
     private static final UserDao instance = new UserDaoImpl();
@@ -34,6 +36,8 @@ public class UserDaoImpl implements UserDao {
     private static final String SQL_DELETE_USER_FROM_BLACKLIST = "DELETE FROM blacklist WHERE ref_user_id = ?";
     private static final String SQL_CHANGE_IS_BANNED_ON_TRUE = "UPDATE users SET is_banned = true WHERE user_id = ?";
     private static final String SQL_CHANGE_IS_BANNED_ON_FALSE = "UPDATE users SET is_banned = false WHERE user_id = ?";
+    private static final String SQL_UPDATE_USER = "UPDATE users SET user_name=?,user_surname=?,user_nickname=?," +
+                                                    "user_DOB=?,user_phone_number=?,user_email=? WHERE user_id = ?";
 
     public static UserDao getInstance(){
         return instance;
@@ -190,6 +194,24 @@ public class UserDaoImpl implements UserDao {
             statement.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while changing property 'isBanned' on false", e);
+        }
+    }
+
+    @Override
+    public void updateUser(String name, String surname, String nickname, String dob,
+                            String phone, String email, int userId) throws DaoException {
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_USER)) {
+            statement.setString(1, name);
+            statement.setString(2, surname);
+            statement.setString(3, nickname);
+            statement.setString(4, dob);
+            statement.setString(5, phone);
+            statement.setString(6, email);
+            statement.setInt(7, userId);
+            statement.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while updating user", e);
         }
     }
 

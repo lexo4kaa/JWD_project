@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class FindProductsByTeamCommand implements ActionCommand {
@@ -21,6 +22,7 @@ public class FindProductsByTeamCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page;
+        HttpSession session = request.getSession();;
         List<Product> products;
         String team = request.getParameter(PARAM_NAME_TEAM);
         try {
@@ -30,7 +32,7 @@ public class FindProductsByTeamCommand implements ActionCommand {
             else {
                 products = productService.findProductsByTeam(team);
             }
-            request.setAttribute("products", products);
+            session.setAttribute("products", products);
             page = ConfigurationManager.getProperty("path.page.products");
         } catch (ServiceException e) {
             logger.info("Problems with function 'findProductsProductsByTeam', redirected to error page");

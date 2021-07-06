@@ -15,7 +15,6 @@ public class LoginCommand implements ActionCommand {
     private static final String PARAM_NAME_PASSWORD = "password";
     private static final String PARAM_NAME_ROLE_CLIENT = "client";
     private static final UserServiceImpl userService = new UserServiceImpl();
-    private static final ProductServiceImpl productService = new ProductServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -25,11 +24,10 @@ public class LoginCommand implements ActionCommand {
         try {
             if (userService.authorizeUser(login, password)) {
                 HttpSession session = request.getSession();
-                session.setAttribute("user", login);
+                session.setAttribute("nickname", login);
                 String role = userService.findUserRole(login).get();
                 session.setAttribute("user_role", role);
                 if (role.equals(PARAM_NAME_ROLE_CLIENT)) {
-                    request.setAttribute("products", productService.findAllProducts());
                     page = ConfigurationManager.getProperty("path.page.products");
                 } else {
                     page = ConfigurationManager.getProperty("path.page.admin_main");

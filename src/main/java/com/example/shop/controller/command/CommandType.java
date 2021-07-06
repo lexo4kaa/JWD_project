@@ -88,9 +88,19 @@ public enum CommandType {
             this.command = new ToUsersInfoPageCommand();
         }
     },
+    TO_ACCOUNT_PAGE {
+        {
+            this.command = new ToAccountPageCommand();
+        }
+    },
     FIRST_INIT {
         {
             this.command = new FirstInitCommand();
+        }
+    },
+    UPDATE_ACCOUNT {
+        {
+            this.command = new UpdateAccountCommand();
         }
     },
     SWITCH_LOCALE {
