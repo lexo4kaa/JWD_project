@@ -23,11 +23,6 @@ public enum CommandType {
             this.command = new DeleteUserCommand();
         }
     },
-    FIND_ALL_USERS {
-        {
-            this.command = new FindAllUsersCommand();
-        }
-    },
     FIND_PRODUCTS_BY_TEAM {
         {
             this.command = new FindProductsByTeamCommand();
@@ -58,6 +53,16 @@ public enum CommandType {
             this.command = new DeleteProductFromCartCommand();
         }
     },
+    ADD_USER_TO_BLACKLIST {
+        {
+            this.command = new AddUserToBlacklistCommand();
+        }
+    },
+    DELETE_USER_FROM_BLACKLIST {
+        {
+            this.command = new DeleteUserFromBlacklistCommand();
+        }
+    },
     TO_LOGIN_PAGE {
         {
             this.command = new ToLoginPageCommand();
@@ -76,6 +81,11 @@ public enum CommandType {
     TO_ADMIN_MAIN_PAGE {
         {
             this.command = new ToAdminMainPageCommand();
+        }
+    },
+    TO_USERS_INFO_PAGE {
+        {
+            this.command = new ToUsersInfoPageCommand();
         }
     },
     FIRST_INIT {

@@ -3,7 +3,6 @@ package com.example.shop.controller.command.impl;
 import com.example.shop.controller.command.ActionCommand;
 import com.example.shop.model.service.ServiceException;
 import com.example.shop.model.service.impl.OrderServiceImpl;
-import com.example.shop.model.service.impl.ProductServiceImpl;
 import com.example.shop.resource.ConfigurationManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

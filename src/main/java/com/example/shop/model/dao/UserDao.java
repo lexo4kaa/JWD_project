@@ -14,4 +14,8 @@ public interface UserDao {
     void addNewUser(String name, String surname, String nickname, String password,
                     String dob, String phone, String email, String role) throws DaoException;
     void deleteUser(int userId) throws DaoException;
+    void addUserToBlacklist(int userId, String banReason) throws DaoException;
+    void deleteUserFromBlacklist(int userId) throws DaoException;
+    void changeIsBannedPropertyOnTrue(int userId) throws DaoException;
+    void changeIsBannedPropertyOnFalse(int userId) throws DaoException;
 }

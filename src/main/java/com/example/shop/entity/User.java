@@ -13,6 +13,7 @@ public class User {
     private String phone;
     private String email;
     private String role;
+    private boolean isBanned;
 
     public User() {
     }
@@ -89,6 +90,14 @@ public class User {
         this.role = role;
     }
 
+    public boolean getIsBanned() {
+        return isBanned;
+    }
+
+    public void setIsBanned(boolean isBanned) {
+        this.isBanned = isBanned;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -102,6 +111,7 @@ public class User {
         result = prime * result + ((phone == null) ? 0 : phone.hashCode());
         result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((role == null) ? 0 : role.hashCode());
+        result = prime * result + (isBanned ? 1 : 0) ;
         return result;
     }
 
@@ -113,7 +123,8 @@ public class User {
         return userId == user.userId && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) &&
                                         Objects.equals(nickname, user.nickname) && Objects.equals(password, user.password) &&
                                         Objects.equals(dob, user.dob) && Objects.equals(phone, user.phone) &&
-                                        Objects.equals(email, user.email) && Objects.equals(role, user.role);
+                                        Objects.equals(email, user.email) && Objects.equals(role, user.role) &&
+                                        isBanned == user.isBanned;
     }
 
     @Override
@@ -128,6 +139,7 @@ public class User {
         sb.append(", phone=").append(phone).append('\'');
         sb.append(", email=").append(email).append('\'');
         sb.append(", role='").append(role).append('\'');
+        sb.append(", isBanned='").append(isBanned).append('\'');
         sb.append('}');
         return sb.toString();
     }

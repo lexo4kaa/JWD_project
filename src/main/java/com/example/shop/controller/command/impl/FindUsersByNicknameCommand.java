@@ -19,13 +19,12 @@ public class FindUsersByNicknameCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page;
-        List<User> users;
-        String nickname = request.getParameter(PARAM_NAME_NICKNAME);
         try {
-            users = userService.findUsersByPartOfNickname(nickname);
-            request.setAttribute("lst", users);
-            request.setAttribute("lst_length", users.size());
-            page = ConfigurationManager.getProperty("path.page.tables");
+            String nickname = request.getParameter(PARAM_NAME_NICKNAME);
+            List<User> users = userService.findUsersByPartOfNickname(nickname);
+            request.setAttribute("users", users);
+            request.setAttribute("users_size", users.size());
+            page = ConfigurationManager.getProperty("path.page.users_info");
         } catch (ServiceException e) {
             logger.info("Problems with function 'findUsersByNickname', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");

@@ -1,4 +1,7 @@
 .header {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    text-align: center;
     padding: 15px 15px;
 }
 
@@ -8,10 +11,7 @@
 }
 
 .header form input {
-    color: blue;
+    background: dodgerblue;
+    color: white;
     font-size: large;
-}
-
-.header div {
-
 }

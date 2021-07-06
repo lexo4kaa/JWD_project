@@ -10,6 +10,7 @@ public final class UsersColumn {
     public static final String USER_PHONE = "user_phone_number";
     public static final String USER_EMAIL = "user_email";
     public static final String USER_ROLE = "user_role";
+    public static final String IS_BANNED = "is_banned";
 
     private UsersColumn() {
     }
