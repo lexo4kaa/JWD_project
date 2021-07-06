@@ -18,4 +18,6 @@ public interface UserDao {
     void deleteUserFromBlacklist(int userId) throws DaoException;
     void changeIsBannedPropertyOnTrue(int userId) throws DaoException;
     void changeIsBannedPropertyOnFalse(int userId) throws DaoException;
+    void updateUser(String name, String surname, String nickname, String dob,
+                    String phone, String email, int userId) throws DaoException;
 }

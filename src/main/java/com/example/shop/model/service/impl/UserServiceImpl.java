@@ -133,4 +133,21 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public boolean updateUser(String name, String surname, String nickname, String dob,
+                                String phone, String email, int userId) throws ServiceException {
+        boolean flag = false;
+        if (UserValidator.isLoginCorrect(nickname) && UserValidator.isEmailCorrect(email)
+                && UserValidator.isPhoneCorrect(phone)) {
+            try {
+                userDao.updateUser(name, surname, nickname, dob, phone, email, userId);
+                flag = true;
+            } catch (DaoException e) {
+                logger.info("userDao.updateUser is failed in UserServiceImpl", e);
+                throw new ServiceException(e);
+            }
+        }
+        return flag;
+    }
 }
