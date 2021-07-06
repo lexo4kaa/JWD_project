@@ -29,7 +29,6 @@ public class LoginCommand implements ActionCommand {
                 String role = userService.findUserRole(login).get();
                 session.setAttribute("user_role", role);
                 if (role.equals(PARAM_NAME_ROLE_CLIENT)) {
-                    request.setAttribute("products", productService.findAllProducts());
                     page = ConfigurationManager.getProperty("path.page.products");
                 } else {
                     page = ConfigurationManager.getProperty("path.page.admin_main");

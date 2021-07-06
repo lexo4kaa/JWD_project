@@ -26,8 +26,7 @@ public class FindProductsByIdsCommand implements ActionCommand {
         Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
         try {
             products = productService.findProductsByIds(cart.keySet());
-            request.setAttribute("cartProducts", products);
-            request.setAttribute("cartValues", cart.values()); //todo use it on jsp
+            session.setAttribute("cartProducts", products);
             session.setAttribute("currentPage", "path.page.cart");
             page = ConfigurationManager.getProperty("path.page.cart");
         } catch (ServiceException e) {

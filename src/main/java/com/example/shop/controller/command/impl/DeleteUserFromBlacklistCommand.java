@@ -29,7 +29,7 @@ public class DeleteUserFromBlacklistCommand implements ActionCommand {
             List<User> users = userService.findAllUsers();
             session.setAttribute("users", users);
             session.setAttribute("users_size", users.size());
-            page = ConfigurationManager.getProperty("path.page.users_info");
+            page = (String) session.getAttribute("currentPage");
         } catch (ServiceException e) {
             logger.info("Problems in 'DeleteUserFromBlacklistCommand', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
