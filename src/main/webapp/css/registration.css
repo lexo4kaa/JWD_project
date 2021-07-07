@@ -3,8 +3,7 @@ body {
 }
 
 .form_reg_block{
-    width: 500px;
-    height: 500px;
+    width: 525px;
     margin: 0 auto;
 }
 .form_reg_block_content{
@@ -19,11 +18,11 @@ body {
 .form_reg_block label{
     display: block;
     text-align: center;
-    padding: 10px;
+    padding: 5px;
     font-size: 150%;
     color: blue;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 .form_reg_block input{
     display: block;
@@ -34,7 +33,7 @@ body {
     border-radius: 10px;
     outline: none;
 }
-.form_reg_block .form_reg_block_content .form_reg_button{
+.form_reg_block .form_reg_button{
     font-size: 150%;
     color: blue;
     display: block;
@@ -42,4 +41,8 @@ body {
     width: 50%;
     border: none;
     cursor: pointer;
+}
+.form_reg_block .prompt{
+    font-size: medium;
+    padding-bottom: 10px;
 }

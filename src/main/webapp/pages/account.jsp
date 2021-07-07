@@ -23,23 +23,25 @@
             <label><fmt:message key="label.surname"/></label>
             <input type="text" name="surname" value="${profile.surname}" required pattern="^[A-Za-z]{1,30}$">
             <label><fmt:message key="label.nickname"/></label>
-            <label class="nick_label" for="nickname_label"><fmt:message key="label.nickname_prompt"/></label>
+            <label style="font-size: medium" for="nickname_label"><fmt:message key="label.nickname_prompt"/></label>
             <input type="text" name="nickname" id="nickname_label" value="${profile.nickname}" required
-                   pattern="^[\w]{3,18}$" title="Letters, numbers or symbol '_' (length between 3 and 18)">
+                   pattern="^[\w]{3,18}$" title="<fmt:message key="label.nickname_prompt"/>">
             <label><fmt:message key="label.dob"/></label>
             <input type="date" name="dob" value="${profile.dob}" min="1900-01-01" max="2003-09-01" required>
             <label><fmt:message key="label.email"/></label>
-            <input type="email" name="email" value="${profile.email}" required
-                   pattern="^[\w]{3,30}@gmail.com$" title="Letters length between 3 and 30 and then '@gmail.com'">
+            <label style="font-size: medium" for="email_label"><fmt:message key="label.email_prompt"/></label>
+            <input type="email" name="email" id="email_label" value="${profile.email}" required
+                   pattern="^[\w]{3,30}@gmail.com$" title="<fmt:message key="label.email_prompt"/>">
             <label><fmt:message key="label.phone"/></label>
-            <input type="text" name="phone" value="${profile.phone}" required
-                   pattern="375(17|25|29|33|44)([1-9]{1})([0-9]{6})$" title="375(17|25|29|33|44)*******">
+            <label style="font-size: medium" for="phone_label"><fmt:message key="label.phone_prompt"/></label>
+            <input type="text" name="phone" id="phone_label" value="${profile.phone}" required
+                   pattern="375(17|25|29|33|44)([1-9]{1})([0-9]{6})$" title="<fmt:message key="label.phone_prompt"/>">
             <br>
             ${wrongAction}
             ${nullPage}
             ${registrationError}
             <br>
-            <input class="updateButton" type="submit" value="<fmt:message key="label.update"/>"/>
+            <input class="form_reg_button" type="submit" value="<fmt:message key="label.save"/>"/>
             <br>
         </div>
     </div>
