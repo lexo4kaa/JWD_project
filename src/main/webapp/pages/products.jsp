@@ -44,7 +44,7 @@
             <c:out value="${ prod.type }" />
             <c:out value="${ prod.year }" />
         </div>
-        <div style="color: red">
+        <div style="color: blue">
             <c:out value="${ prod.price }$" />
         </div>
         <form style="float: left; margin-left: 42.5%" name="addProduct" method="POST" action="controller">
