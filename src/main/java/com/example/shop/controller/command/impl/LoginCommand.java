@@ -22,15 +22,23 @@ public class LoginCommand implements ActionCommand {
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String password = request.getParameter(PARAM_NAME_PASSWORD);
         try {
+            System.out.println("1: "+userService.authorizeUser(login, password));
+            System.out.println("2: "+!userService.isBanned(login));
             if (userService.authorizeUser(login, password)) {
-                HttpSession session = request.getSession();
-                session.setAttribute("nickname", login);
-                String role = userService.findUserRole(login).get();
-                session.setAttribute("user_role", role);
-                if (role.equals(PARAM_NAME_ROLE_CLIENT)) {
-                    page = ConfigurationManager.getProperty("path.page.products");
-                } else {
-                    page = ConfigurationManager.getProperty("path.page.admin_main");
+                if(!userService.isBanned(login)) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("nickname", login);
+                    String role = userService.findUserRole(login).get();
+                    session.setAttribute("user_role", role);
+                    if (role.equals(PARAM_NAME_ROLE_CLIENT)) {
+                        page = ConfigurationManager.getProperty("path.page.products");
+                    } else {
+                        page = ConfigurationManager.getProperty("path.page.admin_main");
+                    }
+                }
+                else {
+                    request.setAttribute("banMessage", MessageManager.getProperty("message.ban"));
+                    page = ConfigurationManager.getProperty("path.page.login");
                 }
             } else {
                 request.setAttribute("errorLoginPassMessage", MessageManager.getProperty("message.loginerror"));

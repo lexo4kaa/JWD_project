@@ -21,4 +21,5 @@ public interface UserDao {
     void updateUser(String name, String surname, String nickname, String dob,
                     String phone, String email, int userId) throws DaoException;
     void changePassword(int userId, String newPassword) throws DaoException;
+    boolean isBanned(String userNickname) throws DaoException;
 }
