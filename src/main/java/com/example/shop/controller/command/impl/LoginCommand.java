@@ -19,11 +19,9 @@ public class LoginCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page;
-        String login = request.getParameter(PARAM_NAME_LOGIN);
+        String login = request.getParameter(PARAM_NAME_LOGIN).toLowerCase();
         String password = request.getParameter(PARAM_NAME_PASSWORD);
         try {
-            System.out.println("1: "+userService.authorizeUser(login, password));
-            System.out.println("2: "+!userService.isBanned(login));
             if (userService.authorizeUser(login, password)) {
                 if(!userService.isBanned(login)) {
                     HttpSession session = request.getSession();

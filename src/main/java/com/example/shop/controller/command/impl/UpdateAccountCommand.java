@@ -24,7 +24,7 @@ public class UpdateAccountCommand implements ActionCommand {
         HttpSession session = request.getSession();
         String name = request.getParameter(PARAM_NAME_NAME);
         String surname = request.getParameter(PARAM_NAME_SURNAME);
-        String nickname = request.getParameter(PARAM_NAME_NICKNAME);
+        String nickname = request.getParameter(PARAM_NAME_NICKNAME).toLowerCase();
         String dob = request.getParameter(PARAM_NAME_DOB);
         String phone = request.getParameter(PARAM_NAME_PHONE);
         String email = request.getParameter(PARAM_NAME_EMAIL);
