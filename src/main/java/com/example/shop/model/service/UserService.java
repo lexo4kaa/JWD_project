@@ -19,4 +19,5 @@ public interface UserService {
     boolean updateUser(String name, String surname, String nickname, String dob,
                     String phone, String email, int userId) throws ServiceException;
     boolean changePassword(String userNickname, String oldPassword, String newPassword) throws ServiceException;
+    boolean isBanned(String userNickname) throws ServiceException;
 }

@@ -21,9 +21,12 @@
             <label><fmt:message key="label.password_input"/></label>
             <input type="password" name="password" value="">
             <br>
-            ${errorLoginPassMessage}
-            ${wrongAction}
-            ${nullPage}
+            <div style="text-align: center; color: red">
+                ${errorLoginPassMessage}
+                ${wrongAction}
+                ${nullPage}
+                ${banMessage}
+            </div>
             <br>
             <input class="form_login" type="submit" value="<fmt:message key="label.login_button"/>"/>
             <br>

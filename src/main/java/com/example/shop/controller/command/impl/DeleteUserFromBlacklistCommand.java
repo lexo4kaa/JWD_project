@@ -26,9 +26,16 @@ public class DeleteUserFromBlacklistCommand implements ActionCommand {
             String stringUserId = request.getParameter(PARAM_NAME_USER_ID);
             int userId = Integer.parseInt(stringUserId);
             userService.deleteUserFromBlacklist(userId);
-            List<User> users = userService.findAllUsers();
+            List<User> users = (List<User>) session.getAttribute("users");
+            for(int i = 0; i < users.size(); i++) {
+                User user = users.get(i);
+                if(user.getUserId() == userId) {
+                    user.setIsBanned(false);
+                    users.set(i, user);
+                    break;
+                }
+            }
             session.setAttribute("users", users);
-            session.setAttribute("users_size", users.size());
             page = (String) session.getAttribute("currentPage");
         } catch (ServiceException e) {
             logger.info("Problems in 'DeleteUserFromBlacklistCommand', redirected to error page");

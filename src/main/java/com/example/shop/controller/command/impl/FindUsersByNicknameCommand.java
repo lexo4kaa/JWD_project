@@ -22,7 +22,7 @@ public class FindUsersByNicknameCommand implements ActionCommand {
         String page;
         HttpSession session = request.getSession();
         try {
-            String nickname = request.getParameter(PARAM_NAME_NICKNAME);
+            String nickname = request.getParameter(PARAM_NAME_NICKNAME).toLowerCase();
             List<User> users = userService.findUsersByPartOfNickname(nickname);
             session.setAttribute("users", users);
             session.setAttribute("users_size", users.size());

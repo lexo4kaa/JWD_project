@@ -39,6 +39,7 @@ public class UserDaoImpl implements UserDao {
     private static final String SQL_UPDATE_USER = "UPDATE users SET user_name=?,user_surname=?,user_nickname=?," +
                                                     "user_DOB=?,user_phone_number=?,user_email=? WHERE user_id = ?";
     private static final String SQL_CHANGE_PASSWORD = "UPDATE users SET user_password = ? WHERE user_id = ?";
+    private static final String SQL_FIND_IS_BANNED_BY_NICKNAME = "SELECT is_banned FROM users WHERE user_nickname = ?";
 
     public static UserDao getInstance(){
         return instance;
@@ -70,7 +71,7 @@ public class UserDaoImpl implements UserDao {
                 users.add(createUserFromResultSet(resultSet));
             }
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while finding users", e);
+            throw new DaoException("Error while finding user", e);
         }
         return users.get(0);
     }
@@ -102,7 +103,7 @@ public class UserDaoImpl implements UserDao {
                 role = Optional.of(resultSet.getString(UsersColumn.USER_ROLE));
             }
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while finding users", e);
+            throw new DaoException("Error while finding user", e);
         }
         return role;
     }
@@ -118,7 +119,7 @@ public class UserDaoImpl implements UserDao {
                 password = resultSet.getString(UsersColumn.USER_PASSWORD);
             }
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while finding users", e);
+            throw new DaoException("Error while finding user", e);
         }
         return password;
     }
@@ -226,6 +227,22 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while changing password", e);
         }
+    }
+
+    @Override
+    public boolean isBanned(String userNickname) throws DaoException {
+        boolean isBanned = false;
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_IS_BANNED_BY_NICKNAME)) {
+            statement.setString(1, userNickname);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()){
+                isBanned = resultSet.getBoolean(UsersColumn.IS_BANNED);
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while finding user", e);
+        }
+        return isBanned;
     }
 
     private User createUserFromResultSet(ResultSet resultSet) throws SQLException {

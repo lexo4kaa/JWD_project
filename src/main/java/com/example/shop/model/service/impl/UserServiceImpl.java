@@ -166,4 +166,18 @@ public class UserServiceImpl implements UserService {
         }
         return flag;
     }
+
+    @Override
+    public boolean isBanned(String userNickname) throws ServiceException {
+        boolean flag = false;
+        if (UserValidator.isLoginCorrect(userNickname)) {
+            try {
+                flag = userDao.isBanned(userNickname);
+            } catch (DaoException e) {
+                logger.info("userDao.isBanned is failed in UserServiceImpl", e);
+                throw new ServiceException(e);
+            }
+        }
+        return flag;
+    }
 }
