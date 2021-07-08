@@ -33,7 +33,7 @@ body {
     border-radius: 10px;
     outline: none;
 }
-.form_reg_block .form_reg_button{
+.form_reg_button{
     font-size: 150%;
     color: blue;
     display: block;
@@ -42,7 +42,7 @@ body {
     border: none;
     cursor: pointer;
 }
-.form_reg_block .prompt{
+.prompt{
     font-size: medium;
     padding-bottom: 10px;
 }

@@ -47,5 +47,12 @@
     </div>
 </form>
 
+<form name="changePasswordPage" method="POST" action="controller">
+    <input type="hidden" name="command" value="to_change_password_page"/>
+    <input style="margin: auto; display:flex; font-size: medium; height: 40px; color: blue" type="submit"
+           value="<fmt:message key="label.want_to_change_password"/>"/>
+</form>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/validatePassword.js"></script>
 </body>
 </html>
