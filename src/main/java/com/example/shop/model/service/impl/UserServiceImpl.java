@@ -150,4 +150,20 @@ public class UserServiceImpl implements UserService {
         }
         return flag;
     }
+
+    @Override
+    public boolean changePassword(String userNickname, String oldPassword, String newPassword) throws ServiceException {
+        boolean flag = false;
+        if (UserValidator.isPasswordCorrect(newPassword) && authorizeUser(userNickname, oldPassword)) {
+            try {
+                int userId = findUserByNickname(userNickname).getUserId();
+                userDao.changePassword(userId, newPassword);
+                flag = true;
+            } catch (DaoException e) {
+                logger.info("userDao.changePassword is failed in UserServiceImpl", e);
+                throw new ServiceException(e);
+            }
+        }
+        return flag;
+    }
 }

@@ -38,6 +38,7 @@ public class UserDaoImpl implements UserDao {
     private static final String SQL_CHANGE_IS_BANNED_ON_FALSE = "UPDATE users SET is_banned = false WHERE user_id = ?";
     private static final String SQL_UPDATE_USER = "UPDATE users SET user_name=?,user_surname=?,user_nickname=?," +
                                                     "user_DOB=?,user_phone_number=?,user_email=? WHERE user_id = ?";
+    private static final String SQL_CHANGE_PASSWORD = "UPDATE users SET user_password = ? WHERE user_id = ?";
 
     public static UserDao getInstance(){
         return instance;
@@ -212,6 +213,18 @@ public class UserDaoImpl implements UserDao {
             statement.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while updating user", e);
+        }
+    }
+
+    @Override
+    public void changePassword(int userId, String newPassword) throws DaoException {
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_CHANGE_PASSWORD)) {
+            statement.setString(1, newPassword);
+            statement.setInt(2, userId);
+            statement.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while changing password", e);
         }
     }
 

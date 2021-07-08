@@ -93,6 +93,11 @@ public enum CommandType {
             this.command = new ToAccountPageCommand();
         }
     },
+    TO_CHANGE_PASSWORD_PAGE {
+        {
+            this.command = new ToChangePasswordPage();
+        }
+    },
     FIRST_INIT {
         {
             this.command = new FirstInitCommand();
@@ -101,6 +106,11 @@ public enum CommandType {
     UPDATE_ACCOUNT {
         {
             this.command = new UpdateAccountCommand();
+        }
+    },
+    CHANGE_PASSWORD {
+        {
+            this.command = new ChangePasswordCommand();
         }
     },
     SWITCH_LOCALE {

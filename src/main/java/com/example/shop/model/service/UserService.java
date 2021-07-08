@@ -18,4 +18,5 @@ public interface UserService {
     void deleteUserFromBlacklist(int userId) throws ServiceException;
     boolean updateUser(String name, String surname, String nickname, String dob,
                     String phone, String email, int userId) throws ServiceException;
+    boolean changePassword(String userNickname, String oldPassword, String newPassword) throws ServiceException;
 }
