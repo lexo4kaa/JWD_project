@@ -1,10 +1,8 @@
 package com.example.shop.entity;
 
-import java.util.Objects;
-
 public class Order {
     private int orderId;
-    private int clientId;
+    private int userId;
     private double cost;
 
     public int getOrderId() {
@@ -15,12 +13,12 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public int getClientId() {
-        return clientId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public double getCost() {
@@ -36,14 +34,14 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return orderId == order.orderId && clientId == order.clientId && cost == order.cost;
+        return orderId == order.orderId && userId == order.userId && cost == order.cost;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + clientId;
+        result = prime * result + userId;
         result = prime * result + orderId;
         result = prime * result + (int)cost;
         return result;
@@ -53,7 +51,7 @@ public class Order {
     public String toString() {
         final StringBuilder sb = new StringBuilder("Order{");
         sb.append("orderId=").append(orderId);
-        sb.append(", clientId=").append(clientId);
+        sb.append(", userId=").append(userId);
         sb.append(", cost=").append(cost);
         sb.append('}');
         return sb.toString();

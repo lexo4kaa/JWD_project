@@ -22,21 +22,6 @@ public class CustomConnectionPool {
     private BlockingQueue<Connection> freeConnections;
     private BlockingQueue<Connection> givenAwayConnections;
 
-    public static CustomConnectionPool getInstance() { // todo understand this double check validation
-        if (instance == null) {
-            try {
-                lock.lock();
-                if (instance == null) {
-                    instance = new CustomConnectionPool();
-                    logger.info("ConnectionPool was created");
-                }
-            } finally {
-                lock.unlock();
-            }
-        }
-        return instance;
-    }
-
     private CustomConnectionPool() {
         freeConnections = new LinkedBlockingQueue<>(DEFAULT_POOL_SIZE);
         givenAwayConnections = new LinkedBlockingQueue<>(DEFAULT_POOL_SIZE);
@@ -54,6 +39,21 @@ public class CustomConnectionPool {
             logger.fatal("connection poll don't created, pool size is 0");
             throw new RuntimeException("connection poll don't created, pool size is 0");
         }
+    }
+
+    public static CustomConnectionPool getInstance() { // todo understand this double check validation
+        if (instance == null) {
+            try {
+                lock.lock();
+                if (instance == null) {
+                    instance = new CustomConnectionPool();
+                    logger.info("ConnectionPool was created");
+                }
+            } finally {
+                lock.unlock();
+            }
+        }
+        return instance;
     }
 
     public Connection getConnection() throws ConnectionPoolException {

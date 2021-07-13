@@ -1,6 +1,5 @@
 package com.example.shop.controller.command.impl;
 import com.example.shop.controller.command.ActionCommand;
-import com.example.shop.model.service.impl.ProductServiceImpl;
 import com.example.shop.resource.ConfigurationManager;
 import com.example.shop.resource.MessageManager;
 import com.example.shop.model.service.ServiceException;
@@ -8,7 +7,6 @@ import com.example.shop.model.service.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 public class LoginCommand implements ActionCommand {
     private static final String PARAM_NAME_LOGIN = "login";

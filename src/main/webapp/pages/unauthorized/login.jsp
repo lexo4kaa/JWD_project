@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css"/>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="../common/header.jsp"/>
 
 <div class="form_auth_block">
     <div class="form_auth_block_content">

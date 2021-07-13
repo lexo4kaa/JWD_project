@@ -38,6 +38,16 @@ public enum CommandType {
             this.command = new FindUsersByNicknameCommand();
         }
     },
+    FIND_USER_BY_NICKNAME {
+        {
+            this.command = new FindUserByNicknameCommand();
+        }
+    },
+    FIND_ALL_USERS {
+        {
+            this.command = new FindAllUsersCommand();
+        }
+    },
     ADD_ORDER {
         {
             this.command = new AddOrderCommand();
@@ -81,16 +91,6 @@ public enum CommandType {
     TO_ADMIN_MAIN_PAGE {
         {
             this.command = new ToAdminMainPageCommand();
-        }
-    },
-    TO_USERS_INFO_PAGE {
-        {
-            this.command = new ToUsersInfoPageCommand();
-        }
-    },
-    TO_ACCOUNT_PAGE {
-        {
-            this.command = new ToAccountPageCommand();
         }
     },
     TO_CHANGE_PASSWORD_PAGE {

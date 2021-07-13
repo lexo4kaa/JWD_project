@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/users_info.css"/>
 </head>
 <body>
-<jsp:include page="header.jsp"/><br>
+<jsp:include page="../../common/header.jsp"/><br>
 <c:if test="${ users_size == 0 }">
     <h3><fmt:message key="label.no_results"/></h3>
 </c:if>
@@ -39,16 +39,16 @@
             </c:if>
             <c:if test="${ currentLocale != 'en_US' }">
                 <c:if test="${ user.role == 'administrator' }">
-                    <td>администратор</td>
+                    <td><fmt:message key="label.admin"/></td>
                 </c:if>
                 <c:if test="${ user.role != 'administrator' }">
-                    <td>клиент</td>
+                    <td><fmt:message key="label.user"/></td>
                 </c:if>
                 <c:if test="${ user.isBanned }">
-                    <td>да</td>
+                    <td><fmt:message key="label.yes"/></td>
                 </c:if>
                 <c:if test="${ !user.isBanned }">
-                    <td>нет</td>
+                    <td><fmt:message key="label.no"/></td>
                 </c:if>
             </c:if>
             <td>
