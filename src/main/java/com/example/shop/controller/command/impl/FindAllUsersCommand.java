@@ -1,6 +1,7 @@
 package com.example.shop.controller.command.impl;
 
 import com.example.shop.controller.command.ActionCommand;
+import com.example.shop.entity.User;
 import com.example.shop.model.service.ServiceException;
 import com.example.shop.model.service.impl.UserServiceImpl;
 import com.example.shop.resource.ConfigurationManager;
@@ -9,8 +10,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
-public class ToAccountPageCommand implements ActionCommand {
+public class FindAllUsersCommand implements ActionCommand {
     private static final UserServiceImpl userService = new UserServiceImpl();
     private static Logger logger = LogManager.getLogger();
 
@@ -18,13 +20,14 @@ public class ToAccountPageCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
-        String nickname = (String) session.getAttribute("nickname");
         try {
-            session.setAttribute("profile", userService.findUserByNickname(nickname));
-            session.setAttribute("currentPage", "path.page.account");
-            page = ConfigurationManager.getProperty("path.page.account");
+            List<User> users = userService.findAllUsers();
+            session.setAttribute("users", users);
+            session.setAttribute("users_size", users.size());
+            session.setAttribute("currentPage", "path.page.users_info");
+            page = ConfigurationManager.getProperty("path.page.users_info");
         } catch (ServiceException e) {
-            logger.info("Problems with userService.findUserByNickname(" + nickname + "), redirected to error page");
+            logger.info("Problems with userService.findAllUsers(), redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
         }
         return page;

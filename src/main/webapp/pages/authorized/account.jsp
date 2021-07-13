@@ -9,7 +9,7 @@
     <title><fmt:message key="label.account"/></title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/registration.css"/>
 </head>
-<jsp:include page="header.jsp"/>
+<jsp:include page="../common/header.jsp"/>
 <body>
 
 <form name="updateAccount" method="POST" action="controller">

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/registration.css"/>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="../common/header.jsp"/>
 
 <form class="registrationForm" name="registrationForm" method="POST" action="controller">
     <input type="hidden" name="command" value="registration" />

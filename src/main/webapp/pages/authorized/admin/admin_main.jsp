@@ -9,7 +9,7 @@
     <title><fmt:message key="label.admin_main"/></title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css"/>
 </head>
-<jsp:include page="header.jsp"/>
+<jsp:include page="../../common/header.jsp"/>
 <h3>Hi, ${nickname}!</h3>
 <img src="https://media.giphy.com/media/Cmr1OMJ2FN0B2/giphy.gif" alt="Oops" width="150" height="150">
 <hr/>
@@ -21,7 +21,7 @@
 </form>
 
 <form name="usersInfoPage" method="POST" action="controller">
-    <input type="hidden" name="command" value="to_users_info_page"/>
+    <input type="hidden" name="command" value="find_all_users"/>
     <input type="submit" value="<fmt:message key="label.users_info"/>" name="submit"/>
 </form>
 

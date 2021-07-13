@@ -18,8 +18,8 @@ public class OrderDaoImpl implements OrderDao {
     private final UserDao userDao = UserDaoImpl.getInstance();
     private final ProductDao productDao = ProductDaoImpl.getInstance();
 
-    private static final String SQL_FIND_ALL_ORDERS = "SELECT order_id,ref_client_id,cost FROM orders";
-    private static final String SQL_ADD_ORDER = "INSERT INTO orders (ref_client_id,cost) VALUES (?,?)";
+    private static final String SQL_FIND_ALL_ORDERS = "SELECT order_id,ref_user_id,cost FROM orders";
+    private static final String SQL_ADD_ORDER = "INSERT INTO orders (ref_user_id,cost) VALUES (?,?)";
     private static final String SQL_ADD_ORDER_HAS_PRODUCT = "INSERT INTO order_has_product (ref_order_id," +
                                                             "ref_product_id,quantity) VALUES (?,?,?)";
 
@@ -84,10 +84,10 @@ public class OrderDaoImpl implements OrderDao {
     private Order createOrdersFromResultSet(ResultSet resultSet) throws SQLException {
         Order order = new Order();
         int orderId = resultSet.getInt(OrderColumn.ORDER_ID);
-        int client_id = resultSet.getInt(OrderColumn.CLIENT_ID);
+        int user_id = resultSet.getInt(OrderColumn.USER_ID);
         double cost = resultSet.getDouble(OrderColumn.COST);
         order.setOrderId(orderId);
-        order.setClientId(client_id);
+        order.setUserId(user_id);
         order.setCost(cost);
         return order;
     }

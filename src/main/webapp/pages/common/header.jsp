@@ -31,7 +31,7 @@
             <input type="submit" value="<fmt:message key="label.logout_button"/>"/>
         </form>
         <form style="float: right" name="account" method="POST" action="controller">
-            <input type="hidden" name="command" value="to_account_page"/>
+            <input type="hidden" name="command" value="find_user_by_nickname"/>
             <input type="submit" value="<fmt:message key="label.account"/>"/>
         </form>
         <c:if test="${user_role == 'client'}">

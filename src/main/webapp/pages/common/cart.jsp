@@ -1,3 +1,4 @@
+<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -34,25 +35,31 @@
                 <div style="color: red">
                     <c:out value="${ elem.price }$" />
                 </div>
-                <form style="float: left; margin-left: 250px; margin-top: -33px" name="addProduct" method="POST" action="controller">
+                <form style="float: left; margin-left: 37.5%" name="addProduct" method="POST" action="controller">
                     <input type="hidden" name="command" value="add_product_to_cart"/>
                     <input type="hidden" name="product_id" value="${ elem.productId }">
                     <input type="submit" value="+"/>
                 </form>
-                <form style="float: left; margin-top: -33px" name="deleteProduct" method="POST" action="controller">
+                <div style="float: left; text-align: center; width: 20px">
+                    <c:set var="containsKey" value="${ sessionScope.cart.containsKey(elem.productId) }"/>
+                    <c:if test="${ containsKey }">
+                        <c:out value="${ sessionScope.cart.get(elem.productId) }"/>
+                    </c:if>
+                    <c:if test="${ !containsKey }">
+                        <c:out value="0"/>
+                    </c:if>
+                </div>
+                <form style="float: left" name="deleteProduct" method="POST" action="controller">
                     <input type="hidden" name="command" value="delete_product_from_cart"/>
                     <input type="hidden" name="product_id" value="${ elem.productId }">
                     <input type="submit" value="-"/>
                 </form>
-                <div class="buttons">
-
-                </div>
             </li>
             <br style="clear:both">
             <hr>
         </c:forEach>
 
-        <h4><fmt:message key="label.total_cost"/> ${total_cost}$</h4>
+        <h4><fmt:message key="label.total_cost"/> ${total_cost}<fmt:message key="label.currency"/></h4>
         <form style="float: right" name="addOrder" method="POST" action="controller">
             <input type="hidden" name="command" value="add_order"/>
             <input type="submit" value="<fmt:message key="label.buy"/>"/>
