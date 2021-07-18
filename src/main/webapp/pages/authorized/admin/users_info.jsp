@@ -79,6 +79,9 @@
             </c:if>
         </tr>
     </c:forEach>
+    <div style="text-align: center; color: red">
+        ${actOnYourselfMessage}
+    </div>
 </table>
 </c:if>
 
