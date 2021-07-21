@@ -44,7 +44,7 @@ public class DeleteUserFromBlacklistCommand implements ActionCommand {
             }
             page = (String) session.getAttribute("currentPage");
         } catch (ServiceException e) {
-            logger.info("Problems in 'DeleteUserFromBlacklistCommand', redirected to error page");
+            logger.error("Exception in 'DeleteUserFromBlacklistCommand', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
         }
         return page;

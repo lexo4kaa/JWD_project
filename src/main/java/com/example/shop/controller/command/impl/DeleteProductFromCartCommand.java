@@ -37,7 +37,7 @@ public class DeleteProductFromCartCommand implements ActionCommand {
             }
             page = (String) session.getAttribute("currentPage");
         } catch (ServiceException e) {
-            logger.info("Problems in 'AddProductToCartCommand', redirected to error page");
+            logger.error("Exception in 'AddProductToCartCommand', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
         }
         return page;

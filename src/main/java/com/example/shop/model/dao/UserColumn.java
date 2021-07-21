@@ -1,6 +1,6 @@
 package com.example.shop.model.dao;
 
-public final class UsersColumn {
+public final class UserColumn {
     public static final String USER_ID = "user_id";
     public static final String USER_NAME = "user_name";
     public static final String USER_SURNAME = "user_surname";
@@ -12,6 +12,6 @@ public final class UsersColumn {
     public static final String USER_ROLE = "user_role";
     public static final String IS_BANNED = "is_banned";
 
-    private UsersColumn() {
+    private UserColumn() {
     }
 }

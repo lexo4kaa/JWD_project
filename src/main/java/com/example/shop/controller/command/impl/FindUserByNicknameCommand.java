@@ -24,7 +24,7 @@ public class FindUserByNicknameCommand implements ActionCommand {
             session.setAttribute("currentPage", "path.page.account");
             page = ConfigurationManager.getProperty("path.page.account");
         } catch (ServiceException e) {
-            logger.info("Problems with userService.findUserByNickname(" + nickname + "), redirected to error page");
+            logger.error("Exception in userService.findUserByNickname(" + nickname + "), redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
         }
         return page;

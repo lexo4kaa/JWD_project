@@ -1,6 +1,7 @@
 package com.example.shop.resource;
 
 import java.util.ResourceBundle;
+
 public class ConfigurationManager {
     private final static ResourceBundle resourceBundle = ResourceBundle.getBundle("config");
 

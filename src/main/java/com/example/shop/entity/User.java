@@ -99,32 +99,39 @@ public class User {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (userId != user.userId) return false;
+        if (isBanned != user.isBanned) return false;
+        if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        if (surname != null ? !surname.equals(user.surname) : user.surname != null) return false;
+        if (nickname != null ? !nickname.equals(user.nickname) : user.nickname != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (dob != null ? !dob.equals(user.dob) : user.dob != null) return false;
+        if (phone != null ? !phone.equals(user.phone) : user.phone != null) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        return role != null ? role.equals(user.role) : user.role == null;
+    }
+
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + userId;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((surname == null) ? 0 : surname.hashCode());
-        result = prime * result + ((nickname == null) ? 0 : nickname.hashCode());
-        result = prime * result + ((password == null) ? 0 : password.hashCode());
-        result = prime * result + ((dob == null) ? 0 : dob.hashCode());
-        result = prime * result + ((phone == null) ? 0 : phone.hashCode());
-        result = prime * result + ((email == null) ? 0 : email.hashCode());
-        result = prime * result + ((role == null) ? 0 : role.hashCode());
+        result = prime * result + (name == null ? 0 : name.hashCode());
+        result = prime * result + (surname == null ? 0 : surname.hashCode());
+        result = prime * result + (nickname == null ? 0 : nickname.hashCode());
+        result = prime * result + (password == null ? 0 : password.hashCode());
+        result = prime * result + (dob == null ? 0 : dob.hashCode());
+        result = prime * result + (phone == null ? 0 : phone.hashCode());
+        result = prime * result + (email == null ? 0 : email.hashCode());
+        result = prime * result + (role == null ? 0 : role.hashCode());
         result = prime * result + (isBanned ? 1 : 0) ;
         return result;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return userId == user.userId && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) &&
-                                        Objects.equals(nickname, user.nickname) && Objects.equals(password, user.password) &&
-                                        Objects.equals(dob, user.dob) && Objects.equals(phone, user.phone) &&
-                                        Objects.equals(email, user.email) && Objects.equals(role, user.role) &&
-                                        isBanned == user.isBanned;
     }
 
     @Override
