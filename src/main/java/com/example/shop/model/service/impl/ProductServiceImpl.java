@@ -24,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             products = productDao.findAllProducts();
         } catch (DaoException e) {
-            logger.info("productDao.findAllProducts() is failed in ProductServiceImpl", e);
+            logger.error("productDao.findAllProducts() is failed in ProductServiceImpl", e);
             throw new ServiceException(e);
         }
         return products;
@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             products = productDao.findProductsByTeam(team);
         } catch (DaoException e) {
-            logger.info("productDao.findProductsByTeam(" + team + ") is failed in ProductServiceImpl", e);
+            logger.error("productDao.findProductsByTeam(" + team + ") is failed in ProductServiceImpl", e);
             throw new ServiceException(e);
         }
         return products;
@@ -51,7 +51,7 @@ public class ProductServiceImpl implements ProductService {
                 products.add(product);
             }
         } catch (DaoException e) {
-            logger.info("productDao.findProductsInCart(" + productIds + ") is failed in ProductServiceImpl", e);
+            logger.error("productDao.findProductsInCart(" + productIds + ") is failed in ProductServiceImpl", e);
             throw new ServiceException(e);
         }
         return products;

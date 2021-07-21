@@ -23,7 +23,7 @@ public class PasswordEncryptor {
             BigInteger bigInt = new BigInteger(1, bytesEncoded);
             encryptedPassword = bigInt.toString(16);
         } catch (NoSuchAlgorithmException e) {
-            logger.info("encoding failed", e);
+            logger.error("NoSuchAlgorithmException in encryptPassword(" + password + ")", e);
             encryptedPassword = Integer.toString(password.hashCode());
         }
         return encryptedPassword;

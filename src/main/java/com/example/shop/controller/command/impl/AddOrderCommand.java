@@ -39,7 +39,7 @@ public class AddOrderCommand implements ActionCommand {
                 page = ConfigurationManager.getProperty("path.page.products");
             }
         } catch (ServiceException e) {
-            logger.info("Problems with function 'addOrder', redirected to error page");
+            logger.error("Exception in function 'addOrder', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
         }
         return page;

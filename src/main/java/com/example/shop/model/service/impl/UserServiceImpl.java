@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
         try {
             users = userDao.findAllUsers();
         } catch (DaoException e) {
-            logger.info("userDao.findAllUsers() is failed in UserServiceImpl", e);
+            logger.error("userDao.findAllUsers() is failed in UserServiceImpl", e);
             throw new ServiceException(e);
         }
         return users;
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
             try {
                 user = userDao.findUserByNickname(nickname);
             } catch (DaoException e) {
-                logger.info("userDao.findUserByNickname(" + nickname + ") is failed in UserServiceImpl", e);
+                logger.error("userDao.findUserByNickname(" + nickname + ") is failed in UserServiceImpl", e);
                 throw new ServiceException(e);
             }
         }
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
             try {
                 users = userDao.findUsersByPartOfNickname(nickname);
             } catch (DaoException e) {
-                logger.info("userDao.findUsersByNickname(" + nickname + ") is failed in UserServiceImpl", e);
+                logger.error("userDao.findUsersByNickname(" + nickname + ") is failed in UserServiceImpl", e);
                 throw new ServiceException(e);
             }
         }
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
         try {
             role = userDao.findUserRole(login);
         } catch (DaoException e) {
-            logger.info("userDao.findUserRole(" + login + ") is failed in UserServiceImpl", e);
+            logger.error("userDao.findUserRole(" + login + ") is failed in UserServiceImpl", e);
             throw new ServiceException(e);
         }
         return role;
@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
             try {
                 findPassword = userDao.findPasswordByNickname(login);
             } catch (DaoException e) {
-                logger.info("userDao.findPasswordByNickname(" + login + ") is failed in UserServiceImpl", e);
+                logger.error("userDao.findPasswordByNickname(" + login + ") is failed in UserServiceImpl", e);
                 throw new ServiceException(e);
             }
         }
@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
                 userDao.addNewUser(name, surname, nickname, password, dob, phone, email, role);
                 flag = true;
             } catch (DaoException e) {
-                logger.info("userDao.registerUser is failed in UserServiceImpl", e);
+                logger.error("userDao.registerUser is failed in UserServiceImpl", e);
                 throw new ServiceException(e);
             }
         }
@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService {
         try {
             userDao.deleteUser(userId);
         } catch (DaoException e) {
-            logger.info("userDao.deleteUser(" + userId + ") is failed in UserServiceImpl", e);
+            logger.error("userDao.deleteUser(" + userId + ") is failed in UserServiceImpl", e);
             throw new ServiceException(e);
         }
     }
@@ -118,7 +118,7 @@ public class UserServiceImpl implements UserService {
             userDao.addUserToBlacklist(userId, banReason);
             userDao.changeIsBannedPropertyOnTrue(userId);
         } catch (DaoException e) {
-            logger.info("adding user to blacklist is failed in UserServiceImpl", e);
+            logger.error("adding user to blacklist is failed in UserServiceImpl", e);
             throw new ServiceException(e);
         }
     }
@@ -129,7 +129,7 @@ public class UserServiceImpl implements UserService {
             userDao.deleteUserFromBlacklist(userId);
             userDao.changeIsBannedPropertyOnFalse(userId);
         } catch (DaoException e) {
-            logger.info("deleting user to blacklist is failed in UserServiceImpl", e);
+            logger.error("deleting user to blacklist is failed in UserServiceImpl", e);
             throw new ServiceException(e);
         }
     }
@@ -144,7 +144,7 @@ public class UserServiceImpl implements UserService {
                 userDao.updateUser(name, surname, nickname, dob, phone, email, userId);
                 flag = true;
             } catch (DaoException e) {
-                logger.info("userDao.updateUser is failed in UserServiceImpl", e);
+                logger.error("userDao.updateUser is failed in UserServiceImpl", e);
                 throw new ServiceException(e);
             }
         }
@@ -160,7 +160,7 @@ public class UserServiceImpl implements UserService {
                 userDao.changePassword(userId, newPassword);
                 flag = true;
             } catch (DaoException e) {
-                logger.info("userDao.changePassword is failed in UserServiceImpl", e);
+                logger.error("userDao.changePassword is failed in UserServiceImpl", e);
                 throw new ServiceException(e);
             }
         }
@@ -174,7 +174,7 @@ public class UserServiceImpl implements UserService {
             try {
                 flag = userDao.isBanned(userNickname);
             } catch (DaoException e) {
-                logger.info("userDao.isBanned is failed in UserServiceImpl", e);
+                logger.error("userDao.isBanned is failed in UserServiceImpl", e);
                 throw new ServiceException(e);
             }
         }

@@ -35,7 +35,7 @@ public class FindProductsByTeamCommand implements ActionCommand {
             session.setAttribute("products", products);
             page = ConfigurationManager.getProperty("path.page.products");
         } catch (ServiceException e) {
-            logger.info("Problems with function 'findProductsProductsByTeam', redirected to error page");
+            logger.error("Exception in function 'findProductsProductsByTeam', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
         }
         return page;

@@ -5,7 +5,6 @@ import com.example.shop.model.pool.ConnectionPoolException;
 import com.example.shop.model.pool.CustomConnectionPool;
 import com.example.shop.model.dao.DaoException;
 import com.example.shop.model.dao.UserDao;
-import com.example.shop.model.dao.UsersColumn;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import static com.example.shop.model.dao.UserColumn.*;
 
 public class UserDaoImpl implements UserDao {
     private static final UserDao instance = new UserDaoImpl();
@@ -100,7 +101,7 @@ public class UserDaoImpl implements UserDao {
             statement.setString(1, nickname);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()){
-                role = Optional.of(resultSet.getString(UsersColumn.USER_ROLE));
+                role = Optional.of(resultSet.getString(USER_ROLE));
             }
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while finding user", e);
@@ -116,7 +117,7 @@ public class UserDaoImpl implements UserDao {
             statement.setString(1, nickname);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()){
-                password = resultSet.getString(UsersColumn.USER_PASSWORD);
+                password = resultSet.getString(USER_PASSWORD);
             }
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while finding user", e);
@@ -237,7 +238,7 @@ public class UserDaoImpl implements UserDao {
             statement.setString(1, userNickname);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()){
-                isBanned = resultSet.getBoolean(UsersColumn.IS_BANNED);
+                isBanned = resultSet.getBoolean(IS_BANNED);
             }
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while finding user", e);
@@ -247,16 +248,16 @@ public class UserDaoImpl implements UserDao {
 
     private User createUserFromResultSet(ResultSet resultSet) throws SQLException {
         User user = new User();
-        int userId = resultSet.getInt(UsersColumn.USER_ID);
-        String name = resultSet.getString(UsersColumn.USER_NAME);
-        String surname = resultSet.getString(UsersColumn.USER_SURNAME);
-        String nickname = resultSet.getString(UsersColumn.USER_NICKNAME);
-        String password = resultSet.getString(UsersColumn.USER_PASSWORD);
-        Date dob = resultSet.getDate(UsersColumn.USER_DOB);
-        String phone = resultSet.getString(UsersColumn.USER_PHONE);
-        String email = resultSet.getString(UsersColumn.USER_EMAIL);
-        String role = resultSet.getString(UsersColumn.USER_ROLE);
-        boolean isBanned = resultSet.getBoolean(UsersColumn.IS_BANNED);
+        int userId = resultSet.getInt(USER_ID);
+        String name = resultSet.getString(USER_NAME);
+        String surname = resultSet.getString(USER_SURNAME);
+        String nickname = resultSet.getString(USER_NICKNAME);
+        String password = resultSet.getString(USER_PASSWORD);
+        Date dob = resultSet.getDate(USER_DOB);
+        String phone = resultSet.getString(USER_PHONE);
+        String email = resultSet.getString(USER_EMAIL);
+        String role = resultSet.getString(USER_ROLE);
+        boolean isBanned = resultSet.getBoolean(IS_BANNED);
         user.setUserId(userId);
         user.setName(name);
         user.setSurname(surname);

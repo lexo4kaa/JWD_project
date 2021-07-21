@@ -36,7 +36,7 @@ public class AddProductToCartCommand implements ActionCommand {
             session.setAttribute("cart_size", cart_size + 1);
             page = (String) session.getAttribute("currentPage");
         } catch (ServiceException e) {
-            logger.info("Problems in 'AddProductToCartCommand', redirected to error page");
+            logger.error("Exception in 'AddProductToCartCommand', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
         }
         return page;

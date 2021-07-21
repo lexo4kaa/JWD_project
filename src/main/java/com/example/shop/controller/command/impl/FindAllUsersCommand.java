@@ -27,7 +27,7 @@ public class FindAllUsersCommand implements ActionCommand {
             session.setAttribute("currentPage", "path.page.users_info");
             page = ConfigurationManager.getProperty("path.page.users_info");
         } catch (ServiceException e) {
-            logger.info("Problems with userService.findAllUsers(), redirected to error page");
+            logger.error("Exception in userService.findAllUsers(), redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
         }
         return page;

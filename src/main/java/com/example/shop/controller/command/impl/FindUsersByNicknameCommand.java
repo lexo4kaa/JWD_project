@@ -28,7 +28,7 @@ public class FindUsersByNicknameCommand implements ActionCommand {
             session.setAttribute("users_size", users.size());
             page = ConfigurationManager.getProperty("path.page.users_info");
         } catch (ServiceException e) {
-            logger.info("Problems with function 'findUsersByNickname', redirected to error page");
+            logger.error("Exception in function 'findUsersByNickname', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
         }
         return page;

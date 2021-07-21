@@ -1,9 +1,12 @@
 package com.example.shop.entity;
 
+import java.util.Date;
+
 public class Order {
     private int orderId;
     private int userId;
-    private double cost;
+    private double orderCost;
+    private Date orderDate;
 
     public int getOrderId() {
         return orderId;
@@ -21,12 +24,20 @@ public class Order {
         this.userId = userId;
     }
 
-    public double getCost() {
-        return cost;
+    public double getOrderCost() {
+        return orderCost;
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
+    public void setOrderCost(double orderCost) {
+        this.orderCost = orderCost;
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 
     @Override
@@ -34,7 +45,10 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return orderId == order.orderId && userId == order.userId && cost == order.cost;
+        if (orderId != order.orderId) return false;
+        if (userId != order.userId) return false;
+        if (Double.compare(order.orderCost, orderCost) != 0) return false;
+        return orderDate != null ? orderDate.equals(order.orderDate) : order.orderDate == null;
     }
 
     @Override
@@ -43,7 +57,8 @@ public class Order {
         int result = 1;
         result = prime * result + userId;
         result = prime * result + orderId;
-        result = prime * result + (int)cost;
+        result = prime * result + (int)orderCost;
+        result = prime * result + (orderDate != null ? orderDate.hashCode() : 0);
         return result;
     }
 
@@ -52,7 +67,8 @@ public class Order {
         final StringBuilder sb = new StringBuilder("Order{");
         sb.append("orderId=").append(orderId);
         sb.append(", userId=").append(userId);
-        sb.append(", cost=").append(cost);
+        sb.append(", orderCost=").append(orderCost);
+        sb.append(", orderDate=").append(orderDate);
         sb.append('}');
         return sb.toString();
     }

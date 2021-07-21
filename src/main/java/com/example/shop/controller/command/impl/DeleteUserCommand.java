@@ -42,7 +42,7 @@ public class DeleteUserCommand implements ActionCommand {
             }
             page = ConfigurationManager.getProperty("path.page.users_info");
         } catch (ServiceException e) {
-            logger.info("Problems with function 'deleteUser', redirected to error page");
+            logger.error("Exception in function 'deleteUser', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
         }
         return page;

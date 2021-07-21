@@ -1,7 +1,5 @@
 package com.example.shop.entity;
 
-import java.util.Objects;
-
 public class Product {
     private int productId;
     private String type;
@@ -72,10 +70,14 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return productId == product.productId &&
-                Double.compare(product.price, price) == 0 && Objects.equals(type, product.type) &&
-                Objects.equals(team, product.team) && year == product.year &&
-                Objects.equals(specification, product.specification) && Objects.equals(path, product.path);
+        if (productId != product.productId) return false;
+        if (year != product.year) return false;
+        if (Double.compare(product.price, price) != 0) return false;
+        if (type != null ? !type.equals(product.type) : product.type != null) return false;
+        if (team != null ? !team.equals(product.team) : product.team != null) return false;
+        if (specification != null ? !specification.equals(product.specification) : product.specification != null)
+            return false;
+        return path != null ? path.equals(product.path) : product.path == null;
     }
 
     @Override
@@ -83,12 +85,12 @@ public class Product {
         final int prime = 31;
         int result = 1;
         result = prime * result + productId;
-        result = prime * result + ((type == null) ? 0 : type.hashCode());
-        result = prime * result + ((team == null) ? 0 : team.hashCode());
+        result = prime * result + (type == null ? 0 : type.hashCode());
+        result = prime * result + (team == null ? 0 : team.hashCode());
         result = prime * result + year;
-        result = prime * result + ((specification == null) ? 0 : specification.hashCode());
+        result = prime * result + (specification == null ? 0 : specification.hashCode());
         result = prime * result + (int)price;
-        result = prime * result + ((path == null) ? 0 : path.hashCode());
+        result = prime * result + (path == null ? 0 : path.hashCode());
         return result;
     }
 

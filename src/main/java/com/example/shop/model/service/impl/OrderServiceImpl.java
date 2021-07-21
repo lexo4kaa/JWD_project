@@ -27,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
                 orderDao.addOrderHasProduct(cart, productId);
             }
         } catch (DaoException e) {
-            logger.info("orderDao.addOrder(" + cart + "," + nickname + ") is failed in OrderServiceImpl", e);
+            logger.error("orderDao.addOrder(" + cart + "," + nickname + ") is failed in OrderServiceImpl", e);
             throw new ServiceException(e);
         }
     }

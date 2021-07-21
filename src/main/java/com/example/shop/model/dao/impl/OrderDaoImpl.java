@@ -1,7 +1,10 @@
 package com.example.shop.model.dao.impl;
 
 import com.example.shop.entity.Order;
-import com.example.shop.model.dao.*;
+import com.example.shop.model.dao.DaoException;
+import com.example.shop.model.dao.OrderDao;
+import com.example.shop.model.dao.ProductDao;
+import com.example.shop.model.dao.UserDao;
 import com.example.shop.model.pool.ConnectionPoolException;
 import com.example.shop.model.pool.CustomConnectionPool;
 
@@ -10,16 +13,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import static com.example.shop.model.dao.OrderColumn.*;
 
 public class OrderDaoImpl implements OrderDao {
     private static final OrderDao instance = new OrderDaoImpl();
     private final UserDao userDao = UserDaoImpl.getInstance();
     private final ProductDao productDao = ProductDaoImpl.getInstance();
 
-    private static final String SQL_FIND_ALL_ORDERS = "SELECT order_id,ref_user_id,cost FROM orders";
-    private static final String SQL_ADD_ORDER = "INSERT INTO orders (ref_user_id,cost) VALUES (?,?)";
+    private static final String SQL_FIND_ALL_ORDERS = "SELECT order_id,ref_user_id,order_cost,order_date FROM orders";
+    private static final String SQL_ADD_ORDER = "INSERT INTO orders (ref_user_id,order_cost) VALUES (?,?)";
     private static final String SQL_ADD_ORDER_HAS_PRODUCT = "INSERT INTO order_has_product (ref_order_id," +
                                                             "ref_product_id,quantity) VALUES (?,?,?)";
 
@@ -83,12 +89,14 @@ public class OrderDaoImpl implements OrderDao {
 
     private Order createOrdersFromResultSet(ResultSet resultSet) throws SQLException {
         Order order = new Order();
-        int orderId = resultSet.getInt(OrderColumn.ORDER_ID);
-        int user_id = resultSet.getInt(OrderColumn.USER_ID);
-        double cost = resultSet.getDouble(OrderColumn.COST);
+        int orderId = resultSet.getInt(ORDER_ID);
+        int user_id = resultSet.getInt(USER_ID);
+        double cost = resultSet.getDouble(COST);
+        Date date = resultSet.getDate(ORDER_DATE);
         order.setOrderId(orderId);
         order.setUserId(user_id);
-        order.setCost(cost);
+        order.setOrderCost(cost);
+        order.setOrderDate(date);
         return order;
     }
 }
