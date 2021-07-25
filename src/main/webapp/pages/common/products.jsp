@@ -51,20 +51,26 @@
             <div style="color: blue">
                 <c:out value="${ prod.price }$" />
             </div>
-            <form style="float: left; margin-left: 37.5%" name="addProduct" method="POST" action="controller">
+            <form style="float: left; margin-left: 35%" name="addProduct" method="POST" action="controller">
                 <input type="hidden" name="command" value="add_product_to_cart"/>
                 <input type="hidden" name="product_id" value="${ prod.productId }">
                 <input type="submit" value="+"/>
             </form>
-            <div style="float: left; text-align: center; width: 20px">
-                <c:set var="containsKey" value="${ sessionScope.cart.containsKey(prod.productId) }"/>
-                <c:if test="${ containsKey }">
-                    <c:out value="${ sessionScope.cart.get(prod.productId) }"/>
-                </c:if>
-                <c:if test="${ !containsKey }">
-                    <c:out value="0"/>
-                </c:if>
-            </div>
+
+            <c:set var="containsKey" value="${ sessionScope.cart.containsKey(prod.productId) }"/>
+            <c:if test="${ containsKey }">
+                <c:set var="quantity" value="${ sessionScope.cart.get(prod.productId) }"/>
+            </c:if>
+            <c:if test="${ !containsKey }">
+                <c:set var="quantity" value="0"/>
+            </c:if>
+            <form style="float: left" name="changeQuantity" id="changeQuantity" method="POST" action="controller">
+                <input type="hidden" name="command" value="change_quantity_of_product_in_cart"/>
+                <input type="hidden" name="product_id" value="${ prod.productId }">
+                <input style="width: 40px" type="number" name="new_quantity"
+                       value="${ quantity }" min="0" max="99" onblur="submit()"/>
+            </form>
+
             <form style="float: left" name="deleteProduct" method="POST" action="controller">
                 <input type="hidden" name="command" value="delete_product_from_cart"/>
                 <input type="hidden" name="product_id" value="${ prod.productId }">

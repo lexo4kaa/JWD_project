@@ -73,6 +73,11 @@ public enum CommandType {
             this.command = new DeleteProductFromCartCommand();
         }
     },
+    CHANGE_QUANTITY_OF_PRODUCT_IN_CART {
+        {
+            this.command = new ChangeQuantityOfProductInCartCommand();
+        }
+    },
     ADD_USER_TO_BLACKLIST {
         {
             this.command = new AddUserToBlacklistCommand();

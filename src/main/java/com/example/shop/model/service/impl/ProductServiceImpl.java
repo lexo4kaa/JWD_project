@@ -82,18 +82,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void addProductToCart(Map<Integer, Integer> cart, int productId) {
+    public Map<Integer, Integer> addProductToCart(Map<Integer, Integer> cart, int productId) {
         if(cart.containsKey(productId)) {
             cart.put(productId, cart.get(productId) + 1);
         } else {
             cart.put(productId, 1);
         }
+        return cart;
     }
 
     @Override
-    public boolean deleteProductFromCart(Map<Integer, Integer> cart, int productId) {
-        boolean containsKey = cart.containsKey(productId);
-        if(containsKey) {
+    public Map<Integer, Integer> deleteProductFromCart(Map<Integer, Integer> cart, int productId) {
+        if(cart.containsKey(productId)) {
             if(cart.get(productId) > 1) {
                 cart.put(productId, cart.get(productId) - 1);
             }
@@ -101,7 +101,17 @@ public class ProductServiceImpl implements ProductService {
                 cart.remove(productId);
             }
         }
-        return containsKey;
+        return cart;
     }
 
+    @Override
+    public Map<Integer, Integer> changeQuantityOfProductInCart(Map<Integer, Integer> cart, int productId, int newQuantity) {
+        if(newQuantity > 1) {
+            cart.put(productId, newQuantity);
+        }
+        else {
+            cart.remove(productId);
+        }
+        return cart;
+    }
 }
