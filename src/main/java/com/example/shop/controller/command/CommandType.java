@@ -23,14 +23,24 @@ public enum CommandType {
             this.command = new DeleteUserCommand();
         }
     },
-    FIND_PRODUCTS_BY_TEAM {
+    FIND_PRODUCTS_BY_TEAM_AND_TYPE {
         {
-            this.command = new FindProductsByTeamCommand();
+            this.command = new FindProductsByTeamAndTypeCommand();
+        }
+    },
+    FIND_PRODUCTS_BY_TYPE {
+        {
+            this.command = new FindProductsByTypeCommand();
         }
     },
     FIND_PRODUCTS_BY_IDS {
         {
             this.command = new FindProductsByIdsCommand();
+        }
+    },
+    FIND_ALL_PRODUCTS {
+        {
+            this.command = new FindAllProductsCommand();
         }
     },
     FIND_USERS_BY_NICKNAME {

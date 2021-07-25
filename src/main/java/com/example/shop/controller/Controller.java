@@ -26,7 +26,7 @@ public class Controller extends HttpServlet {
         ActionCommand command = ActionFactory.defineCommand(request);
         String page = command.execute(request);
         HttpSession session = request.getSession();
-        session.setAttribute("currentPage", page);
+        session.setAttribute("currentPage", page); // fixme mb i set it in TO-pages
         if (page != null) {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
             dispatcher.forward(request, response);

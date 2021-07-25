@@ -14,60 +14,65 @@
 
 <form class="radio" name="findProductsByTeam" method="POST" action="controller">
     <h3><fmt:message key="label.select_a_team"/></h3>
-    <p><input type="radio" name="team" value="All" checked><fmt:message key="label.all"/></p>
     <p><input type="radio" name="team" value="Atletico Madrid"><fmt:message key="label.atletico"/></p>
     <p><input type="radio" name="team" value="Barcelona"><fmt:message key="label.barcelona"/></p>
     <p><input type="radio" name="team" value="Chelsea"><fmt:message key="label.chelsea"/></p>
     <p><input type="radio" name="team" value="Inter Milan"><fmt:message key="label.inter"/></p>
     <p><input type="radio" name="team" value="Juventus"><fmt:message key="label.juventus"/></p>
-    <p><input type="radio" name="team" value="Liverpool"><fmt:message key="label.Liverpool"/></p>
+    <p><input type="radio" name="team" value="Liverpool"><fmt:message key="label.liverpool"/></p>
     <p><input type="radio" name="team" value="Manchester City"><fmt:message key="label.manCity"/></p>
     <p><input type="radio" name="team" value="Manchester United"><fmt:message key="label.manU"/></p>
     <p><input type="radio" name="team" value="Milan"><fmt:message key="label.milan"/></p>
     <p><input type="radio" name="team" value="PSG"><fmt:message key="label.PSG"/></p>
     <p><input type="radio" name="team" value="Real Madrid"><fmt:message key="label.realMadrid"/></p>
+    <p><input type="radio" name="team" value="all"><fmt:message key="label.all"/></p>
 
-    <input type="hidden" name="command" value="find_products_by_team" />
+    <input type="hidden" name="command" value="find_products_by_team_and_type" />
     <input type="submit" value="<fmt:message key="label.find"/>" name="submit"/>
 </form>
 
-<ul class="products" >
-    <c:forEach var="prod" items="${products}" varStatus="status">
-    <li class="product-wrapper">
-        <div class="product">
-            <div class="product-photo">
-                <img src="${pageContext.request.contextPath}${prod.path}" alt="Oops">
+<ul class="products">
+    <c:if test="${sessionScope.products.size() == 0}">
+        <h3><fmt:message key="label.no_results"/></h3>
+    </c:if>
+    <c:if test="${sessionScope.products.size() != 0}">
+        <c:forEach var="prod" items="${products}" varStatus="status">
+        <li class="product-wrapper">
+            <div class="product">
+                <div class="product-photo">
+                    <img src="${pageContext.request.contextPath}${prod.path}" alt="Oops">
+                </div>
             </div>
-        </div>
-        <div>
-            <c:out value="${ prod.team }" />
-            <c:out value="${ prod.type }" />
-            <c:out value="${ prod.year }" />
-        </div>
-        <div style="color: blue">
-            <c:out value="${ prod.price }$" />
-        </div>
-        <form style="float: left; margin-left: 37.5%" name="addProduct" method="POST" action="controller">
-            <input type="hidden" name="command" value="add_product_to_cart"/>
-            <input type="hidden" name="product_id" value="${ prod.productId }">
-            <input type="submit" value="+"/>
-        </form>
-        <div style="float: left; text-align: center; width: 20px">
-            <c:set var="containsKey" value="${ sessionScope.cart.containsKey(prod.productId) }"/>
-            <c:if test="${ containsKey }">
-                <c:out value="${ sessionScope.cart.get(prod.productId) }"/>
-            </c:if>
-            <c:if test="${ !containsKey }">
-                <c:out value="0"/>
-            </c:if>
-        </div>
-        <form style="float: left" name="deleteProduct" method="POST" action="controller">
-            <input type="hidden" name="command" value="delete_product_from_cart"/>
-            <input type="hidden" name="product_id" value="${ prod.productId }">
-            <input type="submit" value="-"/>
-        </form>
-    </li>
-    </c:forEach>
+            <div>
+                <c:out value="${ prod.team }" />
+                <c:out value="${ prod.type }" />
+                <c:out value="${ prod.year }" />
+            </div>
+            <div style="color: blue">
+                <c:out value="${ prod.price }$" />
+            </div>
+            <form style="float: left; margin-left: 37.5%" name="addProduct" method="POST" action="controller">
+                <input type="hidden" name="command" value="add_product_to_cart"/>
+                <input type="hidden" name="product_id" value="${ prod.productId }">
+                <input type="submit" value="+"/>
+            </form>
+            <div style="float: left; text-align: center; width: 20px">
+                <c:set var="containsKey" value="${ sessionScope.cart.containsKey(prod.productId) }"/>
+                <c:if test="${ containsKey }">
+                    <c:out value="${ sessionScope.cart.get(prod.productId) }"/>
+                </c:if>
+                <c:if test="${ !containsKey }">
+                    <c:out value="0"/>
+                </c:if>
+            </div>
+            <form style="float: left" name="deleteProduct" method="POST" action="controller">
+                <input type="hidden" name="command" value="delete_product_from_cart"/>
+                <input type="hidden" name="product_id" value="${ prod.productId }">
+                <input type="submit" value="-"/>
+            </form>
+        </li>
+        </c:forEach>
+    </c:if>
 </ul>
 
 </body>

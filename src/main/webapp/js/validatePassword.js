@@ -10,11 +10,17 @@ document.addEventListener('submit', function (event) {
             errors[i].remove()
         }
 
+        var locale = sessionStorage.getItem("currentLocale");
         var error = document.createElement('div')
         error.className = 'error'
         error.style.color = 'red'
         error.style.textAlign = 'center'
-        error.innerHTML = 'password doesn\'t match' /*todo russian lang*/
+        error.innerHTML = locale/*
+        if(locale == 'ru_RU') {
+            error.innerHTML = 'пароли не совпадают'
+        } else {
+            error.innerHTML = 'password doesn\'t match'
+        }*/
         password2.parentElement.insertBefore(error, password2)
     }
 })

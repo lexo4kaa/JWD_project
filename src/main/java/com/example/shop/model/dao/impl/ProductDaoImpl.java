@@ -21,9 +21,12 @@ public class ProductDaoImpl implements ProductDao {
     private static final String SQL_FIND_ALL_PRODUCTS = "SELECT product_id,product_type, product_team, product_year," +
                                                         "product_specification, product_price, " +
                                                         "product_path FROM products";
-    private static final String SQL_FIND_PRODUCTS_BY_TEAM = "SELECT product_id,product_type, product_team, product_year," +
+    private static final String SQL_FIND_PRODUCTS_BY_TYPE = "SELECT product_id,product_type, product_team, product_year," +
                                                             "product_specification,product_price,product_path " +
-                                                            "FROM products WHERE product_team = ?";
+                                                            "FROM products WHERE product_type LIKE ?";
+    private static final String SQL_FIND_PRODUCTS_BY_TEAM_AND_TYPE = "SELECT product_id,product_type, product_team, product_year," +
+                                                            "product_specification,product_price,product_path " +
+                                                            "FROM products WHERE product_team = ? && product_type LIKE ?";
     private static final String SQL_FIND_PRODUCTS_BY_IDS =  "SELECT product_id,product_type, product_team, product_year," +
                                                             "product_specification, product_price, product_path " +
                                                             "FROM products WHERE product_id = ?";
@@ -50,11 +53,28 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<Product> findProductsByTeam(String team) throws DaoException {
+    public List<Product> findProductsByType(String type) throws DaoException {
         List<Product> products = new ArrayList<>();
         try(Connection connection = CustomConnectionPool.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_FIND_PRODUCTS_BY_TEAM)) {
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_PRODUCTS_BY_TYPE)) {
+            statement.setString(1, type);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                products.add(createProductsFromResultSet(resultSet));
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while finding products", e);
+        }
+        return products;
+    }
+
+    @Override
+    public List<Product> findProductsByTeamAndType(String team, String type) throws DaoException {
+        List<Product> products = new ArrayList<>();
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_PRODUCTS_BY_TEAM_AND_TYPE)) {
             statement.setString(1, team);
+            statement.setString(2, type);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 products.add(createProductsFromResultSet(resultSet));

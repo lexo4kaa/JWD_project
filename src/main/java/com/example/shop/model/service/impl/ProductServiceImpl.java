@@ -15,6 +15,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class ProductServiceImpl implements ProductService {
+    public static final String ALL = "all";
+    public static final String PERCENT = "%";
     private final ProductDao productDao = ProductDaoImpl.getInstance();
     private static Logger logger = LogManager.getLogger();
 
@@ -31,12 +33,34 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findProductsByTeam(String team) throws ServiceException {
+    public List<Product> findProductsByType(String type) throws ServiceException {
         List<Product> products;
         try {
-            products = productDao.findProductsByTeam(team);
+            if(type.equals(ALL)) {
+                type = PERCENT;
+            }
+            products = productDao.findProductsByType(type);
         } catch (DaoException e) {
-            logger.error("productDao.findProductsByTeam(" + team + ") is failed in ProductServiceImpl", e);
+            logger.error("productDao.findProductsByType(" + type + ") is failed in ProductServiceImpl", e);
+            throw new ServiceException(e);
+        }
+        return products;
+    }
+
+    @Override
+    public List<Product> findProductsByTeamAndType(String team, String type) throws ServiceException {
+        List<Product> products;
+        try {
+            if(type.equals(ALL)) {
+                type = PERCENT;
+            }
+            if(team.equals(ALL)) {
+                products = productDao.findProductsByType(type);
+            } else {
+                products = productDao.findProductsByTeamAndType(team, type);
+            }
+        } catch (DaoException e) {
+            logger.error("findProductsByTeamAndType(" + team + ", " + type + ") is failed in ProductServiceImpl", e);
             throw new ServiceException(e);
         }
         return products;
