@@ -7,6 +7,8 @@ public class Order {
     private int userId;
     private double orderCost;
     private Date orderDate;
+    private String methodOfReceiving;
+    private String methodOfPayment;
 
     public int getOrderId() {
         return orderId;
@@ -40,6 +42,22 @@ public class Order {
         this.orderDate = orderDate;
     }
 
+    public String getMethodOfReceiving() {
+        return methodOfReceiving;
+    }
+
+    public void setMethodOfReceiving(String methodOfReceiving) {
+        this.methodOfReceiving = methodOfReceiving;
+    }
+
+    public String getMethodOfPayment() {
+        return methodOfPayment;
+    }
+
+    public void setMethodOfPayment(String methodOfPayment) {
+        this.methodOfPayment = methodOfPayment;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,7 +66,10 @@ public class Order {
         if (orderId != order.orderId) return false;
         if (userId != order.userId) return false;
         if (Double.compare(order.orderCost, orderCost) != 0) return false;
-        return orderDate != null ? orderDate.equals(order.orderDate) : order.orderDate == null;
+        if (orderDate != null ? !orderDate.equals(order.orderDate) : order.orderDate != null) return false;
+        if (methodOfReceiving != null ? !methodOfReceiving.equals(order.methodOfReceiving) : order.methodOfReceiving != null)
+            return false;
+        return methodOfPayment != null ? methodOfPayment.equals(order.methodOfPayment) : order.methodOfPayment == null;
     }
 
     @Override
@@ -59,6 +80,8 @@ public class Order {
         result = prime * result + orderId;
         result = prime * result + (int)orderCost;
         result = prime * result + (orderDate != null ? orderDate.hashCode() : 0);
+        result = prime * result + (methodOfReceiving != null ? methodOfReceiving.hashCode() : 0);
+        result = prime * result + (methodOfPayment != null ? methodOfPayment.hashCode() : 0);
         return result;
     }
 
@@ -69,6 +92,8 @@ public class Order {
         sb.append(", userId=").append(userId);
         sb.append(", orderCost=").append(orderCost);
         sb.append(", orderDate=").append(orderDate);
+        sb.append(", methodOfReceiving=").append(methodOfReceiving);
+        sb.append(", methodOfPayment=").append(methodOfPayment);
         sb.append('}');
         return sb.toString();
     }

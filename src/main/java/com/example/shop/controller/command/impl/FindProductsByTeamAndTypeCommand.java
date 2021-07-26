@@ -15,7 +15,6 @@ import java.util.List;
 
 public class FindProductsByTeamAndTypeCommand implements ActionCommand {
     private static final String PARAM_NAME_TEAM = "team";
-    private static final String ALL_TEAMS = "All";
     private static final ProductService productService = new ProductServiceImpl();
     private static Logger logger = LogManager.getLogger();
 

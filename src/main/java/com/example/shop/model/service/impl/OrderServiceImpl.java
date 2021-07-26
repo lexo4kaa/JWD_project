@@ -15,19 +15,22 @@ public class OrderServiceImpl implements OrderService {
     private static Logger logger = LogManager.getLogger();
 
     @Override
-    public void addOrder(Map<Integer, Integer> cart, String nickname) throws ServiceException {
+    public void addOrder(Map<Integer, Integer> cart, String nickname,
+                         String methodOfReceiving, String methodOfPayment) throws ServiceException {
         try {
-            orderDao.addOrder(cart, nickname);
-
+            orderDao.addOrder(cart, nickname, methodOfReceiving, methodOfPayment);
             int[] keys = cart.keySet().stream()
                             .mapToInt(Integer::intValue)
                             .toArray();
+            System.out.println(keys);
             for(int i = 0; i < cart.size(); i++) {
                 int productId = keys[i];
                 orderDao.addOrderHasProduct(cart, productId);
             }
+            System.out.println(3);
         } catch (DaoException e) {
-            logger.error("orderDao.addOrder(" + cart + "," + nickname + ") is failed in OrderServiceImpl", e);
+            logger.error("orderDao.addOrder(" + cart + "," + nickname + "," +
+                        methodOfReceiving + "," + methodOfPayment + ") is failed in OrderServiceImpl", e);
             throw new ServiceException(e);
         }
     }

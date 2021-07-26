@@ -24,8 +24,10 @@ public class OrderDaoImpl implements OrderDao {
     private final UserDao userDao = UserDaoImpl.getInstance();
     private final ProductDao productDao = ProductDaoImpl.getInstance();
 
-    private static final String SQL_FIND_ALL_ORDERS = "SELECT order_id,ref_user_id,order_cost,order_date FROM orders";
-    private static final String SQL_ADD_ORDER = "INSERT INTO orders (ref_user_id,order_cost) VALUES (?,?)";
+    private static final String SQL_FIND_ALL_ORDERS = "SELECT order_id,ref_user_id,order_cost,order_date," +
+                                                      "method_of_receiving,method_of_payment FROM orders";
+    private static final String SQL_ADD_ORDER = "INSERT INTO orders (ref_user_id,order_cost," +
+                                                "method_of_receiving,method_of_payment) VALUES (?,?,?,?)";
     private static final String SQL_ADD_ORDER_HAS_PRODUCT = "INSERT INTO order_has_product (ref_order_id," +
                                                             "ref_product_id,quantity) VALUES (?,?,?)";
 
@@ -49,12 +51,15 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public void addOrder(Map<Integer, Integer> cart, String nickname) throws DaoException {
+    public void addOrder(Map<Integer, Integer> cart, String nickname,
+                         String methodOfReceiving, String methodOfPayment) throws DaoException {
         try(Connection connection = CustomConnectionPool.getInstance().getConnection();
             PreparedStatement statement = connection.prepareStatement(SQL_ADD_ORDER)) {
             int userId = userDao.findUserByNickname(nickname).getUserId();
             statement.setInt(1, userId);
             statement.setDouble(2, totalCost(cart));
+            statement.setString(3, methodOfReceiving);
+            statement.setString(4, methodOfPayment);
             statement.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while adding order", e);
@@ -93,10 +98,14 @@ public class OrderDaoImpl implements OrderDao {
         int user_id = resultSet.getInt(USER_ID);
         double cost = resultSet.getDouble(COST);
         Date date = resultSet.getDate(ORDER_DATE);
+        String methodOfReceiving = resultSet.getString(METHOD_OF_RECEIVING);
+        String methodOfPayment = resultSet.getString(METHOD_OF_PAYMENT);
         order.setOrderId(orderId);
         order.setUserId(user_id);
         order.setOrderCost(cost);
         order.setOrderDate(date);
+        order.setMethodOfReceiving(methodOfReceiving);
+        order.setMethodOfPayment(methodOfPayment);
         return order;
     }
 }

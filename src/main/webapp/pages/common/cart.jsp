@@ -65,10 +65,28 @@
             <hr>
         </c:forEach>
 
-        <h4><fmt:message key="label.total_cost"/> ${total_cost}<fmt:message key="label.currency"/></h4>
-        <form style="float: right" name="addOrder" method="POST" action="controller">
+        <h3><fmt:message key="label.total_cost"/> ${total_cost}<fmt:message key="label.currency"/></h3>
+        <br>
+
+        <form name="addOrder" method="POST" action="controller">
+            <div style="float:left; width: 500px">
+                <h4>Select method of receiving</h4>
+                <select style="float: left" name="methodOfReceiving">
+                    <option value="self-delivery" selected><fmt:message key="label.self_delivery"/></option>
+                    <option value="delivery"><fmt:message key="label.delivery"/></option>
+                </select>
+            </div>
+            <div style="float:left; width: 500px">
+                <h4>Select method of payment</h4>
+                <select style="float: left" name="methodOfPayment">
+                    <option value="cash" selected><fmt:message key="label.cash"/></option>
+                    <option value="card"><fmt:message key="label.card"/></option>
+                </select>
+            </div>
+            <br style="clear:both">
             <input type="hidden" name="command" value="add_order"/>
-            <input type="submit" value="<fmt:message key="label.buy"/>"/>
+                <input style="font-size:large;background:dodgerblue;color:whitesmoke;margin:10px;padding:5px 10px;
+                        border:none;border-radius:3px;cursor:pointer" type="submit" value="<fmt:message key="label.buy"/>"/>
         </form>
     </c:if>
 </ul>
