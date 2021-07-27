@@ -1,12 +1,12 @@
 package com.example.shop.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Order {
     private int orderId;
     private int userId;
     private double orderCost;
-    private Date orderDate;
+    private LocalDateTime orderDate;
     private String methodOfReceiving;
     private String methodOfPayment;
 
@@ -34,11 +34,11 @@ public class Order {
         this.orderCost = orderCost;
     }
 
-    public Date getOrderDate() {
+    public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
 

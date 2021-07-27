@@ -23,7 +23,7 @@
             <label><fmt:message key="label.new_password"/></label>
             <input type="password" id="password" name="password" value="" required
                    pattern="^[\w]{6,18}$" title="<fmt:message key="label.password_prompt"/>"/>
-            <label><fmt:message key="label.password_repeat"/></label>
+            <label><fmt:message key="label.new_password_repeat"/></label>
             <input type="password" id="password2" name="password2" value="" required
                    pattern="^[\w]{6,18}$" title="<fmt:message key="label.password_prompt"/>"/>
             <br>

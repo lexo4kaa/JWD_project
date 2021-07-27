@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +31,11 @@ public class OrderDaoImpl implements OrderDao {
                                                 "method_of_receiving,method_of_payment) VALUES (?,?,?,?)";
     private static final String SQL_ADD_ORDER_HAS_PRODUCT = "INSERT INTO order_has_product (ref_order_id," +
                                                             "ref_product_id,quantity) VALUES (?,?,?)";
+    private static final String SQL_FIND_ORDERS_BY_NICKNAME = "SELECT order_id,ref_user_id,order_cost,order_date," +
+                                                              "method_of_receiving,method_of_payment FROM orders AS o" +
+                                                              " JOIN users AS u ON u.user_id = o.ref_user_id" +
+                                                              " WHERE user_nickname = ?";
+
 
     public static OrderDao getInstance(){
         return instance;
@@ -80,6 +86,22 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
 
+    @Override
+    public List<Order> findOrdersByNickname(String nickname) throws DaoException {
+        List<Order> orders = new ArrayList<>();
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_ORDERS_BY_NICKNAME)) {
+            statement.setString(1, nickname);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                orders.add(createOrdersFromResultSet(resultSet));
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while finding orders", e);
+        }
+        return orders;
+    }
+
     private double totalCost(Map<Integer, Integer> cart) throws DaoException {
         int cost = 0;
         int[] keys = cart.keySet().stream()
@@ -97,7 +119,7 @@ public class OrderDaoImpl implements OrderDao {
         int orderId = resultSet.getInt(ORDER_ID);
         int user_id = resultSet.getInt(USER_ID);
         double cost = resultSet.getDouble(COST);
-        Date date = resultSet.getDate(ORDER_DATE);
+        LocalDateTime date = resultSet.getObject(ORDER_DATE, LocalDateTime.class);
         String methodOfReceiving = resultSet.getString(METHOD_OF_RECEIVING);
         String methodOfPayment = resultSet.getString(METHOD_OF_PAYMENT);
         order.setOrderId(orderId);

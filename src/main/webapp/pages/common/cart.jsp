@@ -85,7 +85,7 @@
             </div>
             <br style="clear:both">
             <input type="hidden" name="command" value="add_order"/>
-                <input style="font-size:large;background:dodgerblue;color:whitesmoke;margin:10px;padding:5px 10px;
+            <input style="font-size:large;background:dodgerblue;color:whitesmoke;margin:10px;padding:5px 10px;
                         border:none;border-radius:3px;cursor:pointer" type="submit" value="<fmt:message key="label.buy"/>"/>
         </form>
     </c:if>

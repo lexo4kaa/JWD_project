@@ -58,6 +58,11 @@ public enum CommandType {
             this.command = new FindAllUsersCommand();
         }
     },
+    FIND_ORDERS_BY_NICKNAME {
+        {
+            this.command = new FindOrdersByNicknameCommand();
+        }
+    },
     ADD_ORDER {
         {
             this.command = new AddOrderCommand();
