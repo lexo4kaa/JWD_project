@@ -13,29 +13,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class FindProductsByTeamCommand implements ActionCommand {
-    private static final String PARAM_NAME_TEAM = "team";
-    private static final String ALL_TEAMS = "All";
+public class FindAllProductsCommand implements ActionCommand {
     private static final ProductService productService = new ProductServiceImpl();
     private static Logger logger = LogManager.getLogger();
 
     @Override
     public String execute(HttpServletRequest request) {
         String page;
-        HttpSession session = request.getSession();;
+        HttpSession session = request.getSession();
         List<Product> products;
-        String team = request.getParameter(PARAM_NAME_TEAM);
         try {
-            if(team.equals(ALL_TEAMS)) {
-                products = productService.findAllProducts();
-            }
-            else {
-                products = productService.findProductsByTeam(team);
-            }
+            session.setAttribute("typeOfProducts", "all");
+            products = productService.findAllProducts();
             session.setAttribute("products", products);
             page = ConfigurationManager.getProperty("path.page.products");
         } catch (ServiceException e) {
-            logger.error("Exception in function 'findProductsProductsByTeam', redirected to error page");
+            logger.error("Exception in function 'findProductsProductsByType', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
         }
         return page;

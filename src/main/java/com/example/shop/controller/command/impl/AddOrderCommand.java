@@ -26,7 +26,9 @@ public class AddOrderCommand implements ActionCommand {
         try {
             if(cart.size() != 0) {
                 if(user_role != "guest") {
-                    orderService.addOrder(cart, nickname);
+                    String methodOfReceiving = request.getParameter("methodOfReceiving");
+                    String methodOfPayment = request.getParameter("methodOfPayment");
+                    orderService.addOrder(cart, nickname, methodOfReceiving, methodOfPayment);
                     session.setAttribute("cartProducts", null);
                     session.setAttribute("cart", new HashMap<Integer, Integer>());
                     session.setAttribute("cart_size", 0);

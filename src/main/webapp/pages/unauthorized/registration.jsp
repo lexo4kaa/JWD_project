@@ -11,7 +11,7 @@
 <body>
 <jsp:include page="../common/header.jsp"/>
 
-<form class="registrationForm" name="registrationForm" method="POST" action="controller">
+<form class="registrationForm" name="registrationForm" id="form" method="POST" action="controller">
     <input type="hidden" name="command" value="registration" />
 
     <div class="form_reg_block">
@@ -46,6 +46,7 @@
             ${nullPage}
             ${registrationError}
             <br>
+            <input type="hidden" id="locale" name="locale" value="${ currentLocale }" />
             <input class="form_reg_button" type="submit" value="<fmt:message key="label.registration_button"/>"/>
             <br>
         </div>

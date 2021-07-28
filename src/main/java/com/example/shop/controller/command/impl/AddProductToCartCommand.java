@@ -27,7 +27,8 @@ public class AddProductToCartCommand implements ActionCommand {
             Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
             String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
             int productId = Integer.parseInt(stringProductId);
-            productService.addProductToCart(cart, productId);
+            cart = productService.addProductToCart(cart, productId);
+            session.setAttribute("cart", cart);
             session.setAttribute("cartProducts", productService.findProductsByIds(cart.keySet()));
             Product product = productService.findProductsByIds(Set.of(productId)).get(0);
             double cost = (double) session.getAttribute("total_cost");

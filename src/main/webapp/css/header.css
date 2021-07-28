@@ -1,8 +1,8 @@
 .header {
-    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-    font-size: 14px;
+    font-size: medium;
     text-align: center;
     padding: 15px 15px;
+    background: whitesmoke;
 }
 
 .header form {
@@ -11,7 +11,12 @@
 }
 
 .header form input {
-    background: dodgerblue;
-    color: white;
+    background: whitesmoke;
+    color: dodgerblue;
+    border: none;
     font-size: large;
+}
+
+.header form input:hover {
+    cursor: pointer;
 }

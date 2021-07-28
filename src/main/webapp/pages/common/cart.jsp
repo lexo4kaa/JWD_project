@@ -20,38 +20,45 @@
     </c:if>
     <c:if test="${cart_size != 0}">
         <hr>
-        <c:forEach var="elem" items="${cartProducts}" varStatus="status">
+        <c:forEach var="prod" items="${cartProducts}" varStatus="status">
             <li class="product-wrapper">
                 <div class="product">
                     <div class="product-photo">
-                        <img src="${pageContext.request.contextPath}${elem.path}" alt="Oops">
+                        <img src="${pageContext.request.contextPath}${prod.path}" alt="Oops">
                     </div>
                 </div>
                 <div class="description">
-                    <c:out value="${ elem.team }" />
-                    <c:out value="${ elem.type }" />
-                    <c:out value="${ elem.year }" />
+                    <c:out value="${ prod.team }" />
+                    <c:out value="${ prod.type }" />
+                    <c:out value="${ prod.year }" />
                 </div>
-                <div style="color: red">
-                    <c:out value="${ elem.price }$" />
+                <div style="color: blue">
+                    <c:out value="${ prod.price }$" />
                 </div>
-                <form style="float: left; margin-left: 37.5%" name="addProduct" method="POST" action="controller">
+                <form style="float: left; margin-left: 400px; margin-top: -30px" name="addProduct" method="POST" action="controller">
                     <input type="hidden" name="command" value="add_product_to_cart"/>
-                    <input type="hidden" name="product_id" value="${ elem.productId }">
+                    <input type="hidden" name="product_id" value="${ prod.productId }">
                     <input type="submit" value="+"/>
                 </form>
-                <div style="float: left; text-align: center; width: 20px">
-                    <c:set var="containsKey" value="${ sessionScope.cart.containsKey(elem.productId) }"/>
-                    <c:if test="${ containsKey }">
-                        <c:out value="${ sessionScope.cart.get(elem.productId) }"/>
-                    </c:if>
-                    <c:if test="${ !containsKey }">
-                        <c:out value="0"/>
-                    </c:if>
-                </div>
-                <form style="float: left" name="deleteProduct" method="POST" action="controller">
+
+                <c:set var="containsKey" value="${ cart.containsKey(prod.productId) }"/>
+                <c:if test="${ containsKey }">
+                    <c:set var="quantity" value="${ cart.get(prod.productId) }"/>
+                </c:if>
+                <c:if test="${ !containsKey }">
+                    <c:set var="quantity" value="0"/>
+                </c:if>
+
+                <form style="float: left; margin-top: -30px" name="changeQuantity" id="changeQuantity" method="POST" action="controller">
+                    <input type="hidden" name="command" value="change_quantity_of_product_in_cart"/>
+                    <input type="hidden" name="product_id" value="${ prod.productId }">
+                    <input style="width: 40px" type="number" name="new_quantity"
+                           value="${ quantity }" min="0" max="99" onblur="checkQuantity(this)"/>
+                </form>
+
+                <form style="float: left; margin-top: -30px" name="deleteProduct" method="POST" action="controller">
                     <input type="hidden" name="command" value="delete_product_from_cart"/>
-                    <input type="hidden" name="product_id" value="${ elem.productId }">
+                    <input type="hidden" name="product_id" value="${ prod.productId }">
                     <input type="submit" value="-"/>
                 </form>
             </li>
@@ -59,13 +66,32 @@
             <hr>
         </c:forEach>
 
-        <h4><fmt:message key="label.total_cost"/> ${total_cost}<fmt:message key="label.currency"/></h4>
-        <form style="float: right" name="addOrder" method="POST" action="controller">
+        <h3><fmt:message key="label.total_cost"/> ${total_cost}<fmt:message key="label.currency"/></h3>
+        <br>
+
+        <form name="addOrder" method="POST" action="controller">
+            <div style="float:left; width: 500px">
+                <h4>Select method of receiving</h4>
+                <select style="float: left" name="methodOfReceiving">
+                    <option value="self-delivery" selected><fmt:message key="label.self_delivery"/></option>
+                    <option value="delivery"><fmt:message key="label.delivery"/></option>
+                </select>
+            </div>
+            <div style="float:left; width: 500px">
+                <h4>Select method of payment</h4>
+                <select style="float: left" name="methodOfPayment">
+                    <option value="cash" selected><fmt:message key="label.cash"/></option>
+                    <option value="card"><fmt:message key="label.card"/></option>
+                </select>
+            </div>
+            <br style="clear:both">
             <input type="hidden" name="command" value="add_order"/>
-            <input type="submit" value="<fmt:message key="label.buy"/>"/>
+            <input style="font-size:large;background:dodgerblue;color:whitesmoke;margin:10px;padding:5px 10px;cursor:pointer;
+                        border:none;border-radius:3px;" type="submit" value="<fmt:message key="label.buy"/>"/>
         </form>
     </c:if>
 </ul>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/checkQuantity.js"></script>
 
 <br style="clear:both">
 <hr>

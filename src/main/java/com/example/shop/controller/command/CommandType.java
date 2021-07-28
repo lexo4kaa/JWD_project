@@ -23,14 +23,24 @@ public enum CommandType {
             this.command = new DeleteUserCommand();
         }
     },
-    FIND_PRODUCTS_BY_TEAM {
+    FIND_PRODUCTS_BY_TEAM_AND_TYPE {
         {
-            this.command = new FindProductsByTeamCommand();
+            this.command = new FindProductsByTeamAndTypeCommand();
+        }
+    },
+    FIND_PRODUCTS_BY_TYPE {
+        {
+            this.command = new FindProductsByTypeCommand();
         }
     },
     FIND_PRODUCTS_BY_IDS {
         {
             this.command = new FindProductsByIdsCommand();
+        }
+    },
+    FIND_ALL_PRODUCTS {
+        {
+            this.command = new FindAllProductsCommand();
         }
     },
     FIND_USERS_BY_NICKNAME {
@@ -48,6 +58,11 @@ public enum CommandType {
             this.command = new FindAllUsersCommand();
         }
     },
+    FIND_ORDERS_BY_NICKNAME {
+        {
+            this.command = new FindOrdersByNicknameCommand();
+        }
+    },
     ADD_ORDER {
         {
             this.command = new AddOrderCommand();
@@ -61,6 +76,11 @@ public enum CommandType {
     DELETE_PRODUCT_FROM_CART {
         {
             this.command = new DeleteProductFromCartCommand();
+        }
+    },
+    CHANGE_QUANTITY_OF_PRODUCT_IN_CART {
+        {
+            this.command = new ChangeQuantityOfProductInCartCommand();
         }
     },
     ADD_USER_TO_BLACKLIST {
