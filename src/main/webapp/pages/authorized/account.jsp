@@ -59,6 +59,5 @@
            value="<fmt:message key="label.want_to_see_orders"/>"/>
 </form>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/validatePassword.js"></script>
 </body>
 </html>

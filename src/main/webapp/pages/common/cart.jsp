@@ -32,30 +32,31 @@
                     <c:out value="${ prod.type }" />
                     <c:out value="${ prod.year }" />
                 </div>
-                <div style="color: red">
+                <div style="color: blue">
                     <c:out value="${ prod.price }$" />
                 </div>
-                <form style="float: left; margin-left: 35%" name="addProduct" method="POST" action="controller">
+                <form style="float: left; margin-left: 400px; margin-top: -30px" name="addProduct" method="POST" action="controller">
                     <input type="hidden" name="command" value="add_product_to_cart"/>
                     <input type="hidden" name="product_id" value="${ prod.productId }">
                     <input type="submit" value="+"/>
                 </form>
 
-                <c:set var="containsKey" value="${ sessionScope.cart.containsKey(prod.productId) }"/>
+                <c:set var="containsKey" value="${ cart.containsKey(prod.productId) }"/>
                 <c:if test="${ containsKey }">
-                    <c:set var="quantity" value="${ sessionScope.cart.get(prod.productId) }"/>
+                    <c:set var="quantity" value="${ cart.get(prod.productId) }"/>
                 </c:if>
                 <c:if test="${ !containsKey }">
                     <c:set var="quantity" value="0"/>
                 </c:if>
-                <form style="float: left" name="changeQuantity" id="changeQuantity" method="POST" action="controller">
+
+                <form style="float: left; margin-top: -30px" name="changeQuantity" id="changeQuantity" method="POST" action="controller">
                     <input type="hidden" name="command" value="change_quantity_of_product_in_cart"/>
                     <input type="hidden" name="product_id" value="${ prod.productId }">
                     <input style="width: 40px" type="number" name="new_quantity"
-                           value="${ quantity }" min="0" max="99" onblur="submit()"/>
+                           value="${ quantity }" min="0" max="99" onblur="checkQuantity(this)"/>
                 </form>
 
-                <form style="float: left" name="deleteProduct" method="POST" action="controller">
+                <form style="float: left; margin-top: -30px" name="deleteProduct" method="POST" action="controller">
                     <input type="hidden" name="command" value="delete_product_from_cart"/>
                     <input type="hidden" name="product_id" value="${ prod.productId }">
                     <input type="submit" value="-"/>
@@ -85,11 +86,12 @@
             </div>
             <br style="clear:both">
             <input type="hidden" name="command" value="add_order"/>
-            <input style="font-size:large;background:dodgerblue;color:whitesmoke;margin:10px;padding:5px 10px;
-                        border:none;border-radius:3px;cursor:pointer" type="submit" value="<fmt:message key="label.buy"/>"/>
+            <input style="font-size:large;background:dodgerblue;color:whitesmoke;margin:10px;padding:5px 10px;cursor:pointer;
+                        border:none;border-radius:3px;" type="submit" value="<fmt:message key="label.buy"/>"/>
         </form>
     </c:if>
 </ul>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/checkQuantity.js"></script>
 
 <br style="clear:both">
 <hr>

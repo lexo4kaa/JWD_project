@@ -106,7 +106,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Map<Integer, Integer> changeQuantityOfProductInCart(Map<Integer, Integer> cart, int productId, int newQuantity) {
-        if(newQuantity > 1) {
+        if(newQuantity > 0) {
             cart.put(productId, newQuantity);
         }
         else {

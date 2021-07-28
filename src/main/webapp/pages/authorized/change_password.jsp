@@ -12,7 +12,7 @@
 <jsp:include page="../common/header.jsp"/>
 <body>
 
-<form name="changePassword" method="POST" action="controller">
+<form name="changePassword" id="form" method="POST" action="controller">
     <input type="hidden" name="command" value="change_password" />
     <div class="form_reg_block">
         <div class="form_reg_block_content">
@@ -29,8 +29,9 @@
             <br>
             ${wrongAction}
             ${nullPage}
-            ${updaetError}
+            ${updateError}
             <br>
+            <input type="hidden" id="locale" name="locale" value="${ currentLocale }" />
             <input class="form_reg_button" type="submit" value="<fmt:message key="label.save"/>" name="submit"/>
             <br>
         </div>

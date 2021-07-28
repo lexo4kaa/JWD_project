@@ -12,7 +12,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 
-<form class="radio" name="findProductsByTeam" method="POST" action="controller">
+<form id="radio" class="radio" name="findProductsByTeam" method="POST" action="controller">
     <h3><fmt:message key="label.select_a_team"/></h3>
     <p><input type="radio" name="team" value="Atletico Madrid"><fmt:message key="label.atletico"/></p>
     <p><input type="radio" name="team" value="Barcelona"><fmt:message key="label.barcelona"/></p>
@@ -27,15 +27,17 @@
     <p><input type="radio" name="team" value="Real Madrid"><fmt:message key="label.realMadrid"/></p>
     <p><input type="radio" name="team" value="all"><fmt:message key="label.all"/></p>
 
+    <input type="hidden" id="locale" name="locale" value="${currentLocale}" />
     <input type="hidden" name="command" value="find_products_by_team_and_type" />
-    <input type="submit" value="<fmt:message key="label.find"/>" name="submit"/>
+    <input style="font-size:large;background:dodgerblue;color:whitesmoke;margin:10px;padding:5px 10px;cursor:pointer;
+                  border:none;border-radius:3px;" name="submit" type="submit" value="<fmt:message key="label.find"/>"/>
 </form>
 
 <ul class="products">
-    <c:if test="${sessionScope.products.size() == 0}">
-        <h3><fmt:message key="label.no_results"/></h3>
+    <c:if test="${products.size() == 0}">
+        <h3 style="margin: 20px"><fmt:message key="label.no_results"/></h3>
     </c:if>
-    <c:if test="${sessionScope.products.size() != 0}">
+    <c:if test="${products.size() != 0}">
         <c:forEach var="prod" items="${products}" varStatus="status">
         <li class="product-wrapper">
             <div class="product">
@@ -57,18 +59,19 @@
                 <input type="submit" value="+"/>
             </form>
 
-            <c:set var="containsKey" value="${ sessionScope.cart.containsKey(prod.productId) }"/>
+            <c:set var="containsKey" value="${ cart.containsKey(prod.productId) }"/>
             <c:if test="${ containsKey }">
-                <c:set var="quantity" value="${ sessionScope.cart.get(prod.productId) }"/>
+                <c:set var="quantity" value="${ cart.get(prod.productId) }"/>
             </c:if>
             <c:if test="${ !containsKey }">
                 <c:set var="quantity" value="0"/>
             </c:if>
+
             <form style="float: left" name="changeQuantity" id="changeQuantity" method="POST" action="controller">
                 <input type="hidden" name="command" value="change_quantity_of_product_in_cart"/>
                 <input type="hidden" name="product_id" value="${ prod.productId }">
                 <input style="width: 40px" type="number" name="new_quantity"
-                       value="${ quantity }" min="0" max="99" onblur="submit()"/>
+                       value="${ quantity }" min="0" max="99" onblur="checkQuantity(this)"/>
             </form>
 
             <form style="float: left" name="deleteProduct" method="POST" action="controller">
@@ -80,6 +83,7 @@
         </c:forEach>
     </c:if>
 </ul>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/checkQuantity.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/checkSelected.js"></script>
 </body>
 </html>
