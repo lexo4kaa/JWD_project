@@ -2,7 +2,7 @@ package com.example.shop.validator;
 
 public class UserValidator {
     private static final String LOGIN_REGEX = "^[\\w]{3,18}$";
-    private static final String EMAIL_REGEX = "^[\\w]{3,30}@gmail.com$";
+    private static final String EMAIL_REGEX = "^[\\w.]{3,30}@gmail.com$";
     private static final String PASSWORD_REGEX = "^[\\w]{6,18}$";
     private static final String PHONE_REGEX = "375(17|25|29|33|44)([1-9]{1})([0-9]{6})$";
 

@@ -71,14 +71,14 @@
 
         <form name="addOrder" method="POST" action="controller">
             <div style="float:left; width: 500px">
-                <h4>Select method of receiving</h4>
+                <h4><fmt:message key="label.select_method_of_receiving"/></h4>
                 <select style="float: left" name="methodOfReceiving">
                     <option value="self-delivery" selected><fmt:message key="label.self_delivery"/></option>
                     <option value="delivery"><fmt:message key="label.delivery"/></option>
                 </select>
             </div>
             <div style="float:left; width: 500px">
-                <h4>Select method of payment</h4>
+                <h4><fmt:message key="label.select_method_of_payment"/></h4>
                 <select style="float: left" name="methodOfPayment">
                     <option value="cash" selected><fmt:message key="label.cash"/></option>
                     <option value="card"><fmt:message key="label.card"/></option>

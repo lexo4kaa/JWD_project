@@ -9,6 +9,11 @@
 </head>
 <body>
 <div class="header">
+
+    <img style="float:left;width:60px;height:40px;margin-top: -10px" src="<%=request.getContextPath()%>/images/ball.jpg" alt="Oops">
+    <!--<span style="float:left;font-size:xx-large;color:blue;font-family:'Bradley Hand ITC';margin-top: -10px;margin-right: 10px; ">
+        FOOTBALL SHOP</span>
+-->
     <c:if test="${user_role == 'administrator'}">
         <form name="adminMainPage" method="POST" action="controller">
             <input type="hidden" name="command" value="to_admin_main_page"/>
@@ -40,21 +45,6 @@
         <input type="hidden" name="type" value="scarf">
         <input type="submit" value="<fmt:message key="label.scarf"/>"/>
     </form>
-
-    <form name="cartPage" method="POST" action="controller">
-        <input type="hidden" name="command" value="find_products_by_ids"/>
-        <input type="submit" value="<fmt:message key="label.cart"/>"/>
-    </form>
-
-    <c:if test="${cart_size > 99}">
-        <c:set var="width" value="30"></c:set>
-    </c:if>
-    <c:if test="${cart_size <= 99}">
-        <c:set var="width" value="20"></c:set>
-    </c:if>
-
-    <div style="border-radius: 10px; margin-left: -15px; margin-top: -10px; float: left;
-                color: white; background: dodgerblue; text-align: center; width: ${width}px; height: 20px">${cart_size}</div>
 
     <c:if test="${user_role != 'guest'}">
         <form style="float: right" name="logout" method="POST" action="controller">
@@ -89,16 +79,32 @@
 
     <form name="switchLocale" method="POST" action="controller">
         <input type="hidden" name="command" value="switch_locale"/>
-        <button type="submit" name="locale" value="ru_RU" style="margin: 0">
+        <button type="submit" name="locale" value="ru_RU" style="border:none;cursor:pointer;background:whitesmoke">
             <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f3/Flag_of_Russia.svg/1200px-Flag_of_Russia.svg.png"
                  alt="" style="height: 20px; width: 30px">
         </button>
-        <button type="submit" name="locale" value="en_US">
+        <button type="submit" name="locale" value="en_US" style="border:none;cursor:pointer;background:whitesmoke">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1280px-Flag_of_the_United_Kingdom.svg.png"
                  alt="" style="height: 20px; width: 30px">
         </button>
     </form>
-    <br/>
+
+    <c:if test="${cart_size > 99}">
+        <c:set var="width" value="30"></c:set>
+    </c:if>
+    <c:if test="${cart_size <= 99}">
+        <c:set var="width" value="20"></c:set>
+    </c:if>
+
+    <div style="border-radius:10px;margin-right:30px;margin-top:-10px;float:right;color:white;background:dodgerblue;
+                text-align: center; width: ${width}px; height: 20px">${cart_size}
+    </div>
+
+    <form style="float: right; margin-right: -10px" name="cartPage" method="POST" action="controller">
+        <input type="hidden" name="command" value="find_products_by_ids"/>
+        <input type="submit" value="<fmt:message key="label.cart"/>"/>
+    </form>
+    <br>
 </div>
 </body>
 </html>
