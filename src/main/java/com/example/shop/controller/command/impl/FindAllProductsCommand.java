@@ -1,6 +1,8 @@
 package com.example.shop.controller.command.impl;
 
 import com.example.shop.controller.command.ActionCommand;
+import com.example.shop.controller.command.Router;
+import com.example.shop.controller.command.Router.RouteType;
 import com.example.shop.entity.Product;
 import com.example.shop.model.service.ProductService;
 import com.example.shop.model.service.ServiceException;
@@ -18,7 +20,7 @@ public class FindAllProductsCommand implements ActionCommand {
     private static Logger logger = LogManager.getLogger();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
         List<Product> products;
@@ -31,6 +33,6 @@ public class FindAllProductsCommand implements ActionCommand {
             logger.error("Exception in function 'findProductsProductsByType', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
         }
-        return page;
+        return new Router(page, RouteType.REDIRECT);
     }
 }

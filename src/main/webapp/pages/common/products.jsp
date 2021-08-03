@@ -43,6 +43,7 @@
             <div class="product">
                 <div class="product-photo">
                     <img src="${pageContext.request.contextPath}${prod.path}" alt="Oops">
+                    <div class="specification">${prod.specification}</div>
                 </div>
             </div>
             <div>

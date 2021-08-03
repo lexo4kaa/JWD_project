@@ -1,6 +1,8 @@
 package com.example.shop.controller.command.impl;
 
 import com.example.shop.controller.command.ActionCommand;
+import com.example.shop.controller.command.Router;
+import com.example.shop.controller.command.Router.RouteType;
 import com.example.shop.resource.ConfigurationManager;
 import com.example.shop.resource.MessageManager;
 import com.example.shop.model.service.ServiceException;
@@ -21,7 +23,7 @@ public class RegistrationCommand implements ActionCommand {
     private static final UserServiceImpl userService = new UserServiceImpl();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         String user_role = (String) session.getAttribute("user_role");
         String page;
@@ -55,6 +57,6 @@ public class RegistrationCommand implements ActionCommand {
             request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction"));
             page = ConfigurationManager.getProperty("path.page.index");
         }
-        return page;
+        return new Router(page, RouteType.REDIRECT);
     }
 }

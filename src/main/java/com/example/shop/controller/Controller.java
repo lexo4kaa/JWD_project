@@ -1,9 +1,10 @@
 package com.example.shop.controller;
 import com.example.shop.controller.command.ActionCommand;
 import com.example.shop.controller.command.ActionFactory;
+import com.example.shop.controller.command.Router;
 import com.example.shop.resource.ConfigurationManager;
-import com.example.shop.resource.MessageManager;
-import com.example.shop.model.service.ServiceException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -16,24 +17,34 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
+    private static Logger logger = LogManager.getLogger();
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
+
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ActionCommand command = ActionFactory.defineCommand(request);
-        String page = command.execute(request);
+        Router router = command.execute(request);
+        String page = router.getPagePath();
         HttpSession session = request.getSession();
         session.setAttribute("currentPage", page); // fixme mb i set it in TO-pages
-        if (page != null) {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-            dispatcher.forward(request, response);
-        } else {
-            page = ConfigurationManager.getProperty("path.page.index");
-            request.getSession().setAttribute("nullPage", MessageManager.getProperty("message.nullpage"));
-            response.sendRedirect(request.getContextPath() + page);
+        switch (router.getRouteType()) {
+            case FORWARD:
+                RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+                dispatcher.forward(request, response);
+                break;
+            case REDIRECT:
+                response.sendRedirect(request.getContextPath() + page);
+                break;
+            default:
+                logger.error("incorrect route type " + router.getRouteType());
+                page = ConfigurationManager.getProperty("path.page.error");
+                response.sendRedirect(request.getContextPath() + page);
         }
     }
 }
