@@ -15,9 +15,11 @@
             <taglib-location>/WEB-INF/tld/taglib.tld</taglib-location>
         </taglib>
     </jsp-config>
-    <error-page>
+    <!-- todo mb delete this
+        <error-page>
         <error-code>404</error-code>
         <exception-type>java.lang.RuntimeException</exception-type>
         <location>/pages/error/error.jsp</location>
     </error-page>
+    -->
 </web-app>

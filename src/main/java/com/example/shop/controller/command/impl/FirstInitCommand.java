@@ -39,6 +39,6 @@ public class FirstInitCommand implements ActionCommand {
             request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction"));
             page = ConfigurationManager.getProperty("path.page.index");
         }
-        return new Router(page, RouteType.FORWARD);
+        return new Router(page, RouteType.REDIRECT);
     }
 }
