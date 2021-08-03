@@ -1,6 +1,8 @@
 package com.example.shop.controller.command.impl;
 
 import com.example.shop.controller.command.ActionCommand;
+import com.example.shop.controller.command.Router;
+import com.example.shop.controller.command.Router.RouteType;
 import com.example.shop.model.service.ServiceException;
 import com.example.shop.model.service.impl.UserServiceImpl;
 import com.example.shop.resource.ConfigurationManager;
@@ -15,7 +17,7 @@ public class FindUserByNicknameCommand implements ActionCommand {
     private static Logger logger = LogManager.getLogger();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
         String nickname = (String) session.getAttribute("nickname");
@@ -27,6 +29,6 @@ public class FindUserByNicknameCommand implements ActionCommand {
             logger.error("Exception in userService.findUserByNickname(" + nickname + "), redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
         }
-        return page;
+        return new Router(page, RouteType.REDIRECT);
     }
 }

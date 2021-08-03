@@ -1,6 +1,8 @@
 package com.example.shop.controller.command.impl;
 
 import com.example.shop.controller.command.ActionCommand;
+import com.example.shop.controller.command.Router;
+import com.example.shop.controller.command.Router.RouteType;
 import com.example.shop.model.service.ServiceException;
 import com.example.shop.model.service.impl.OrderServiceImpl;
 import com.example.shop.resource.ConfigurationManager;
@@ -17,7 +19,7 @@ public class AddOrderCommand implements ActionCommand {
     private static Logger logger = LogManager.getLogger();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
         Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
@@ -44,6 +46,6 @@ public class AddOrderCommand implements ActionCommand {
             logger.error("Exception in function 'addOrder', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
         }
-        return page;
+        return new Router(page, RouteType.REDIRECT);
     }
 }

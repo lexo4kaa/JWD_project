@@ -13,7 +13,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class CustomConnectionPool {
+    public class CustomConnectionPool {
     private static final Logger logger = LogManager.getLogger();
     private static final int DEFAULT_POOL_SIZE = 8;
     private static CustomConnectionPool instance;
@@ -72,7 +72,7 @@ public class CustomConnectionPool {
         if (connection instanceof ProxyConnection && givenAwayConnections.remove(connection)) {
             freeConnections.offer(connection);
         } else {
-            logger.error(connection + " does not belong to the pool");
+            logger.error("connection does not belong to the pool");
         }
     }
 

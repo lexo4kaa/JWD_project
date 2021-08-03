@@ -10,10 +10,16 @@
 <body>
 <div class="header">
 
-    <img style="float:left;width:60px;height:40px;margin-top: -10px" src="<%=request.getContextPath()%>/images/ball.jpg" alt="Oops">
-    <!--<span style="float:left;font-size:xx-large;color:blue;font-family:'Bradley Hand ITC';margin-top: -10px;margin-right: 10px; ">
-        FOOTBALL SHOP</span>
--->
+    <!-- <img style="float:left;width:60px;height:40px;margin-top: -10px" src="<%=request.getContextPath()%>/images/ball.jpg" alt="Oops"> -->
+    <!-- <span style="float:left;font-size:xx-large;color:blue;font-family:'Bradley Hand ITC';
+                margin-top: -10px;margin-right: 10px">FOOTBALL SHOP</span> -->
+
+    <form name="allProducts" method="POST" action="controller">
+        <input type="hidden" name="command" value="find_all_products"/>
+        <input style="float:left;font-size:xx-large;color:blue;font-family:'Bradley Hand ITC';
+                      margin-top: -10px;margin-right: 10px" type="submit" value="<fmt:message key="label.football_shop"/>"/>
+    </form> <!-- todo куда переводить при нажатии -->
+
     <c:if test="${user_role == 'administrator'}">
         <form name="adminMainPage" method="POST" action="controller">
             <input type="hidden" name="command" value="to_admin_main_page"/>

@@ -1,6 +1,8 @@
 package com.example.shop.controller.command.impl;
 
 import com.example.shop.controller.command.ActionCommand;
+import com.example.shop.controller.command.Router;
+import com.example.shop.controller.command.Router.RouteType;
 import com.example.shop.entity.User;
 import com.example.shop.model.service.ServiceException;
 import com.example.shop.model.service.impl.UserServiceImpl;
@@ -17,7 +19,7 @@ public class FindAllUsersCommand implements ActionCommand {
     private static Logger logger = LogManager.getLogger();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
         try {
@@ -30,6 +32,6 @@ public class FindAllUsersCommand implements ActionCommand {
             logger.error("Exception in userService.findAllUsers(), redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
         }
-        return page;
+        return new Router(page, RouteType.REDIRECT);
     }
 }
