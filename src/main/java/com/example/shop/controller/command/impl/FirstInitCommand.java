@@ -34,7 +34,6 @@ public class FirstInitCommand implements ActionCommand {
             List<User> users = userService.findAllUsers();
             session.setAttribute("users", users);
             session.setAttribute("users_size", users.size());
-            session.setAttribute("currentPage", "path.page.products");
             page = ConfigurationManager.getProperty("path.page.products");
         } catch (ServiceException e) {
             request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction"));

@@ -7,12 +7,12 @@
 <html>
 <head>
     <title><fmt:message key="label.products"/></title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/products.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/products.css"/>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
 
-<form id="radio" class="radio" name="findProductsByTeam" method="POST" action="controller">
+<form id="radio" class="radio" name="findProductsByTeam" method="POST" action="${pageContext.request.contextPath}/controller">
     <h3><fmt:message key="label.select_a_team"/></h3>
     <p><input type="radio" name="team" value="Atletico Madrid"><fmt:message key="label.atletico"/></p>
     <p><input type="radio" name="team" value="Barcelona"><fmt:message key="label.barcelona"/></p>
@@ -54,7 +54,7 @@
             <div style="color: blue">
                 <c:out value="${ prod.price }$" />
             </div>
-            <form style="float: left; margin-left: 35%" name="addProduct" method="POST" action="controller">
+            <form style="float: left; margin-left: 35%" name="addProduct" method="POST" action="${pageContext.request.contextPath}/controller">
                 <input type="hidden" name="command" value="add_product_to_cart"/>
                 <input type="hidden" name="product_id" value="${ prod.productId }">
                 <input type="submit" value="+"/>
@@ -68,14 +68,14 @@
                 <c:set var="quantity" value="0"/>
             </c:if>
 
-            <form style="float: left" name="changeQuantity" id="changeQuantity" method="POST" action="controller">
+            <form style="float: left" name="changeQuantity" id="changeQuantity" method="POST" action="${pageContext.request.contextPath}/controller">
                 <input type="hidden" name="command" value="change_quantity_of_product_in_cart"/>
                 <input type="hidden" name="product_id" value="${ prod.productId }">
                 <input style="width: 40px" type="number" name="new_quantity"
                        value="${ quantity }" min="0" max="99" onblur="checkQuantity(this)"/>
             </form>
 
-            <form style="float: left" name="deleteProduct" method="POST" action="controller">
+            <form style="float: left" name="deleteProduct" method="POST" action="${pageContext.request.contextPath}/controller">
                 <input type="hidden" name="command" value="delete_product_from_cart"/>
                 <input type="hidden" name="product_id" value="${ prod.productId }">
                 <input type="submit" value="-"/>

@@ -11,8 +11,6 @@ import javax.servlet.http.HttpSession;
 public class ToLoginPageCommand implements ActionCommand {
     @Override
     public Router execute(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        session.setAttribute("currentPage", "path.page.login");
         String page = ConfigurationManager.getProperty("path.page.login");
         return new Router(page, RouteType.FORWARD);
     }

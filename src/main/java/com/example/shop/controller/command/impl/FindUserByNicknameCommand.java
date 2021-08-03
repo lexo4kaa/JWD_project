@@ -23,7 +23,6 @@ public class FindUserByNicknameCommand implements ActionCommand {
         String nickname = (String) session.getAttribute("nickname");
         try {
             session.setAttribute("profile", userService.findUserByNickname(nickname));
-            session.setAttribute("currentPage", "path.page.account");
             page = ConfigurationManager.getProperty("path.page.account");
         } catch (ServiceException e) {
             logger.error("Exception in userService.findUserByNickname(" + nickname + "), redirected to error page");

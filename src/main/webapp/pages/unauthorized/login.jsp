@@ -6,7 +6,7 @@
 <html>
 <head>
     <title><fmt:message key="label.login_title"/></title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css"/>
 </head>
 <body>
 <jsp:include page="../common/header.jsp"/>
@@ -14,7 +14,7 @@
 <div class="form_auth_block">
     <div class="form_auth_block_content">
         <br>
-        <form name="loginForm" method="POST" action="controller">
+        <form name="loginForm" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="login"/>
             <label><fmt:message key="label.login_input"/></label>
             <input type="text" name="login" value="">
@@ -31,7 +31,7 @@
             <input class="form_login" type="submit" value="<fmt:message key="label.login_button"/>"/>
             <br>
         </form>
-        <form name="toRegistration" method="POST" action="controller">
+        <form name="toRegistration" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="to_registration_page"/>
             <input class="form_no_account" type="submit" value="<fmt:message key="label.no_account"/>"/>
         </form>

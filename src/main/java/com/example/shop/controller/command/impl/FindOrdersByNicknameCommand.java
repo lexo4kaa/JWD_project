@@ -27,7 +27,6 @@ public class FindOrdersByNicknameCommand implements ActionCommand {
             List<Order> orders = orderService.findOrdersByNickname(nickname);
             session.setAttribute("orders", orders);
             session.setAttribute("orders_size", orders.size());
-            session.setAttribute("currentPage", "path.page.orders_info");
             page = ConfigurationManager.getProperty("path.page.orders_info");
         } catch (ServiceException e) {
             logger.error("Exception in orderService.findOrdersByNickname(" + nickname + "), redirected to error page");

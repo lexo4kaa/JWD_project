@@ -29,7 +29,6 @@ public class FindProductsByIdsCommand implements ActionCommand {
         try {
             products = productService.findProductsByIds(cart.keySet());
             session.setAttribute("cartProducts", products);
-            session.setAttribute("currentPage", "path.page.cart");
             page = ConfigurationManager.getProperty("path.page.cart");
         } catch (ServiceException e) {
             logger.error("Exception in function 'findProductsByIds', redirected to error page");

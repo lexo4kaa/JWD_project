@@ -11,8 +11,6 @@ import javax.servlet.http.HttpSession;
 public class ToChangePasswordPage implements ActionCommand {
     @Override
     public Router execute(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        session.setAttribute("currentPage", "path.page.change_password");
         String page = ConfigurationManager.getProperty("path.page.change_password");
         return new Router(page, RouteType.FORWARD);
     }

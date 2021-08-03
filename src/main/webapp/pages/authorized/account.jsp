@@ -7,12 +7,12 @@
 <html>
 <head>
     <title><fmt:message key="label.account"/></title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/registration.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/registration.css"/>
 </head>
 <jsp:include page="../common/header.jsp"/>
 <body>
 
-<form name="updateAccount" method="POST" action="controller">
+<form name="updateAccount" method="POST" action="${pageContext.request.contextPath}/controller">
     <input type="hidden" name="command" value="update_account" />
 
     <div class="form_reg_block">
@@ -47,13 +47,13 @@
     </div>
 </form>
 
-<form name="changePasswordPage" method="POST" action="controller">
+<form name="changePasswordPage" method="POST" action="${pageContext.request.contextPath}/controller">
     <input type="hidden" name="command" value="to_change_password_page"/>
     <input style="margin: auto; display:flex; font-size: medium; height: 40px; color: blue" type="submit"
            value="<fmt:message key="label.want_to_change_password"/>"/>
 </form>
 
-<form name="myOrdersPage" method="POST" action="controller">
+<form name="myOrdersPage" method="POST" action="${pageContext.request.contextPath}/controller">
     <input type="hidden" name="command" value="find_orders_by_nickname"/>
     <input style="margin: auto; display:flex; font-size: medium; height: 40px; color: blue" type="submit"
            value="<fmt:message key="label.want_to_see_orders"/>"/>

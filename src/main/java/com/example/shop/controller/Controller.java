@@ -32,7 +32,7 @@ public class Controller extends HttpServlet {
         Router router = command.execute(request);
         String page = router.getPagePath();
         HttpSession session = request.getSession();
-        session.setAttribute("currentPage", page); // fixme mb i set it in TO-pages
+        session.setAttribute("currentPage", page);
         switch (router.getRouteType()) {
             case FORWARD:
                 RequestDispatcher dispatcher = request.getRequestDispatcher(page);

@@ -6,12 +6,12 @@
 <html>
 <head>
     <title><fmt:message key="label.registration"/></title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/registration.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/registration.css"/>
 </head>
 <body>
 <jsp:include page="../common/header.jsp"/>
 
-<form class="registrationForm" name="registrationForm" id="form" method="POST" action="controller">
+<form class="registrationForm" name="registrationForm" id="form" method="POST" action="${pageContext.request.contextPath}/controller">
     <input type="hidden" name="command" value="registration" />
 
     <div class="form_reg_block">
