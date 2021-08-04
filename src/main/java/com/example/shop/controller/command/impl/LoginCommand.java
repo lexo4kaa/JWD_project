@@ -10,10 +10,9 @@ import com.example.shop.model.service.impl.UserServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 public class LoginCommand implements ActionCommand {
-    private static final String PARAM_NAME_LOGIN = "login";
-    private static final String PARAM_NAME_PASSWORD = "password";
-    private static final String PARAM_NAME_ROLE_CLIENT = "client";
     private static final UserServiceImpl userService = new UserServiceImpl();
 
     @Override
@@ -25,10 +24,10 @@ public class LoginCommand implements ActionCommand {
             if (userService.authorizeUser(login, password)) {
                 if(!userService.isBanned(login)) {
                     HttpSession session = request.getSession();
-                    session.setAttribute("nickname", login);
+                    session.setAttribute(NICKNAME, login);
                     String role = userService.findUserRole(login).get();
-                    session.setAttribute("user_role", role);
-                    if (role.equals(PARAM_NAME_ROLE_CLIENT)) {
+                    session.setAttribute(USER_ROLE, role);
+                    if (role.equals(CLIENT)) {
                         page = ConfigurationManager.getProperty("path.page.products");
                     } else {
                         page = ConfigurationManager.getProperty("path.page.admin_main");

@@ -11,15 +11,9 @@ import com.example.shop.model.service.impl.UserServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 public class RegistrationCommand implements ActionCommand {
-    private static final String PARAM_NAME_NAME = "name";
-    private static final String PARAM_NAME_SURNAME = "surname";
-    private static final String PARAM_NAME_NICKNAME = "nickname";
-    private static final String PARAM_NAME_DOB = "dob";
-    private static final String PARAM_NAME_PHONE = "phone";
-    private static final String PARAM_NAME_EMAIL = "email";
-    private static final String PARAM_NAME_PASSWORD = "password";
-    private static final String PARAM_NAME_PASSWORD2 = "password2";
     private static final UserServiceImpl userService = new UserServiceImpl();
 
     @Override
@@ -36,7 +30,7 @@ public class RegistrationCommand implements ActionCommand {
         String password = request.getParameter(PARAM_NAME_PASSWORD);
         String password2 = request.getParameter(PARAM_NAME_PASSWORD2);
         try {
-            if(user_role.equals("administrator")) {
+            if(user_role.equals(ADMINISTRATOR)) {
                 if (password.equals(password2) &&
                         userService.registerUser(name, surname, nickname, password, dob, phone, email, "administrator")) {
                     page = ConfigurationManager.getProperty("path.page.admin_main");

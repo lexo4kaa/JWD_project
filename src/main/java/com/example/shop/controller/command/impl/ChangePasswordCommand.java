@@ -11,10 +11,9 @@ import com.example.shop.resource.MessageManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 public class ChangePasswordCommand implements ActionCommand {
-    private static final String PARAM_NAME_OLD_PASSWORD = "old_password";
-    private static final String PARAM_NAME_NEW_PASSWORD = "password";
-    private static final String PARAM_NAME_NEW_PASSWORD_REPEAT = "password2";
     private static final UserServiceImpl userService = new UserServiceImpl();
 
     @Override
@@ -22,10 +21,10 @@ public class ChangePasswordCommand implements ActionCommand {
         String page;
         HttpSession session = request.getSession();
         String oldPassword = request.getParameter(PARAM_NAME_OLD_PASSWORD);
-        String newPassword = request.getParameter(PARAM_NAME_NEW_PASSWORD);
-        String newPasswordRepeat = request.getParameter(PARAM_NAME_NEW_PASSWORD_REPEAT);
+        String newPassword = request.getParameter(PARAM_NAME_PASSWORD);
+        String newPasswordRepeat = request.getParameter(PARAM_NAME_PASSWORD2);
         try {
-            String userNickname = (String) session.getAttribute("nickname");
+            String userNickname = (String) session.getAttribute(NICKNAME);
             if (newPassword.equals(newPasswordRepeat) &&
                     userService.changePassword(userNickname, oldPassword, newPassword)) {
                 page = ConfigurationManager.getProperty("path.page.account");

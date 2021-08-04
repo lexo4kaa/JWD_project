@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 @WebFilter(urlPatterns = { "/pages/authorized/*" })
 public class ClientAccessFilter implements Filter {
 
@@ -18,7 +20,7 @@ public class ClientAccessFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
         HttpSession session = httpRequest.getSession();
-        if (session.getAttribute("user_role").equals("guest")) {
+        if (session.getAttribute(USER_ROLE).equals(GUEST)) {
             String page = ConfigurationManager.getProperty("path.page.index");
             httpResponse.sendRedirect(httpRequest.getContextPath() + page);
             // todo mb some text or another page

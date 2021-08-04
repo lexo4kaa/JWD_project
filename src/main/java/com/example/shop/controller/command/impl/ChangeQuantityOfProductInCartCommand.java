@@ -16,9 +16,9 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 import java.util.Set;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 public class ChangeQuantityOfProductInCartCommand implements ActionCommand {
-    private static final String PARAM_NAME_PRODUCT_ID = "product_id";
-    private static final String PARAM_NAME_NEW_QUANTITY = "new_quantity";
     private static final ProductService productService = new ProductServiceImpl();
     private static Logger logger = LogManager.getLogger();
 
@@ -35,13 +35,13 @@ public class ChangeQuantityOfProductInCartCommand implements ActionCommand {
             int oldQuantity = cart.containsKey(productId) ? cart.get(productId) : 0;
             Product product = productService.findProductsByIds(Set.of(productId)).get(0);
             cart = productService.changeQuantityOfProductInCart(cart, productId, newQuantity);
-            session.setAttribute("cart", cart);
-            session.setAttribute("cartProducts", productService.findProductsByIds(cart.keySet()));
-            double cost = (double) session.getAttribute("total_cost");
-            session.setAttribute("total_cost", cost + (newQuantity - oldQuantity) * product.getPrice());
-            int cart_size = (int) session.getAttribute("cart_size");
-            session.setAttribute("cart_size", cart_size + newQuantity - oldQuantity);
-            page = (String) session.getAttribute("currentPage");
+            session.setAttribute(CART, cart);
+            session.setAttribute(CART_PRODUCTS, productService.findProductsByIds(cart.keySet()));
+            double cost = (double) session.getAttribute(TOTAL_COST);
+            session.setAttribute(TOTAL_COST, cost + (newQuantity - oldQuantity) * product.getPrice());
+            int cart_size = (int) session.getAttribute(CART_SIZE);
+            session.setAttribute(CART_SIZE, cart_size + newQuantity - oldQuantity);
+            page = (String) session.getAttribute(CURRENT_PAGE);
         } catch (ServiceException e) {
             logger.error("Exception in 'ChangeQuantityOfProductInCartCommand', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");

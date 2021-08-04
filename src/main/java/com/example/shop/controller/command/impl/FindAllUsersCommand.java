@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 public class FindAllUsersCommand implements ActionCommand {
     private static final UserServiceImpl userService = new UserServiceImpl();
     private static Logger logger = LogManager.getLogger();
@@ -24,8 +26,8 @@ public class FindAllUsersCommand implements ActionCommand {
         HttpSession session = request.getSession();
         try {
             List<User> users = userService.findAllUsers();
-            session.setAttribute("users", users);
-            session.setAttribute("users_size", users.size());
+            session.setAttribute(USERS, users);
+            session.setAttribute(USERS_SIZE, users.size());
             page = ConfigurationManager.getProperty("path.page.users_info");
         } catch (ServiceException e) {
             logger.error("Exception in userService.findAllUsers(), redirected to error page");

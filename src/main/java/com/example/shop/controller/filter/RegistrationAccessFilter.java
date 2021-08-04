@@ -11,8 +11,8 @@ import java.io.IOException;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
-@WebFilter(urlPatterns = { "/pages/authorized/admin/*" })
-public class AdminAccessFilter implements Filter {
+@WebFilter(urlPatterns = { "/pages/registration/*" })
+public class RegistrationAccessFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
@@ -20,7 +20,7 @@ public class AdminAccessFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
         HttpSession session = httpRequest.getSession();
-        if (!session.getAttribute(USER_ROLE).equals(ADMINISTRATOR)) {
+        if (session.getAttribute(USER_ROLE).equals(CLIENT)) {
             String page = ConfigurationManager.getProperty("path.page.index");
             httpResponse.sendRedirect(httpRequest.getContextPath() + page);
             // todo mb some text or another page
@@ -29,3 +29,4 @@ public class AdminAccessFilter implements Filter {
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }
+

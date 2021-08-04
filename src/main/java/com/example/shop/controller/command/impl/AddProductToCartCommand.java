@@ -16,8 +16,9 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 import java.util.Set;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 public class AddProductToCartCommand implements ActionCommand {
-    private static final String PARAM_NAME_PRODUCT_ID = "product_id";
     private static final ProductService productService = new ProductServiceImpl();
     private static Logger logger = LogManager.getLogger();
 
@@ -30,14 +31,14 @@ public class AddProductToCartCommand implements ActionCommand {
             String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
             int productId = Integer.parseInt(stringProductId);
             cart = productService.addProductToCart(cart, productId);
-            session.setAttribute("cart", cart);
-            session.setAttribute("cartProducts", productService.findProductsByIds(cart.keySet()));
+            session.setAttribute(CART, cart);
+            session.setAttribute(CART_PRODUCTS, productService.findProductsByIds(cart.keySet()));
             Product product = productService.findProductsByIds(Set.of(productId)).get(0);
-            double cost = (double) session.getAttribute("total_cost");
-            session.setAttribute("total_cost", cost + product.getPrice());
-            int cart_size = (int) session.getAttribute("cart_size");
-            session.setAttribute("cart_size", cart_size + 1);
-            page = (String) session.getAttribute("currentPage");
+            double cost = (double) session.getAttribute(TOTAL_COST);
+            session.setAttribute(TOTAL_COST, cost + product.getPrice());
+            int cart_size = (int) session.getAttribute(CART_SIZE);
+            session.setAttribute(CART_SIZE, cart_size + 1);
+            page = (String) session.getAttribute(CURRENT_PAGE);
         } catch (ServiceException e) {
             logger.error("Exception in 'AddProductToCartCommand', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");

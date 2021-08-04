@@ -16,8 +16,9 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 import java.util.Set;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 public class DeleteProductFromCartCommand implements ActionCommand {
-    private static final String PARAM_NAME_PRODUCT_ID = "product_id";
     private static final ProductService productService = new ProductServiceImpl();
     private static Logger logger = LogManager.getLogger();
 
@@ -26,20 +27,20 @@ public class DeleteProductFromCartCommand implements ActionCommand {
         HttpSession session = request.getSession();
         String page;
         try {
-            Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
+            Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute(CART);
             String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
             int productId = Integer.parseInt(stringProductId);
             if(cart.containsKey(productId)) {
                 Product product = productService.findProductsByIds(Set.of(productId)).get(0);
                 cart = productService.deleteProductFromCart(cart, productId);
-                session.setAttribute("cart", cart);
-                session.setAttribute("cartProducts", productService.findProductsByIds(cart.keySet()));
-                double cost = (double) session.getAttribute("total_cost");
-                session.setAttribute("total_cost", cost - product.getPrice());
-                int cart_size = (int) session.getAttribute("cart_size");
-                session.setAttribute("cart_size", cart_size - 1);
+                session.setAttribute(CART, cart);
+                session.setAttribute(CART_PRODUCTS, productService.findProductsByIds(cart.keySet()));
+                double cost = (double) session.getAttribute(TOTAL_COST);
+                session.setAttribute(TOTAL_COST, cost - product.getPrice());
+                int cart_size = (int) session.getAttribute(CART_SIZE);
+                session.setAttribute(CART_SIZE, cart_size - 1);
             }
-            page = (String) session.getAttribute("currentPage");
+            page = (String) session.getAttribute(CURRENT_PAGE);
         } catch (ServiceException e) {
             logger.error("Exception in 'AddProductToCartCommand', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");
