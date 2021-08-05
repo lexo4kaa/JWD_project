@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByNickname(String nickname) throws ServiceException {
-        User user = new User();
+    public Optional<User> findUserByNickname(String nickname) throws ServiceException {
+        Optional<User> user = Optional.empty();
         if (UserValidator.isLoginCorrect(nickname)) {
             try {
                 user = userDao.findUserByNickname(nickname);
@@ -39,6 +39,18 @@ public class UserServiceImpl implements UserService {
                 logger.error("userDao.findUserByNickname(" + nickname + ") is failed in UserServiceImpl", e);
                 throw new ServiceException(e);
             }
+        }
+        return user;
+    }
+
+    @Override
+    public Optional<User> findUserById(int userId) throws ServiceException {
+        Optional<User> user;
+        try {
+            user = userDao.findUserById(userId);
+        } catch (DaoException e) {
+            logger.error("userDao.findUserById(" + userId + ") is failed in UserServiceImpl", e);
+            throw new ServiceException(e);
         }
         return user;
     }
@@ -103,16 +115,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(int userId) throws ServiceException {
-        try {
-            userDao.deleteUser(userId);
-        } catch (DaoException e) {
-            logger.error("userDao.deleteUser(" + userId + ") is failed in UserServiceImpl", e);
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
     public void addUserToBlacklist(int userId, String banReason) throws ServiceException {
         try {
             userDao.addUserToBlacklist(userId, banReason);
@@ -156,7 +158,8 @@ public class UserServiceImpl implements UserService {
         boolean flag = false;
         if (UserValidator.isPasswordCorrect(newPassword) && authorizeUser(userNickname, oldPassword)) {
             try {
-                int userId = findUserByNickname(userNickname).getUserId();
+                User user = findUserByNickname(userNickname).get();
+                int userId = user.getUserId();
                 userDao.changePassword(userId, newPassword);
                 flag = true;
             } catch (DaoException e) {
@@ -179,5 +182,15 @@ public class UserServiceImpl implements UserService {
             }
         }
         return flag;
+    }
+
+    @Override
+    public void changeRole(int userId, String newRole) throws ServiceException {
+        try {
+            userDao.changeRole(userId, newRole);
+        } catch (DaoException e) {
+            logger.error("changing role is failed in UserServiceImpl", e);
+            throw new ServiceException(e);
+        }
     }
 }

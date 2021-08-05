@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<fmt:setLocale value="${currentLocale}"/>
+<fmt:setLocale value="${current_locale}"/>
 <fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
@@ -46,7 +46,7 @@
             ${nullPage}
             ${registrationError}
             <br>
-            <input type="hidden" id="locale" name="locale" value="${ currentLocale }" />
+            <input type="hidden" id="locale" name="locale" value="${ current_locale }" />
             <input class="form_reg_button" type="submit" value="<fmt:message key="label.registration_button"/>"/>
             <br>
         </div>

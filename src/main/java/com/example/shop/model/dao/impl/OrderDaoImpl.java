@@ -61,7 +61,7 @@ public class OrderDaoImpl implements OrderDao {
                          String methodOfReceiving, String methodOfPayment) throws DaoException {
         try(Connection connection = CustomConnectionPool.getInstance().getConnection();
             PreparedStatement statement = connection.prepareStatement(SQL_ADD_ORDER)) {
-            int userId = userDao.findUserByNickname(nickname).getUserId();
+            int userId = userDao.findUserByNickname(nickname).get().getUserId();
             statement.setInt(1, userId);
             statement.setDouble(2, totalCost(cart));
             statement.setString(3, methodOfReceiving);

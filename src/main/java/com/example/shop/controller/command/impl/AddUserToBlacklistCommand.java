@@ -28,9 +28,9 @@ public class AddUserToBlacklistCommand implements ActionCommand {
         HttpSession session = request.getSession();
         try {
             String banReason = request.getParameter(PARAM_NAME_BAN_REASON);
-            int userId = Integer.valueOf(request.getParameter(PARAM_NAME_USER_ID));
+            int userId = Integer.parseInt(request.getParameter(PARAM_NAME_USER_ID));
             String nickname = (String) session.getAttribute(NICKNAME);
-            User activeUser = userService.findUserByNickname(nickname);
+            User activeUser = userService.findUserByNickname(nickname).get();
             if(activeUser.getUserId() != userId) {
                 userService.addUserToBlacklist(userId, banReason);
                 List<User> users = (List<User>) session.getAttribute(USERS);

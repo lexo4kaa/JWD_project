@@ -5,6 +5,7 @@ import com.example.shop.model.pool.ConnectionPoolException;
 import com.example.shop.model.pool.CustomConnectionPool;
 import com.example.shop.model.dao.DaoException;
 import com.example.shop.model.dao.UserDao;
+import com.example.shop.model.service.ServiceException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,6 +26,9 @@ public class UserDaoImpl implements UserDao {
     private static final String SQL_FIND_USER_BY_NICKNAME = "SELECT user_id,user_name,user_surname,user_nickname," +
                                                             "user_password,user_DOB,user_phone_number,user_email," +
                                                             "user_role,is_banned FROM users WHERE user_nickname = ?";
+    private static final String SQL_FIND_USER_BY_ID = "SELECT user_id,user_name,user_surname,user_nickname," +
+                                                        "user_password,user_DOB,user_phone_number,user_email," +
+                                                        "user_role,is_banned FROM users WHERE user_id = ?";
     private static final String SQL_FIND_USER_BY_PART_OF_NICKNAME = "SELECT user_id,user_name,user_surname,user_nickname," +
                                                             "user_password,user_DOB,user_phone_number,user_email," +
                                                             "user_role,is_banned FROM users WHERE user_nickname LIKE ?";
@@ -32,7 +36,6 @@ public class UserDaoImpl implements UserDao {
     private static final String SQL_FIND_PASSWORD_BY_NICKNAME = "SELECT user_password FROM users WHERE user_nickname = ?";
     private static final String SQL_ADD_USER = "INSERT INTO users (user_name,user_surname,user_nickname,user_password," +
                                                 "user_DOB,user_phone_number,user_email,user_role) VALUES (?,?,?,?,?,?,?,?)";
-    private static final String SQL_DELETE_USER = "DELETE FROM users WHERE user_id = ?";
     private static final String SQL_ADD_USER_TO_BLACKLIST = "INSERT INTO blacklist (ref_user_id,ban_reason) VALUES (?,?)";
     private static final String SQL_DELETE_USER_FROM_BLACKLIST = "DELETE FROM blacklist WHERE ref_user_id = ?";
     private static final String SQL_CHANGE_IS_BANNED_ON_TRUE = "UPDATE users SET is_banned = true WHERE user_id = ?";
@@ -41,6 +44,7 @@ public class UserDaoImpl implements UserDao {
                                                     "user_DOB=?,user_phone_number=?,user_email=? WHERE user_id = ?";
     private static final String SQL_CHANGE_PASSWORD = "UPDATE users SET user_password = ? WHERE user_id = ?";
     private static final String SQL_FIND_IS_BANNED_BY_NICKNAME = "SELECT is_banned FROM users WHERE user_nickname = ?";
+    private static final String SQL_CHANGE_ROLE = "UPDATE users SET user_role = ? WHERE user_id = ?";
 
     public static UserDao getInstance(){
         return instance;
@@ -62,19 +66,35 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findUserByNickname(String nickname) throws DaoException {
-        List<User> users = new ArrayList<>();
+    public Optional<User> findUserByNickname(String nickname) throws DaoException {
+        Optional<User> user = Optional.empty();
         try(Connection connection = CustomConnectionPool.getInstance().getConnection();
             PreparedStatement statement = connection.prepareStatement(SQL_FIND_USER_BY_NICKNAME)) {
             statement.setString(1, nickname);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()){
-                users.add(createUserFromResultSet(resultSet));
+                user = Optional.of(createUserFromResultSet(resultSet));
             }
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while finding user", e);
         }
-        return users.get(0);
+        return user;
+    }
+
+    @Override
+    public Optional<User> findUserById(int userId) throws DaoException {
+        Optional<User> user = Optional.empty();
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_USER_BY_ID)) {
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()){
+                user = Optional.of(createUserFromResultSet(resultSet));
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while finding user", e);
+        }
+        return user;
     }
 
     @Override
@@ -141,17 +161,6 @@ public class UserDaoImpl implements UserDao {
             statement.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while adding user", e);
-        }
-    }
-
-    @Override
-    public void deleteUser(int userId) throws DaoException {
-        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_DELETE_USER)) {
-            statement.setInt(1, userId);
-            statement.executeUpdate();
-        } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while deleting user", e);
         }
     }
 
@@ -244,6 +253,18 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException("Error while finding user", e);
         }
         return isBanned;
+    }
+
+    @Override
+    public void changeRole(int userId, String newRole) throws DaoException {
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_CHANGE_ROLE)) {
+            statement.setString(1, newRole);
+            statement.setInt(2, userId);
+            statement.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while changing role", e);
+        }
     }
 
     private User createUserFromResultSet(ResultSet resultSet) throws SQLException {

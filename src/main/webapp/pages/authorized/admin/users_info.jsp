@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<fmt:setLocale value="${currentLocale}"/>
+<fmt:setLocale value="${current_locale}"/>
 <fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
@@ -23,7 +23,7 @@
         <th><fmt:message key="label.email"/></th>
         <th><fmt:message key="label.role"/></th>
         <th><fmt:message key="label.isBanned"/></th>
-        <th><fmt:message key="label.delete"/></th>
+        <th><fmt:message key="label.change_role"/></th>
         <th><fmt:message key="label.ban"/>/<fmt:message key="label.unban"/></th>
     </tr>
     <c:forEach var="user" items="${users}" varStatus="status">
@@ -33,11 +33,11 @@
             <td><c:out value="${ user.surname }" /></td>
             <td><c:out value="${ user.nickname }" /></td>
             <td><c:out value="${ user.email }" /></td>
-            <c:if test="${ currentLocale == 'en_US' }">
+            <c:if test="${ current_locale == 'en_US' }">
                 <td><c:out value="${ user.role }" /></td>
                 <td><c:out value="${ user.isBanned }" /></td>
             </c:if>
-            <c:if test="${ currentLocale != 'en_US' }">
+            <c:if test="${ current_locale != 'en_US' }">
                 <c:if test="${ user.role == 'administrator' }">
                     <td><fmt:message key="label.admin"/></td>
                 </c:if>
@@ -52,10 +52,10 @@
                 </c:if>
             </c:if>
             <td>
-                <form style="margin: 0" name="deleteUser" method="POST" action="${pageContext.request.contextPath}/controller">
-                    <input type="hidden" name="command" value="delete_user"/>
+                <form style="margin: 0" name="changeUserRole" method="POST" action="${pageContext.request.contextPath}/controller">
+                    <input type="hidden" name="command" value="change_role"/>
                     <input type="hidden" name="user_id" value="${ user.userId }">
-                    <input type="submit" value="<fmt:message key="label.delete"/>"/>
+                    <input type="submit" value="<fmt:message key="label.change_role"/>"/>
                 </form>
             </td>
             <c:if test="${ user.isBanned }">

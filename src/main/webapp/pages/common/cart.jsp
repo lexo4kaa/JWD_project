@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" uri="customtags" %>
-<fmt:setLocale value="${currentLocale}" scope="session"/>
+<fmt:setLocale value="${current_locale}"/>
 <fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
@@ -20,7 +20,7 @@
     </c:if>
     <c:if test="${cart_size != 0}">
         <hr>
-        <c:forEach var="prod" items="${cartProducts}" varStatus="status">
+        <c:forEach var="prod" items="${cart_products}" varStatus="status">
             <li class="product-wrapper">
                 <div class="product">
                     <div class="product-photo">
@@ -72,14 +72,14 @@
         <form name="addOrder" method="POST" action="${pageContext.request.contextPath}/controller">
             <div style="float:left; width: 500px">
                 <h4><fmt:message key="label.select_method_of_receiving"/></h4>
-                <select style="float: left" name="methodOfReceiving">
+                <select style="float: left" name="method_of_receiving">
                     <option value="self-delivery" selected><fmt:message key="label.self_delivery"/></option>
                     <option value="delivery"><fmt:message key="label.delivery"/></option>
                 </select>
             </div>
             <div style="float:left; width: 500px">
                 <h4><fmt:message key="label.select_method_of_payment"/></h4>
-                <select style="float: left" name="methodOfPayment">
+                <select style="float: left" name="method_of_payment">
                     <option value="cash" selected><fmt:message key="label.cash"/></option>
                     <option value="card"><fmt:message key="label.card"/></option>
                 </select>

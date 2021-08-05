@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.CURRENT_PAGE;
+
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
     private static Logger logger = LogManager.getLogger();
@@ -32,19 +34,20 @@ public class Controller extends HttpServlet {
         Router router = command.execute(request);
         String page = router.getPagePath();
         HttpSession session = request.getSession();
-        session.setAttribute("currentPage", page);
+        session.setAttribute(CURRENT_PAGE, page);
         switch (router.getRouteType()) {
             case FORWARD:
                 RequestDispatcher dispatcher = request.getRequestDispatcher(page);
                 dispatcher.forward(request, response);
                 break;
             case REDIRECT:
-                response.sendRedirect(request.getContextPath() + page);
+                String path = request.getContextPath() + page;
+                response.sendRedirect(path);
                 break;
             default:
                 logger.error("incorrect route type " + router.getRouteType());
-                page = ConfigurationManager.getProperty("path.page.error");
-                response.sendRedirect(request.getContextPath() + page);
+                path = request.getContextPath() + ConfigurationManager.getProperty("path.page.error");
+                response.sendRedirect(path);
         }
     }
 }
