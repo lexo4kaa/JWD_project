@@ -12,6 +12,8 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 public class FindUserByNicknameCommand implements ActionCommand {
     private static final UserServiceImpl userService = new UserServiceImpl();
     private static Logger logger = LogManager.getLogger();
@@ -20,10 +22,9 @@ public class FindUserByNicknameCommand implements ActionCommand {
     public Router execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
-        String nickname = (String) session.getAttribute("nickname");
+        String nickname = (String) session.getAttribute(NICKNAME);
         try {
-            session.setAttribute("profile", userService.findUserByNickname(nickname));
-            session.setAttribute("currentPage", "path.page.account");
+            session.setAttribute(PROFILE, userService.findUserByNickname(nickname));
             page = ConfigurationManager.getProperty("path.page.account");
         } catch (ServiceException e) {
             logger.error("Exception in userService.findUserByNickname(" + nickname + "), redirected to error page");

@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 public class FindOrdersByNicknameCommand implements ActionCommand {
     private static final OrderServiceImpl orderService = new OrderServiceImpl();
     private static Logger logger = LogManager.getLogger();
@@ -22,12 +24,11 @@ public class FindOrdersByNicknameCommand implements ActionCommand {
     public Router execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
-        String nickname = (String) session.getAttribute("nickname");
+        String nickname = (String) session.getAttribute(NICKNAME);
         try {
             List<Order> orders = orderService.findOrdersByNickname(nickname);
-            session.setAttribute("orders", orders);
-            session.setAttribute("orders_size", orders.size());
-            session.setAttribute("currentPage", "path.page.orders_info");
+            session.setAttribute(ORDERS, orders);
+            session.setAttribute(ORDERS_SIZE, orders.size());
             page = ConfigurationManager.getProperty("path.page.orders_info");
         } catch (ServiceException e) {
             logger.error("Exception in orderService.findOrdersByNickname(" + nickname + "), redirected to error page");

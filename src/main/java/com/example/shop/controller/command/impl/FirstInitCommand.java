@@ -15,7 +15,11 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 public class FirstInitCommand implements ActionCommand {
+    private static final String ALL_VALUE = "all";
+    private static final String EN_US_LOCALE = "en_US";
     private static final ProductServiceImpl productService = new ProductServiceImpl();
     private static final UserServiceImpl userService = new UserServiceImpl();
 
@@ -24,22 +28,21 @@ public class FirstInitCommand implements ActionCommand {
         String page;
         HttpSession session = request.getSession();
         try {
-            session.setAttribute("currentLocale", "en_US");
-            session.setAttribute("user_role", "guest");
-            session.setAttribute("products", productService.findAllProducts());
-            session.setAttribute("typeOfProducts", "all");
-            session.setAttribute("cart", new HashMap<Integer, Integer>());
-            session.setAttribute("cart_size", 0);
-            session.setAttribute("total_cost", 0.0);
+            session.setAttribute(CURRENT_LOCALE, EN_US_LOCALE);
+            session.setAttribute(USER_ROLE, GUEST);
+            session.setAttribute(PRODUCTS, productService.findAllProducts());
+            session.setAttribute(TYPE_OF_PRODUCTS, ALL_VALUE);
+            session.setAttribute(CART, new HashMap<Integer, Integer>());
+            session.setAttribute(CART_SIZE, 0);
+            session.setAttribute(TOTAL_COST, 0.0);
             List<User> users = userService.findAllUsers();
-            session.setAttribute("users", users);
-            session.setAttribute("users_size", users.size());
-            session.setAttribute("currentPage", "path.page.products");
+            session.setAttribute(USERS, users);
+            session.setAttribute(USERS_SIZE, users.size());
             page = ConfigurationManager.getProperty("path.page.products");
         } catch (ServiceException e) {
             request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction"));
             page = ConfigurationManager.getProperty("path.page.index");
         }
-        return new Router(page, RouteType.FORWARD);
+        return new Router(page, RouteType.REDIRECT);
     }
 }

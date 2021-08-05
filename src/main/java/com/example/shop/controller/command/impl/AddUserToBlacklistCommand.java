@@ -16,9 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 public class AddUserToBlacklistCommand implements ActionCommand {
-    private static final String PARAM_NAME_USER_ID = "user_id";
-    private static final String PARAM_NAME_BAN_REASON = "ban_reason";
     private static final UserService userService = new UserServiceImpl();
     private static Logger logger = LogManager.getLogger();
 
@@ -29,11 +29,11 @@ public class AddUserToBlacklistCommand implements ActionCommand {
         try {
             String banReason = request.getParameter(PARAM_NAME_BAN_REASON);
             int userId = Integer.valueOf(request.getParameter(PARAM_NAME_USER_ID));
-            String nickname = (String) session.getAttribute("nickname");
+            String nickname = (String) session.getAttribute(NICKNAME);
             User activeUser = userService.findUserByNickname(nickname);
             if(activeUser.getUserId() != userId) {
                 userService.addUserToBlacklist(userId, banReason);
-                List<User> users = (List<User>) session.getAttribute("users");
+                List<User> users = (List<User>) session.getAttribute(USERS);
                 for (int i = 0; i < users.size(); i++) {
                     User user = users.get(i);
                     if (user.getUserId() == userId) {
@@ -42,11 +42,11 @@ public class AddUserToBlacklistCommand implements ActionCommand {
                         break;
                     }
                 }
-                session.setAttribute("users", users);
+                session.setAttribute(USERS, users);
             } else {
                 request.setAttribute("actOnYourselfMessage", MessageManager.getProperty("message.actonyourself"));
             }
-            page = (String) session.getAttribute("currentPage");
+            page = (String) session.getAttribute(CURRENT_PAGE);
         } catch (ServiceException e) {
             logger.error("Exception in 'AddUserToBlacklistCommand', redirected to error page");
             page = ConfigurationManager.getProperty("path.page.error");

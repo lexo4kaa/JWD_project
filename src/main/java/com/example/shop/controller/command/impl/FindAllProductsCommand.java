@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 public class FindAllProductsCommand implements ActionCommand {
+    private static final String ALL_VALUE = "all";
     private static final ProductService productService = new ProductServiceImpl();
     private static Logger logger = LogManager.getLogger();
 
@@ -25,9 +28,9 @@ public class FindAllProductsCommand implements ActionCommand {
         HttpSession session = request.getSession();
         List<Product> products;
         try {
-            session.setAttribute("typeOfProducts", "all");
+            session.setAttribute(TYPE_OF_PRODUCTS, ALL_VALUE);
             products = productService.findAllProducts();
-            session.setAttribute("products", products);
+            session.setAttribute(PRODUCTS, products);
             page = ConfigurationManager.getProperty("path.page.products");
         } catch (ServiceException e) {
             logger.error("Exception in function 'findProductsProductsByType', redirected to error page");

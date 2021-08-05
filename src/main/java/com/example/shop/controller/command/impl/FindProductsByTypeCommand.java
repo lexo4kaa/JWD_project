@@ -15,8 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 public class FindProductsByTypeCommand implements ActionCommand {
-    private static final String PARAM_NAME_TYPE = "type";
     private static final ProductService productService = new ProductServiceImpl();
     private static Logger logger = LogManager.getLogger();
 
@@ -27,9 +28,9 @@ public class FindProductsByTypeCommand implements ActionCommand {
         List<Product> products;
         String type = request.getParameter(PARAM_NAME_TYPE);
         try {
-            session.setAttribute("typeOfProducts", type);
+            session.setAttribute(TYPE_OF_PRODUCTS, type);
             products = productService.findProductsByType(type);
-            session.setAttribute("products", products);
+            session.setAttribute(PRODUCTS, products);
             page = ConfigurationManager.getProperty("path.page.products");
         } catch (ServiceException e) {
             logger.error("Exception in function 'findProductsProductsByTeam', redirected to error page");

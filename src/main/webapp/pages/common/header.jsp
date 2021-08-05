@@ -5,59 +5,59 @@
 <fmt:setBundle basename="pagecontent"/>
 <html>
 <head>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/header.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css"/>
 </head>
 <body>
 <div class="header">
 
-    <!-- <img style="float:left;width:60px;height:40px;margin-top: -10px" src="<%=request.getContextPath()%>/images/ball.jpg" alt="Oops"> -->
+    <!-- <img style="float:left;width:60px;height:40px;margin-top: -10px" src="${pageContext.request.contextPath}/images/ball.jpg" alt="Oops"> -->
     <!-- <span style="float:left;font-size:xx-large;color:blue;font-family:'Bradley Hand ITC';
                 margin-top: -10px;margin-right: 10px">FOOTBALL SHOP</span> -->
 
-    <form name="allProducts" method="POST" action="controller">
+    <form name="allProducts" method="POST" action="${pageContext.request.contextPath}/controller">
         <input type="hidden" name="command" value="find_all_products"/>
         <input style="float:left;font-size:xx-large;color:blue;font-family:'Bradley Hand ITC';
                       margin-top: -10px;margin-right: 10px" type="submit" value="<fmt:message key="label.football_shop"/>"/>
     </form> <!-- todo куда переводить при нажатии -->
 
     <c:if test="${user_role == 'administrator'}">
-        <form name="adminMainPage" method="POST" action="controller">
+        <form name="adminMainPage" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="to_admin_main_page"/>
             <input type="submit" value="<fmt:message key="label.admin_main"/>"/>
         </form>
     </c:if>
-    <form name="allProducts" method="POST" action="controller">
+    <form name="allProducts" method="POST" action="${pageContext.request.contextPath}/controller">
         <input type="hidden" name="command" value="find_all_products"/>
         <input type="submit" value="<fmt:message key="label.all_products"/>"/>
     </form>
 
-    <form name="jersey" method="POST" action="controller">
+    <form name="jersey" method="POST" action="${pageContext.request.contextPath}/controller">
         <input type="hidden" name="command" value="find_products_by_type"/>
         <input type="hidden" name="type" value="jersey">
         <input type="submit" value="<fmt:message key="label.jersey"/>"/>
     </form>
-    <form name="uniform" method="POST" action="controller">
+    <form name="uniform" method="POST" action="${pageContext.request.contextPath}/controller">
         <input type="hidden" name="command" value="find_products_by_type"/>
         <input type="hidden" name="type" value="uniform">
         <input type="submit" value="<fmt:message key="label.uniform"/>"/>
     </form>
-    <form name="cap" method="POST" action="controller">
+    <form name="cap" method="POST" action="${pageContext.request.contextPath}/controller">
         <input type="hidden" name="command" value="find_products_by_type"/>
         <input type="hidden" name="type" value="cap">
         <input type="submit" value="<fmt:message key="label.cap"/>"/>
     </form>
-    <form name="scarf" method="POST" action="controller">
+    <form name="scarf" method="POST" action="${pageContext.request.contextPath}/controller">
         <input type="hidden" name="command" value="find_products_by_type"/>
         <input type="hidden" name="type" value="scarf">
         <input type="submit" value="<fmt:message key="label.scarf"/>"/>
     </form>
 
     <c:if test="${user_role != 'guest'}">
-        <form style="float: right" name="logout" method="POST" action="controller">
+        <form style="float: right" name="logout" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="logout"/>
             <input type="submit" value="<fmt:message key="label.logout_button"/>"/>
         </form>
-        <form style="float: right" name="account" method="POST" action="controller">
+        <form style="float: right" name="account" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="find_user_by_nickname"/>
             <input type="submit" value="<fmt:message key="label.account"/>"/>
         </form>
@@ -74,7 +74,7 @@
     </c:if>
 
     <c:if test="${user_role == 'guest'}">
-        <form style="float: right" name="to_login_page" method="POST" action="controller">
+        <form style="float: right" name="to_login_page" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="to_login_page"/>
             <input type="submit" value="<fmt:message key="label.login_button"/>"/>
         </form>
@@ -83,7 +83,7 @@
         </div>
     </c:if>
 
-    <form name="switchLocale" method="POST" action="controller">
+    <form name="switchLocale" method="POST" action="${pageContext.request.contextPath}/controller">
         <input type="hidden" name="command" value="switch_locale"/>
         <button type="submit" name="locale" value="ru_RU" style="border:none;cursor:pointer;background:whitesmoke">
             <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f3/Flag_of_Russia.svg/1200px-Flag_of_Russia.svg.png"
@@ -106,7 +106,7 @@
                 text-align: center; width: ${width}px; height: 20px">${cart_size}
     </div>
 
-    <form style="float: right; margin-right: -10px" name="cartPage" method="POST" action="controller">
+    <form style="float: right; margin-right: -10px" name="cartPage" method="POST" action="${pageContext.request.contextPath}/controller">
         <input type="hidden" name="command" value="find_products_by_ids"/>
         <input type="submit" value="<fmt:message key="label.cart"/>"/>
     </form>

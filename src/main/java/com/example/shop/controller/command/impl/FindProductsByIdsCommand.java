@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 public class FindProductsByIdsCommand implements ActionCommand {
     private static final ProductService productService = new ProductServiceImpl();
     private static Logger logger = LogManager.getLogger();
@@ -25,11 +27,10 @@ public class FindProductsByIdsCommand implements ActionCommand {
         String page;
         List<Product> products;
         HttpSession session = request.getSession();
-        Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
+        Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute(CART);
         try {
             products = productService.findProductsByIds(cart.keySet());
-            session.setAttribute("cartProducts", products);
-            session.setAttribute("currentPage", "path.page.cart");
+            session.setAttribute(CART_PRODUCTS, products);
             page = ConfigurationManager.getProperty("path.page.cart");
         } catch (ServiceException e) {
             logger.error("Exception in function 'findProductsByIds', redirected to error page");

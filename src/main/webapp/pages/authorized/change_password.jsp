@@ -7,12 +7,12 @@
 <html>
 <head>
     <title><fmt:message key="label.change_password"/></title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/registration.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/registration.css"/>
 </head>
 <jsp:include page="../common/header.jsp"/>
 <body>
 
-<form name="changePassword" id="form" method="POST" action="controller">
+<form name="changePassword" id="form" method="POST" action="${pageContext.request.contextPath}/controller">
     <input type="hidden" name="command" value="change_password" />
     <div class="form_reg_block">
         <div class="form_reg_block_content">

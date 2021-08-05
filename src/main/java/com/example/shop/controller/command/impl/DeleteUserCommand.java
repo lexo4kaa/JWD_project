@@ -15,8 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 public class DeleteUserCommand implements ActionCommand {
-    private static final String PARAM_NAME_USER_ID = "user_id";
     private static final UserServiceImpl userService = new UserServiceImpl();
     private static Logger logger = LogManager.getLogger();
 
@@ -25,20 +26,20 @@ public class DeleteUserCommand implements ActionCommand {
         String page;
         HttpSession session = request.getSession();
         try {
-            int userId = Integer.valueOf(request.getParameter(PARAM_NAME_USER_ID));
-            String nickname = (String) session.getAttribute("nickname");
+            int userId = Integer.parseInt(request.getParameter(PARAM_NAME_USER_ID));//todo check valueOf -> parseInt
+            String nickname = (String) session.getAttribute(NICKNAME);
             User user = userService.findUserByNickname(nickname);
             if(user.getUserId() != userId) {
                 userService.deleteUser(userId);
-                List<User> users = (List<User>) session.getAttribute("users");
+                List<User> users = (List<User>) session.getAttribute(USERS);
                 for (int i = 0; i < users.size(); i++) {
                     if (users.get(i).getUserId() == userId) {
                         users.remove(i);
                         break;
                     }
                 }
-                session.setAttribute("users", users);
-                session.setAttribute("users_size", users.size());
+                session.setAttribute(USERS, users);
+                session.setAttribute(USERS_SIZE, users.size());
             } else {
                 request.setAttribute("actOnYourselfMessage", MessageManager.getProperty("message.actonyourself"));
             }

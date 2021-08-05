@@ -6,7 +6,7 @@
 <html>
 <head>
     <title><fmt:message key="label.users_info"/></title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/info.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/info.css"/>
 </head>
 <body>
 <jsp:include page="../../common/header.jsp"/><br>
@@ -52,7 +52,7 @@
                 </c:if>
             </c:if>
             <td>
-                <form style="margin: 0" name="deleteUser" method="POST" action="controller">
+                <form style="margin: 0" name="deleteUser" method="POST" action="${pageContext.request.contextPath}/controller">
                     <input type="hidden" name="command" value="delete_user"/>
                     <input type="hidden" name="user_id" value="${ user.userId }">
                     <input type="submit" value="<fmt:message key="label.delete"/>"/>
@@ -60,7 +60,7 @@
             </td>
             <c:if test="${ user.isBanned }">
                 <td>
-                    <form style="margin: 0" name="deleteUserFromBlackList" method="POST" action="controller">
+                    <form style="margin: 0" name="deleteUserFromBlackList" method="POST" action="${pageContext.request.contextPath}/controller">
                         <input type="hidden" name="command" value="delete_user_from_blacklist"/>
                         <input type="hidden" name="user_id" value="${ user.userId }">
                         <input type="submit" value="<fmt:message key="label.delete_from_blacklist"/>"/>
@@ -69,7 +69,7 @@
             </c:if>
             <c:if test="${ !user.isBanned }">
                 <td>
-                    <form style="margin: 0" name="addUserToBlackList" method="POST" action="controller">
+                    <form style="margin: 0" name="addUserToBlackList" method="POST" action="${pageContext.request.contextPath}/controller">
                         <input type="hidden" name="command" value="add_user_to_blacklist"/>
                         <input type="hidden" name="user_id" value="${ user.userId }">
                         <input type="text" name="ban_reason" value=""/>

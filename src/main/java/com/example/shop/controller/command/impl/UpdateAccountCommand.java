@@ -11,13 +11,9 @@ import com.example.shop.resource.MessageManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import static com.example.shop.controller.command.ParameterAndAttribute.*;
+
 public class UpdateAccountCommand implements ActionCommand {
-    private static final String PARAM_NAME_NAME = "name";
-    private static final String PARAM_NAME_SURNAME = "surname";
-    private static final String PARAM_NAME_NICKNAME = "nickname";
-    private static final String PARAM_NAME_DOB = "dob";
-    private static final String PARAM_NAME_PHONE = "phone";
-    private static final String PARAM_NAME_EMAIL = "email";
     private static final UserServiceImpl userService = new UserServiceImpl();
 
     @Override
@@ -31,11 +27,11 @@ public class UpdateAccountCommand implements ActionCommand {
         String phone = request.getParameter(PARAM_NAME_PHONE);
         String email = request.getParameter(PARAM_NAME_EMAIL);
         try {
-            String userNickname = (String) session.getAttribute("nickname");
+            String userNickname = (String) session.getAttribute(NICKNAME);
             int userId = userService.findUserByNickname(userNickname).getUserId();
             if (userService.updateUser(name, surname, nickname, dob, phone, email, userId)) {
-                session.setAttribute("nickname", nickname);
-                session.setAttribute("profile", userService.findUserByNickname(nickname));
+                session.setAttribute(NICKNAME, nickname);
+                session.setAttribute(PROFILE, userService.findUserByNickname(nickname));
                 page = ConfigurationManager.getProperty("path.page.account");
             } else {
                 request.setAttribute("updateError", MessageManager.getProperty("message.updateerror"));
