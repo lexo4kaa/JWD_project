@@ -1,17 +1,14 @@
 package com.example.shop.model.service.impl;
 
 import com.example.shop.entity.Order;
-import com.example.shop.entity.User;
 import com.example.shop.model.dao.DaoException;
 import com.example.shop.model.dao.OrderDao;
 import com.example.shop.model.dao.impl.OrderDaoImpl;
 import com.example.shop.model.service.OrderService;
 import com.example.shop.model.service.ServiceException;
-import com.example.shop.validator.UserValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,13 +24,11 @@ public class OrderServiceImpl implements OrderService {
             int[] keys = cart.keySet().stream()
                             .mapToInt(Integer::intValue)
                             .toArray();
-            for(int i = 0; i < cart.size(); i++) {
-                int productId = keys[i];
+            for (int productId : keys) {
                 orderDao.addOrderHasProduct(cart, productId);
             }
         } catch (DaoException e) {
-            logger.error("orderDao.addOrder(" + cart + "," + nickname + "," +
-                        methodOfReceiving + "," + methodOfPayment + ") is failed in OrderServiceImpl", e);
+            logger.error("adding order is failed in OrderServiceImpl", e);
             throw new ServiceException(e);
         }
     }
@@ -48,5 +43,17 @@ public class OrderServiceImpl implements OrderService {
             throw new ServiceException(e);
         }
         return orders;
+    }
+
+    @Override
+    public Map<Integer, Integer> findInfoAboutOrder(int orderId) throws ServiceException {
+        Map<Integer, Integer> cart;
+        try {
+            cart = orderDao.findInfoAboutOrder(orderId);
+        } catch (DaoException e) {
+            logger.error("orderDao.findInfoAboutOrder(" + orderId + ") is failed in OrderServiceImpl", e);
+            throw new ServiceException(e);
+        }
+        return cart;
     }
 }

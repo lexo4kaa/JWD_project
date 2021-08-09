@@ -13,12 +13,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.example.shop.model.dao.OrderColumn.*;
+import static com.example.shop.model.dao.OrderHasProductColumn.*;
 
 public class OrderDaoImpl implements OrderDao {
     private static final OrderDao instance = new OrderDaoImpl();
@@ -35,6 +33,8 @@ public class OrderDaoImpl implements OrderDao {
                                                               "method_of_receiving,method_of_payment FROM orders AS o" +
                                                               " JOIN users AS u ON u.user_id = o.ref_user_id" +
                                                               " WHERE user_nickname = ?";
+    private static final String SQL_INFO_ABOUT_ORDERS = "SELECT ref_product_id, quantity FROM order_has_product" +
+                                                        " WHERE ref_order_id = ?";
 
 
     public static OrderDao getInstance(){
@@ -102,13 +102,30 @@ public class OrderDaoImpl implements OrderDao {
         return orders;
     }
 
+    @Override
+    public Map<Integer, Integer> findInfoAboutOrder(int orderId) throws DaoException {
+        Map<Integer, Integer> cart = new HashMap<>();
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_INFO_ABOUT_ORDERS)) {
+            statement.setInt(1, orderId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int productId = resultSet.getInt(REF_PRODUCT_ID);
+                int quantity = resultSet.getInt(QUANTITY);
+                cart.put(productId, quantity);
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while finding info about order", e);
+        }
+        return cart;
+    }
+
     private double totalCost(Map<Integer, Integer> cart) throws DaoException {
         int cost = 0;
         int[] keys = cart.keySet().stream()
                 .mapToInt(Integer::intValue)
                 .toArray();
-        for(int i = 0; i < cart.size(); i++) {
-            int productId = keys[i];
+        for(int productId : keys) {
             cost += productDao.findPriceById(productId) * cart.get(productId);
         }
         return cost;

@@ -54,10 +54,10 @@
             <div style="color: blue">
                 <c:out value="${ prod.price }$" />
             </div>
-            <form style="float: left; margin-left: 35%" name="addProduct" method="POST" action="${pageContext.request.contextPath}/controller">
-                <input type="hidden" name="command" value="add_product_to_cart"/>
+            <form style="float: left; margin-left: 35%" name="deleteProduct" method="POST" action="${pageContext.request.contextPath}/controller">
+                <input type="hidden" name="command" value="delete_product_from_cart"/>
                 <input type="hidden" name="product_id" value="${ prod.productId }">
-                <input type="submit" value="+"/>
+                <input type="submit" value="-"/>
             </form>
 
             <c:set var="containsKey" value="${ cart.containsKey(prod.productId) }"/>
@@ -75,10 +75,10 @@
                        value="${ quantity }" min="0" max="99" onblur="checkQuantity(this)"/>
             </form>
 
-            <form style="float: left" name="deleteProduct" method="POST" action="${pageContext.request.contextPath}/controller">
-                <input type="hidden" name="command" value="delete_product_from_cart"/>
+            <form style="float: left" name="addProduct" method="POST" action="${pageContext.request.contextPath}/controller">
+                <input type="hidden" name="command" value="add_product_to_cart"/>
                 <input type="hidden" name="product_id" value="${ prod.productId }">
-                <input type="submit" value="-"/>
+                <input type="submit" value="+"/>
             </form>
         </li>
         </c:forEach>

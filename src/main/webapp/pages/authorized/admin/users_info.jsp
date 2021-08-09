@@ -6,7 +6,7 @@
 <html>
 <head>
     <title><fmt:message key="label.users_info"/></title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/info.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orders_info.css"/>
 </head>
 <body>
 <jsp:include page="../../common/header.jsp"/><br>

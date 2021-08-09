@@ -6,33 +6,29 @@
 <html>
 <head>
     <title><fmt:message key="label.users_info"/></title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/info.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orders_info.css"/>
 </head>
 <body>
 <jsp:include page="../common/header.jsp"/><br>
-<c:if test="${ orders_size == 0 }">
-    <h3><fmt:message key="label.no_results"/></h3>
-</c:if>
-<c:if test="${ orders_size != 0 }">
-    <table>
+
+<table>
+    <tr>
+        <th><fmt:message key="label.type"/></th>
+        <th><fmt:message key="label.team"/></th>
+        <th><fmt:message key="label.year"/></th>
+        <th><fmt:message key="label.price"/></th>
+        <th><fmt:message key="label.quantity"/></th>
+    </tr>
+    <c:forEach var="product" items="${cart_products}" varStatus="status">
         <tr>
-            <th>Id</th>
-            <th><fmt:message key="label.order_date"/></th>
-            <th><fmt:message key="label.order_cost"/></th>
-            <th><fmt:message key="label.method_of_receiving"/></th>
-            <th><fmt:message key="label.method_of_payment"/></th>
+            <td><c:out value="${ product.type }" /></td>
+            <td><c:out value="${ product.team }" /></td>
+            <td><c:out value="${ product.year }" /></td>
+            <td><c:out value="${ product.price }" /></td>
+            <td><c:out value="${ cart.get(product.productId) }" /></td>
         </tr>
-        <c:forEach var="order" items="${orders}" varStatus="status">
-            <tr>
-                <td><c:out value="${ order.orderId }" /></td>
-                <td><c:out value="${ order.orderDate }" /></td>
-                <td><c:out value="${ order.orderCost }" /></td>
-                <td><c:out value="${ order.methodOfReceiving }" /></td>
-                <td><c:out value="${ order.methodOfPayment }" /></td>
-            </tr>
-        </c:forEach>
-    </table>
-</c:if>
+    </c:forEach>
+</table>
 
 </body>
 </html>

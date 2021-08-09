@@ -11,6 +11,7 @@ public final class ParameterAndAttribute {
     public static final String PARAM_NAME_NEW_QUANTITY = "new_quantity";
     public static final String PARAM_NAME_NICKNAME = "nickname";
     public static final String PARAM_NAME_OLD_PASSWORD = "old_password";
+    public static final String PARAM_NAME_ORDER_ID = "order_id";
     public static final String PARAM_NAME_PASSWORD = "password";
     public static final String PARAM_NAME_PASSWORD2 = "password2";
     public static final String PARAM_NAME_PHONE = "phone";

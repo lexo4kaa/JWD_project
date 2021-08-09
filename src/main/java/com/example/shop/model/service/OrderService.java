@@ -10,4 +10,5 @@ public interface OrderService {
     void addOrder(Map<Integer, Integer> cart, String nickname,
                   String methodOfReceiving, String methodOfPayment) throws ServiceException;
     List<Order> findOrdersByNickname(String nickname) throws ServiceException;
+    Map<Integer, Integer> findInfoAboutOrder(int orderId) throws ServiceException;
 }

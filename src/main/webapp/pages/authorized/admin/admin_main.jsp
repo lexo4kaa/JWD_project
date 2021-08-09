@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css"/>
 </head>
 <jsp:include page="../../common/header.jsp"/>
-<h3>Hi, ${nickname}!</h3>
+<h3><fmt:message key="label.hi"/>, ${nickname}!</h3>
 <img src="https://media.giphy.com/media/Cmr1OMJ2FN0B2/giphy.gif" alt="Oops" width="150" height="150">
 <hr/>
 

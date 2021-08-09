@@ -53,6 +53,11 @@ public enum CommandType {
             this.command = new FindAllUsersCommand();
         }
     },
+    FIND_INFO_ABOUT_ORDER {
+        {
+            this.command = new FindInfoAboutOrderCommand();
+        }
+    },
     FIND_ORDERS_BY_NICKNAME {
         {
             this.command = new FindOrdersByNicknameCommand();
@@ -71,6 +76,11 @@ public enum CommandType {
     DELETE_PRODUCT_FROM_CART {
         {
             this.command = new DeleteProductFromCartCommand();
+        }
+    },
+    DELETE_ALL_PRODUCTS_FROM_CART {
+        {
+            this.command = new DeleteAllProductsFromCartCommand();
         }
     },
     CHANGE_QUANTITY_OF_PRODUCT_IN_CART {

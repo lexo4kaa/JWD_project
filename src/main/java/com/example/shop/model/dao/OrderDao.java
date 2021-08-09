@@ -11,4 +11,5 @@ public interface OrderDao {
                   String methodOfReceiving, String methodOfPayment) throws DaoException;
     void addOrderHasProduct(Map<Integer, Integer> cart, int productId) throws DaoException;
     List<Order> findOrdersByNickname(String nickname) throws DaoException;
+    Map<Integer, Integer> findInfoAboutOrder(int orderId) throws DaoException;
 }
