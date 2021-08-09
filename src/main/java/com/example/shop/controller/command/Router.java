@@ -1,12 +1,12 @@
 package com.example.shop.controller.command;
 
 public class Router {
-    private final String pagePath;
-    private final RouteType routeType;
-
     public enum RouteType {
         FORWARD, REDIRECT
     }
+
+    private final String pagePath;
+    private final RouteType routeType;
 
     public Router(String pagePath, RouteType routeType) {
         this.pagePath = pagePath;

@@ -7,13 +7,13 @@ import java.util.Optional;
 
 public interface UserDao {
     List<User> findAllUsers() throws DaoException;
-    User findUserByNickname(String nickname) throws DaoException;
+    Optional<User> findUserByNickname(String nickname) throws DaoException;
+    Optional<User> findUserById(int userId) throws DaoException;
     List<User> findUsersByPartOfNickname(String nickname) throws DaoException;
     Optional<String> findUserRole(String nickname) throws DaoException;
     String findPasswordByNickname(String nickname) throws DaoException;
     void addNewUser(String name, String surname, String nickname, String password,
                     String dob, String phone, String email, String role) throws DaoException;
-    void deleteUser(int userId) throws DaoException;
     void addUserToBlacklist(int userId, String banReason) throws DaoException;
     void deleteUserFromBlacklist(int userId) throws DaoException;
     void changeIsBannedPropertyOnTrue(int userId) throws DaoException;
@@ -22,4 +22,5 @@ public interface UserDao {
                     String phone, String email, int userId) throws DaoException;
     void changePassword(int userId, String newPassword) throws DaoException;
     boolean isBanned(String userNickname) throws DaoException;
+    void changeRole(int userId, String newRole) throws DaoException;
 }

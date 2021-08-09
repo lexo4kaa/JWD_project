@@ -27,7 +27,7 @@ public class ChangeQuantityOfProductInCartCommand implements ActionCommand {
         HttpSession session = request.getSession();
         String page;
         try {
-            Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute("cart");
+            Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute(CART);
             String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
             int productId = Integer.parseInt(stringProductId);
             String stringNewQuantity = request.getParameter(PARAM_NAME_NEW_QUANTITY);

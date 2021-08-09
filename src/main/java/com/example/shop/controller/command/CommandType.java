@@ -18,11 +18,6 @@ public enum CommandType {
             this.command = new RegistrationCommand();
         }
     },
-    DELETE_USER {
-        {
-            this.command = new DeleteUserCommand();
-        }
-    },
     FIND_PRODUCTS_BY_TEAM_AND_TYPE {
         {
             this.command = new FindProductsByTeamAndTypeCommand();
@@ -91,6 +86,11 @@ public enum CommandType {
     DELETE_USER_FROM_BLACKLIST {
         {
             this.command = new DeleteUserFromBlacklistCommand();
+        }
+    },
+    CHANGE_ROLE {
+        {
+            this.command = new ChangeUserRoleCommand();
         }
     },
     TO_LOGIN_PAGE {

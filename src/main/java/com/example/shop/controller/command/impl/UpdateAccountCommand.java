@@ -3,6 +3,7 @@ package com.example.shop.controller.command.impl;
 import com.example.shop.controller.command.ActionCommand;
 import com.example.shop.controller.command.Router;
 import com.example.shop.controller.command.Router.RouteType;
+import com.example.shop.entity.User;
 import com.example.shop.model.service.ServiceException;
 import com.example.shop.model.service.impl.UserServiceImpl;
 import com.example.shop.resource.ConfigurationManager;
@@ -28,7 +29,8 @@ public class UpdateAccountCommand implements ActionCommand {
         String email = request.getParameter(PARAM_NAME_EMAIL);
         try {
             String userNickname = (String) session.getAttribute(NICKNAME);
-            int userId = userService.findUserByNickname(userNickname).getUserId();
+            User user = userService.findUserByNickname(userNickname).get();
+            int userId = user.getUserId();
             if (userService.updateUser(name, surname, nickname, dob, phone, email, userId)) {
                 session.setAttribute(NICKNAME, nickname);
                 session.setAttribute(PROFILE, userService.findUserByNickname(nickname));
