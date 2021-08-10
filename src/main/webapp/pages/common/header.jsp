@@ -10,10 +10,6 @@
 <body>
 <div class="header">
 
-    <!-- <img style="float:left;width:60px;height:40px;margin-top: -10px" src="${pageContext.request.contextPath}/images/ball.jpg" alt="Oops"> -->
-    <!-- <span style="float:left;font-size:xx-large;color:blue;font-family:'Bradley Hand ITC';
-                margin-top: -10px;margin-right: 10px">FOOTBALL SHOP</span> -->
-
     <form name="allProducts" method="POST" action="${pageContext.request.contextPath}/controller">
         <input type="hidden" name="command" value="find_all_products"/>
         <input style="float:left;font-size:xx-large;color:blue;font-family:'Bradley Hand ITC';

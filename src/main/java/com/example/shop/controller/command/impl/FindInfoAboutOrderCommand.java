@@ -29,9 +29,9 @@ public class FindInfoAboutOrderCommand  implements ActionCommand {
         try {
             int orderId = Integer.parseInt(request.getParameter(PARAM_NAME_ORDER_ID));
             Map<Integer, Integer> cart = orderService.findInfoAboutOrder(orderId);
-            session.setAttribute(CART, cart);
+            session.setAttribute(INFO_CART, cart);
             List<Product> products = productService.findProductsByIds(cart.keySet());
-            session.setAttribute(CART_PRODUCTS, products);
+            session.setAttribute(INFO_CART_PRODUCTS, products);
             page = ConfigurationManager.getProperty("path.page.orders_info");
         } catch (ServiceException e) {
             logger.error("Exception in 'FindInfoAboutOrderCommand', redirected to error page");

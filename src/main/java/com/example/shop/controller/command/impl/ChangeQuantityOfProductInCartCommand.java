@@ -32,7 +32,7 @@ public class ChangeQuantityOfProductInCartCommand implements ActionCommand {
             int productId = Integer.parseInt(stringProductId);
             String stringNewQuantity = request.getParameter(PARAM_NAME_NEW_QUANTITY);
             int newQuantity = Integer.parseInt(stringNewQuantity);
-            int oldQuantity = cart.containsKey(productId) ? cart.get(productId) : 0;
+            int oldQuantity = cart.getOrDefault(productId, 0);
             Product product = productService.findProductsByIds(Set.of(productId)).get(0);
             cart = productService.changeQuantityOfProductInCart(cart, productId, newQuantity);
             session.setAttribute(CART, cart);

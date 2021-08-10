@@ -54,8 +54,8 @@
             <div style="color: blue">
                 <c:out value="${ prod.price }$" />
             </div>
-            <form style="float: left; margin-left: 35%" name="deleteProduct" method="POST" action="${pageContext.request.contextPath}/controller">
-                <input type="hidden" name="command" value="delete_product_from_cart"/>
+            <form style="float: left; margin-left: 35%" name="deleteUnitOfProduct" method="POST" action="${pageContext.request.contextPath}/controller">
+                <input type="hidden" name="command" value="delete_unit_of_product_from_cart"/>
                 <input type="hidden" name="product_id" value="${ prod.productId }">
                 <input type="submit" value="-"/>
             </form>
@@ -75,8 +75,8 @@
                        value="${ quantity }" min="0" max="99" onblur="checkQuantity(this)"/>
             </form>
 
-            <form style="float: left" name="addProduct" method="POST" action="${pageContext.request.contextPath}/controller">
-                <input type="hidden" name="command" value="add_product_to_cart"/>
+            <form style="float: left" name="addUnitOfProduct" method="POST" action="${pageContext.request.contextPath}/controller">
+                <input type="hidden" name="command" value="add_unit_of_product_to_cart"/>
                 <input type="hidden" name="product_id" value="${ prod.productId }">
                 <input type="submit" value="+"/>
             </form>
