@@ -25,4 +25,4 @@
 - просмотр информации о всех пользователях (или части пользователей)
 
 ## Схема базы данных
-![Image alt](https://github.com/lexo4kaa/JWD_project/raw/{branch}/main/db/db.png)
+![Image alt](https://github.com/lexo4kaa/JWD_project/raw/main/db/db.png)
