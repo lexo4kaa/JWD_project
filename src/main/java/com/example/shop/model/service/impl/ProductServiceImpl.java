@@ -114,4 +114,30 @@ public class ProductServiceImpl implements ProductService {
         }
         return cart;
     }
+
+    @Override
+    public void changeStatusOfFavouriteProduct(int userId, int productId) throws ServiceException {
+        try {
+            if(productDao.isFavouriteProduct(userId, productId)) {
+                productDao.deleteProductFromFavourites(userId, productId);
+            } else {
+                productDao.addProductToFavourites(userId, productId);
+            }
+        } catch (DaoException e) {
+            logger.error("Exception in changeStatusOfFavouriteProduct(" + userId + "," + productId + ")", e);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Set<Integer> findFavouriteProducts(int userId) throws ServiceException {
+        Set<Integer> products;
+        try {
+            products = productDao.findFavouriteProducts(userId);
+        } catch (DaoException e) {
+            logger.error("productDao.findFavouriteProducts(" + userId + ") is failed in ProductServiceImpl", e);
+            throw new ServiceException(e);
+        }
+        return products;
+    }
 }

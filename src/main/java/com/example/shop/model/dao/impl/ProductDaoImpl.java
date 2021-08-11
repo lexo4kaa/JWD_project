@@ -11,7 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.example.shop.model.dao.ProductColumn.*;
 
@@ -27,9 +29,17 @@ public class ProductDaoImpl implements ProductDao {
     private static final String SQL_FIND_PRODUCTS_BY_TEAM_AND_TYPE = "SELECT product_id,product_type, product_team, product_year," +
                                                             "product_specification,product_price,product_path " +
                                                             "FROM products WHERE product_team = ? && product_type LIKE ?";
-    private static final String SQL_FIND_PRODUCTS_BY_IDS =  "SELECT product_id,product_type, product_team, product_year," +
+    private static final String SQL_FIND_PRODUCTS_BY_ID =  "SELECT product_id,product_type, product_team, product_year," +
                                                             "product_specification, product_price, product_path " +
                                                             "FROM products WHERE product_id = ?";
+    private static final String SQL_ADD_PRODUCT_TO_FAVOURITES = "INSERT INTO favourite_products(ref_user_id,ref_product_id) " +
+                                                                "VALUES (?,?)";
+    private static final String SQL_DELETE_PRODUCT_FROM_FAVOURITES = "DELETE FROM favourite_products WHERE " +
+                                                                    "ref_user_id = ? && ref_product_id = ?";
+    private static final String SQL_FIND_FAVOURITE_PRODUCT = "SELECT ref_user_id,ref_product_id FROM favourite_products" +
+                                                            " WHERE ref_user_id = ? && ref_product_id = ?";
+    private static final String SQL_FIND_FAVOURITE_PRODUCTS = "SELECT ref_product_id FROM favourite_products" +
+                                                            " WHERE ref_user_id = ?";
 
     private ProductDaoImpl(){}
 
@@ -89,7 +99,7 @@ public class ProductDaoImpl implements ProductDao {
     public Product findProductById(int productId) throws DaoException {
         Product product = new Product();
         try(Connection connection = CustomConnectionPool.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_FIND_PRODUCTS_BY_IDS)) {
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_PRODUCTS_BY_ID)) {
             statement.setInt(1, productId);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()){
@@ -105,7 +115,7 @@ public class ProductDaoImpl implements ProductDao {
     public double findPriceById(int productId) throws DaoException {
         Product product = new Product();
         try(Connection connection = CustomConnectionPool.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_FIND_PRODUCTS_BY_IDS)) {
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_PRODUCTS_BY_ID)) {
             statement.setInt(1, productId);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()){
@@ -115,6 +125,63 @@ public class ProductDaoImpl implements ProductDao {
             throw new DaoException("Error while finding price", e);
         }
         return product.getPrice();
+    }
+
+    @Override
+    public boolean isFavouriteProduct(int userId, int productId) throws DaoException {
+        boolean isFavouriteProduct = false;
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_FAVOURITE_PRODUCT)) {
+            statement.setInt(1, userId);
+            statement.setInt(2, productId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()){
+                isFavouriteProduct = true;
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while checking status of favourite product", e);
+        }
+        return isFavouriteProduct;
+    }
+
+    @Override
+    public void addProductToFavourites(int userId, int productId) throws DaoException {
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_ADD_PRODUCT_TO_FAVOURITES)) {
+            statement.setInt(1, userId);
+            statement.setInt(2, productId);
+            statement.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while adding product to favourites", e);
+        }
+    }
+
+    @Override
+    public void deleteProductFromFavourites(int userId, int productId) throws DaoException {
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_DELETE_PRODUCT_FROM_FAVOURITES)) {
+            statement.setInt(1, userId);
+            statement.setInt(2, productId);
+            statement.executeUpdate();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while deleting product from favourites", e);
+        }
+    }
+
+    @Override
+    public Set<Integer> findFavouriteProducts(int userId) throws DaoException {
+        Set<Integer> productsIds = new HashSet<>();
+        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_FAVOURITE_PRODUCTS)) {
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                productsIds.add(resultSet.getInt(1));
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Error while finding favourite products", e);
+        }
+        return productsIds;
     }
 
     private Product createProductsFromResultSet(ResultSet resultSet) throws SQLException {

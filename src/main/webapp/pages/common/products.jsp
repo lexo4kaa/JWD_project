@@ -60,6 +60,7 @@
             <div style="color: blue">
                 <c:out value="${ prod.price }$" />
             </div>
+
             <form style="float: left; margin-left: 35%" name="deleteUnitOfProduct" method="POST" action="${pageContext.request.contextPath}/controller">
                 <input type="hidden" name="command" value="delete_unit_of_product_from_cart"/>
                 <input type="hidden" name="product_id" value="${ prod.productId }">
@@ -85,6 +86,21 @@
                 <input type="hidden" name="command" value="add_unit_of_product_to_cart"/>
                 <input type="hidden" name="product_id" value="${ prod.productId }">
                 <input type="submit" value="+"/>
+            </form>
+
+            <c:set var="isFavourite" value="${ favourites.contains(prod.productId) }"/>
+            <c:if test="${ isFavourite }">
+                <c:set var="heartType" value="&#10084;"/>
+            </c:if>
+            <c:if test="${ !isFavourite }">
+                <c:set var="heartType" value="&#9825;"/>
+            </c:if>
+
+            <br style="clear:both">
+            <form style="text-align: center" name="changeStatusOfFavouriteProduct" method="POST" action="${pageContext.request.contextPath}/controller">
+                <input type="hidden" name="command" value="change_status_of_favourite_product"/>
+                <input type="hidden" name="product_id" value="${ prod.productId }">
+                <input style="border: none; background-color: white; font-size: x-large" type="submit" value="${heartType}"/>
             </form>
         </li>
         </c:forEach>

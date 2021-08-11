@@ -68,6 +68,16 @@ public enum CommandType {
             this.command = new AddOrderCommand();
         }
     },
+    CHANGE_STATUS_OF_FAVOURITE_PRODUCT {
+        {
+            this.command = new ChangeStatusOfFavouriteProductCommand();
+        }
+    },
+    FIND_FAVOURITE_PRODUCTS {
+        {
+            this.command = new FindFavouriteProductsCommand();
+        }
+    },
     FIND_INFO_ABOUT_PRODUCT {
         {
             this.command = new FindInfoAboutProductCommand();

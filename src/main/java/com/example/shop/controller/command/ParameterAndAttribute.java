@@ -29,6 +29,8 @@ public final class ParameterAndAttribute {
     public static final String CLIENT = "client";
     public static final String CURRENT_LOCALE = "current_locale";
     public static final String CURRENT_PAGE = "current_page";
+    public static final String FAVOURITE_PRODUCTS = "favourite_products";
+    public static final String FAVOURITES = "favourites";
     public static final String GUEST = "guest";
     public static final String INFO_CART = "info_cart";
     public static final String INFO_CART_PRODUCTS = "info_cart_products";

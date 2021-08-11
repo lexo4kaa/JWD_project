@@ -4,6 +4,7 @@ import com.example.shop.controller.command.ActionCommand;
 import com.example.shop.controller.command.Router;
 import com.example.shop.controller.command.Router.RouteType;
 import com.example.shop.entity.Order;
+import com.example.shop.model.service.OrderService;
 import com.example.shop.model.service.ServiceException;
 import com.example.shop.model.service.impl.OrderServiceImpl;
 import com.example.shop.resource.ConfigurationManager;
@@ -17,7 +18,7 @@ import java.util.List;
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
 public class FindOrdersByNicknameCommand implements ActionCommand {
-    private static final OrderServiceImpl orderService = new OrderServiceImpl();
+    private static final OrderService orderService = new OrderServiceImpl();
     private static Logger logger = LogManager.getLogger();
 
     @Override

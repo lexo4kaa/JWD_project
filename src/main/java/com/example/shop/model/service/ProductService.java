@@ -14,4 +14,6 @@ public interface ProductService {
     Map<Integer, Integer> addUnitOfProductToCart(Map<Integer, Integer> cart, int productId);
     Map<Integer, Integer> deleteUnitOfProductFromCart(Map<Integer, Integer> cart, int productId);
     Map<Integer, Integer> changeQuantityOfProductInCart(Map<Integer, Integer> cart, int productId, int quantity);
+    void changeStatusOfFavouriteProduct(int userId, int productId) throws ServiceException;
+    Set<Integer> findFavouriteProducts(int userId) throws ServiceException;
 }
