@@ -32,6 +32,7 @@ public final class ParameterAndAttribute {
     public static final String GUEST = "guest";
     public static final String INFO_CART = "info_cart";
     public static final String INFO_CART_PRODUCTS = "info_cart_products";
+    public static final String INFO_PRODUCT = "info_product";
     public static final String METHOD_OF_RECEIVING = "method_of_receiving";
     public static final String METHOD_OF_PAYMENT = "method_of_payment";
     public static final String NICKNAME = "nickname";

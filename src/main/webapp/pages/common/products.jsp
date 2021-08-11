@@ -42,8 +42,14 @@
         <li class="product-wrapper">
             <div class="product">
                 <div class="product-photo">
-                    <img src="${pageContext.request.contextPath}${prod.path}" alt="Oops">
-                    <div class="specification">${prod.specification}</div>
+                    <form name="infoAboutProduct" method="POST" action="${pageContext.request.contextPath}/controller">
+                        <input type="hidden" name="command" value="find_info_about_product"/>
+                        <input type="hidden" name="product_id" value="${ prod.productId }">
+                        <input style="position:absolute;top:0;bottom:0;left:0;right:0;width:200px;height:200px;
+                                background-size:200px;cursor:pointer;margin: auto;border:none;
+                                background-image:url('${pageContext.request.contextPath}${prod.path}');" type="submit" value=""/>
+
+                    </form>
                 </div>
             </div>
             <div>

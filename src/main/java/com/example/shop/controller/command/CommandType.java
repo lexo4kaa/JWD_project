@@ -68,6 +68,11 @@ public enum CommandType {
             this.command = new AddOrderCommand();
         }
     },
+    FIND_INFO_ABOUT_PRODUCT {
+        {
+            this.command = new FindInfoAboutProductCommand();
+        }
+    },
     ADD_UNIT_OF_PRODUCT_TO_CART {
         {
             this.command = new AddUnitOfProductToCartCommand();
