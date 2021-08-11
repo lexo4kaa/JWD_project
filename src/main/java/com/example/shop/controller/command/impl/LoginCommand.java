@@ -23,13 +23,13 @@ public class LoginCommand implements ActionCommand {
 
     @Override
     public Router execute(HttpServletRequest request) {
+        HttpSession session = request.getSession();
         String page;
         String login = request.getParameter(PARAM_NAME_LOGIN).toLowerCase();
         String password = request.getParameter(PARAM_NAME_PASSWORD);
         try {
             if (userService.authorizeUser(login, password)) {
                 if(!userService.isBanned(login)) {
-                    HttpSession session = request.getSession();
                     session.setAttribute(NICKNAME, login);
                     User user = userService.findUserByNickname(login).get();
                     String role = user.getRole();
@@ -43,16 +43,16 @@ public class LoginCommand implements ActionCommand {
                     }
                 }
                 else {
-                    request.setAttribute("banMessage", MessageManager.getProperty("message.ban"));
+                    session.setAttribute(BAN_MESSAGE, MessageManager.getProperty("message.ban")); // todo attr to constant
                     page = ConfigurationManager.getProperty("path.page.login");
                 }
             } else {
-                request.setAttribute("errorLoginPassMessage", MessageManager.getProperty("message.loginerror"));
+                session.setAttribute(ERROR_LOGIN_PASS_MESSAGE, MessageManager.getProperty("message.loginerror")); // todo attr to constant
                 page = ConfigurationManager.getProperty("path.page.login");
             }
         }
         catch(ServiceException e) {
-            request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction"));
+            session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction"));
             page = ConfigurationManager.getProperty("path.page.index");
         }
         return new Router(page, RouteType.REDIRECT);

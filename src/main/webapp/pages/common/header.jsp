@@ -109,10 +109,10 @@
                     background-size:40px 40px;width:40px;height:40px;margin-top:-10px" type="submit" value=""/>
     </form>
 
-    <form style="float: right; margin-right: -10px; margin-top:-10px"
-          name="cartPage" method="POST" action="${pageContext.request.contextPath}/controller">
+    <form style="float: right; margin-top: -5px"
+          name="favouritesPage" method="POST" action="${pageContext.request.contextPath}/controller">
         <input type="hidden" name="command" value="find_favourite_products"/>
-        <input type="submit" value="&#10084;"/>
+        <input style="color: red; font-size: x-large" type="submit" value="&#10084;"/>
     </form>
     <br>
 </div>

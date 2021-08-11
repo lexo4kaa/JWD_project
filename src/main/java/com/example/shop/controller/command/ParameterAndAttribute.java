@@ -47,4 +47,11 @@ public final class ParameterAndAttribute {
     public static final String USER_ROLE = "user_role";
     public static final String USERS = "users";
     public static final String USERS_SIZE = "users_size";
+
+    public static final String ACT_ON_YOURSELF_MESSAGE = "actOnYourselfMessage";
+    public static final String BAN_MESSAGE = "banMessage";
+    public static final String ERROR_LOGIN_PASS_MESSAGE = "errorLoginPassMessage";
+    public static final String REGISTRATION_ERROR_MESSAGE = "registrationError";
+    public static final String UPDATE_ERROR_MESSAGE = "updateError";
+    public static final String WRONG_ACTION_MESSAGE = "wrongAction";
 }

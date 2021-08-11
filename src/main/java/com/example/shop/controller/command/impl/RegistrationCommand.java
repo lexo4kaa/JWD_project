@@ -35,7 +35,7 @@ public class RegistrationCommand implements ActionCommand {
                         userService.registerUser(name, surname, nickname, password, dob, phone, email, "administrator")) {
                     page = ConfigurationManager.getProperty("path.page.admin_main");
                 } else {
-                    request.setAttribute("registrationError", MessageManager.getProperty("message.registrationerror"));
+                    session.setAttribute(REGISTRATION_ERROR_MESSAGE, MessageManager.getProperty("message.registrationerror"));
                     page = ConfigurationManager.getProperty("path.page.registration");
                 }
             } else {
@@ -43,12 +43,12 @@ public class RegistrationCommand implements ActionCommand {
                         userService.registerUser(name, surname, nickname, password, dob, phone, email, "client")) {
                     page = ConfigurationManager.getProperty("path.page.login");
                 } else {
-                    request.setAttribute("registrationError", MessageManager.getProperty("message.registrationerror"));
+                    session.setAttribute(REGISTRATION_ERROR_MESSAGE, MessageManager.getProperty("message.registrationerror"));
                     page = ConfigurationManager.getProperty("path.page.registration");
                 }
             }
         } catch(ServiceException e) {
-            request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction"));
+            session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction"));
             page = ConfigurationManager.getProperty("path.page.index");
         }
         return new Router(page, RouteType.REDIRECT);

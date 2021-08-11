@@ -36,11 +36,11 @@ public class UpdateAccountCommand implements ActionCommand {
                 session.setAttribute(PROFILE, userService.findUserByNickname(nickname));
                 page = ConfigurationManager.getProperty("path.page.account");
             } else {
-                request.setAttribute("updateError", MessageManager.getProperty("message.updateerror"));
+                session.setAttribute(UPDATE_ERROR_MESSAGE, MessageManager.getProperty("message.updateerror"));
                 page = ConfigurationManager.getProperty("path.page.registration");
             }
         } catch(ServiceException e) {
-            request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction"));
+            session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction"));
             page = ConfigurationManager.getProperty("path.page.index");
         }
         return new Router(page, RouteType.REDIRECT);
