@@ -11,6 +11,7 @@ public final class ParameterAndAttribute {
     public static final String PARAM_NAME_NEW_QUANTITY = "new_quantity";
     public static final String PARAM_NAME_NICKNAME = "nickname";
     public static final String PARAM_NAME_OLD_PASSWORD = "old_password";
+    public static final String PARAM_NAME_ORDER_ID = "order_id";
     public static final String PARAM_NAME_PASSWORD = "password";
     public static final String PARAM_NAME_PASSWORD2 = "password2";
     public static final String PARAM_NAME_PHONE = "phone";
@@ -28,7 +29,12 @@ public final class ParameterAndAttribute {
     public static final String CLIENT = "client";
     public static final String CURRENT_LOCALE = "current_locale";
     public static final String CURRENT_PAGE = "current_page";
+    public static final String FAVOURITE_PRODUCTS = "favourite_products";
+    public static final String FAVOURITES = "favourites";
     public static final String GUEST = "guest";
+    public static final String INFO_CART = "info_cart";
+    public static final String INFO_CART_PRODUCTS = "info_cart_products";
+    public static final String INFO_PRODUCT = "info_product";
     public static final String METHOD_OF_RECEIVING = "method_of_receiving";
     public static final String METHOD_OF_PAYMENT = "method_of_payment";
     public static final String NICKNAME = "nickname";
@@ -41,4 +47,11 @@ public final class ParameterAndAttribute {
     public static final String USER_ROLE = "user_role";
     public static final String USERS = "users";
     public static final String USERS_SIZE = "users_size";
+
+    public static final String ACT_ON_YOURSELF_MESSAGE = "actOnYourselfMessage";
+    public static final String BAN_MESSAGE = "banMessage";
+    public static final String ERROR_LOGIN_PASS_MESSAGE = "errorLoginPassMessage";
+    public static final String REGISTRATION_ERROR_MESSAGE = "registrationError";
+    public static final String UPDATE_ERROR_MESSAGE = "updateError";
+    public static final String WRONG_ACTION_MESSAGE = "wrongAction";
 }

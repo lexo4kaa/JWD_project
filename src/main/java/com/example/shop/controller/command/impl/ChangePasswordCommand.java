@@ -29,11 +29,11 @@ public class ChangePasswordCommand implements ActionCommand {
                     userService.changePassword(userNickname, oldPassword, newPassword)) {
                 page = ConfigurationManager.getProperty("path.page.account");
             } else {
-                request.setAttribute("updateError", MessageManager.getProperty("message.updateerror"));
+                session.setAttribute(UPDATE_ERROR_MESSAGE, MessageManager.getProperty("message.updateerror"));
                 page = ConfigurationManager.getProperty("path.page.change_password");
             }
         } catch(ServiceException e) {
-            request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction"));
+            session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction"));
             page = ConfigurationManager.getProperty("path.page.index");
         }
         return new Router(page, RouteType.REDIRECT);

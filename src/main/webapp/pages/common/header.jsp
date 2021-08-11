@@ -10,10 +10,6 @@
 <body>
 <div class="header">
 
-    <!-- <img style="float:left;width:60px;height:40px;margin-top: -10px" src="${pageContext.request.contextPath}/images/ball.jpg" alt="Oops"> -->
-    <!-- <span style="float:left;font-size:xx-large;color:blue;font-family:'Bradley Hand ITC';
-                margin-top: -10px;margin-right: 10px">FOOTBALL SHOP</span> -->
-
     <form name="allProducts" method="POST" action="${pageContext.request.contextPath}/controller">
         <input type="hidden" name="command" value="find_all_products"/>
         <input style="float:left;font-size:xx-large;color:blue;font-family:'Bradley Hand ITC';
@@ -62,12 +58,12 @@
             <input type="submit" value="<fmt:message key="label.account"/>"/>
         </form>
         <c:if test="${user_role == 'client'}">
-            <div style="margin-top: -10px; padding: 0 15px; color: blue; float: right">
+            <div style="margin-top: -10px; padding: 0 15px; color: blue; font-size: medium; float: right">
                 <fmt:message key="label.user"/><br>${nickname}
             </div>
         </c:if>
         <c:if test="${user_role == 'administrator'}">
-            <div style="margin-top: -10px; padding: 0 15px; color: blueviolet; float: right">
+            <div style="margin-top: -10px; padding: 0 15px; color: blueviolet; font-size: medium; float: right">
                 <fmt:message key="label.admin"/><br>${nickname}
             </div>
         </c:if>
@@ -78,7 +74,7 @@
             <input type="hidden" name="command" value="to_login_page"/>
             <input type="submit" value="<fmt:message key="label.login_button"/>"/>
         </form>
-        <div style="margin-top: -10px; padding: 0 15px; color: darkred; float: right">
+        <div style="padding: 0 15px; color: darkgreen; font-size: medium; float: right">
             <fmt:message key="label.guest"/>
         </div>
     </c:if>
@@ -106,9 +102,17 @@
                 text-align: center; width: ${width}px; height: 20px">${cart_size}
     </div>
 
-    <form style="float: right; margin-right: -10px" name="cartPage" method="POST" action="${pageContext.request.contextPath}/controller">
+    <form style="float: right; margin-right: -10px"
+          name="cartPage" method="POST" action="${pageContext.request.contextPath}/controller">
         <input type="hidden" name="command" value="find_products_by_ids"/>
-        <input type="submit" value="<fmt:message key="label.cart"/>"/>
+        <input style="background-image:url('${pageContext.request.contextPath}/images/cart.png');
+                    background-size:40px 40px;width:40px;height:40px;margin-top:-10px" type="submit" value=""/>
+    </form>
+
+    <form style="float: right; margin-top: -5px"
+          name="favouritesPage" method="POST" action="${pageContext.request.contextPath}/controller">
+        <input type="hidden" name="command" value="find_favourite_products"/>
+        <input style="color: red; font-size: x-large" type="submit" value="&#10084;"/>
     </form>
     <br>
 </div>

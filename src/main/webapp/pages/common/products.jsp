@@ -42,8 +42,14 @@
         <li class="product-wrapper">
             <div class="product">
                 <div class="product-photo">
-                    <img src="${pageContext.request.contextPath}${prod.path}" alt="Oops">
-                    <div class="specification">${prod.specification}</div>
+                    <form name="infoAboutProduct" method="POST" action="${pageContext.request.contextPath}/controller">
+                        <input type="hidden" name="command" value="find_info_about_product"/>
+                        <input type="hidden" name="product_id" value="${ prod.productId }">
+                        <input style="position:absolute;top:0;bottom:0;left:0;right:0;width:200px;height:200px;
+                                background-size:200px;cursor:pointer;margin: auto;border:none;
+                                background-image:url('${pageContext.request.contextPath}${prod.path}');" type="submit" value=""/>
+
+                    </form>
                 </div>
             </div>
             <div>
@@ -54,10 +60,11 @@
             <div style="color: blue">
                 <c:out value="${ prod.price }$" />
             </div>
-            <form style="float: left; margin-left: 35%" name="addProduct" method="POST" action="${pageContext.request.contextPath}/controller">
-                <input type="hidden" name="command" value="add_product_to_cart"/>
+
+            <form style="float: left; margin-left: 35%" name="deleteUnitOfProduct" method="POST" action="${pageContext.request.contextPath}/controller">
+                <input type="hidden" name="command" value="delete_unit_of_product_from_cart"/>
                 <input type="hidden" name="product_id" value="${ prod.productId }">
-                <input type="submit" value="+"/>
+                <input type="submit" value="-"/>
             </form>
 
             <c:set var="containsKey" value="${ cart.containsKey(prod.productId) }"/>
@@ -75,10 +82,25 @@
                        value="${ quantity }" min="0" max="99" onblur="checkQuantity(this)"/>
             </form>
 
-            <form style="float: left" name="deleteProduct" method="POST" action="${pageContext.request.contextPath}/controller">
-                <input type="hidden" name="command" value="delete_product_from_cart"/>
+            <form style="float: left" name="addUnitOfProduct" method="POST" action="${pageContext.request.contextPath}/controller">
+                <input type="hidden" name="command" value="add_unit_of_product_to_cart"/>
                 <input type="hidden" name="product_id" value="${ prod.productId }">
-                <input type="submit" value="-"/>
+                <input type="submit" value="+"/>
+            </form>
+
+            <c:set var="isFavourite" value="${ favourites.contains(prod.productId) }"/>
+            <c:if test="${ isFavourite }">
+                <c:set var="heartType" value="&#10084;"/>
+            </c:if>
+            <c:if test="${ !isFavourite }">
+                <c:set var="heartType" value="&#9825;"/>
+            </c:if>
+
+            <br style="clear:both">
+            <form style="text-align: center" name="changeStatusOfFavouriteProduct" method="POST" action="${pageContext.request.contextPath}/controller">
+                <input type="hidden" name="command" value="change_status_of_favourite_product"/>
+                <input type="hidden" name="product_id" value="${ prod.productId }">
+                <input style="border: none; background-color: white; font-size: x-large" type="submit" value="${heartType}"/>
             </form>
         </li>
         </c:forEach>

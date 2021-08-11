@@ -27,11 +27,11 @@ public class AddOrderCommand implements ActionCommand {
         Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute(CART);
         String nickname = (String) session.getAttribute(NICKNAME);
         String user_role = (String) session.getAttribute(USER_ROLE);
+        String methodOfReceiving = request.getParameter(METHOD_OF_RECEIVING);
+        String methodOfPayment = request.getParameter(METHOD_OF_PAYMENT);
         try {
             if(cart.size() != 0) {
                 if(!user_role.equals(GUEST)) {
-                    String methodOfReceiving = request.getParameter(METHOD_OF_RECEIVING);
-                    String methodOfPayment = request.getParameter(METHOD_OF_PAYMENT);
                     orderService.addOrder(cart, nickname, methodOfReceiving, methodOfPayment);
                     session.setAttribute(CART_PRODUCTS, null);
                     session.setAttribute(CART, new HashMap<Integer, Integer>());

@@ -53,7 +53,7 @@
            value="<fmt:message key="label.want_to_change_password"/>"/>
 </form>
 
-<form name="myOrdersPage" method="POST" action="${pageContext.request.contextPath}/controller">
+<form name="ordersPage" method="POST" action="${pageContext.request.contextPath}/controller">
     <input type="hidden" name="command" value="find_orders_by_nickname"/>
     <input style="margin: auto; display:flex; font-size: medium; height: 40px; color: blue" type="submit"
            value="<fmt:message key="label.want_to_see_orders"/>"/>

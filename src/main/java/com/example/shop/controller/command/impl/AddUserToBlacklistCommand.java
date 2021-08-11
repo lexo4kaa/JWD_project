@@ -44,7 +44,7 @@ public class AddUserToBlacklistCommand implements ActionCommand {
                 }
                 session.setAttribute(USERS, users);
             } else {
-                request.setAttribute("actOnYourselfMessage", MessageManager.getProperty("message.actonyourself"));
+                session.setAttribute(ACT_ON_YOURSELF_MESSAGE, MessageManager.getProperty("message.actonyourself"));
             }
             page = (String) session.getAttribute(CURRENT_PAGE);
         } catch (ServiceException e) {

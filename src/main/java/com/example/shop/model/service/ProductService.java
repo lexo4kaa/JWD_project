@@ -11,7 +11,9 @@ public interface ProductService {
     List<Product> findProductsByType(String type) throws ServiceException;
     List<Product> findProductsByTeamAndType(String team, String type) throws ServiceException;
     List<Product> findProductsByIds(Set<Integer> productIds) throws ServiceException;
-    Map<Integer, Integer> addProductToCart(Map<Integer, Integer> cart, int productId);
-    Map<Integer, Integer> deleteProductFromCart(Map<Integer, Integer> cart, int productId);
+    Map<Integer, Integer> addUnitOfProductToCart(Map<Integer, Integer> cart, int productId);
+    Map<Integer, Integer> deleteUnitOfProductFromCart(Map<Integer, Integer> cart, int productId);
     Map<Integer, Integer> changeQuantityOfProductInCart(Map<Integer, Integer> cart, int productId, int quantity);
+    void changeStatusOfFavouriteProduct(int userId, int productId) throws ServiceException;
+    Set<Integer> findFavouriteProducts(int userId) throws ServiceException;
 }

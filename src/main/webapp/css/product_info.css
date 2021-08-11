@@ -1,0 +1,20 @@
+.wrapper {
+    width: 90%;
+    text-align: center;
+}
+
+.wrapper .product-photo {
+    width: 50%;
+}
+
+.wrapper .product-photo img {
+    float: left;
+    width: 400px;
+    height: 400px;
+}
+
+.wrapper .description {
+    width: 40%;
+    float: right;
+    text-align: center;
+}

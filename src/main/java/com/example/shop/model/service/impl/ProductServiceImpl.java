@@ -82,7 +82,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Map<Integer, Integer> addProductToCart(Map<Integer, Integer> cart, int productId) {
+    public Map<Integer, Integer> addUnitOfProductToCart(Map<Integer, Integer> cart, int productId) {
         if(cart.containsKey(productId)) {
             cart.put(productId, cart.get(productId) + 1);
         } else {
@@ -92,7 +92,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Map<Integer, Integer> deleteProductFromCart(Map<Integer, Integer> cart, int productId) {
+    public Map<Integer, Integer> deleteUnitOfProductFromCart(Map<Integer, Integer> cart, int productId) {
         if(cart.containsKey(productId)) {
             if(cart.get(productId) > 1) {
                 cart.put(productId, cart.get(productId) - 1);
@@ -113,5 +113,31 @@ public class ProductServiceImpl implements ProductService {
             cart.remove(productId);
         }
         return cart;
+    }
+
+    @Override
+    public void changeStatusOfFavouriteProduct(int userId, int productId) throws ServiceException {
+        try {
+            if(productDao.isFavouriteProduct(userId, productId)) {
+                productDao.deleteProductFromFavourites(userId, productId);
+            } else {
+                productDao.addProductToFavourites(userId, productId);
+            }
+        } catch (DaoException e) {
+            logger.error("Exception in changeStatusOfFavouriteProduct(" + userId + "," + productId + ")", e);
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Set<Integer> findFavouriteProducts(int userId) throws ServiceException {
+        Set<Integer> products;
+        try {
+            products = productDao.findFavouriteProducts(userId);
+        } catch (DaoException e) {
+            logger.error("productDao.findFavouriteProducts(" + userId + ") is failed in ProductServiceImpl", e);
+            throw new ServiceException(e);
+        }
+        return products;
     }
 }

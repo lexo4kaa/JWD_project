@@ -250,7 +250,7 @@ public class UserDaoImpl implements UserDao {
                 isBanned = resultSet.getBoolean(IS_BANNED);
             }
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while finding user", e);
+            throw new DaoException("Error while checking status of user", e);
         }
         return isBanned;
     }

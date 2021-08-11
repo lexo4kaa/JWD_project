@@ -3,6 +3,7 @@ package com.example.shop.controller.command.impl;
 import com.example.shop.controller.command.ActionCommand;
 import com.example.shop.controller.command.Router;
 import com.example.shop.controller.command.Router.RouteType;
+import com.example.shop.entity.Product;
 import com.example.shop.entity.User;
 import com.example.shop.model.service.ServiceException;
 import com.example.shop.model.service.impl.ProductServiceImpl;
@@ -30,17 +31,18 @@ public class FirstInitCommand implements ActionCommand {
         try {
             session.setAttribute(CURRENT_LOCALE, EN_US_LOCALE);
             session.setAttribute(USER_ROLE, GUEST);
-            session.setAttribute(PRODUCTS, productService.findAllProducts());
-            session.setAttribute(TYPE_OF_PRODUCTS, ALL_VALUE);
-            session.setAttribute(CART, new HashMap<Integer, Integer>());
-            session.setAttribute(CART_SIZE, 0);
-            session.setAttribute(TOTAL_COST, 0.0);
+            List<Product> products = productService.findAllProducts();
+            session.setAttribute(PRODUCTS, products);
             List<User> users = userService.findAllUsers();
             session.setAttribute(USERS, users);
             session.setAttribute(USERS_SIZE, users.size());
+            session.setAttribute(CART, new HashMap<Integer, Integer>());
+            session.setAttribute(CART_SIZE, 0);
+            session.setAttribute(TOTAL_COST, 0.0);
+            session.setAttribute(TYPE_OF_PRODUCTS, ALL_VALUE);
             page = ConfigurationManager.getProperty("path.page.products");
         } catch (ServiceException e) {
-            request.setAttribute("wrongAction", MessageManager.getProperty("message.wrongaction"));
+            session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction"));
             page = ConfigurationManager.getProperty("path.page.index");
         }
         return new Router(page, RouteType.REDIRECT);

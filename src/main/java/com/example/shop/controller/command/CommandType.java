@@ -53,6 +53,11 @@ public enum CommandType {
             this.command = new FindAllUsersCommand();
         }
     },
+    FIND_INFO_ABOUT_ORDER {
+        {
+            this.command = new FindInfoAboutOrderCommand();
+        }
+    },
     FIND_ORDERS_BY_NICKNAME {
         {
             this.command = new FindOrdersByNicknameCommand();
@@ -63,14 +68,39 @@ public enum CommandType {
             this.command = new AddOrderCommand();
         }
     },
-    ADD_PRODUCT_TO_CART {
+    CHANGE_STATUS_OF_FAVOURITE_PRODUCT {
         {
-            this.command = new AddProductToCartCommand();
+            this.command = new ChangeStatusOfFavouriteProductCommand();
+        }
+    },
+    FIND_FAVOURITE_PRODUCTS {
+        {
+            this.command = new FindFavouriteProductsCommand();
+        }
+    },
+    FIND_INFO_ABOUT_PRODUCT {
+        {
+            this.command = new FindInfoAboutProductCommand();
+        }
+    },
+    ADD_UNIT_OF_PRODUCT_TO_CART {
+        {
+            this.command = new AddUnitOfProductToCartCommand();
+        }
+    },
+    DELETE_UNIT_OF_PRODUCT_FROM_CART {
+        {
+            this.command = new DeleteUnitOfProductFromCartCommand();
         }
     },
     DELETE_PRODUCT_FROM_CART {
         {
             this.command = new DeleteProductFromCartCommand();
+        }
+    },
+    DELETE_ALL_PRODUCTS_FROM_CART {
+        {
+            this.command = new DeleteAllProductsFromCartCommand();
         }
     },
     CHANGE_QUANTITY_OF_PRODUCT_IN_CART {
