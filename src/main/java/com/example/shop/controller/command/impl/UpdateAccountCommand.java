@@ -33,7 +33,7 @@ public class UpdateAccountCommand implements ActionCommand {
             int userId = user.getUserId();
             if (userService.updateUser(name, surname, nickname, dob, phone, email, userId)) {
                 session.setAttribute(NICKNAME, nickname);
-                session.setAttribute(PROFILE, userService.findUserByNickname(nickname));
+                session.setAttribute(PROFILE, userService.findUserByNickname(nickname).get());
                 page = ConfigurationManager.getProperty("path.page.account");
             } else {
                 session.setAttribute(UPDATE_ERROR_MESSAGE, MessageManager.getProperty("message.updateerror"));
