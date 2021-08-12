@@ -43,11 +43,11 @@ public class LoginCommand implements ActionCommand {
                     }
                 }
                 else {
-                    session.setAttribute(BAN_MESSAGE, MessageManager.getProperty("message.ban")); // todo attr to constant
+                    session.setAttribute(BAN_MESSAGE, MessageManager.getProperty("message.ban"));
                     page = ConfigurationManager.getProperty("path.page.login");
                 }
             } else {
-                session.setAttribute(ERROR_LOGIN_PASS_MESSAGE, MessageManager.getProperty("message.loginerror")); // todo attr to constant
+                session.setAttribute(ERROR_LOGIN_PASS_MESSAGE, MessageManager.getProperty("message.loginerror"));
                 page = ConfigurationManager.getProperty("path.page.login");
             }
         }

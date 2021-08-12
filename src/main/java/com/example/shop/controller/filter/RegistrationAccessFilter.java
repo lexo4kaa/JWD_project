@@ -23,7 +23,6 @@ public class RegistrationAccessFilter implements Filter {
         if (session.getAttribute(USER_ROLE).equals(CLIENT)) {
             String page = ConfigurationManager.getProperty("path.page.index");
             httpResponse.sendRedirect(httpRequest.getContextPath() + page);
-            // todo mb some text or another page
             return;
         }
         filterChain.doFilter(servletRequest, servletResponse);
