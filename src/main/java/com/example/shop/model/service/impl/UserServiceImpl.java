@@ -15,7 +15,15 @@ import java.util.*;
 
 public class UserServiceImpl implements UserService {
     private static Logger logger = LogManager.getLogger();
-    private final UserDao userDao = UserDaoImpl.getInstance();
+    private final UserDao userDao;
+
+    public UserServiceImpl() {
+        userDao = UserDaoImpl.getInstance();
+    }
+
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Override
     public List<User> findAllUsers() throws ServiceException {
@@ -164,20 +172,6 @@ public class UserServiceImpl implements UserService {
                 flag = true;
             } catch (DaoException e) {
                 logger.error("userDao.changePassword is failed in UserServiceImpl", e);
-                throw new ServiceException(e);
-            }
-        }
-        return flag;
-    }
-
-    @Override
-    public boolean isBanned(String userNickname) throws ServiceException {
-        boolean flag = false;
-        if (UserValidator.isLoginCorrect(userNickname)) {
-            try {
-                flag = userDao.isBanned(userNickname);
-            } catch (DaoException e) {
-                logger.error("userDao.isBanned is failed in UserServiceImpl", e);
                 throw new ServiceException(e);
             }
         }

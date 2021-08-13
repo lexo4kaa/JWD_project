@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -274,7 +275,7 @@ public class UserDaoImpl implements UserDao {
         String surname = resultSet.getString(USER_SURNAME);
         String nickname = resultSet.getString(USER_NICKNAME);
         String password = resultSet.getString(USER_PASSWORD);
-        Date dob = resultSet.getDate(USER_DOB);
+        LocalDate dob = resultSet.getDate(USER_DOB).toLocalDate();
         String phone = resultSet.getString(USER_PHONE);
         String email = resultSet.getString(USER_EMAIL);
         String role = resultSet.getString(USER_ROLE);

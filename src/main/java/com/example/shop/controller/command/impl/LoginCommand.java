@@ -29,9 +29,9 @@ public class LoginCommand implements ActionCommand {
         String password = request.getParameter(PARAM_NAME_PASSWORD);
         try {
             if (userService.authorizeUser(login, password)) {
-                if(!userService.isBanned(login)) {
+                User user = userService.findUserByNickname(login).get();
+                if(!user.getIsBanned()) {
                     session.setAttribute(NICKNAME, login);
-                    User user = userService.findUserByNickname(login).get();
                     String role = user.getRole();
                     session.setAttribute(USER_ROLE, role);
                     int userId = user.getUserId();

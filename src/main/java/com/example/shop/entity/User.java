@@ -1,7 +1,6 @@
 package com.example.shop.entity;
 
-import java.util.Date;
-import java.util.Objects;
+import java.time.LocalDate;
 
 public class User {
     private int userId;
@@ -9,7 +8,7 @@ public class User {
     private String surname;
     private String nickname;
     private String password;
-    private Date dob;
+    private LocalDate dob;
     private String phone;
     private String email;
     private String role;
@@ -58,11 +57,11 @@ public class User {
         this.password = password;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
