@@ -17,8 +17,16 @@ import java.util.Set;
 public class ProductServiceImpl implements ProductService {
     public static final String ALL = "all";
     public static final String PERCENT = "%";
-    private final ProductDao productDao = ProductDaoImpl.getInstance();
+    private final ProductDao productDao;
     private static Logger logger = LogManager.getLogger();
+
+    public ProductServiceImpl() {
+        productDao = ProductDaoImpl.getInstance();
+    }
+
+    public ProductServiceImpl(ProductDao productDao) {
+        this.productDao = productDao;
+    }
 
     @Override
     public List<Product> findAllProducts() throws ServiceException {
