@@ -10,7 +10,6 @@ public interface ProductDao {
     List<Product> findProductsByType(String type) throws DaoException;
     List<Product> findProductsByTeamAndType(String team, String type) throws DaoException;
     Product findProductById(int productId) throws DaoException;
-    double findPriceById(int productId) throws DaoException;
     boolean isFavouriteProduct(int userId, int productId) throws DaoException;
     void addProductToFavourites(int userId, int productId) throws DaoException;
     void deleteProductFromFavourites(int userId, int productId) throws DaoException;

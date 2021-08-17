@@ -45,7 +45,7 @@ public class Controller extends HttpServlet {
                 response.sendRedirect(path);
                 break;
             default:
-                logger.error("incorrect route type " + router.getRouteType());
+                logger.error("incorrect route type " + page);
                 path = request.getContextPath() + ConfigurationManager.getProperty("path.page.error");
                 response.sendRedirect(path);
         }

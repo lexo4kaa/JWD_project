@@ -5,7 +5,6 @@ import com.example.shop.model.pool.ConnectionPoolException;
 import com.example.shop.model.pool.CustomConnectionPool;
 import com.example.shop.model.dao.DaoException;
 import com.example.shop.model.dao.UserDao;
-import com.example.shop.model.service.ServiceException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -240,22 +238,6 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while changing password", e);
         }
-    }
-
-    @Override
-    public boolean isBanned(String userNickname) throws DaoException {
-        boolean isBanned = false;
-        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_FIND_IS_BANNED_BY_NICKNAME)) {
-            statement.setString(1, userNickname);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()){
-                isBanned = resultSet.getBoolean(IS_BANNED);
-            }
-        } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while checking status of user", e);
-        }
-        return isBanned;
     }
 
     @Override

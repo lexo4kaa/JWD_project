@@ -2,7 +2,6 @@ package com.example.shop.controller.command.impl;
 
 import com.example.shop.controller.command.ActionCommand;
 import com.example.shop.controller.command.Router;
-import com.example.shop.entity.Product;
 import com.example.shop.entity.User;
 import com.example.shop.model.service.ProductService;
 import com.example.shop.model.service.ServiceException;
@@ -15,7 +14,6 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Map;
 import java.util.Set;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;

@@ -54,8 +54,7 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public void addOrder(int cost, int userId,
-                         String methodOfReceiving, String methodOfPayment) throws DaoException {
+    public void addOrder(int cost, int userId, String methodOfReceiving, String methodOfPayment) throws DaoException {
         try(Connection connection = CustomConnectionPool.getInstance().getConnection();
             PreparedStatement statement = connection.prepareStatement(SQL_ADD_ORDER)) {
             statement.setInt(1, userId);

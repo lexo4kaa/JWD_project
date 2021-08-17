@@ -2,7 +2,6 @@ package com.example.shop.controller.command.impl;
 import com.example.shop.controller.command.ActionCommand;
 import com.example.shop.controller.command.Router;
 import com.example.shop.controller.command.Router.RouteType;
-import com.example.shop.entity.Product;
 import com.example.shop.entity.User;
 import com.example.shop.model.service.ProductService;
 import com.example.shop.model.service.UserService;
@@ -50,8 +49,7 @@ public class LoginCommand implements ActionCommand {
                 session.setAttribute(ERROR_LOGIN_PASS_MESSAGE, MessageManager.getProperty("message.loginerror"));
                 page = ConfigurationManager.getProperty("path.page.login");
             }
-        }
-        catch(ServiceException e) {
+        } catch(ServiceException e) {
             session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction"));
             page = ConfigurationManager.getProperty("path.page.index");
         }
