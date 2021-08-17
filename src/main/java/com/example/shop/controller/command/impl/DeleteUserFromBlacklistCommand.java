@@ -27,7 +27,7 @@ public class DeleteUserFromBlacklistCommand implements ActionCommand {
         String page;
         HttpSession session = request.getSession();
         try {
-            int userId = Integer.valueOf(request.getParameter(PARAM_NAME_USER_ID));
+            int userId = Integer.parseInt(request.getParameter(PARAM_NAME_USER_ID));
             String nickname = (String) session.getAttribute(NICKNAME);
             User activeUser = userService.findUserByNickname(nickname).get();
             if(activeUser.getUserId() != userId) {

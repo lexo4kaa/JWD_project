@@ -112,22 +112,6 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public double findPriceById(int productId) throws DaoException {
-        Product product = new Product();
-        try(Connection connection = CustomConnectionPool.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_FIND_PRODUCTS_BY_ID)) {
-            statement.setInt(1, productId);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()){
-                product = createProductsFromResultSet(resultSet);
-            }
-        } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Error while finding price", e);
-        }
-        return product.getPrice();
-    }
-
-    @Override
     public boolean isFavouriteProduct(int userId, int productId) throws DaoException {
         boolean isFavouriteProduct = false;
         try(Connection connection = CustomConnectionPool.getInstance().getConnection();

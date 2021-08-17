@@ -2,7 +2,6 @@ package com.example.shop.controller.command.impl;
 
 import com.example.shop.controller.command.ActionCommand;
 import com.example.shop.controller.command.Router;
-import com.example.shop.entity.Product;
 import com.example.shop.entity.User;
 import com.example.shop.model.service.ServiceException;
 import com.example.shop.model.service.UserService;

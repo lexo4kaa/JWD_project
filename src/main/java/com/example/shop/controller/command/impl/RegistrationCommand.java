@@ -32,7 +32,7 @@ public class RegistrationCommand implements ActionCommand {
         try {
             if(user_role.equals(ADMINISTRATOR)) {
                 if (password.equals(password2) &&
-                        userService.registerUser(name, surname, nickname, password, dob, phone, email, "administrator")) {
+                        userService.registerUser(name, surname, nickname, password, dob, phone, email, ADMINISTRATOR)) {
                     page = ConfigurationManager.getProperty("path.page.admin_main");
                 } else {
                     session.setAttribute(REGISTRATION_ERROR_MESSAGE, MessageManager.getProperty("message.registrationerror"));
@@ -40,7 +40,7 @@ public class RegistrationCommand implements ActionCommand {
                 }
             } else {
                 if (password.equals(password2) &&
-                        userService.registerUser(name, surname, nickname, password, dob, phone, email, "client")) {
+                        userService.registerUser(name, surname, nickname, password, dob, phone, email, CLIENT)) {
                     page = ConfigurationManager.getProperty("path.page.login");
                 } else {
                     session.setAttribute(REGISTRATION_ERROR_MESSAGE, MessageManager.getProperty("message.registrationerror"));
