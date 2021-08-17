@@ -16,7 +16,7 @@
 
 <form name="findUsersByNickname" method="POST" action="${pageContext.request.contextPath}/controller">
     <input type="hidden" name="command" value="find_users_by_nickname" />
-    <input type="text" name="nickname" value=""/>
+    <input type="text" name="nickname" value="" pattern="^[\w]{3,18}$" title="<fmt:message key="label.nickname_prompt"/>"/>
     <input type="submit" value="<fmt:message key="label.find_users_by_part_of_nickname"/>" name="submit"/>
 </form>
 

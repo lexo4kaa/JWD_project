@@ -22,8 +22,8 @@
         <th><fmt:message key="label.nickname"/></th>
         <th><fmt:message key="label.email"/></th>
         <th><fmt:message key="label.role"/></th>
-        <th><fmt:message key="label.isBanned"/></th>
         <th><fmt:message key="label.change_role"/></th>
+        <th><fmt:message key="label.isBanned"/></th>
         <th><fmt:message key="label.ban"/>/<fmt:message key="label.unban"/></th>
     </tr>
     <c:forEach var="user" items="${users}" varStatus="status">
@@ -35,7 +35,6 @@
             <td><c:out value="${ user.email }" /></td>
             <c:if test="${ current_locale == 'en_US' }">
                 <td><c:out value="${ user.role }" /></td>
-                <td><c:out value="${ user.isBanned }" /></td>
             </c:if>
             <c:if test="${ current_locale != 'en_US' }">
                 <c:if test="${ user.role == 'administrator' }">
@@ -43,12 +42,6 @@
                 </c:if>
                 <c:if test="${ user.role != 'administrator' }">
                     <td><fmt:message key="label.user"/></td>
-                </c:if>
-                <c:if test="${ user.isBanned }">
-                    <td><fmt:message key="label.yes"/></td>
-                </c:if>
-                <c:if test="${ !user.isBanned }">
-                    <td><fmt:message key="label.no"/></td>
                 </c:if>
             </c:if>
             <td>
@@ -58,6 +51,17 @@
                     <input type="submit" value="<fmt:message key="label.change_role"/>"/>
                 </form>
             </td>
+            <c:if test="${ current_locale == 'en_US' }">
+                <td><c:out value="${ user.isBanned }" /></td>
+            </c:if>
+            <c:if test="${ current_locale != 'en_US' }">
+                <c:if test="${ user.isBanned }">
+                    <td><fmt:message key="label.yes"/></td>
+                </c:if>
+                <c:if test="${ !user.isBanned }">
+                    <td><fmt:message key="label.no"/></td>
+                </c:if>
+            </c:if>
             <c:if test="${ user.isBanned }">
                 <td>
                     <form style="margin: 0" name="deleteUserFromBlackList" method="POST" action="${pageContext.request.contextPath}/controller">
@@ -72,7 +76,8 @@
                     <form style="margin: 0" name="addUserToBlackList" method="POST" action="${pageContext.request.contextPath}/controller">
                         <input type="hidden" name="command" value="add_user_to_blacklist"/>
                         <input type="hidden" name="user_id" value="${ user.userId }">
-                        <input type="text" name="ban_reason" value=""/>
+                        <input type="text" name="ban_reason" value="" pattern="^[\w]{0,100}$"
+                               title="<fmt:message key="label.ban_reason_title"/>"/>
                         <input type="submit" value="<fmt:message key="label.add_to_blacklist"/>"/>
                     </form>
                 </td>

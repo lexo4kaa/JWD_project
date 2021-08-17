@@ -7,9 +7,9 @@ import java.util.Map;
 
 public interface OrderDao {
     List<Order> findAllOrders() throws DaoException;
-    void addOrder(Map<Integer, Integer> cart, String nickname,
+    void addOrder(int cost, int userId,
                   String methodOfReceiving, String methodOfPayment) throws DaoException;
-    void addOrderHasProduct(Map<Integer, Integer> cart, int productId) throws DaoException;
+    void addOrderHasProduct(int productId, int quantity) throws DaoException;
     List<Order> findOrdersByNickname(String nickname) throws DaoException;
     Map<Integer, Integer> findInfoAboutOrder(int orderId) throws DaoException;
 }

@@ -25,6 +25,8 @@ public class UserValidatorTest {
         return new Object[][]{
                 {"IvanovIvanIvanovich"}, // length is 19 (>18)
                 {"QWE RTY"}, // 2 words
+                {"_abcdef"}, // first symbol is a underscore
+                {"abcdef_"}, // last symbol is a underscore
                 {"ya.umni4ka"}, // contains '.'
                 {"a"} // length is 1 (<3)
         };
@@ -53,8 +55,10 @@ public class UserValidatorTest {
         return new Object[][]{
                 {"IvanovIvanIvanovichIvanovIvanIvanovich@gmail.com"}, // length is 38 (>30)
                 {"QWE RTY@gmail.com"}, // 2 words
+                {".abcdef@gmail.com"}, // first symbol  is a dot
+                {"abcdef.@gmail.com"}, // last symbol of name is a dot
                 {"umni4ka@yandex.ru"}, // not contains '@gmail.com'
-                {"a@gmail.com"} // length is 1 (<3)
+                {"abc@gmail.com"} // length is 3 (<6)
         };
     }
     @Test(dataProvider = "falseDataIsEmailCorrect")

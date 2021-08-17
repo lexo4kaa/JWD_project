@@ -3,8 +3,6 @@ package com.example.shop.model.dao.impl;
 import com.example.shop.entity.Order;
 import com.example.shop.model.dao.DaoException;
 import com.example.shop.model.dao.OrderDao;
-import com.example.shop.model.dao.ProductDao;
-import com.example.shop.model.dao.UserDao;
 import com.example.shop.model.pool.ConnectionPoolException;
 import com.example.shop.model.pool.CustomConnectionPool;
 
@@ -20,8 +18,6 @@ import static com.example.shop.model.dao.OrderHasProductColumn.*;
 
 public class OrderDaoImpl implements OrderDao {
     private static final OrderDao instance = new OrderDaoImpl();
-    private final UserDao userDao = UserDaoImpl.getInstance();
-    private final ProductDao productDao = ProductDaoImpl.getInstance();
 
     private static final String SQL_FIND_ALL_ORDERS = "SELECT order_id,ref_user_id,order_cost,order_date," +
                                                       "method_of_receiving,method_of_payment FROM orders";
@@ -36,6 +32,7 @@ public class OrderDaoImpl implements OrderDao {
     private static final String SQL_INFO_ABOUT_ORDERS = "SELECT ref_product_id, quantity FROM order_has_product" +
                                                         " WHERE ref_order_id = ?";
 
+    private OrderDaoImpl() {}
 
     public static OrderDao getInstance(){
         return instance;
@@ -57,13 +54,12 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public void addOrder(Map<Integer, Integer> cart, String nickname,
+    public void addOrder(int cost, int userId,
                          String methodOfReceiving, String methodOfPayment) throws DaoException {
         try(Connection connection = CustomConnectionPool.getInstance().getConnection();
             PreparedStatement statement = connection.prepareStatement(SQL_ADD_ORDER)) {
-            int userId = userDao.findUserByNickname(nickname).get().getUserId();
             statement.setInt(1, userId);
-            statement.setDouble(2, totalCost(cart));
+            statement.setDouble(2, cost);
             statement.setString(3, methodOfReceiving);
             statement.setString(4, methodOfPayment);
             statement.executeUpdate();
@@ -73,13 +69,13 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public void addOrderHasProduct(Map<Integer, Integer> cart, int productId) throws DaoException {
+    public void addOrderHasProduct(int productId, int quantity) throws DaoException {
         try(Connection connection = CustomConnectionPool.getInstance().getConnection();
             PreparedStatement statement = connection.prepareStatement(SQL_ADD_ORDER_HAS_PRODUCT)) {
             int orderId = findAllOrders().size();
             statement.setInt(1, orderId);
             statement.setInt(2, productId);
-            statement.setInt(3, cart.get(productId));
+            statement.setInt(3, quantity);
             statement.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while adding in order_has_product", e);
@@ -118,17 +114,6 @@ public class OrderDaoImpl implements OrderDao {
             throw new DaoException("Error while finding info about order", e);
         }
         return cart;
-    }
-
-    private double totalCost(Map<Integer, Integer> cart) throws DaoException {
-        int cost = 0;
-        int[] keys = cart.keySet().stream()
-                .mapToInt(Integer::intValue)
-                .toArray();
-        for(int productId : keys) {
-            cost += productDao.findPriceById(productId) * cart.get(productId);
-        }
-        return cost;
     }
 
     private Order createOrdersFromResultSet(ResultSet resultSet) throws SQLException {

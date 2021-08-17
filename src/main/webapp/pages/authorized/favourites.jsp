@@ -7,31 +7,10 @@
 <html>
 <head>
     <title><fmt:message key="label.products"/></title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/products.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/favourites.css"/>
 </head>
 <body>
 <jsp:include page="../common/header.jsp"/>
-
-<form id="radio" class="radio" name="findProductsByTeam" method="POST" action="${pageContext.request.contextPath}/controller">
-    <h3><fmt:message key="label.select_a_team"/></h3>
-    <p><input type="radio" name="team" value="Atletico Madrid"><fmt:message key="label.atletico"/></p>
-    <p><input type="radio" name="team" value="Barcelona"><fmt:message key="label.barcelona"/></p>
-    <p><input type="radio" name="team" value="Chelsea"><fmt:message key="label.chelsea"/></p>
-    <p><input type="radio" name="team" value="Inter Milan"><fmt:message key="label.inter"/></p>
-    <p><input type="radio" name="team" value="Juventus"><fmt:message key="label.juventus"/></p>
-    <p><input type="radio" name="team" value="Liverpool"><fmt:message key="label.liverpool"/></p>
-    <p><input type="radio" name="team" value="Manchester City"><fmt:message key="label.manCity"/></p>
-    <p><input type="radio" name="team" value="Manchester United"><fmt:message key="label.manU"/></p>
-    <p><input type="radio" name="team" value="Milan"><fmt:message key="label.milan"/></p>
-    <p><input type="radio" name="team" value="PSG"><fmt:message key="label.PSG"/></p>
-    <p><input type="radio" name="team" value="Real Madrid"><fmt:message key="label.realMadrid"/></p>
-    <p><input type="radio" name="team" value="all"><fmt:message key="label.all"/></p>
-
-    <input type="hidden" id="locale" name="locale" value="${current_locale}" />
-    <input type="hidden" name="command" value="find_products_by_team_and_type" />
-    <input style="font-size:large;background:dodgerblue;color:whitesmoke;margin:10px;padding:5px 10px;cursor:pointer;
-                  border:none;border-radius:3px;" name="submit" type="submit" value="<fmt:message key="label.find"/>"/>
-</form>
 
 <ul class="products">
     <c:if test="${favourite_products.size() == 0}">

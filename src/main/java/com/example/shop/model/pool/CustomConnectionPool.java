@@ -41,7 +41,7 @@ import java.util.concurrent.locks.ReentrantLock;
         }
     }
 
-    public static CustomConnectionPool getInstance() { // todo understand this double check validation
+    public static CustomConnectionPool getInstance() {
         if (instance == null) {
             try {
                 lock.lock();
