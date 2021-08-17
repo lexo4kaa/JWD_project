@@ -1,5 +1,6 @@
 .products {
-    margin-left: 111px;
+    margin-left: 55px;
+    margin-right: 55px;
 }
 
 .product-wrapper {
@@ -21,11 +22,6 @@
     position: relative;
     padding-bottom: 100%;
     overflow: hidden;
-}
-
-.heart {
-    visibility: visible;
-    text-align: center;
 }
 
 .radio {

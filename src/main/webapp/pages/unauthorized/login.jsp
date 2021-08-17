@@ -17,9 +17,9 @@
         <form name="loginForm" method="POST" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="login"/>
             <label><fmt:message key="label.login_input"/></label>
-            <input type="text" name="login" value="">
+            <input type="text" name="login" value="" pattern="^[\w]{3,18}$" title="<fmt:message key="label.nickname_prompt"/>">
             <label><fmt:message key="label.password_input"/></label>
-            <input type="password" name="password" value="">
+            <input type="password" name="password" value="" pattern="^[\w]{6,18}$" title="<fmt:message key="label.password_prompt"/>">
             <br>
             <div style="text-align: center; color: red">
                 ${errorLoginPassMessage}

@@ -47,6 +47,8 @@ public class UserDaoImpl implements UserDao {
     private static final String SQL_FIND_IS_BANNED_BY_NICKNAME = "SELECT is_banned FROM users WHERE user_nickname = ?";
     private static final String SQL_CHANGE_ROLE = "UPDATE users SET user_role = ? WHERE user_id = ?";
 
+    private UserDaoImpl() {}
+
     public static UserDao getInstance(){
         return instance;
     }
