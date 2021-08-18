@@ -26,7 +26,7 @@ public class ChangeUserRoleCommand implements ActionCommand {
         HttpSession session = request.getSession();
         String page;
         try {
-            int userId = Integer.parseInt(request.getParameter(PARAM_NAME_USER_ID));
+            int userId = Integer.parseInt(request.getParameter(USER_ID));
             String nickname = userService.findUserById(userId).get().getNickname();
             String role = userService.findUserRole(nickname).get();
             String newRole = role.equals(ADMINISTRATOR) ? CLIENT : ADMINISTRATOR;
@@ -45,7 +45,8 @@ public class ChangeUserRoleCommand implements ActionCommand {
                 }
                 session.setAttribute(USERS, users);
             } else {
-                session.setAttribute(ACT_ON_YOURSELF_MESSAGE, MessageManager.getProperty("message.actonyourself"));
+                String locale = (String) session.getAttribute(CURRENT_LOCALE);
+                session.setAttribute(ACT_ON_YOURSELF_MESSAGE, MessageManager.getProperty("message.actonyourself", locale));
             }
             page = (String) session.getAttribute(CURRENT_PAGE);
         } catch (ServiceException e) {

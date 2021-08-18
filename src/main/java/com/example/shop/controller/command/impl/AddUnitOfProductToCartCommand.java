@@ -28,7 +28,7 @@ public class AddUnitOfProductToCartCommand implements ActionCommand {
         String page;
         try {
             Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute(CART);
-            String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
+            String stringProductId = request.getParameter(PRODUCT_ID);
             int productId = Integer.parseInt(stringProductId);
             if((cart.get(productId) == null ? 0 : cart.get(productId)) < 99) {
                 cart = productService.addUnitOfProductToCart(cart, productId);

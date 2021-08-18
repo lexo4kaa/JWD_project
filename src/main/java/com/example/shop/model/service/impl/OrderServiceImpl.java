@@ -16,12 +16,17 @@ import java.util.Set;
 public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao = OrderDaoImpl.getInstance();
     private static Logger logger = LogManager.getLogger();
+    private static final String EMPTY_STRING = "";
+    private static final String DEFAULT_ADDRESS = "Minsk, Oktyabrskaya st., 10/2";
 
     @Override
-    public void addOrder(Map<Integer, Integer> cart, int cost, int userId,
-                         String methodOfReceiving, String methodOfPayment) throws ServiceException {
+    public void addOrder(Map<Integer, Integer> cart, double cost, int userId,
+                         String methodOfReceiving, String methodOfPayment, String address) throws ServiceException {
         try {
-            orderDao.addOrder(cost, userId, methodOfReceiving, methodOfPayment);
+            if(address.equals(EMPTY_STRING)) {
+                address = DEFAULT_ADDRESS;
+            }
+            orderDao.addOrder(cost, userId, methodOfReceiving, methodOfPayment, address);
             Set<Integer> keys = cart.keySet();
             for (int productId : keys) {
                 int quantity = cart.get(productId);

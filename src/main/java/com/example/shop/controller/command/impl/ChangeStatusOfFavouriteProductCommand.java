@@ -33,7 +33,7 @@ public class ChangeStatusOfFavouriteProductCommand implements ActionCommand {
             if(!user_role.equals(GUEST)) {
                 User user = userService.findUserByNickname(nickname).get();
                 int userId = user.getUserId();
-                String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
+                String stringProductId = request.getParameter(PRODUCT_ID);
                 int productId = Integer.parseInt(stringProductId);
                 productService.changeStatusOfFavouriteProduct(userId, productId);
                 Set<Integer> productsIds = productService.findFavouriteProducts(userId);

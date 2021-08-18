@@ -20,20 +20,21 @@ public class ChangePasswordCommand implements ActionCommand {
     public Router execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
-        String oldPassword = request.getParameter(PARAM_NAME_OLD_PASSWORD);
-        String newPassword = request.getParameter(PARAM_NAME_PASSWORD);
-        String newPasswordRepeat = request.getParameter(PARAM_NAME_PASSWORD2);
+        String oldPassword = request.getParameter(OLD_PASSWORD);
+        String newPassword = request.getParameter(PASSWORD);
+        String newPasswordRepeat = request.getParameter(PASSWORD2);
+        String locale = (String) session.getAttribute(CURRENT_LOCALE);
         try {
             String userNickname = (String) session.getAttribute(NICKNAME);
             if (newPassword.equals(newPasswordRepeat) &&
                     userService.changePassword(userNickname, oldPassword, newPassword)) {
                 page = ConfigurationManager.getProperty("path.page.account");
             } else {
-                session.setAttribute(UPDATE_ERROR_MESSAGE, MessageManager.getProperty("message.updateerror"));
+                session.setAttribute(UPDATE_ERROR_MESSAGE, MessageManager.getProperty("message.updateerror", locale));
                 page = ConfigurationManager.getProperty("path.page.change_password");
             }
         } catch(ServiceException e) {
-            session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction"));
+            session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction", locale));
             page = ConfigurationManager.getProperty("path.page.index");
         }
         return new Router(page, RouteType.REDIRECT);

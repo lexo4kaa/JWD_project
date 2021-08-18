@@ -28,9 +28,9 @@ public class ChangeQuantityOfProductInCartCommand implements ActionCommand {
         String page;
         try {
             Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute(CART);
-            String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
+            String stringProductId = request.getParameter(PRODUCT_ID);
             int productId = Integer.parseInt(stringProductId);
-            String stringNewQuantity = request.getParameter(PARAM_NAME_NEW_QUANTITY);
+            String stringNewQuantity = request.getParameter(NEW_QUANTITY);
             int newQuantity = Integer.parseInt(stringNewQuantity);
             int oldQuantity = cart.getOrDefault(productId, 0);
             Product product = productService.findProductsByIds(Set.of(productId)).get(0);

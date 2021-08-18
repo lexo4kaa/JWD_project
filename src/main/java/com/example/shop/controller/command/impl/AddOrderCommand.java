@@ -34,13 +34,14 @@ public class AddOrderCommand implements ActionCommand {
         String user_role = (String) session.getAttribute(USER_ROLE);
         String methodOfReceiving = request.getParameter(METHOD_OF_RECEIVING);
         String methodOfPayment = request.getParameter(METHOD_OF_PAYMENT);
+        String address = request.getParameter(ADDRESS);
         try {
             if(cart.size() != 0) {
                 if(!user_role.equals(GUEST)) {
                     User user = userService.findUserByNickname(nickname).get();
-                    String stringCost = (String) session.getAttribute(TOTAL_COST);
-                    int cost = Integer.parseInt(stringCost);
-                    orderService.addOrder(cart, cost, user.getUserId(), methodOfReceiving, methodOfPayment);
+                    String stringCost = session.getAttribute(TOTAL_COST).toString();
+                    double cost = Double.parseDouble(stringCost);
+                    orderService.addOrder(cart, cost, user.getUserId(), methodOfReceiving, methodOfPayment, address);
                     session.setAttribute(CART_PRODUCTS, null);
                     session.setAttribute(CART, new HashMap<Integer, Integer>());
                     session.setAttribute(CART_SIZE, 0);

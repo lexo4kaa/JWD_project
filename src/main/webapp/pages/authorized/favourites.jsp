@@ -79,7 +79,7 @@
                 <form style="text-align: center" name="changeStatusOfFavouriteProduct" method="POST" action="${pageContext.request.contextPath}/controller">
                     <input type="hidden" name="command" value="change_status_of_favourite_product"/>
                     <input type="hidden" name="product_id" value="${ prod.productId }">
-                    <input style="border: none; background-color: white; font-size: x-large" type="submit" value="${heartType}"/>
+                    <input style="border:none;background-color:white;color:red;font-size:x-large" type="submit" value="${heartType}"/>
                 </form>
             </li>
         </c:forEach>

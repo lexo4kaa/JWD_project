@@ -24,8 +24,9 @@ public class LoginCommand implements ActionCommand {
     public Router execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         String page;
-        String login = request.getParameter(PARAM_NAME_LOGIN).toLowerCase();
-        String password = request.getParameter(PARAM_NAME_PASSWORD);
+        String login = request.getParameter(LOGIN).toLowerCase();
+        String password = request.getParameter(PASSWORD);
+        String locale = (String) session.getAttribute(CURRENT_LOCALE);
         try {
             if (userService.authorizeUser(login, password)) {
                 User user = userService.findUserByNickname(login).get();
@@ -42,15 +43,15 @@ public class LoginCommand implements ActionCommand {
                     }
                 }
                 else {
-                    session.setAttribute(BAN_MESSAGE, MessageManager.getProperty("message.ban"));
+                    session.setAttribute(BAN_MESSAGE, MessageManager.getProperty("message.ban", locale));
                     page = ConfigurationManager.getProperty("path.page.login");
                 }
             } else {
-                session.setAttribute(ERROR_LOGIN_PASS_MESSAGE, MessageManager.getProperty("message.loginerror"));
+                session.setAttribute(ERROR_LOGIN_PASS_MESSAGE, MessageManager.getProperty("message.loginerror", locale));
                 page = ConfigurationManager.getProperty("path.page.login");
             }
         } catch(ServiceException e) {
-            session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction"));
+            session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction", locale));
             page = ConfigurationManager.getProperty("path.page.index");
         }
         return new Router(page, RouteType.REDIRECT);

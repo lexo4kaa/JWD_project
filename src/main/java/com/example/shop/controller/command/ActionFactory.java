@@ -21,7 +21,8 @@ public class ActionFactory {
             CommandType currentEnum = CommandType.valueOf(action.toUpperCase());
             current = currentEnum.getCurrentCommand();
         } catch (IllegalArgumentException e) {
-            session.setAttribute(WRONG_ACTION_MESSAGE, action + MessageManager.getProperty("message.wrongaction"));
+            String locale = (String) session.getAttribute(CURRENT_LOCALE);
+            session.setAttribute(WRONG_ACTION_MESSAGE, action + MessageManager.getProperty("message.wrongaction", locale));
             current = new EmptyCommand();
         }
         return current;

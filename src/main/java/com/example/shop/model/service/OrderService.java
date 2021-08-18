@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface OrderService {
-    void addOrder(Map<Integer, Integer> cart, int cost, int userId,
-                  String methodOfReceiving, String methodOfPayment) throws ServiceException;
+    void addOrder(Map<Integer, Integer> cart, double cost, int userId,
+                  String methodOfReceiving, String methodOfPayment, String address) throws ServiceException;
     List<Order> findOrdersByNickname(String nickname) throws ServiceException;
     Map<Integer, Integer> findInfoAboutOrder(int orderId) throws ServiceException;
 }

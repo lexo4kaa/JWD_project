@@ -88,10 +88,13 @@
         <form name="addOrder" method="POST" action="${pageContext.request.contextPath}/controller">
             <div style="float:left; width: 500px">
                 <h4><fmt:message key="label.select_method_of_receiving"/></h4>
-                <select style="float: left" name="method_of_receiving">
+                <select id="method_of_receiving" style="float: left" name="method_of_receiving">
                     <option value="self-delivery" selected><fmt:message key="label.self_delivery"/></option>
                     <option value="delivery"><fmt:message key="label.delivery"/></option>
                 </select>
+                <br style="clear:both">
+                <input style="margin:10px 0;width:300px;height:30px;visibility:hidden;float:left" type="text" value=""
+                       name="address" id="address" pattern="^[\w.,\\/ ]{16,100}$" title="<fmt:message key="label.delivery_prompt"/>">
             </div>
             <div style="float:left; width: 500px">
                 <h4><fmt:message key="label.select_method_of_payment"/></h4>
@@ -108,7 +111,7 @@
     </c:if>
 </ul>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/checkQuantity.js"></script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/checkMethodOfReceiving.js"></script>
 <br style="clear:both">
 <hr>
 <tags:copyright/>

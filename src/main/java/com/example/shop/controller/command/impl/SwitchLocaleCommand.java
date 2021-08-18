@@ -15,7 +15,7 @@ public class SwitchLocaleCommand implements ActionCommand {
     public Router execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
-        String locale = request.getParameter(PARAM_NAME_LOCALE);
+        String locale = request.getParameter(LOCALE);
         session.setAttribute(CURRENT_LOCALE, locale);
         page = (String) session.getAttribute(CURRENT_PAGE);
         return new Router(page, RouteType.REDIRECT);

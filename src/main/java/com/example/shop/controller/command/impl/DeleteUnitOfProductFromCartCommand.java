@@ -28,7 +28,7 @@ public class DeleteUnitOfProductFromCartCommand implements ActionCommand {
         String page;
         try {
             Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute(CART);
-            String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
+            String stringProductId = request.getParameter(PRODUCT_ID);
             int productId = Integer.parseInt(stringProductId);
             if(cart.containsKey(productId)) {
                 Product product = productService.findProductsByIds(Set.of(productId)).get(0);

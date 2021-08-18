@@ -7,6 +7,7 @@ public class OrderColumn {
     public static final String ORDER_DATE = "order_date";
     public static final String METHOD_OF_RECEIVING = "method_of_receiving";
     public static final String METHOD_OF_PAYMENT = "method_of_payment";
+    public static final String ADDRESS = "address";
 
     private OrderColumn() {
     }

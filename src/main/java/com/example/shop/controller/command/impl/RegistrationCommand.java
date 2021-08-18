@@ -21,21 +21,22 @@ public class RegistrationCommand implements ActionCommand {
         HttpSession session = request.getSession();
         String user_role = (String) session.getAttribute("user_role");
         String page;
-        String name = request.getParameter(PARAM_NAME_NAME);
-        String surname = request.getParameter(PARAM_NAME_SURNAME);
-        String nickname = request.getParameter(PARAM_NAME_NICKNAME).toLowerCase();
-        String dob = request.getParameter(PARAM_NAME_DOB);
-        String phone = request.getParameter(PARAM_NAME_PHONE);
-        String email = request.getParameter(PARAM_NAME_EMAIL);
-        String password = request.getParameter(PARAM_NAME_PASSWORD);
-        String password2 = request.getParameter(PARAM_NAME_PASSWORD2);
+        String name = request.getParameter(NAME);
+        String surname = request.getParameter(SURNAME);
+        String nickname = request.getParameter(NICKNAME).toLowerCase();
+        String dob = request.getParameter(DOB);
+        String phone = request.getParameter(PHONE);
+        String email = request.getParameter(EMAIL);
+        String password = request.getParameter(PASSWORD);
+        String password2 = request.getParameter(PASSWORD2);
+        String locale = (String) session.getAttribute(CURRENT_LOCALE);
         try {
             if(user_role.equals(ADMINISTRATOR)) {
                 if (password.equals(password2) &&
                         userService.registerUser(name, surname, nickname, password, dob, phone, email, ADMINISTRATOR)) {
                     page = ConfigurationManager.getProperty("path.page.admin_main");
                 } else {
-                    session.setAttribute(REGISTRATION_ERROR_MESSAGE, MessageManager.getProperty("message.registrationerror"));
+                    session.setAttribute(REGISTRATION_ERROR_MESSAGE, MessageManager.getProperty("message.registrationerror", locale));
                     page = ConfigurationManager.getProperty("path.page.registration");
                 }
             } else {
@@ -43,12 +44,12 @@ public class RegistrationCommand implements ActionCommand {
                         userService.registerUser(name, surname, nickname, password, dob, phone, email, CLIENT)) {
                     page = ConfigurationManager.getProperty("path.page.login");
                 } else {
-                    session.setAttribute(REGISTRATION_ERROR_MESSAGE, MessageManager.getProperty("message.registrationerror"));
+                    session.setAttribute(REGISTRATION_ERROR_MESSAGE, MessageManager.getProperty("message.registrationerror", locale));
                     page = ConfigurationManager.getProperty("path.page.registration");
                 }
             }
         } catch(ServiceException e) {
-            session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction"));
+            session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction", locale));
             page = ConfigurationManager.getProperty("path.page.index");
         }
         return new Router(page, RouteType.REDIRECT);

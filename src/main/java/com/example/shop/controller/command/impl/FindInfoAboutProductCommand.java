@@ -25,7 +25,7 @@ public class FindInfoAboutProductCommand  implements ActionCommand {
         String page;
         HttpSession session = request.getSession();
         try {
-            int productId = Integer.parseInt(request.getParameter(PARAM_NAME_PRODUCT_ID));
+            int productId = Integer.parseInt(request.getParameter(PRODUCT_ID));
             Product product = productService.findProductsByIds(Set.of(productId)).get(0);
             session.setAttribute(INFO_PRODUCT, product);
             page = ConfigurationManager.getProperty("path.page.product_info");

@@ -42,7 +42,7 @@ public class FirstInitCommand implements ActionCommand {
             session.setAttribute(TYPE_OF_PRODUCTS, ALL_VALUE);
             page = ConfigurationManager.getProperty("path.page.products");
         } catch (ServiceException e) {
-            session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction"));
+            session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction", EN_US_LOCALE));
             page = ConfigurationManager.getProperty("path.page.index");
         }
         return new Router(page, RouteType.REDIRECT);

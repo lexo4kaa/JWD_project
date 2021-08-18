@@ -98,11 +98,11 @@
         <c:set var="width" value="20"></c:set>
     </c:if>
 
-    <div style="border-radius:10px;margin-right:30px;margin-top:-10px;float:right;color:white;background:dodgerblue;
+    <div style="border-radius:10px;margin-right:20px;margin-top:-10px;float:right;color:white;background:dodgerblue;
                 text-align: center; width: ${width}px; height: 20px">${cart_size}
     </div>
 
-    <form style="float: right; margin-right: -10px"
+    <form style="float: right; margin-right: -5px"
           name="cartPage" method="POST" action="${pageContext.request.contextPath}/controller">
         <input type="hidden" name="command" value="find_products_by_ids"/>
         <input style="background-image:url('${pageContext.request.contextPath}/images/cart.png');
