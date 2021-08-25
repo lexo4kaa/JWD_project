@@ -35,12 +35,6 @@
                 <div style="color: blue">
                     <c:out value="${ prod.price }$" />
                 </div>
-                <form style="float: left; margin-left: 400px; margin-top: -30px" name="deleteUnitOfProduct" method="POST"
-                      action="${pageContext.request.contextPath}/controller">
-                    <input type="hidden" name="command" value="delete_unit_of_product_from_cart"/>
-                    <input type="hidden" name="product_id" value="${ prod.productId }">
-                    <input type="submit" value="-"/>
-                </form>
 
                 <c:set var="containsKey" value="${ cart.containsKey(prod.productId) }"/>
                 <c:if test="${ containsKey }">
@@ -49,6 +43,14 @@
                 <c:if test="${ !containsKey }">
                     <c:set var="quantity" value="0"/>
                 </c:if>
+
+                <form style="float: left; margin-left: 400px; margin-top: -30px" name="deleteUnitOfProduct" method="POST"
+                      action="${pageContext.request.contextPath}/controller">
+                    <input type="hidden" name="command" value="change_quantity_of_product_in_cart"/>
+                    <input type="hidden" name="product_id" value="${ prod.productId }">
+                    <input type="hidden" name="new_quantity" value="${ quantity - 1 }">
+                    <input type="submit" value="-"/>
+                </form>
 
                 <form style="float: left; margin-top: -30px" name="changeQuantity" id="changeQuantity" method="POST"
                       action="${pageContext.request.contextPath}/controller">
@@ -60,14 +62,15 @@
 
                 <form style="float: left; margin-top: -30px" name="addUnitOfProduct" method="POST"
                       action="${pageContext.request.contextPath}/controller">
-                    <input type="hidden" name="command" value="add_unit_of_product_to_cart"/>
+                    <input type="hidden" name="command" value="change_quantity_of_product_in_cart"/>
                     <input type="hidden" name="product_id" value="${ prod.productId }">
+                    <input type="hidden" name="new_quantity" value="${ quantity + 1 }">
                     <input type="submit" value="+"/>
                 </form>
 
                 <form style="float:right;margin-top:-38px;margin-right:50px;" name="deleteProduct" method="POST"
                       action="${pageContext.request.contextPath}/controller">
-                    <input type="hidden" name="command" value="delete_product_from_cart"/>
+                    <input type="hidden" name="command" value="delete_of_product_from_cart"/>
                     <input type="hidden" name="product_id" value="${ prod.productId }">
                     <input style="cursor:pointer;background-color:white;font-size:x-large;border:none" type="submit" value="&#10006;"/>
                 </form>

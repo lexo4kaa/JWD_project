@@ -8,6 +8,9 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * The utility is responsible for encrypting passwords
+ */
 public class PasswordEncryptor {
     private static Logger logger = LogManager.getLogger();
     private static final String ENCRYPTOR_ALGORITHM = "SHA-1";

@@ -1,5 +1,8 @@
 package com.example.shop.model.dao;
 
+/**
+ * Describes column names for table 'user'
+ */
 public final class UserColumn {
     public static final String USER_ID = "user_id";
     public static final String USER_NAME = "user_name";

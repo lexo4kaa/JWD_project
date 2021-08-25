@@ -18,6 +18,9 @@ import java.util.Set;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for changing status of favourite product
+ */
 public class ChangeStatusOfFavouriteProductCommand implements ActionCommand {
     private static final ProductService productService = new ProductServiceImpl();
     private static final UserService userService = new UserServiceImpl();

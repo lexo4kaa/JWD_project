@@ -1,5 +1,8 @@
 package com.example.shop.controller.command;
 
+/**
+ *  Describes all parameters and attributes
+ */
 public final class ParameterAndAttribute {
     //parameters
     public static final String ADDRESS = "address";
@@ -52,7 +55,10 @@ public final class ParameterAndAttribute {
     public static final String ACT_ON_YOURSELF_MESSAGE = "actOnYourselfMessage";
     public static final String BAN_MESSAGE = "banMessage";
     public static final String ERROR_LOGIN_PASS_MESSAGE = "errorLoginPassMessage";
+    public static final String LOGIN_EXISTS_MESSAGE = "loginExistsMessage";
     public static final String REGISTRATION_ERROR_MESSAGE = "registrationError";
     public static final String UPDATE_ERROR_MESSAGE = "updateError";
     public static final String WRONG_ACTION_MESSAGE = "wrongAction";
+
+    private ParameterAndAttribute() {}
 }

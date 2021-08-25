@@ -18,6 +18,9 @@ import java.util.List;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for adding attributes to session on first launch.
+ */
 public class FirstInitCommand implements ActionCommand {
     private static final String ALL_VALUE = "all";
     private static final String EN_US_LOCALE = "en_US";

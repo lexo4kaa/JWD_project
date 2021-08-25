@@ -11,6 +11,9 @@ import java.io.IOException;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * Filter for control access to admin pages
+ */
 @WebFilter(urlPatterns = { "/pages/authorized/admin/*" })
 public class AdminAccessFilter implements Filter {
 

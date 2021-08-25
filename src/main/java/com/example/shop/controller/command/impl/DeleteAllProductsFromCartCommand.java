@@ -9,6 +9,9 @@ import java.util.HashMap;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for deleting all products from cart
+ */
 public class DeleteAllProductsFromCartCommand implements ActionCommand {
 
     @Override

@@ -16,6 +16,9 @@ import java.util.List;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for finding users by part of nickname
+ */
 public class FindUsersByNicknameCommand implements ActionCommand {
     private static final UserServiceImpl userService = new UserServiceImpl();
     private static Logger logger = LogManager.getLogger();

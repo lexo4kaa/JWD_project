@@ -2,6 +2,9 @@ package com.example.shop.entity;
 
 import java.time.LocalDateTime;
 
+/**
+ * Describes the entity Order.
+ */
 public class Order {
     private int orderId;
     private int userId;

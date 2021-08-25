@@ -1,5 +1,8 @@
 package com.example.shop.model.service;
 
+/**
+ * Describes exception in service
+ */
 public class ServiceException extends Exception {
     public ServiceException() {}
     public ServiceException(String message) {

@@ -14,6 +14,9 @@ import javax.servlet.http.HttpSession;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for finding user by nickname
+ */
 public class FindUserByNicknameCommand implements ActionCommand {
     private static final UserServiceImpl userService = new UserServiceImpl();
     private static Logger logger = LogManager.getLogger();

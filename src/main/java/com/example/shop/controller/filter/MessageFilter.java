@@ -8,6 +8,9 @@ import java.io.IOException;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * Filter for passing error messages to request
+ */
 @WebFilter(urlPatterns = { "/*" })
 public class MessageFilter implements Filter {
     @Override

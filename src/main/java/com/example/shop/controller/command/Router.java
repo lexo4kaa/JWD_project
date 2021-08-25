@@ -1,6 +1,12 @@
 package com.example.shop.controller.command;
 
+/**
+ * Describes the router
+ */
 public class Router {
+    /**
+     * Describes all route types
+     */
     public enum RouteType {
         FORWARD, REDIRECT
     }

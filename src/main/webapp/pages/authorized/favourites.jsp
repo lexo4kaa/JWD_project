@@ -40,12 +40,6 @@
                     <c:out value="${ prod.price }$" />
                 </div>
 
-                <form style="float: left; margin-left: 35%" name="deleteUnitOfProduct" method="POST" action="${pageContext.request.contextPath}/controller">
-                    <input type="hidden" name="command" value="delete_unit_of_product_from_cart"/>
-                    <input type="hidden" name="product_id" value="${ prod.productId }">
-                    <input type="submit" value="-"/>
-                </form>
-
                 <c:set var="containsKey" value="${ cart.containsKey(prod.productId) }"/>
                 <c:if test="${ containsKey }">
                     <c:set var="quantity" value="${ cart.get(prod.productId) }"/>
@@ -53,6 +47,13 @@
                 <c:if test="${ !containsKey }">
                     <c:set var="quantity" value="0"/>
                 </c:if>
+
+                <form style="float: left; margin-left: 35%" name="deleteUnitOfProduct" method="POST" action="${pageContext.request.contextPath}/controller">
+                    <input type="hidden" name="command" value="change_quantity_of_product_in_cart"/>
+                    <input type="hidden" name="product_id" value="${ prod.productId }">
+                    <input type="hidden" name="new_quantity" value="${ quantity - 1 }">
+                    <input type="submit" value="-"/>
+                </form>
 
                 <form style="float: left" name="changeQuantity" id="changeQuantity" method="POST" action="${pageContext.request.contextPath}/controller">
                     <input type="hidden" name="command" value="change_quantity_of_product_in_cart"/>
@@ -62,8 +63,9 @@
                 </form>
 
                 <form style="float: left" name="addUnitOfProduct" method="POST" action="${pageContext.request.contextPath}/controller">
-                    <input type="hidden" name="command" value="add_unit_of_product_to_cart"/>
+                    <input type="hidden" name="command" value="change_quantity_of_product_in_cart"/>
                     <input type="hidden" name="product_id" value="${ prod.productId }">
+                    <input type="hidden" name="new_quantity" value="${ quantity + 1 }">
                     <input type="submit" value="+"/>
                 </form>
 

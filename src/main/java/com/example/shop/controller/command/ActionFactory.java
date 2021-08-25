@@ -7,9 +7,18 @@ import javax.servlet.http.HttpSession;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The class-factory for command.
+ */
 public class ActionFactory {
     private static final String PARAM_NAME_COMMAND = "command";
 
+    /**
+     * Defines command.
+     *
+     * @param request request
+     * @return ActionCommand
+     */
     public static ActionCommand defineCommand(HttpServletRequest request) {
         ActionCommand current;
         HttpSession session = request.getSession();

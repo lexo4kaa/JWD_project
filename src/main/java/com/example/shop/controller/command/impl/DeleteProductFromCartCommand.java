@@ -17,6 +17,9 @@ import java.util.Set;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for deleting 1 product from cart
+ */
 public class DeleteProductFromCartCommand implements ActionCommand {
     private static final ProductService productService = new ProductServiceImpl();
     private static Logger logger = LogManager.getLogger();

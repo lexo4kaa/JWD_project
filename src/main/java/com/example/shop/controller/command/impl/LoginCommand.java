@@ -16,6 +16,9 @@ import javax.servlet.http.HttpSession;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for login
+ */
 public class LoginCommand implements ActionCommand {
     private static final UserService userService = new UserServiceImpl();
     private static final ProductService productService = new ProductServiceImpl();

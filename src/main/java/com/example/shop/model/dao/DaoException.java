@@ -1,5 +1,8 @@
 package com.example.shop.model.dao;
 
+/**
+ * Describes exception in dao
+ */
 public class DaoException extends Exception {
     public DaoException() {}
     public DaoException(String message) {

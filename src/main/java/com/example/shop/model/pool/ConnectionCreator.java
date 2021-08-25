@@ -11,6 +11,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * ConnectionCreator is responsible for creating connections
+ */
 class ConnectionCreator {
     private static final Logger logger = LogManager.getLogger();
     private static final Properties properties = new Properties();
@@ -48,6 +51,12 @@ class ConnectionCreator {
         }
     }
 
+    /**
+     * Gets a connection to the database
+     *
+     * @return connection
+     * @throws SQLException sql exception
+     */
     static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
     }

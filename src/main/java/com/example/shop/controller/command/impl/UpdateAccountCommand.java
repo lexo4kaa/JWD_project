@@ -14,6 +14,9 @@ import javax.servlet.http.HttpSession;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for updating account
+ */
 public class UpdateAccountCommand implements ActionCommand {
     private static final UserServiceImpl userService = new UserServiceImpl();
 

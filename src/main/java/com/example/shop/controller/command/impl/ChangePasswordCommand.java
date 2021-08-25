@@ -13,6 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for changing password.
+ */
 public class ChangePasswordCommand implements ActionCommand {
     private static final UserServiceImpl userService = new UserServiceImpl();
 

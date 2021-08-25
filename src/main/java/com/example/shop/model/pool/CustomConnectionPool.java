@@ -13,7 +13,10 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-    public class CustomConnectionPool {
+/**
+ * CustomConnectionPool is responsible for connections used while the system is running
+ */
+public class CustomConnectionPool {
     private static final Logger logger = LogManager.getLogger();
     private static final int DEFAULT_POOL_SIZE = 8;
     private static CustomConnectionPool instance;
@@ -41,6 +44,11 @@ import java.util.concurrent.locks.ReentrantLock;
         }
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return instance
+     */
     public static CustomConnectionPool getInstance() {
         if (instance == null) {
             try {
@@ -56,6 +64,12 @@ import java.util.concurrent.locks.ReentrantLock;
         return instance;
     }
 
+    /**
+     * Gets connection.
+     *
+     * @return connection
+     * @throws ConnectionPoolException if InterruptedException occurs
+     */
     public Connection getConnection() throws ConnectionPoolException {
         Connection connection;
         try {
@@ -68,6 +82,11 @@ import java.util.concurrent.locks.ReentrantLock;
         return connection;
     }
 
+    /**
+     * Releases connection to connection pool
+     *
+     * @param connection connection
+     */
     public void releaseConnection(Connection connection) {
         if (connection instanceof ProxyConnection && givenAwayConnections.remove(connection)) {
             freeConnections.offer(connection);
@@ -76,6 +95,11 @@ import java.util.concurrent.locks.ReentrantLock;
         }
     }
 
+    /**
+     * Destroy connection pool.
+     *
+     * @throws ConnectionPoolException if InterruptedException of SQLException occurs
+     */
     public void destroyPool() throws ConnectionPoolException {
         for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
             try {

@@ -46,3 +46,8 @@ body {
     font-size: medium;
     padding-bottom: 10px;
 }
+.messages {
+    color: red;
+    margin: 5px;
+    font-size: medium;
+}

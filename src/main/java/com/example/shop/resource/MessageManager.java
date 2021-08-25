@@ -3,6 +3,9 @@ package com.example.shop.resource;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * Message manager.
+ */
 public class MessageManager {
     private static final Character UNDERSCORE = '_';
     private static final Character HYPHEN = '-';

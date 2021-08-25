@@ -9,6 +9,9 @@ import javax.servlet.http.HttpSession;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for switching locale
+ */
 public class SwitchLocaleCommand implements ActionCommand {
 
     @Override

@@ -27,6 +27,9 @@
             <label class="prompt" for="nickname_label"><fmt:message key="label.nickname_prompt"/></label>
             <input type="text" name="nickname" id="nickname_label" value="" required
                    pattern="^[A-Za-z0-9]{1}[\w]{1,16}[A-Za-z0-9]{1}" title="<fmt:message key="label.nickname_prompt"/>">
+            <div class="messages">
+                ${loginExistsMessage}
+            </div>
             <label><fmt:message key="label.dob"/></label>
             <input type="date" name="dob" value="" min="1900-01-01" max="2003-09-01" required>
             <label><fmt:message key="label.email"/></label>
@@ -55,5 +58,6 @@
     </div>
 </form>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/validatePassword.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/addDataToInputs.js"></script>
 </body>
 </html>

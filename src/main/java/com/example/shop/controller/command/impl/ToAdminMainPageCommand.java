@@ -7,6 +7,9 @@ import com.example.shop.resource.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The command is responsible for forwarding to admin main page
+ */
 public class ToAdminMainPageCommand implements ActionCommand {
     @Override
     public Router execute(HttpServletRequest request) {

@@ -16,6 +16,9 @@ import java.util.*;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for finding information about product
+ */
 public class FindInfoAboutProductCommand  implements ActionCommand {
     private static final ProductService productService = new ProductServiceImpl();
     private static Logger logger = LogManager.getLogger();

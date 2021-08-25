@@ -17,6 +17,9 @@ import java.util.List;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for finding all products
+ */
 public class FindAllProductsCommand implements ActionCommand {
     private static final String ALL_VALUE = "all";
     private static final ProductService productService = new ProductServiceImpl();

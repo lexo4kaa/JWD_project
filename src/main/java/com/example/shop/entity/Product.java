@@ -1,5 +1,8 @@
 package com.example.shop.entity;
 
+/**
+ * Describes the entity Product.
+ */
 public class Product {
     private int productId;
     private String type;

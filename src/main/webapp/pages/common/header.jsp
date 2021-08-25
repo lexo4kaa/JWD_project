@@ -10,11 +10,8 @@
 <body>
 <div class="header">
 
-    <form name="allProducts" method="POST" action="${pageContext.request.contextPath}/controller">
-        <input type="hidden" name="command" value="find_all_products"/>
-        <input style="float:left;font-size:xx-large;color:blue;font-family:'Bradley Hand ITC';
-                      margin-top: -10px;margin-right: 10px" type="submit" value="<fmt:message key="label.football_shop"/>"/>
-    </form> <!-- todo куда переводить при нажатии -->
+    <div style="float:left;font-size:xx-large;color:blue;font-family:'Bradley Hand ITC';
+                  margin-top: -10px;margin-right: 10px"><fmt:message key="label.football_shop"/></div>
 
     <c:if test="${user_role == 'administrator'}">
         <form name="adminMainPage" method="POST" action="${pageContext.request.contextPath}/controller">

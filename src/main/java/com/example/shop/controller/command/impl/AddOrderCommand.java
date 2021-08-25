@@ -20,6 +20,9 @@ import java.util.Map;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for adding order
+ */
 public class AddOrderCommand implements ActionCommand {
     private static final OrderService orderService = new OrderServiceImpl();
     private static final UserService userService = new UserServiceImpl();

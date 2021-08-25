@@ -17,6 +17,9 @@ import java.util.List;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for changing user role
+ */
 public class ChangeUserRoleCommand implements ActionCommand {
     private static final UserService userService = new UserServiceImpl();
     private static Logger logger = LogManager.getLogger();

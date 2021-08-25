@@ -18,6 +18,9 @@ import java.util.List;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for adding user to blacklist.
+ */
 public class AddUserToBlacklistCommand implements ActionCommand {
     private static final UserService userService = new UserServiceImpl();
     private static Logger logger = LogManager.getLogger();
