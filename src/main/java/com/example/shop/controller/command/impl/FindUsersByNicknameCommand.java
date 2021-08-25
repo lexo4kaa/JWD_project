@@ -16,6 +16,9 @@ import java.util.List;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for finding users by part of nickname
+ */
 public class FindUsersByNicknameCommand implements ActionCommand {
     private static final UserServiceImpl userService = new UserServiceImpl();
     private static Logger logger = LogManager.getLogger();
@@ -25,7 +28,7 @@ public class FindUsersByNicknameCommand implements ActionCommand {
         String page;
         HttpSession session = request.getSession();
         try {
-            String nickname = request.getParameter(PARAM_NAME_NICKNAME).toLowerCase();
+            String nickname = request.getParameter(NICKNAME).toLowerCase();
             List<User> users = userService.findUsersByPartOfNickname(nickname);
             session.setAttribute(USERS, users);
             session.setAttribute(USERS_SIZE, users.size());

@@ -17,6 +17,9 @@ import java.util.*;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for finding information about order
+ */
 public class FindInfoAboutOrderCommand  implements ActionCommand {
     private static final OrderServiceImpl orderService = new OrderServiceImpl();
     private static final ProductService productService = new ProductServiceImpl();
@@ -27,7 +30,7 @@ public class FindInfoAboutOrderCommand  implements ActionCommand {
         String page;
         HttpSession session = request.getSession();
         try {
-            int orderId = Integer.parseInt(request.getParameter(PARAM_NAME_ORDER_ID));
+            int orderId = Integer.parseInt(request.getParameter(ORDER_ID));
             Map<Integer, Integer> cart = orderService.findInfoAboutOrder(orderId);
             session.setAttribute(INFO_CART, cart);
             List<Product> products = productService.findProductsByIds(cart.keySet());

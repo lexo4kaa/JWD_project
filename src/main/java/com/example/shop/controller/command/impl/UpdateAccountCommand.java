@@ -14,6 +14,9 @@ import javax.servlet.http.HttpSession;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for updating account
+ */
 public class UpdateAccountCommand implements ActionCommand {
     private static final UserServiceImpl userService = new UserServiceImpl();
 
@@ -21,12 +24,13 @@ public class UpdateAccountCommand implements ActionCommand {
     public Router execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
-        String name = request.getParameter(PARAM_NAME_NAME);
-        String surname = request.getParameter(PARAM_NAME_SURNAME);
-        String nickname = request.getParameter(PARAM_NAME_NICKNAME).toLowerCase();
-        String dob = request.getParameter(PARAM_NAME_DOB);
-        String phone = request.getParameter(PARAM_NAME_PHONE);
-        String email = request.getParameter(PARAM_NAME_EMAIL);
+        String name = request.getParameter(NAME);
+        String surname = request.getParameter(SURNAME);
+        String nickname = request.getParameter(NICKNAME).toLowerCase();
+        String dob = request.getParameter(DOB);
+        String phone = request.getParameter(PHONE);
+        String email = request.getParameter(EMAIL);
+        String locale = (String) session.getAttribute(CURRENT_LOCALE);
         try {
             String userNickname = (String) session.getAttribute(NICKNAME);
             User user = userService.findUserByNickname(userNickname).get();
@@ -36,11 +40,11 @@ public class UpdateAccountCommand implements ActionCommand {
                 session.setAttribute(PROFILE, userService.findUserByNickname(nickname).get());
                 page = ConfigurationManager.getProperty("path.page.account");
             } else {
-                session.setAttribute(UPDATE_ERROR_MESSAGE, MessageManager.getProperty("message.updateerror"));
+                session.setAttribute(UPDATE_ERROR_MESSAGE, MessageManager.getProperty("message.updateerror", locale));
                 page = ConfigurationManager.getProperty("path.page.registration");
             }
         } catch(ServiceException e) {
-            session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction"));
+            session.setAttribute(WRONG_ACTION_MESSAGE, MessageManager.getProperty("message.wrongaction", locale));
             page = ConfigurationManager.getProperty("path.page.index");
         }
         return new Router(page, RouteType.REDIRECT);

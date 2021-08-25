@@ -2,6 +2,9 @@ package com.example.shop.controller.command;
 
 import com.example.shop.controller.command.impl.*;
 
+/**
+ * The enum for getting Command.
+ */
 public enum CommandType {
     LOGIN {
         {
@@ -81,16 +84,6 @@ public enum CommandType {
     FIND_INFO_ABOUT_PRODUCT {
         {
             this.command = new FindInfoAboutProductCommand();
-        }
-    },
-    ADD_UNIT_OF_PRODUCT_TO_CART {
-        {
-            this.command = new AddUnitOfProductToCartCommand();
-        }
-    },
-    DELETE_UNIT_OF_PRODUCT_FROM_CART {
-        {
-            this.command = new DeleteUnitOfProductFromCartCommand();
         }
     },
     DELETE_PRODUCT_FROM_CART {

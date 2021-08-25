@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+/**
+ * Class wrapper for Connection (changed method 'close', added method 'reallyClose')
+ */
 class ProxyConnection implements Connection {
     private Connection connection;
 

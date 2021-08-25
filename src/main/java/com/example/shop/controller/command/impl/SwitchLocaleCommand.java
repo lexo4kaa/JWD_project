@@ -9,13 +9,16 @@ import javax.servlet.http.HttpSession;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for switching locale
+ */
 public class SwitchLocaleCommand implements ActionCommand {
 
     @Override
     public Router execute(HttpServletRequest request) {
         String page;
         HttpSession session = request.getSession();
-        String locale = request.getParameter(PARAM_NAME_LOCALE);
+        String locale = request.getParameter(LOCALE);
         session.setAttribute(CURRENT_LOCALE, locale);
         page = (String) session.getAttribute(CURRENT_PAGE);
         return new Router(page, RouteType.REDIRECT);

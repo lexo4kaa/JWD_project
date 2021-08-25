@@ -16,6 +16,9 @@ import java.util.*;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for finding information about product
+ */
 public class FindInfoAboutProductCommand  implements ActionCommand {
     private static final ProductService productService = new ProductServiceImpl();
     private static Logger logger = LogManager.getLogger();
@@ -25,7 +28,7 @@ public class FindInfoAboutProductCommand  implements ActionCommand {
         String page;
         HttpSession session = request.getSession();
         try {
-            int productId = Integer.parseInt(request.getParameter(PARAM_NAME_PRODUCT_ID));
+            int productId = Integer.parseInt(request.getParameter(PRODUCT_ID));
             Product product = productService.findProductsByIds(Set.of(productId)).get(0);
             session.setAttribute(INFO_PRODUCT, product);
             page = ConfigurationManager.getProperty("path.page.product_info");

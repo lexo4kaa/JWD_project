@@ -17,6 +17,9 @@ import java.util.List;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for finding orders by nickname
+ */
 public class FindOrdersByNicknameCommand implements ActionCommand {
     private static final OrderService orderService = new OrderServiceImpl();
     private static Logger logger = LogManager.getLogger();

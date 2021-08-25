@@ -9,12 +9,12 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import static com.example.shop.controller.command.ParameterAndAttribute.CURRENT_LOCALE;
 
-public class CopyrightTag extends TagSupport {
+/**
+ * Custom footer tag
+ */
+public class FooterTag extends TagSupport {
     private static final Character UNDERSCORE = '_';
     private static final Character HYPHEN = '-';
     private static final String BUNDLE_NAME = "pagecontent";

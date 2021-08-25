@@ -76,7 +76,7 @@
                     <form style="margin: 0" name="addUserToBlackList" method="POST" action="${pageContext.request.contextPath}/controller">
                         <input type="hidden" name="command" value="add_user_to_blacklist"/>
                         <input type="hidden" name="user_id" value="${ user.userId }">
-                        <input type="text" name="ban_reason" value="" pattern="^[\w]{0,100}$"
+                        <input type="text" name="ban_reason" value="" pattern="^[\w ]{0,100}$"
                                title="<fmt:message key="label.ban_reason_title"/>"/>
                         <input type="submit" value="<fmt:message key="label.add_to_blacklist"/>"/>
                     </form>

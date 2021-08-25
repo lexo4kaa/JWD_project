@@ -3,7 +3,7 @@ body {
 }
 
 .form_reg_block{
-    width: 525px;
+    width: 550px;
     margin: 0 auto;
 }
 .form_reg_block_content{
@@ -42,7 +42,12 @@ body {
     border: none;
     cursor: pointer;
 }
-.prompt{
+.form_reg_block .prompt{
     font-size: medium;
     padding-bottom: 10px;
+}
+.messages {
+    color: red;
+    margin: 5px;
+    font-size: medium;
 }

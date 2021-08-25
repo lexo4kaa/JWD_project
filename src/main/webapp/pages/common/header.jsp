@@ -10,11 +10,8 @@
 <body>
 <div class="header">
 
-    <form name="allProducts" method="POST" action="${pageContext.request.contextPath}/controller">
-        <input type="hidden" name="command" value="find_all_products"/>
-        <input style="float:left;font-size:xx-large;color:blue;font-family:'Bradley Hand ITC';
-                      margin-top: -10px;margin-right: 10px" type="submit" value="<fmt:message key="label.football_shop"/>"/>
-    </form> <!-- todo куда переводить при нажатии -->
+    <div style="float:left;font-size:xx-large;color:blue;font-family:'Bradley Hand ITC';
+                  margin-top: -10px;margin-right: 10px"><fmt:message key="label.football_shop"/></div>
 
     <c:if test="${user_role == 'administrator'}">
         <form name="adminMainPage" method="POST" action="${pageContext.request.contextPath}/controller">
@@ -98,11 +95,11 @@
         <c:set var="width" value="20"></c:set>
     </c:if>
 
-    <div style="border-radius:10px;margin-right:30px;margin-top:-10px;float:right;color:white;background:dodgerblue;
+    <div style="border-radius:10px;margin-right:20px;margin-top:-10px;float:right;color:white;background:dodgerblue;
                 text-align: center; width: ${width}px; height: 20px">${cart_size}
     </div>
 
-    <form style="float: right; margin-right: -10px"
+    <form style="float: right; margin-right: -5px"
           name="cartPage" method="POST" action="${pageContext.request.contextPath}/controller">
         <input type="hidden" name="command" value="find_products_by_ids"/>
         <input style="background-image:url('${pageContext.request.contextPath}/images/cart.png');

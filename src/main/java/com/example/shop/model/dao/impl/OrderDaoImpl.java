@@ -20,13 +20,13 @@ public class OrderDaoImpl implements OrderDao {
     private static final OrderDao instance = new OrderDaoImpl();
 
     private static final String SQL_FIND_ALL_ORDERS = "SELECT order_id,ref_user_id,order_cost,order_date," +
-                                                      "method_of_receiving,method_of_payment FROM orders";
+                                                      "method_of_receiving,method_of_payment,address FROM orders";
     private static final String SQL_ADD_ORDER = "INSERT INTO orders (ref_user_id,order_cost," +
-                                                "method_of_receiving,method_of_payment) VALUES (?,?,?,?)";
+                                                "method_of_receiving,method_of_payment,address) VALUES (?,?,?,?,?)";
     private static final String SQL_ADD_ORDER_HAS_PRODUCT = "INSERT INTO order_has_product (ref_order_id," +
                                                             "ref_product_id,quantity) VALUES (?,?,?)";
     private static final String SQL_FIND_ORDERS_BY_NICKNAME = "SELECT order_id,ref_user_id,order_cost,order_date," +
-                                                              "method_of_receiving,method_of_payment FROM orders AS o" +
+                                                              "method_of_receiving,method_of_payment,address FROM orders AS o" +
                                                               " JOIN users AS u ON u.user_id = o.ref_user_id" +
                                                               " WHERE user_nickname = ?";
     private static final String SQL_INFO_ABOUT_ORDERS = "SELECT ref_product_id, quantity FROM order_has_product" +
@@ -54,13 +54,15 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public void addOrder(int cost, int userId, String methodOfReceiving, String methodOfPayment) throws DaoException {
+    public void addOrder(double cost, int userId, String methodOfReceiving, String methodOfPayment,
+                         String address) throws DaoException {
         try(Connection connection = CustomConnectionPool.getInstance().getConnection();
             PreparedStatement statement = connection.prepareStatement(SQL_ADD_ORDER)) {
             statement.setInt(1, userId);
             statement.setDouble(2, cost);
             statement.setString(3, methodOfReceiving);
             statement.setString(4, methodOfPayment);
+            statement.setString(5, address);
             statement.executeUpdate();
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException("Error while adding order", e);
@@ -123,12 +125,14 @@ public class OrderDaoImpl implements OrderDao {
         LocalDateTime date = resultSet.getObject(ORDER_DATE, LocalDateTime.class);
         String methodOfReceiving = resultSet.getString(METHOD_OF_RECEIVING);
         String methodOfPayment = resultSet.getString(METHOD_OF_PAYMENT);
+        String address = resultSet.getString(ADDRESS);
         order.setOrderId(orderId);
         order.setUserId(user_id);
         order.setOrderCost(cost);
         order.setOrderDate(date);
         order.setMethodOfReceiving(methodOfReceiving);
         order.setMethodOfPayment(methodOfPayment);
+        order.setAddress(address);
         return order;
     }
 }

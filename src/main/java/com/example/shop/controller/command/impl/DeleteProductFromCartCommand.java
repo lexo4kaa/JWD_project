@@ -17,6 +17,9 @@ import java.util.Set;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for deleting 1 product from cart
+ */
 public class DeleteProductFromCartCommand implements ActionCommand {
     private static final ProductService productService = new ProductServiceImpl();
     private static Logger logger = LogManager.getLogger();
@@ -28,7 +31,7 @@ public class DeleteProductFromCartCommand implements ActionCommand {
         String page;
         try {
             Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute(CART);
-            String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
+            String stringProductId = request.getParameter(PRODUCT_ID);
             int productId = Integer.parseInt(stringProductId);
             int oldQuantity = cart.getOrDefault(productId, 0);
             Product product = productService.findProductsByIds(Set.of(productId)).get(0);

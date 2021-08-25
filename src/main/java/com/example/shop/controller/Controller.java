@@ -17,6 +17,9 @@ import javax.servlet.http.HttpSession;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.CURRENT_PAGE;
 
+/**
+ * Controller receive request from client (get or post)
+ */
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
     private static Logger logger = LogManager.getLogger();

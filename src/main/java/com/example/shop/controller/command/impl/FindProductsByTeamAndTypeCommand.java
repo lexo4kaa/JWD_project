@@ -17,6 +17,9 @@ import java.util.List;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for finding products by team and type
+ */
 public class FindProductsByTeamAndTypeCommand implements ActionCommand {
     private static final ProductService productService = new ProductServiceImpl();
     private static Logger logger = LogManager.getLogger();
@@ -26,7 +29,7 @@ public class FindProductsByTeamAndTypeCommand implements ActionCommand {
         String page;
         HttpSession session = request.getSession();
         List<Product> products;
-        String team = request.getParameter(PARAM_NAME_TEAM);
+        String team = request.getParameter(TEAM);
         try {
             String type = (String) session.getAttribute(TYPE_OF_PRODUCTS);
             products = productService.findProductsByTeamAndType(team, type);

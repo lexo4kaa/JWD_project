@@ -3,12 +3,14 @@ package com.example.shop.controller.filter;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * Filter for passing error messages to request
+ */
 @WebFilter(urlPatterns = { "/*" })
 public class MessageFilter implements Filter {
     @Override

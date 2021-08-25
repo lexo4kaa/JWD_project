@@ -11,6 +11,9 @@ import java.io.IOException;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * Filter for control access to guest pages
+ */
 @WebFilter(urlPatterns = { "/pages/unauthorized/*" })
 public class GuestAccessFilter implements Filter {
 

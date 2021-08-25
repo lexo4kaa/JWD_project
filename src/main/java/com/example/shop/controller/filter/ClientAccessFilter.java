@@ -11,6 +11,9 @@ import java.io.IOException;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * Filter for control access to client pages
+ */
 @WebFilter(urlPatterns = { "/pages/authorized/*" })
 public class ClientAccessFilter implements Filter {
 

@@ -1,8 +1,10 @@
 package com.example.shop.model.pool;
 
+/**
+ * Describes exception in ConnectionPool
+ */
 public class ConnectionPoolException extends Exception {
-    public ConnectionPoolException() {
-    }
+    public ConnectionPoolException() {}
     public ConnectionPoolException(String message) {
         super(message);
     }

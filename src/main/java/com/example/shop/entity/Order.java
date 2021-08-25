@@ -2,6 +2,9 @@ package com.example.shop.entity;
 
 import java.time.LocalDateTime;
 
+/**
+ * Describes the entity Order.
+ */
 public class Order {
     private int orderId;
     private int userId;
@@ -9,6 +12,7 @@ public class Order {
     private LocalDateTime orderDate;
     private String methodOfReceiving;
     private String methodOfPayment;
+    private String address;
 
     public int getOrderId() {
         return orderId;
@@ -58,6 +62,14 @@ public class Order {
         this.methodOfPayment = methodOfPayment;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,7 +81,9 @@ public class Order {
         if (orderDate != null ? !orderDate.equals(order.orderDate) : order.orderDate != null) return false;
         if (methodOfReceiving != null ? !methodOfReceiving.equals(order.methodOfReceiving) : order.methodOfReceiving != null)
             return false;
-        return methodOfPayment != null ? methodOfPayment.equals(order.methodOfPayment) : order.methodOfPayment == null;
+        if (methodOfPayment != null ? !methodOfPayment.equals(order.methodOfPayment) : order.methodOfPayment != null)
+            return false;
+        return address != null ? address.equals(order.address) : order.address == null;
     }
 
     @Override
@@ -82,6 +96,7 @@ public class Order {
         result = prime * result + (orderDate != null ? orderDate.hashCode() : 0);
         result = prime * result + (methodOfReceiving != null ? methodOfReceiving.hashCode() : 0);
         result = prime * result + (methodOfPayment != null ? methodOfPayment.hashCode() : 0);
+        result = prime * result + (address != null ? address.hashCode() : 0);
         return result;
     }
 
@@ -94,6 +109,7 @@ public class Order {
         sb.append(", orderDate=").append(orderDate);
         sb.append(", methodOfReceiving=").append(methodOfReceiving);
         sb.append(", methodOfPayment=").append(methodOfPayment);
+        sb.append(", address=").append(address);
         sb.append('}');
         return sb.toString();
     }

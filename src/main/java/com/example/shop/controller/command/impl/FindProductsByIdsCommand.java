@@ -18,6 +18,9 @@ import java.util.Map;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for finding products by ids
+ */
 public class FindProductsByIdsCommand implements ActionCommand {
     private static final ProductService productService = new ProductServiceImpl();
     private static Logger logger = LogManager.getLogger();

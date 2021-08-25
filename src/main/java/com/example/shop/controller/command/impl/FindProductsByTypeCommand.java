@@ -17,6 +17,9 @@ import java.util.List;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for finding products by type
+ */
 public class FindProductsByTypeCommand implements ActionCommand {
     private static final ProductService productService = new ProductServiceImpl();
     private static Logger logger = LogManager.getLogger();
@@ -26,7 +29,7 @@ public class FindProductsByTypeCommand implements ActionCommand {
         String page;
         HttpSession session = request.getSession();
         List<Product> products;
-        String type = request.getParameter(PARAM_NAME_TYPE);
+        String type = request.getParameter(TYPE);
         try {
             session.setAttribute(TYPE_OF_PRODUCTS, type);
             products = productService.findProductsByType(type);

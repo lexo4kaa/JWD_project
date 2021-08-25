@@ -7,9 +7,18 @@ import javax.servlet.http.HttpSession;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The class-factory for command.
+ */
 public class ActionFactory {
     private static final String PARAM_NAME_COMMAND = "command";
 
+    /**
+     * Defines command.
+     *
+     * @param request request
+     * @return ActionCommand
+     */
     public static ActionCommand defineCommand(HttpServletRequest request) {
         ActionCommand current;
         HttpSession session = request.getSession();
@@ -21,7 +30,8 @@ public class ActionFactory {
             CommandType currentEnum = CommandType.valueOf(action.toUpperCase());
             current = currentEnum.getCurrentCommand();
         } catch (IllegalArgumentException e) {
-            session.setAttribute(WRONG_ACTION_MESSAGE, action + MessageManager.getProperty("message.wrongaction"));
+            String locale = (String) session.getAttribute(CURRENT_LOCALE);
+            session.setAttribute(WRONG_ACTION_MESSAGE, action + MessageManager.getProperty("message.wrongaction", locale));
             current = new EmptyCommand();
         }
         return current;

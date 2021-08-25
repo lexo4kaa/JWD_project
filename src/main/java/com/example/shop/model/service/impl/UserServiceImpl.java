@@ -187,4 +187,18 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public boolean existsNickname(String nickname) throws ServiceException {
+        boolean existsNickname = true;
+        if (UserValidator.isLoginCorrect(nickname)) {
+            try {
+                existsNickname = userDao.findUserByNickname(nickname).isPresent();
+            } catch (DaoException e) {
+                logger.error("changing role is failed in UserServiceImpl", e);
+                throw new ServiceException(e);
+            }
+        }
+        return existsNickname;
+    }
 }

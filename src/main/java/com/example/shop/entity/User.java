@@ -2,6 +2,9 @@ package com.example.shop.entity;
 
 import java.time.LocalDate;
 
+/**
+ * Describes the entity User.
+ */
 public class User {
     private int userId;
     private String name;

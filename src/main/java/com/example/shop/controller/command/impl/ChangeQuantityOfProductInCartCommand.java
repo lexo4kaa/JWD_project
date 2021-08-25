@@ -18,6 +18,9 @@ import java.util.Set;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * The command is responsible for changing quantity of product in cart
+ */
 public class ChangeQuantityOfProductInCartCommand implements ActionCommand {
     private static final ProductService productService = new ProductServiceImpl();
     private static Logger logger = LogManager.getLogger();
@@ -28,10 +31,12 @@ public class ChangeQuantityOfProductInCartCommand implements ActionCommand {
         String page;
         try {
             Map<Integer, Integer> cart = (Map<Integer, Integer>) session.getAttribute(CART);
-            String stringProductId = request.getParameter(PARAM_NAME_PRODUCT_ID);
+            String stringProductId = request.getParameter(PRODUCT_ID);
             int productId = Integer.parseInt(stringProductId);
-            String stringNewQuantity = request.getParameter(PARAM_NAME_NEW_QUANTITY);
+            String stringNewQuantity = request.getParameter(NEW_QUANTITY);
             int newQuantity = Integer.parseInt(stringNewQuantity);
+            newQuantity = Math.max(newQuantity, 0);
+            newQuantity = Math.min(newQuantity, 99);
             int oldQuantity = cart.getOrDefault(productId, 0);
             Product product = productService.findProductsByIds(Set.of(productId)).get(0);
             cart = productService.changeQuantityOfProductInCart(cart, productId, newQuantity);

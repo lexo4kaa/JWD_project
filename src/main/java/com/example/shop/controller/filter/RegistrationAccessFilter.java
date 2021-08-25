@@ -11,6 +11,9 @@ import java.io.IOException;
 
 import static com.example.shop.controller.command.ParameterAndAttribute.*;
 
+/**
+ * Filter for control access to registration page
+ */
 @WebFilter(urlPatterns = { "/pages/registration/*" })
 public class RegistrationAccessFilter implements Filter {
 
