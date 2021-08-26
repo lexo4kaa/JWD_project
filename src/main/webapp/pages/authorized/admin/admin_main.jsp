@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css"/>
 </head>
 <jsp:include page="../../common/header.jsp"/>
-<h3><fmt:message key="label.hi"/>, ${nickname}!</h3>
-<img src="https://media.giphy.com/media/Cmr1OMJ2FN0B2/giphy.gif" alt="Oops" width="150" height="150">
+<h2><fmt:message key="label.hi"/>, ${nickname}!</h2>
+<img src="https://c.tenor.com/8WyEbWrvlnkAAAAC/lionel-messi-thumbs-up.gif" alt="Oops" width="200" height="150">
 <hr/>
 
 <form name="findUsersByNickname" method="POST" action="${pageContext.request.contextPath}/controller">

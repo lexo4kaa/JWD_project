@@ -70,7 +70,7 @@
 
                 <form style="float:right;margin-top:-38px;margin-right:50px;" name="deleteProduct" method="POST"
                       action="${pageContext.request.contextPath}/controller">
-                    <input type="hidden" name="command" value="delete_of_product_from_cart"/>
+                    <input type="hidden" name="command" value="delete_product_from_cart"/>
                     <input type="hidden" name="product_id" value="${ prod.productId }">
                     <input style="cursor:pointer;background-color:white;font-size:x-large;border:none" type="submit" value="&#10006;"/>
                 </form>
